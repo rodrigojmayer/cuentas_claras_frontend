@@ -1,4 +1,4 @@
-import { NewUser, NewDebt } from "@/types";
+import { NewUser, NewDebt, NewPayment } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/api";
 
@@ -102,6 +102,30 @@ export async function postDebt({id_user_creditor, id_user_debtor, detail, amount
         }
     } catch (error) {
         console.error("Network error posting debt: ", error);
+        throw new Error("Unable to reach server");
+    }
+}
+
+export async function postPayment({id_debt, amount, dolar_google}: NewPayment) {
+    try {
+        const res = await fetch(`${API_URL}/payments`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id_debt,
+                amount,
+                dolar_google
+            })
+        })
+        if(!res.ok) {
+            const errorText = await res.text();
+            console.error("Error posting payment: ", res.status, errorText);
+            throw new Error(`Failed to post payment (status ${res.status})`);
+        }
+    } catch (error) {
+        console.error("Network error posting payment: ", error);
         throw new Error("Unable to reach server");
     }
 }
