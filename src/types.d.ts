@@ -18,8 +18,8 @@ export interface Debt {
     id_user_debtor: string;
     date_debt: date;
     detail?: string;
-    amount: number;
-    dolar_google?: number;
+    amount: number | null;
+    dolar_google?: number | null;
     status: string;
     date_due?: date;
     currency: string;
@@ -43,17 +43,17 @@ export interface NewDebt {
 export interface Payment {
     _id: string;
     id_debt: string;
-    amount: number;
+    amount: number | null;
     date_payment: date;
-    dolar_google?: number;
+    dolar_google?: number | null;
     enabled: boolean;
     deleted: boolean;
 }
 
 export interface NewPayment {
     id_debt: string;
-    amount: number;
-    dolar_google?: number;
+    amount: number | null;
+    dolar_google?: number | null;
 }
 
 export interface Alert {
