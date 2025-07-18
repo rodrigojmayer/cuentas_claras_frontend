@@ -58,9 +58,10 @@ export default function DataList() {
                 <ul className="space-y-2">
                     {debts.map((d: Debt) => (
                         <li key={d._id} className="p-3 bg-green-300 rounded-lg shadow">
+                            <p>ID: {d._id}</p>
                             <p>Detail: {d.detail}</p>
                             <p>Amount: ${d.amount}</p>
-                            <p>Amount: ${new Date(d.date_debt).toLocaleDateString("es-ES")}</p>
+                            <p>Date: {new Date(d.date_debt).toLocaleDateString("es-ES")}</p>
                         </li>
                     ))}
                 </ul>

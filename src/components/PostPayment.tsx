@@ -44,7 +44,7 @@ export default function PostPayment() {
                 Create Payment
             </h2>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4 border rounded-lg p-2 bg-green-300">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 border rounded-lg p-2 bg-yellow-200">
                 <input
                     type="text"
                     placeholder="ID Debt"
@@ -65,7 +65,8 @@ export default function PostPayment() {
                     type="number"
                     placeholder="Dolar Google"
                     value={paymentDolarGoogle ?? ""}
-                    onChange={(e) => setPaymentDolarGoogle(e.target.value === "" ? null : Number(paymentDolarGoogle))}
+                    onChange={(e) => setPaymentDolarGoogle(e.target.value === "" ? null : Number(e.target.value))}
+                    className="border rounded-lg p-2 bg-white text-gray-800"
                 />
                 <button
                     type="submit"
