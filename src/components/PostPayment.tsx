@@ -73,7 +73,7 @@ export default function PostPayment() {
                     disabled={loading}
                     className="bg-gray-500 text-white py-2 m-auto w-30 rounded-lg hover:bg-gray-700 transition"
                 >
-                    {loading ? "Creating..." : "Create Debt"}    
+                    {loading ? "Creating..." : "Create Payment"}    
                 </button>    
             </form>
 

@@ -64,3 +64,9 @@ export interface Alert {
     enabled: boolean;
     deleted: boolean;
 }
+
+export interface NewAlert {
+    id_debt: string;
+    date_alert: date;
+    sent: boolean;
+}
