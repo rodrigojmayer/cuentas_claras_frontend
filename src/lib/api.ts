@@ -1,4 +1,4 @@
-import { NewUser, NewDebt, NewPayment } from "@/types";
+import { NewUser, NewDebt, NewPayment, NewAlert } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/api";
 
@@ -100,6 +100,7 @@ export async function postDebt({id_user_creditor, id_user_debtor, detail, amount
             console.error("Error posting debt: ", res.status, errorText);
             throw new Error(`Failed to post debt (status ${res.status})`);
         }
+        return res.json();
     } catch (error) {
         console.error("Network error posting debt: ", error);
         throw new Error("Unable to reach server");
@@ -124,8 +125,33 @@ export async function postPayment({id_debt, amount, dolar_google}: NewPayment) {
             console.error("Error posting payment: ", res.status, errorText);
             throw new Error(`Failed to post payment (status ${res.status})`);
         }
+        return res.json();
     } catch (error) {
         console.error("Network error posting payment: ", error);
+        throw new Error("Unable to reach server");
+    }
+}
+
+export async function postAlert({id_debt, date_alert, sent}: NewAlert) {
+    try {
+        const res = await fetch(`${API_URL}/alerts`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id_debt,
+                date_alert,
+                sent
+            })
+            
+        })
+        if(!res.ok) {
+            const errorText = await res.text();
+            console.error("Error posting alert: ", res.status, errorText);
+            throw new Error(`Failed to post alert (status ${res.status})`);
+        }
+        return res.json();
+    } catch (error) {
+        console.error("Network error posting alert: ", error);
         throw new Error("Unable to reach server");
     }
 }

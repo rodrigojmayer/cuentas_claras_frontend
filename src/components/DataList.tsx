@@ -52,7 +52,7 @@ export default function DataList() {
                         </li>
                     ))}
                 </ul>
-                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                <h2 className="text-3xl mt-5 font-bold text-gray-800 dark:text-gray-100 mb-4">
                     Debts
                 </h2>
                 <ul className="space-y-2">
@@ -65,7 +65,7 @@ export default function DataList() {
                         </li>
                     ))}
                 </ul>
-                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                <h2 className="text-3xl mt-5 font-bold text-gray-800 dark:text-gray-100 mb-4">
                     Payments
                 </h2>
                 <ul className="space-y-2">
@@ -76,7 +76,7 @@ export default function DataList() {
                         </li>
                     ))}
                 </ul>
-                <h2 className="text-3xl font-bold text-gray-100 dark:text-gray-100 mb-4">
+                <h2 className="text-3xl mt-5 font-bold text-gray-100 dark:text-gray-100 mb-4">
                     Alerts
                 </h2>
                 <ul className="space-y-2">
@@ -103,7 +103,7 @@ export default function DataList() {
                     </ul>
                 }
                 
-                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                <h2 className="text-3xl mt-5 font-bold text-gray-800 dark:text-gray-100 mb-4">
                     Debts as creditor
                 </h2>
                 {debtsByCreditor.length === 0 ? 
@@ -114,7 +114,7 @@ export default function DataList() {
                             <li key={d._id} className="p-3 bg-green-300 rounded-lg shadow">
                                 <p>Detail: {d.detail}</p>
                                 <p>Amount: ${d.amount}</p>
-                                <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-900 mb-4">
+                                <h3 className="text-3xl mt-3 font-bold text-gray-800 dark:text-gray-500 mb-4">
                                     Payments
                                 </h3>
                                 {d.payments.length === 0 ? 
@@ -129,7 +129,7 @@ export default function DataList() {
                                         ))}
                                     </ul>
                                 }
-                                <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-900 mb-4">
+                                <h3 className="text-3xl mt-3 font-bold text-gray-800 dark:text-gray-500 mb-4">
                                     Alerts
                                 </h3>
                                 {d.alerts.length === 0 ? 
@@ -150,7 +150,7 @@ export default function DataList() {
                         ))}
                     </ul>
                 }
-                <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                <h2 className="text-3xl mt-5 font-bold text-gray-800 dark:text-gray-100 mb-4">
                     Debts as debtor
                 </h2>
                 {debtsByDebtor.length === 0 ? 
@@ -161,7 +161,7 @@ export default function DataList() {
                             <li key={d._id} className="p-3 bg-green-300 rounded-lg shadow">
                                 <p>Detail: {d.detail}</p>
                                 <p>Amount: ${d.amount}</p>
-                                <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-500 mb-4">
+                                <h3 className="text-3xl mt-3 font-bold text-gray-800 dark:text-gray-500 mb-4">
                                     Payments
                                 </h3>
                                 {d.payments.length === 0 ? 
@@ -176,7 +176,7 @@ export default function DataList() {
                                         ))}
                                     </ul>
                                 }
-                                <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-500 mb-4">
+                                <h3 className="text-3xl mt-3 font-bold text-gray-800 dark:text-gray-500 mb-4">
                                     Alerts
                                 </h3>
                                 {d.alerts.length === 0 ? 
