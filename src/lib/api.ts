@@ -132,15 +132,14 @@ export async function postPayment({id_debt, amount, dolar_google}: NewPayment) {
     }
 }
 
-export async function postAlert({id_debt, date_alert, sent}: NewAlert) {
+export async function postAlert({id_debt, date_alert}: NewAlert) {
     try {
         const res = await fetch(`${API_URL}/alerts`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 id_debt,
-                date_alert,
-                sent
+                date_alert
             })
             
         })

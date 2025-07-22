@@ -1,7 +1,8 @@
 import PostDebt from "@/components/PostDebt";
 import PostUser from "../../components/PostUser"
 import PostPayment from "@/components/PostPayment";
-import DebtsList from "../../components/DataList"
+import PostAlert from "@/components/PostAlert";
+import DataList from "../../components/DataList"
 
 export default function TestApi() {
   return (
@@ -10,8 +11,9 @@ export default function TestApi() {
             < PostUser />
             < PostDebt />
             < PostPayment />
+            < PostAlert />
         </div>
-        < DebtsList />
+        < DataList />
     </div>
     );
 }

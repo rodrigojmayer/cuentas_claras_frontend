@@ -68,5 +68,4 @@ export interface Alert {
 export interface NewAlert {
     id_debt: string;
     date_alert: date;
-    sent: boolean;
 }
