@@ -73,7 +73,7 @@ export default function DataList() {
                     {payments.map((p: Payment) => (
                         <li key={p._id} className="p-3 bg-yellow-200 rounded-lg shadow">
                             <p>Amount: ${p.amount}</p>
-                            <p>Date: {new Date(p.date_payment).toLocaleDateString("es-ES")}</p>
+                            <p>Date: {new Date(p.date_payment).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                         </li>
                     ))}
                 </ul>
@@ -83,7 +83,7 @@ export default function DataList() {
                 <ul className="space-y-2">
                     {alerts.map((a: Alert) => (
                         <li key={a._id} className="p-3 bg-red-300 rounded-lg shadow">
-                            <p>Date: {new Date(a.date_alert).toLocaleDateString("es-ES")}</p>
+                            <p>Date: {new Date(a.date_alert).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                             <p>Sent: {a.sent ? "Si":"No"}</p>
                         </li>
                     ))}
@@ -125,7 +125,7 @@ export default function DataList() {
                                         {d.payments.map((p: Payment) => (
                                             <li key={p._id} className="p-3 bg-yellow-200 rounded-lg shadow">
                                                 <p>Amount: {p.amount}</p>
-                                                <p>Date: {new Date(p.date_payment).toLocaleDateString("es-ES")}</p>
+                                                <p>Date: {new Date(p.date_payment).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                                             </li>
                                         ))}
                                     </ul>
@@ -141,7 +141,7 @@ export default function DataList() {
                                     <ul className="space-y-2">
                                         {d.alerts.map((a: Alert) => (
                                             <li key={a._id} className="p-3 bg-red-300 rounded-lg shadow">
-                                                <p>Date: {new Date(a.date_alert).toLocaleDateString("es-ES")}</p>
+                                                <p>Date: {new Date(a.date_alert).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                                                 <p>Sent: {a.sent ? "Si":"No"}</p>
                                             </li>
                                         ))}
@@ -172,7 +172,7 @@ export default function DataList() {
                                         {d.payments.map((p: Payment) => (
                                             <li key={p._id} className="p-3 bg-yellow-200 rounded-lg shadow">
                                                 <p>Amount: {p.amount}</p>
-                                                <p>Date: {new Date(p.date_payment).toLocaleDateString("es-ES")}</p>
+                                                <p>Date: {new Date(p.date_payment).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                                             </li>
                                         ))}
                                     </ul>
@@ -186,7 +186,7 @@ export default function DataList() {
                                     <ul className="space-y-2">
                                         {d.alerts.map((a: Alert) => (
                                             <li key={a._id} className="p-3 bg-red-300 rounded-lg shadow">
-                                                <p>Date: {new Date(a.date_alert).toLocaleDateString("es-ES")}</p>
+                                                <p>Date: {new Date(a.date_alert).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                                                 <p>Sent: {a.sent ? "Si":"No"}</p>
                                             </li>
                                         ))}
