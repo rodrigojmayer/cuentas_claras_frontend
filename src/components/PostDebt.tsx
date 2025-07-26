@@ -10,7 +10,7 @@ export default function PostDebt() {
     const [debtDetail, setDebtDetail] = useState<string>("");
     const [debtAmount, setDebtAmount] = useState<number | null>(null);
     const [debtDolarGoogle, setDebtDolarGoogle] = useState<number | null>(null);
-    const [debtStatus, setDebtStatus] = useState<string>("");
+    const [debtStatus, setDebtStatus] = useState<string>("open");
     const [debtDateDue, setDebtDateDue] = useState<Date | null>(null);
     const [debtCurrency, setDebtCurrency] = useState<string>("");
     const [loading, setLoading] = useState(false);
@@ -62,7 +62,7 @@ export default function PostDebt() {
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 border rounded-lg p-2 bg-green-300">
                 <input
                     type="text"
-                    placeholder="ID Creditor"
+                    placeholder="ID Creditor*"
                     value={debtIdUserCreditor}
                     onChange={(e) => setDebtIdUserCreditor(e.target.value)}
                     className="border rounded-lg p-2 bg-white text-gray-800"
@@ -70,7 +70,7 @@ export default function PostDebt() {
                 />
                 <input 
                     type="text" 
-                    placeholder="ID Debtor"
+                    placeholder="ID Debtor*"
                     value={debtIdUserDebtor}
                     onChange={(e) => setDebtIdUserDebtor(e.target.value)}
                     className="border rounded-lg p-2 bg-white text-gray-800"
@@ -85,7 +85,7 @@ export default function PostDebt() {
                 />
                 <input
                     type="number"
-                    placeholder="Amount"
+                    placeholder="Amount*"
                     value={debtAmount ?? ""}
                     onChange={(e) => setDebtAmount(e.target.value === "" ? null : Number(e.target.value))}
                     className="border rounded-lg p-2 bg-white text-gray-800"  
@@ -97,13 +97,24 @@ export default function PostDebt() {
                     onChange={(e) => setDebtDolarGoogle(e.target.value === "" ? null : Number(e.target.value))}
                     className="border rounded-lg p-2 bg-white text-gray-800"
                 />
-                <input
-                    type="text"
-                    placeholder="Status"
-                    value={debtStatus}
+                {/* <input
+                    type="select"
+                    placeholder="Status*"
+                    // value={debtStatus}
                     onChange={(e) => setDebtStatus(e.target.value)}
                     className="border rounded-lg p-2 bg-white text-gray-800"
-                />
+                /> */}
+                <select 
+                    name="status"
+                    value={debtStatus} 
+                    onChange={(e) => setDebtStatus(e.target.value)}
+                    className="border rounded-lg p-2 bg-white text-gray-800 cursor-pointer"
+                    required
+                >
+                    <option value="open">Open</option>
+                    <option value="closed">Closed</option>
+                    <option value="overdue">Overdue</option>
+                </select>
                 <input
                     type="date"
                     placeholder="Date Due"

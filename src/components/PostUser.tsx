@@ -47,7 +47,7 @@ export default function PostUser() {
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 border rounded-lg p-2 bg-blue-300">
                 <input 
                     type="email"
-                    placeholder="Email"
+                    placeholder="Email*"
                     value={userEmail}
                     onChange={(e) => setUserEmail(e.target.value)}
                     className="border rounded-lg p-2 bg-white text-gray-800"

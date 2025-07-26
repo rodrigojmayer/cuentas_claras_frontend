@@ -42,7 +42,7 @@ export default function DataList() {
                     {users.map((u: User) => (
                         <li 
                             key={u._id} 
-                            className="p-3 bg-blue-300 rounded-lg shadow"
+                            className="p-3 bg-blue-300 rounded-lg shadow cursor-pointer"
                             onClick={() => selectUser(u._id)}    
                         >
                             <p>ID: {u._id}</p>
@@ -61,6 +61,7 @@ export default function DataList() {
                             <p>ID: {d._id}</p>
                             <p>Detail: {d.detail}</p>
                             <p>Amount: ${d.amount}</p>
+                            <p>Status: {d.status}</p>
                             <p>Creation: {new Date(d.date_debt).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                             <p>Due: {new Date(d.date_due).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                         </li>
@@ -72,6 +73,7 @@ export default function DataList() {
                 <ul className="space-y-2">
                     {payments.map((p: Payment) => (
                         <li key={p._id} className="p-3 bg-yellow-200 rounded-lg shadow">
+                            <p>ID: {p._id}</p>
                             <p>Amount: ${p.amount}</p>
                             <p>Date: {new Date(p.date_payment).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                         </li>
@@ -83,6 +85,7 @@ export default function DataList() {
                 <ul className="space-y-2">
                     {alerts.map((a: Alert) => (
                         <li key={a._id} className="p-3 bg-red-300 rounded-lg shadow">
+                            <p>ID: {a._id}</p>
                             <p>Date: {new Date(a.date_alert).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                             <p>Sent: {a.sent ? "Si":"No"}</p>
                         </li>
@@ -97,6 +100,7 @@ export default function DataList() {
                 { userSelected &&
                     <ul className="space-y-2">
                         <li className="p-3 bg-blue-300 rounded-lg shadow">
+                            <p>ID: {userSelected._id}</p>
                             <p>Email: {userSelected.email}</p>
                             <p>Phone: {userSelected.phone}</p>
                             <p>Name: {userSelected.name}</p>
@@ -113,8 +117,13 @@ export default function DataList() {
                     <ul className="space-y-2">
                         {debtsByCreditor.map((d: Debt) => (
                             <li key={d._id} className="p-3 bg-green-300 rounded-lg shadow">
+                                <p>ID: {d._id}</p>
                                 <p>Detail: {d.detail}</p>
                                 <p>Amount: ${d.amount}</p>
+                                <p>Status: {d.status}</p>
+                                <p>Creation: {new Date(d.date_debt).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
+                                <p>Due: {new Date(d.date_due).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
+                        
                                 <h3 className="text-3xl mt-3 font-bold text-gray-800 dark:text-gray-500 mb-4">
                                     Payments
                                 </h3>
@@ -124,6 +133,7 @@ export default function DataList() {
                                     <ul className="space-y-2">
                                         {d.payments.map((p: Payment) => (
                                             <li key={p._id} className="p-3 bg-yellow-200 rounded-lg shadow">
+                                                <p>ID: {p._id}</p>
                                                 <p>Amount: {p.amount}</p>
                                                 <p>Date: {new Date(p.date_payment).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                                             </li>
@@ -141,6 +151,7 @@ export default function DataList() {
                                     <ul className="space-y-2">
                                         {d.alerts.map((a: Alert) => (
                                             <li key={a._id} className="p-3 bg-red-300 rounded-lg shadow">
+                                                <p>ID: {a._id}</p>
                                                 <p>Date: {new Date(a.date_alert).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                                                 <p>Sent: {a.sent ? "Si":"No"}</p>
                                             </li>
