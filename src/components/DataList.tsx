@@ -61,6 +61,7 @@ export default function DataList() {
                             <p>ID: {d._id}</p>
                             <p>Detail: {d.detail}</p>
                             <p>Amount: ${d.amount}</p>
+                            <p>Currency: {d.currency}</p>
                             <p>Status: {d.status}</p>
                             <p>Creation: {new Date(d.date_debt).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                             <p>Due: {new Date(d.date_due).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
@@ -120,6 +121,7 @@ export default function DataList() {
                                 <p>ID: {d._id}</p>
                                 <p>Detail: {d.detail}</p>
                                 <p>Amount: ${d.amount}</p>
+                                <p>Currency: {d.currency}</p>
                                 <p>Status: {d.status}</p>
                                 <p>Creation: {new Date(d.date_debt).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                                 <p>Due: {new Date(d.date_due).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>

@@ -12,7 +12,7 @@ export default function PostDebt() {
     const [debtDolarGoogle, setDebtDolarGoogle] = useState<number | null>(null);
     const [debtStatus, setDebtStatus] = useState<string>("open");
     const [debtDateDue, setDebtDateDue] = useState<Date | null>(null);
-    const [debtCurrency, setDebtCurrency] = useState<string>("");
+    const [debtCurrency, setDebtCurrency] = useState<string>("ARS");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
 
@@ -97,13 +97,6 @@ export default function PostDebt() {
                     onChange={(e) => setDebtDolarGoogle(e.target.value === "" ? null : Number(e.target.value))}
                     className="border rounded-lg p-2 bg-white text-gray-800"
                 />
-                {/* <input
-                    type="select"
-                    placeholder="Status*"
-                    // value={debtStatus}
-                    onChange={(e) => setDebtStatus(e.target.value)}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
-                /> */}
                 <select 
                     name="status"
                     value={debtStatus} 
@@ -122,13 +115,17 @@ export default function PostDebt() {
                     onChange={(e) => setDebtDateDue(e.target.value ? new Date(e.target.value) : null)}
                     className="border rounded-lg p-2 bg-white text-gray-800"
                 />
-                <input
-                    type="text"
-                    placeholder="Currency"
-                    value={debtCurrency}
+                <select 
+                    name="currency"
+                    value={debtCurrency} 
                     onChange={(e) => setDebtCurrency(e.target.value)}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
-                />
+                    className="border rounded-lg p-2 bg-white text-gray-800 cursor-pointer"
+                    required
+                >
+                    <option value="ARS">ARS</option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                </select>
                 <button
                     type="submit"
                     disabled={loading}
