@@ -113,7 +113,7 @@ export default function DataList() {
                     Debts as creditor
                 </h2>
                 {debtsByCreditor.length === 0 ? 
-                    <p>No debts</p>
+                    <p className="text-gray-800 dark:text-gray-100">No debts</p>
                 : 
                     <ul className="space-y-2">
                         {debtsByCreditor.map((d: Debt) => (
@@ -168,7 +168,7 @@ export default function DataList() {
                     Debts as debtor
                 </h2>
                 {debtsByDebtor.length === 0 ? 
-                    <p>No debts</p>
+                    <p className="text-gray-800 dark:text-gray-100">No debts</p>
                 : 
                     <ul className="space-y-2">
                         {debtsByDebtor.map((d: Debt) => (
