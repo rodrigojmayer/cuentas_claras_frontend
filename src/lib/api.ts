@@ -1,4 +1,4 @@
-import { NewUser, NewDebt, NewPayment, NewAlert } from "@/types";
+import { NewUser, NewDebt, NewPayment, NewAlert, User } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/api";
 
@@ -151,6 +151,30 @@ export async function postAlert({id_debt, date_alert}: NewAlert) {
         return res.json();
     } catch (error) {
         console.error("Network error posting alert: ", error);
+        throw new Error("Unable to reach server");
+    }
+}
+
+export async function patchUser({_id, email, phone, name, enabled, deleted}: User) {
+    try {
+        const res = await fetch(`${API_URL}/${_id}`, {
+            method: 'PATCH',
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                email,
+                phone,
+                name,
+                enabled,
+                deleted    
+            })
+        })
+        if(!res.ok) {
+            const errorText = await res.text();
+            console.error("Error patching user: ", res.status, errorText);
+            throw new Error(`Failed to patch user (status ${res.status})`);
+        }
+    } catch (error) {
+        console.error("Network error patching user: ", error);
         throw new Error("Unable to reach server");
     }
 }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { postUser } from "../lib/api";
 import type { NewUser } from "../types";
 
-export default function PostUser() {
+export default function ManageUser() {
     const [userEmail, setUserEmail] = useState<string>("");
     const [userPhone, setUserPhone] = useState<string>("");
     const [userName, setUserName] = useState<string>("");
