@@ -3,7 +3,7 @@ import { useState } from "react";
 import { postAlert } from "../lib/api";
 import type { NewAlert } from "../types";
 
-export default function PostAlert() {
+export default function ManageAlert() {
     const [alertIdDebt, setAlertIdDebt] = useState<string>("");
     const [alertDateAlert, setAlertDateAlert] = useState<Date | null>(null);
     

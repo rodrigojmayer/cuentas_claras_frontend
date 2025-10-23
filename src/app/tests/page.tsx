@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
 import PostDebt from "@/components/PostDebt";
-import ManageUser from "../../components/ManageUser"
+import ManageUser from "@/components/ManageUser"
 import PostPayment from "@/components/PostPayment";
-import PostAlert from "@/components/PostAlert";
-import DataList from "../../components/DataList"
+import ManageAlert from "@/components/ManageAlert";
+import DataList from "@/components/DataList"
 import type { User } from "@/types";
 
 export default function TestApi() {
@@ -34,7 +34,7 @@ export default function TestApi() {
             < ManageUser />
             < PostDebt />
             < PostPayment />
-            < PostAlert />
+            < ManageAlert />
         </div>
         < DataList setVisibleUpdateUser={setVisibleUpdateUser} setUserEdit={setUserEdit} />
     </div>
