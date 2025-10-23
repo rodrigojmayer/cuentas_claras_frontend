@@ -129,7 +129,7 @@ export default function PostDebt() {
                 <button
                     type="submit"
                     disabled={loading}
-                    className="bg-gray-500 text-white py-2 m-auto w-30 rounded-lg hover:bg-gray-700 transition"
+                    className="bg-gray-500 text-white py-2 m-auto w-30 rounded-lg hover:bg-gray-700 transition cursor-pointer"
                 >
                     {loading ? "Creating..." : "Create Debt"}
                 </button>
