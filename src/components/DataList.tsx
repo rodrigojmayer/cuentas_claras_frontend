@@ -63,6 +63,8 @@ export default function DataList({ setVisibleUpdateUser, setUserEdit }: DataList
                             <p>Email: {u.email}</p>
                             <p>Phone: {u.phone}</p>
                             <p>Name: {u.name}</p>
+                            <p>Enabled: {u.enabled ? "Si":"No"}</p>
+                            <p>Deleted: {u.deleted ? "Si":"No"}</p>
                             <button                    
                                 className="bg-gray-500 text-white py-1 m-auto w-15 rounded-lg hover:bg-gray-700 transition cursor-pointer"
                                 onClick={() => { 
@@ -87,6 +89,8 @@ export default function DataList({ setVisibleUpdateUser, setUserEdit }: DataList
                             <p>Status: {d.status}</p>
                             <p>Creation: {new Date(d.date_debt).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                             <p>Due: {new Date(d.date_due).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
+                            <p>Enabled: {d.enabled ? "Si":"No"}</p>
+                            <p>Deleted: {d.deleted ? "Si":"No"}</p>
                         </li>
                     ))}
                 </ul>
@@ -99,6 +103,8 @@ export default function DataList({ setVisibleUpdateUser, setUserEdit }: DataList
                             <p>ID: {p._id}</p>
                             <p>Amount: ${p.amount}</p>
                             <p>Date: {new Date(p.date_payment).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
+                            <p>Enabled: {p.enabled ? "Si":"No"}</p>
+                            <p>Deleted: {p.deleted ? "Si":"No"}</p>
                         </li>
                     ))}
                 </ul>
@@ -111,6 +117,8 @@ export default function DataList({ setVisibleUpdateUser, setUserEdit }: DataList
                             <p>ID: {a._id}</p>
                             <p>Date: {new Date(a.date_alert).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                             <p>Sent: {a.sent ? "Si":"No"}</p>
+                            <p>Enabled: {a.enabled ? "Si":"No"}</p>
+                            <p>Deleted: {a.deleted ? "Si":"No"}</p>
                         </li>
                     ))}
                 </ul>

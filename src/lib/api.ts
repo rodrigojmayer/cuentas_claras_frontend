@@ -59,7 +59,7 @@ export async function postUser({email, phone, name}: NewUser) {
             body: JSON.stringify({
                 email,
                 phone,
-                name
+                name,
             })
         });
 

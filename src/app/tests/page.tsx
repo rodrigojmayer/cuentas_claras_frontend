@@ -9,7 +9,7 @@ import type { User } from "@/types";
 
 export default function TestApi() {
 
-    const [visibleUpdateUser, setVisibleUpdateUser] = useState(true)
+    const [visibleUpdateUser, setVisibleUpdateUser] = useState(false)
     const [userEdit, setUserEdit] = useState<User | undefined>(undefined);
 
 

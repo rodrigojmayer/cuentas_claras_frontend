@@ -11,6 +11,8 @@ export default function ManageUser({ userEdit }: ManageUserProps) {
     const [userEmail, setUserEmail] = useState<string>(userEdit ? userEdit.email : "");
     const [userPhone, setUserPhone] = useState<string | undefined>(userEdit ? userEdit.phone : "");
     const [userName, setUserName] = useState<string | undefined>(userEdit ? userEdit.name : "");
+    const [userEnabled, setUserEnabled] = useState<boolean>(userEdit ? userEdit.enabled : true);
+    const [userDeleted, setUserDeleted] = useState<boolean>(userEdit ? userEdit.deleted : false);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
     
@@ -71,6 +73,43 @@ export default function ManageUser({ userEdit }: ManageUserProps) {
                     onChange={(e) => setUserName(e.target.value)}
                     className="border rounded-lg p-2 bg-white text-gray-800"
                 />
+                { userEdit ? 
+                    <>
+                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
+                            <span className="text-sm text-gray-800 truncate">Enabled</span>
+                            <input
+                                type="checkbox"
+                                checked={userEnabled}
+                                onChange={(e) => setUserEnabled(e.target.checked)}
+                                className="
+                                    w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
+                                    after:content-[''] after:top-0.5 after:left-[2px] after:bg-white 
+                                    after:border-gray-300 after:rounded-full after:h-5 after:w-5 
+                                    after:transition-all peer-checked:after:translate-x-full 
+                                    peer-checked:after:border-white
+                                "
+                            />
+                        </label>
+                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
+                            <span className="text-sm text-gray-800 truncate">Deleted</span>
+                            <input
+                                type="checkbox"
+                                checked={userDeleted}
+                                onChange={(e) => setUserDeleted(e.target.checked)}
+                                className="
+                                    w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
+                                    after:content-[''] after:top-0.5 after:left-[2px] after:bg-white 
+                                    after:border-gray-300 after:rounded-full after:h-5 after:w-5 
+                                    after:transition-all peer-checked:after:translate-x-full 
+                                    peer-checked:after:border-white
+                                "
+                            />
+                        </label>
+                    </>
+                :
+                    <></>
+                }
+
                 <button
                     type="submit"
                     disabled={loading}
