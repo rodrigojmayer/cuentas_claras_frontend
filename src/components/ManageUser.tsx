@@ -76,7 +76,11 @@ export default function ManageUser({ userEdit }: ManageUserProps) {
                     disabled={loading}
                     className="bg-gray-500 text-white py-2 m-auto w-30 rounded-lg hover:bg-gray-700 transition"
                 >
-                    {loading ? "Creating..." : "Create User"}
+                    {userEdit ? 
+                        (loading ? "Updating..." : "Update User")
+                        :
+                        (loading ? "Creating..." : "Create User")
+                    }
                 </button>
             </form>
 
