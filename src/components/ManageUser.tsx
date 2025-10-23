@@ -41,9 +41,9 @@ export default function ManageUser({ userEdit }: ManageUserProps) {
                 };
                 response = await postUser(newUser);
             }
-            console.log("Created user:", response);
+            // console.log("Created user:", response);
 
-            setMessage("User created successfully!");
+            setMessage(`User ${userEdit ? "edited" : "created"} successfully!`);
             setUserEmail("");
             setUserPhone("");
             setUserName("");
