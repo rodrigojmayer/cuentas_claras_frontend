@@ -157,7 +157,7 @@ export async function postAlert({id_debt, date_alert}: NewAlert) {
 
 export async function patchUser({_id, email, phone, name, enabled, deleted}: User) {
     try {
-        const res = await fetch(`${API_URL}/${_id}`, {
+        const res = await fetch(`${API_URL}/users/${_id}`, {
             method: 'PATCH',
             headers: { "Content-Type": "application/json"},
             body: JSON.stringify({
@@ -173,6 +173,10 @@ export async function patchUser({_id, email, phone, name, enabled, deleted}: Use
             console.error("Error patching user: ", res.status, errorText);
             throw new Error(`Failed to patch user (status ${res.status})`);
         }
+
+        // Return the updated user data (assuming backend sends it back)
+        const updatedUser = await res.json();
+        return updatedUser;
     } catch (error) {
         console.error("Network error patching user: ", error);
         throw new Error("Unable to reach server");

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { postUser } from "../lib/api";
+import { postUser, patchUser } from "../lib/api";
 import type { NewUser, User } from "../types";
 
 interface ManageUserProps {
@@ -22,13 +22,25 @@ export default function ManageUser({ userEdit }: ManageUserProps) {
         setMessage(null);
 
         try {
-            const newUser: NewUser = {
-                email: userEmail,
-                phone: userPhone,
-                name: userName,
-            };
-
-            const response = await postUser(newUser);
+            let response
+            if(userEdit) {
+                const updateUser: User = {
+                    _id: userEdit._id,
+                    email: userEmail,
+                    phone: userPhone,
+                    name: userName,
+                    enabled: userEnabled,
+                    deleted: userDeleted
+                };
+                response = await patchUser(updateUser);
+            } else {
+                const newUser: NewUser = {
+                    email: userEmail,
+                    phone: userPhone,
+                    name: userName,
+                };
+                response = await postUser(newUser);
+            }
             console.log("Created user:", response);
 
             setMessage("User created successfully!");
