@@ -3,11 +3,21 @@ import { useEffect, useState } from "react";
 import { getAlerts, getDebts, getPayments, getUsers, getDebtsByCreditor, getDebtsByDebtor } from "../lib/api";
 import type { Alert, Debt, Payment, User } from "../types";
 
-export default function DataList() {
+import useUsers from "@/hooks/useUsers";
+
+interface DataListProps {
+    setVisibleUpdateUser: (visible: boolean) => void;
+    setUserEdit: (visible: User) => void;
+}
+
+export default function DataList({ setVisibleUpdateUser, setUserEdit }: DataListProps) {
+    const { users, isLoading, isError  } = useUsers();
+
+
     const [alerts, setAlerts] = useState<Alert[]>([]);
     const [debts, setDebts] = useState<Debt[]>([]);
     const [payments, setPayments] = useState<Payment[]>([]);
-    const [users, setUsers] = useState<User[]>([]);
+    // const [users, setUsers] = useState<User[]>([]);
 
     const [userSelected, setUserSelected] = useState<User | null>(null);
     const [debtsByCreditor, setDebtsByCreditor] = useState<Debt[]>([]);
@@ -23,7 +33,7 @@ export default function DataList() {
         getAlerts().then(setAlerts);
         getDebts().then(setDebts);
         getPayments().then(setPayments);
-        getUsers().then(setUsers);
+        // getUsers().then(setUsers);
     }, []);
     useEffect(() => {
         if(userSelected){
@@ -32,6 +42,10 @@ export default function DataList() {
         }
     }, [userSelected]);
 
+    
+    if (isLoading) return <p>Loading users...</p>;
+    if (isError) return <p>Error loading users.</p>;
+    
     return (
         <div className="flex flex-row">
             <div className="p-2">
@@ -49,6 +63,13 @@ export default function DataList() {
                             <p>Email: {u.email}</p>
                             <p>Phone: {u.phone}</p>
                             <p>Name: {u.name}</p>
+                            <button
+                                onClick={() => { 
+                                    setVisibleUpdateUser(true)
+                                    setUserEdit(u)
+                                }
+                                }
+                                >Edit</button>
                         </li>
                     ))}
                 </ul>

@@ -1,12 +1,16 @@
 "use client";
 import { useState } from "react";
 import { postUser } from "../lib/api";
-import type { NewUser } from "../types";
+import type { NewUser, User } from "../types";
 
-export default function ManageUser() {
-    const [userEmail, setUserEmail] = useState<string>("");
-    const [userPhone, setUserPhone] = useState<string>("");
-    const [userName, setUserName] = useState<string>("");
+interface ManageUserProps {
+    userEdit?:  User;
+}
+
+export default function ManageUser({ userEdit }: ManageUserProps) {
+    const [userEmail, setUserEmail] = useState<string>(userEdit ? userEdit.email : "");
+    const [userPhone, setUserPhone] = useState<string | undefined>(userEdit ? userEdit.phone : "");
+    const [userName, setUserName] = useState<string | undefined>(userEdit ? userEdit.name : "");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
     

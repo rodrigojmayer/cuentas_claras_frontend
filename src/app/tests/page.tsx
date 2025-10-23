@@ -5,10 +5,12 @@ import ManageUser from "../../components/ManageUser"
 import PostPayment from "@/components/PostPayment";
 import PostAlert from "@/components/PostAlert";
 import DataList from "../../components/DataList"
+import type { User } from "@/types";
 
 export default function TestApi() {
 
     const [visibleUpdateUser, setVisibleUpdateUser] = useState(true)
+    const [userEdit, setUserEdit] = useState<User | undefined>(undefined);
 
 
   return (
@@ -24,7 +26,7 @@ export default function TestApi() {
                     className="bg-blue-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white"
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
-                    <ManageUser />
+                    <ManageUser userEdit={userEdit} />
                 </div>
             </div>
         )}
@@ -34,7 +36,7 @@ export default function TestApi() {
             < PostPayment />
             < PostAlert />
         </div>
-        < DataList />
+        < DataList setVisibleUpdateUser={setVisibleUpdateUser} setUserEdit={setUserEdit} />
     </div>
     );
 }
