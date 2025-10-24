@@ -8,9 +8,16 @@ import type { Alert, Debt, Payment, User } from "../types";
 interface DataListProps {
     setVisibleUpdateUser: (visible: boolean) => void;
     setUserEdit: (visible: User) => void;
+    setVisibleUpdateAlert: (visible: boolean) => void;
+    setAlertEdit: (visible: Alert) => void;
 }
 
-export default function DataList({ setVisibleUpdateUser, setUserEdit }: DataListProps) {
+export default function DataList({ 
+    setVisibleUpdateUser, 
+    setUserEdit,  
+    setVisibleUpdateAlert,
+    setAlertEdit
+    }: DataListProps) {
     // const { users, isLoading, isError  } = useUsers();
 
 
@@ -70,9 +77,10 @@ export default function DataList({ setVisibleUpdateUser, setUserEdit }: DataList
                                 onClick={() => { 
                                     setVisibleUpdateUser(true)
                                     setUserEdit(u)
-                                }
-                                }
-                                >Edit</button>
+                                }}
+                            >
+                                Edit
+                            </button>
                         </li>
                     ))}
                 </ul>
@@ -119,6 +127,15 @@ export default function DataList({ setVisibleUpdateUser, setUserEdit }: DataList
                             <p>Sent: {a.sent ? "Si":"No"}</p>
                             <p>Enabled: {a.enabled ? "Si":"No"}</p>
                             <p>Deleted: {a.deleted ? "Si":"No"}</p>
+                            <button
+                                className="bg-gray-500 text-white py-1 m-auto w-15 rounded-lg hover:bg-gray-700 transition cursor-pointer"
+                                onClick={() => {
+                                    setVisibleUpdateAlert(true)
+                                    setAlertEdit(a)
+                                }}
+                            >
+                                Edit
+                            </button>
                         </li>
                     ))}
                 </ul>

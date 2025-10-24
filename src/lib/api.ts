@@ -183,7 +183,7 @@ export async function patchUser({_id, email, phone, name, enabled, deleted}: Use
     }
 }
 
-export async function patchAlert({_id, id_debt, date_alert, enabled, deleted }: Alert) {
+export async function patchAlert({_id, id_debt, date_alert, sent, enabled, deleted }: Alert) {
     try {
         const res = await fetch(`${API_URL}/alerts/${_id}`, {
             method: "PATCH",
@@ -191,6 +191,7 @@ export async function patchAlert({_id, id_debt, date_alert, enabled, deleted }: 
             body: JSON.stringify({
                 id_debt,
                 date_alert,
+                sent,
                 enabled,
                 deleted
             })

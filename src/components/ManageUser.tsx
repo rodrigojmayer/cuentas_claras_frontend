@@ -59,7 +59,7 @@ export default function ManageUser({ userEdit }: ManageUserProps) {
     return (
         <div className="flex flex-col p-2 max-w-md">
             <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-                Create User
+                {userEdit ? "Update" : "Create"} User
             </h2>
             
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 border rounded-lg p-2 bg-blue-300">

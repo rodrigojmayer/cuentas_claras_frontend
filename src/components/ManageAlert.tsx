@@ -1,11 +1,17 @@
 "use client";
-import { useState } from "react";
-import { postAlert } from "../lib/api";
-import type { NewAlert } from "../types";
+import { useEffect, useState } from "react";
+import { patchAlert, postAlert } from "../lib/api";
+import type { Alert, NewAlert } from "../types";
 
-export default function ManageAlert() {
-    const [alertIdDebt, setAlertIdDebt] = useState<string>("");
-    const [alertDateAlert, setAlertDateAlert] = useState<Date | null>(null);
+interface ManageAlertProps {
+    alertEdit?: Alert;
+}
+export default function ManageAlert({ alertEdit }: ManageAlertProps) {
+    const [alertIdDebt, setAlertIdDebt] = useState<string>(alertEdit ? alertEdit.id_debt : "");
+    const [alertDateAlert, setAlertDateAlert] = useState<Date | null>(alertEdit ? new Date(alertEdit.date_alert) : null);
+    const [alertSent, setAlertSent] = useState<boolean>(alertEdit ? alertEdit.sent : false);
+    const [alertEnabled, setAlertEnabled] = useState<boolean>(alertEdit ? alertEdit.enabled : true);
+    const [alertDeleted, setAlertDeleted] = useState<boolean>(alertEdit ? alertEdit.deleted : false);
     
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
@@ -16,14 +22,27 @@ export default function ManageAlert() {
         setMessage(null);
 
         try {
-            const newAlert: NewAlert = {
-                id_debt: alertIdDebt,
-                date_alert: alertDateAlert,
+            let response
+            if(alertEdit) {
+                const updateAlert : Alert = {
+                    _id: alertEdit._id,
+                    id_debt: alertIdDebt,
+                    date_alert: alertDateAlert,
+                    sent: alertSent,
+                    enabled: alertEnabled,
+                    deleted: alertDeleted
+                };
+                response = await patchAlert(updateAlert);
+            } else {
+                const newAlert: NewAlert = {
+                    id_debt: alertIdDebt,
+                    date_alert: alertDateAlert,
+                };   
+                response = await postAlert(newAlert);
             }
-            const response = await postAlert(newAlert);
-            console.log("Created alert: ", response);
+            // console.log("Created alert: ", response);
 
-            setMessage("Alert created successfully");
+            setMessage(`Alert ${alertEdit ? "edited" : "created"} successfully!`);
             setAlertIdDebt("");
             setAlertDateAlert(null);
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -38,7 +57,7 @@ export default function ManageAlert() {
     return(
         <div className="flex flex-col p-2 max-w-md">
             <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-                Create Alert
+                {alertEdit ? "Update" : "Create"} Alert
             </h2>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 border rounded-lg p-2 bg-red-300">
@@ -57,12 +76,68 @@ export default function ManageAlert() {
                     onChange={(e) => setAlertDateAlert(e.target.value ? new Date(e.target.value) : null)}
                     className="border rounded-lg p-2 bg-white text-gray-800"
                 />
+                { alertEdit ?
+                    <>
+                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
+                            <span className="text-sm text-gray-800 truncate">Sent</span>
+                            <input
+                                type="checkbox"
+                                checked={alertSent}
+                                onChange={(e) => setAlertSent(e.target.checked)}
+                                className="
+                                    w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
+                                    after:content-[''] after:top-0.5 after:left-[2px] after:bg-white 
+                                    after:border-gray-300 after:rounded-full after:h-5 after:w-5 
+                                    after:transition-all peer-checked:after:translate-x-full 
+                                    peer-checked:after:border-white
+                                "
+                            />
+                        </label>
+                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
+                            <span className="text-sm text-gray-800 truncate">Enabled</span>
+                            <input
+                                type="checkbox"
+                                checked={alertEnabled}
+                                onChange={(e) => setAlertEnabled(e.target.checked)}
+                                className="
+                                    w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
+                                    after:content-[''] after:top-0.5 after:left-[2px] after:bg-white 
+                                    after:border-gray-300 after:rounded-full after:h-5 after:w-5 
+                                    after:transition-all peer-checked:after:translate-x-full 
+                                    peer-checked:after:border-white
+                                "
+                            />
+                        </label>
+                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
+                            <span className="text-sm text-gray-800 truncate">Deleted</span>
+                            <input
+                                type="checkbox"
+                                checked={alertDeleted}
+                                onChange={(e) => setAlertDeleted(e.target.checked)}
+                                className="
+                                    w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
+                                    after:content-[''] after:top-0.5 after:left-[2px] after:bg-white 
+                                    after:border-gray-300 after:rounded-full after:h-5 after:w-5 
+                                    after:transition-all peer-checked:after:translate-x-full 
+                                    peer-checked:after:border-white
+                                "
+                            />
+                        </label>
+                    </>
+                :
+                    <></>   
+                
+                }
                 <button
                     type="submit"
                     disabled={loading}
                     className="bg-gray-500 text-white py-2 m-auto w-30 rounded-lg hover:bg-gray-700 transition cursor-pointer"
                 >
-                    {loading ? "Creating..." : "Create Alert"}
+                    {alertEdit ? 
+                        (loading ? "Updating..." : "Update Alert")
+                        :
+                        (loading ? "Creating..." : "Create Alert")
+                    }
                 </button>
             </form>
 
