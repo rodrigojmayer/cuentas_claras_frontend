@@ -1,4 +1,4 @@
-import { NewUser, NewDebt, NewPayment, NewAlert, User, Alert } from "@/types";
+import { NewUser, NewDebt, NewPayment, NewAlert, User, Alert, Debt } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/api";
 
@@ -183,6 +183,39 @@ export async function patchUser({_id, email, phone, name, enabled, deleted}: Use
     }
 }
 
+export async function patchDebt({_id, id_user_creditor, id_user_debtor, date_debt, detail, amount, dolar_google, status, date_due, currency, enabled, deleted}: Debt) {
+    try {
+        const res = await fetch(`${API_URL}/debts/${_id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application-json" },
+            body: JSON.stringify({
+                id_user_creditor,
+                id_user_debtor,
+                date_debt,
+                detail,
+                amount,
+                dolar_google,
+                status,
+                date_due,
+                currency,
+                enabled,
+                deleted
+            })
+        })
+        if(!res.ok) {
+            const errorText = await res.text();
+            console.error("Error patching debt: ", res.status, errorText);
+            throw new Error(`Failed to patch debt (status ${res.status})`);
+        }
+
+        const updateDebt = await res.json();
+        return updateDebt;
+    } catch (error) {
+        console.error("Network error patching debt: ", error);
+        throw new Error("Unable to reach server");
+    }
+}
+
 export async function patchAlert({_id, id_debt, date_alert, sent, enabled, deleted }: Alert) {
     try {
         const res = await fetch(`${API_URL}/alerts/${_id}`, {
@@ -198,7 +231,7 @@ export async function patchAlert({_id, id_debt, date_alert, sent, enabled, delet
         })
         if(!res.ok) {
             const errorText = await res.text();
-            console.error("Error patching user: ", res.status, errorText);
+            console.error("Error patching alert: ", res.status, errorText);
             throw new Error(`Failed to patch alert (status ${res.status})`);
         }
 
