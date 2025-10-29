@@ -5,7 +5,7 @@ import type { Debt, NewDebt, User } from "../types";
 
 interface ManageDebtProps {
     debtEdit?: Debt;
-    setVisibleUpdateDebt?: (visible: boolean) =>void;
+    setVisibleUpdateDebt?: (visible: boolean) => void;
 }
 export default function ManageDebt({ debtEdit, setVisibleUpdateDebt }: ManageDebtProps) {
     const getInitialCreditorId = (debt?: Debt): string => {

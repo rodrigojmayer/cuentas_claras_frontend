@@ -32,6 +32,7 @@ export default function TestApi() {
                 >
                     <ManageUser 
                         userEdit={userEdit}  
+                        setVisibleUpdateUser={setVisibleUpdateUser}
                     />
                 </div>
             </div>
@@ -62,7 +63,8 @@ export default function TestApi() {
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ManageAlert  
-                        alertEdit={alertEdit}    
+                        alertEdit={alertEdit}  
+                        setVisibleUpdateAlert={setVisibleUpdateAlert}  
                     />
                 </div>
             </div>

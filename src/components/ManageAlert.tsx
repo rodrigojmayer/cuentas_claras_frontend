@@ -5,8 +5,9 @@ import type { Alert, NewAlert } from "../types";
 
 interface ManageAlertProps {
     alertEdit?: Alert;
+    setVisibleUpdateAlert?: (visible: boolean) => void;
 }
-export default function ManageAlert({ alertEdit }: ManageAlertProps) {
+export default function ManageAlert({ alertEdit, setVisibleUpdateAlert }: ManageAlertProps) {
     const [alertIdDebt, setAlertIdDebt] = useState<string>(alertEdit ? alertEdit.id_debt : "");
     const [alertDateAlert, setAlertDateAlert] = useState<Date | null>(alertEdit ? new Date(alertEdit.date_alert) : null);
     const [alertSent, setAlertSent] = useState<boolean>(alertEdit ? alertEdit.sent : false);
@@ -33,6 +34,7 @@ export default function ManageAlert({ alertEdit }: ManageAlertProps) {
                     deleted: alertDeleted
                 };
                 response = await patchAlert(updateAlert);
+                setVisibleUpdateAlert?.(false);
             } else {
                 const newAlert: NewAlert = {
                     id_debt: alertIdDebt,

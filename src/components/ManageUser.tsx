@@ -5,9 +5,10 @@ import type { NewUser, User } from "../types";
 
 interface ManageUserProps {
     userEdit?:  User;
+    setVisibleUpdateUser?: (visible: boolean) => void;
 }
 
-export default function ManageUser({ userEdit }: ManageUserProps) {
+export default function ManageUser({ userEdit, setVisibleUpdateUser }: ManageUserProps) {
     const [userEmail, setUserEmail] = useState<string>(userEdit ? userEdit.email : "");
     const [userPhone, setUserPhone] = useState<string | undefined>(userEdit ? userEdit.phone : "");
     const [userName, setUserName] = useState<string | undefined>(userEdit ? userEdit.name : "");
@@ -34,6 +35,7 @@ export default function ManageUser({ userEdit }: ManageUserProps) {
                     deleted: userDeleted
                 };
                 response = await patchUser(updateUser);
+                setVisibleUpdateUser?.(false);
             } else {
                 const newUser: NewUser = {
                     email: userEmail,
