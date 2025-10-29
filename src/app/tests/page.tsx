@@ -46,7 +46,8 @@ export default function TestApi() {
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ManageDebt  
-                        debtEdit={debtEdit}    
+                        debtEdit={debtEdit}  
+                        setVisibleUpdateDebt={setVisibleUpdateDebt}  
                     />
                 </div>
             </div>

@@ -5,8 +5,9 @@ import type { Debt, NewDebt, User } from "../types";
 
 interface ManageDebtProps {
     debtEdit?: Debt;
+    setVisibleUpdateDebt?: (visible: boolean) =>void;
 }
-export default function ManageDebt({ debtEdit }: ManageDebtProps) {
+export default function ManageDebt({ debtEdit, setVisibleUpdateDebt }: ManageDebtProps) {
     const getInitialCreditorId = (debt?: Debt): string => {
         if (!debt) return "";
         const id = debt.id_user_creditor;
@@ -19,7 +20,6 @@ export default function ManageDebt({ debtEdit }: ManageDebtProps) {
         if (typeof id === "string") return id;
         return (id as User)?._id ?? "";
     }
-    console.log("debtEdit: ", new Date(debtEdit?.date_due))
     const [debtIdUserCreditor, setDebtIdUserCreditor] = useState<string>(getInitialCreditorId(debtEdit));
     const [debtIdUserDebtor, setDebtIdUserDebtor] = useState<string>(getInitialDebtorId(debtEdit));
     const [debtDateDebt, setDebtDateDebt] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_debt) : null);
@@ -57,6 +57,7 @@ export default function ManageDebt({ debtEdit }: ManageDebtProps) {
                     deleted: debtDeleted
                 };
                 response = await patchDebt(updateDebt);
+                setVisibleUpdateDebt?.(false);
             } else {
                 const newDebt: NewDebt = {
                     id_user_creditor: debtIdUserCreditor,
@@ -70,7 +71,6 @@ export default function ManageDebt({ debtEdit }: ManageDebtProps) {
                 }
                 response = await postDebt(newDebt);
             }
-            console.log("Created debt: ", response);
 
             setMessage(`Debt ${debtEdit ? "edited" : "created"} successfully!`);
             setDebtIdUserCreditor("");
@@ -146,13 +146,17 @@ export default function ManageDebt({ debtEdit }: ManageDebtProps) {
                     <option value="closed">Closed</option>
                     <option value="overdue">Overdue</option>
                 </select>
-                <input
-                    type="date"
-                    placeholder="Date Due"
-                    value={debtDateDue && debtDateDue.toString() !== "Invalid Date" ? debtDateDue.toISOString().slice(0, 10) : ""}
-                    onChange={(e) => setDebtDateDue(e.target.value ? new Date(e.target.value) : null)}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
-                />
+                {debtEdit ? 
+                    <input
+                        type="date"
+                        placeholder="Date Debt"
+                        value={debtDateDebt && debtDateDebt.toString() !== "Invalid Date" ? debtDateDebt.toISOString().slice(0, 10) : ""}
+                        onChange={(e) => setDebtDateDebt(e.target.value ? new Date(e.target.value) : null)}
+                        className="border rounded-lg p-2 bg-white text-gray-800"
+                    />
+                : 
+                    <></>
+                }
                 <input
                     type="date"
                     placeholder="Date Due"
@@ -171,6 +175,43 @@ export default function ManageDebt({ debtEdit }: ManageDebtProps) {
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
                 </select>
+                
+                {debtEdit ? 
+                    <>
+                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
+                            <span className="text-sm text-gray-800 truncate">Enabled</span>
+                            <input
+                                type="checkbox"
+                                checked={debtEnabled}
+                                onChange={(e) => setDebtEnabled(e.target.checked)}
+                                className="
+                                    w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
+                                    after:content-[''] after:top-0.5 after:left-[2px] after:bg-white 
+                                    after:border-gray-300 after:rounded-full after:h-5 after:w-5 
+                                    after:transition-all peer-checked:after:translate-x-full 
+                                    peer-checked:after:border-white
+                                "
+                            />
+                        </label>
+                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
+                            <span className="text-sm text-gray-800 truncate">Deleted</span>
+                            <input
+                                type="checkbox"
+                                checked={debtDeleted}
+                                onChange={(e) => setDebtDeleted(e.target.checked)}
+                                className="
+                                    w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
+                                    after:content-[''] after:top-0.5 after:left-[2px] after:bg-white 
+                                    after:border-gray-300 after:rounded-full after:h-5 after:w-5 
+                                    after:transition-all peer-checked:after:translate-x-full 
+                                    peer-checked:after:border-white
+                                "
+                            />
+                        </label>
+                    </>
+                : 
+                    <></>
+                }
                 <button
                     type="submit"
                     disabled={loading}

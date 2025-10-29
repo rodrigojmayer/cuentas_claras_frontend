@@ -187,7 +187,7 @@ export async function patchDebt({_id, id_user_creditor, id_user_debtor, date_deb
     try {
         const res = await fetch(`${API_URL}/debts/${_id}`, {
             method: "PATCH",
-            headers: { "Content-Type": "application-json" },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 id_user_creditor,
                 id_user_debtor,
