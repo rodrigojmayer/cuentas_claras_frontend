@@ -1,4 +1,4 @@
-import { NewUser, NewDebt, NewPayment, NewAlert, User, Alert, Debt } from "@/types";
+import { NewUser, NewDebt, NewPayment, NewAlert, User, Alert, Debt, Payment } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/api";
 
@@ -213,6 +213,34 @@ export async function patchDebt({_id, id_user_creditor, id_user_debtor, date_deb
         return updateDebt;
     } catch (error) {
         console.error("Network error patching debt: ", error);
+        throw new Error("Unable to reach server");
+    }
+}
+
+export async function patchPayment({_id, id_debt, amount, date_payment, dolar_google, enabled, deleted }: Payment) {
+    try {
+        const res = await fetch(`${API_URL}/payments/${_id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify({
+                id_debt,
+                amount,
+                date_payment,
+                dolar_google,
+                enabled,
+                deleted
+            })
+        })
+        if(!res.ok) {
+            const errorText = await res.text();
+            console.error("Error patching payment: ", res.status, errorText);
+            throw new Error(`Failed to patch payment (status ${res.status})`);
+        }
+
+        const updatePayment = await res.json();
+        return updatePayment;
+    } catch (error) {
+        console.error("Network error patching payment: ", error);
         throw new Error("Unable to reach server");
     }
 }
