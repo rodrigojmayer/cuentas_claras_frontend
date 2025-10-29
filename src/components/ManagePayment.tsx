@@ -3,7 +3,7 @@ import { useState } from "react";
 import { postPayment } from "../lib/api";
 import type { NewPayment } from "../types";
 
-export default function PostPayment() {
+export default function ManagePayment() {
     const [paymentIdDebt, setPaymentIdDebt] = useState<string>("");
     const [paymentAmount, setPaymentAmount] = useState<number | null>(null);
     const [paymentDolarGoogle, setPaymentDolarGoogle] = useState<number | null>(null);

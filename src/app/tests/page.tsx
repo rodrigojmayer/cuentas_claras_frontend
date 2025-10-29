@@ -2,7 +2,7 @@
 import { useState } from "react";
 import ManageUser from "@/components/ManageUser"
 import ManageDebt from "@/components/ManageDebt";
-import PostPayment from "@/components/PostPayment";
+import ManagePayment from "@/components/ManagePayment";
 import ManageAlert from "@/components/ManageAlert";
 import DataList from "@/components/DataList"
 import type { Alert, Debt, User } from "@/types";
@@ -72,7 +72,7 @@ export default function TestApi() {
         <div className="flex flex-col ">
             < ManageUser />
             < ManageDebt />
-            < PostPayment />
+            < ManagePayment />
             < ManageAlert />
         </div>
         < DataList 
