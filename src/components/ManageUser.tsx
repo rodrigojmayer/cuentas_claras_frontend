@@ -13,6 +13,7 @@ export default function ManageUser({ userEdit }: ManageUserProps) {
     const [userName, setUserName] = useState<string | undefined>(userEdit ? userEdit.name : "");
     const [userEnabled, setUserEnabled] = useState<boolean>(userEdit ? userEdit.enabled : true);
     const [userDeleted, setUserDeleted] = useState<boolean>(userEdit ? userEdit.deleted : false);
+    
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
     

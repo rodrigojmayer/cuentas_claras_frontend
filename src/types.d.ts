@@ -25,8 +25,8 @@ export interface Debt {
     currency: string;
     enabled: boolean;
     deleted: boolean;
-    payments: Payment[];
-    alerts: Alert[];
+    payments?: Payment[];
+    alerts?: Alert[];
 }
 
 export interface NewDebt {

@@ -8,13 +8,17 @@ import type { Alert, Debt, Payment, User } from "../types";
 interface DataListProps {
     setVisibleUpdateUser: (visible: boolean) => void;
     setUserEdit: (visible: User) => void;
+    setVisibleUpdateDebt: (visible: boolean) => void;
+    setDebtEdit: (visible: Debt) => void;
     setVisibleUpdateAlert: (visible: boolean) => void;
     setAlertEdit: (visible: Alert) => void;
 }
 
 export default function DataList({ 
     setVisibleUpdateUser, 
-    setUserEdit,  
+    setUserEdit,
+    setVisibleUpdateDebt,
+    setDebtEdit,
     setVisibleUpdateAlert,
     setAlertEdit
     }: DataListProps) {
@@ -99,6 +103,15 @@ export default function DataList({
                             <p>Due: {new Date(d.date_due).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                             <p>Enabled: {d.enabled ? "Si":"No"}</p>
                             <p>Deleted: {d.deleted ? "Si":"No"}</p>
+                            <button
+                                className="bg-gray-500 text-white py-1 m-auto w-15 rounded-lg hover:bg-gray-700 transition cursor-pointer"
+                                onClick={() => {
+                                    setVisibleUpdateDebt(true)
+                                    setDebtEdit(d)
+                                }}
+                            >
+                                Edit
+                            </button>
                         </li>
                     ))}
                 </ul>
@@ -164,7 +177,7 @@ export default function DataList({
                 : 
                     <ul className="space-y-2">
                         {debtsByCreditor.map((d: Debt) => (
-                            <li key={d._id} className="p-3 bg-green-300 rounded-lg shadow">
+                            <li key={d._id} className="p-3 bg-green-300 rounded-lg shadow">?
                                 <p>ID: {d._id}</p>
                                 <p>Detail: {d.detail}</p>
                                 <p>Amount: ${d.amount}</p>
@@ -176,7 +189,7 @@ export default function DataList({
                                 <h3 className="text-3xl mt-3 font-bold text-gray-800 dark:text-gray-500 mb-4">
                                     Payments
                                 </h3>
-                                {d.payments.length === 0 ? 
+                                {!d.payments || d.payments.length === 0 ? 
                                     <p>No payments</p>
                                 :
                                     <ul className="space-y-2">
@@ -192,7 +205,7 @@ export default function DataList({
                                 <h3 className="text-3xl mt-3 font-bold text-gray-800 dark:text-gray-500 mb-4">
                                     Alerts
                                 </h3>
-                                {d.alerts.length === 0 ? 
+                                {!d.alerts || d.alerts.length === 0 ? 
                                     <p className="text-gray-800 dark:text-gray-900">
                                         No alerts
                                     </p>
@@ -225,7 +238,7 @@ export default function DataList({
                                 <h3 className="text-3xl mt-3 font-bold text-gray-800 dark:text-gray-500 mb-4">
                                     Payments
                                 </h3>
-                                {d.payments.length === 0 ? 
+                                {!d.payments || d.payments.length === 0 ? 
                                     <p>No payments</p>
                                 :
                                     <ul className="space-y-2">
@@ -240,7 +253,7 @@ export default function DataList({
                                 <h3 className="text-3xl mt-3 font-bold text-gray-800 dark:text-gray-500 mb-4">
                                     Alerts
                                 </h3>
-                                {d.alerts.length === 0 ? 
+                                {!d.alerts || d.alerts.length === 0 ? 
                                     <p>No alerts</p>
                                 :
                                     <ul className="space-y-2">

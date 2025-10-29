@@ -72,7 +72,7 @@ export default function ManageAlert({ alertEdit }: ManageAlertProps) {
                 <input
                     type="date"
                     placeholder="Date Alert"
-                    value={alertDateAlert ? alertDateAlert.toISOString().slice(0, 10) : ""}
+                    value={alertDateAlert && alertDateAlert.toString() !== "Invalid Date" ? alertDateAlert.toISOString().slice(0, 10) : ""}
                     onChange={(e) => setAlertDateAlert(e.target.value ? new Date(e.target.value) : null)}
                     className="border rounded-lg p-2 bg-white text-gray-800"
                 />

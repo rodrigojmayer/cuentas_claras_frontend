@@ -1,16 +1,18 @@
 "use client";
 import { useState } from "react";
-import PostDebt from "@/components/PostDebt";
 import ManageUser from "@/components/ManageUser"
+import ManageDebt from "@/components/ManageDebt";
 import PostPayment from "@/components/PostPayment";
 import ManageAlert from "@/components/ManageAlert";
 import DataList from "@/components/DataList"
-import type { Alert, User } from "@/types";
+import type { Alert, Debt, User } from "@/types";
 
 export default function TestApi() {
 
     const [visibleUpdateUser, setVisibleUpdateUser] = useState(false);
     const [userEdit, setUserEdit] = useState<User | undefined>(undefined);
+    const [visibleUpdateDebt, setVisibleUpdateDebt] = useState(false);
+    const [debtEdit, setDebtEdit] = useState<Debt | undefined>(undefined);
     const [visibleUpdateAlert, setVisibleUpdateAlert] = useState(false);
     const [alertEdit, setAlertEdit] = useState<Alert | undefined>(undefined);
 
@@ -34,6 +36,21 @@ export default function TestApi() {
                 </div>
             </div>
         )}
+        {visibleUpdateDebt && (
+            <div 
+                className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+                onClick={() => setVisibleUpdateDebt(false)} // click background to close
+            >
+                <div
+                    className="bg-green-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white"
+                    onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                >
+                    <ManageDebt  
+                        debtEdit={debtEdit}    
+                    />
+                </div>
+            </div>
+        )}
         {visibleUpdateAlert && (
             <div 
                 className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
@@ -51,13 +68,15 @@ export default function TestApi() {
         )}
         <div className="flex flex-col ">
             < ManageUser />
-            < PostDebt />
+            < ManageDebt />
             < PostPayment />
             < ManageAlert />
         </div>
         < DataList 
             setVisibleUpdateUser={setVisibleUpdateUser} 
             setUserEdit={setUserEdit} 
+            setVisibleUpdateDebt={setVisibleUpdateDebt} 
+            setDebtEdit={setDebtEdit} 
             setVisibleUpdateAlert={setVisibleUpdateAlert} 
             setAlertEdit={setAlertEdit} 
         />

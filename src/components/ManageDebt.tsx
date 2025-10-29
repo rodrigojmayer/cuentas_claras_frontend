@@ -1,18 +1,37 @@
 "use client";
 import { useState } from "react";
-import { postDebt } from "../lib/api";
-import type { NewDebt } from "../types";
+import { patchDebt, postDebt } from "../lib/api";
+import type { Debt, NewDebt, User } from "../types";
 
-export default function PostDebt() {
-    const [debtIdUserCreditor, setDebtIdUserCreditor] = useState<string>("");
-    const [debtIdUserDebtor, setDebtIdUserDebtor] = useState<string>("");
-    // const [debtDateDebt, setDebtDateDebt] = useState<date | null>(null);
-    const [debtDetail, setDebtDetail] = useState<string>("");
-    const [debtAmount, setDebtAmount] = useState<number | null>(null);
-    const [debtDolarGoogle, setDebtDolarGoogle] = useState<number | null>(null);
-    const [debtStatus, setDebtStatus] = useState<string>("open");
-    const [debtDateDue, setDebtDateDue] = useState<Date | null>(null);
-    const [debtCurrency, setDebtCurrency] = useState<string>("ARS");
+interface ManageDebtProps {
+    debtEdit?: Debt;
+}
+export default function ManageDebt({ debtEdit }: ManageDebtProps) {
+    const getInitialCreditorId = (debt?: Debt): string => {
+        if (!debt) return "";
+        const id = debt.id_user_creditor;
+        if (typeof id === "string") return id;
+        return (id as User)?._id ?? "";
+    };
+    const getInitialDebtorId = (debt?: Debt): string => {
+        if (!debt) return "";
+        const id = debt.id_user_debtor;
+        if (typeof id === "string") return id;
+        return (id as User)?._id ?? "";
+    }
+    console.log("debtEdit: ", new Date(debtEdit?.date_due))
+    const [debtIdUserCreditor, setDebtIdUserCreditor] = useState<string>(getInitialCreditorId(debtEdit));
+    const [debtIdUserDebtor, setDebtIdUserDebtor] = useState<string>(getInitialDebtorId(debtEdit));
+    const [debtDateDebt, setDebtDateDebt] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_debt) : null);
+    const [debtDetail, setDebtDetail] = useState<string | undefined>(debtEdit ? debtEdit.detail : "");
+    const [debtAmount, setDebtAmount] = useState<number | null>(debtEdit ? debtEdit.amount : null);
+    const [debtDolarGoogle, setDebtDolarGoogle] = useState<number | null | undefined>(debtEdit ? debtEdit.dolar_google : null);
+    const [debtStatus, setDebtStatus] = useState<string>(debtEdit ? debtEdit.status : "open");
+    const [debtDateDue, setDebtDateDue] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_due) : null);
+    const [debtCurrency, setDebtCurrency] = useState<string>(debtEdit ? debtEdit.currency : "ARS");
+    const [debtEnabled, setDebtEnabled] = useState<boolean>(debtEdit ? debtEdit.enabled : true);
+    const [debtDeleted, setDebtDeleted] = useState<boolean>(debtEdit ? debtEdit.deleted : false);
+
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
 
@@ -21,20 +40,39 @@ export default function PostDebt() {
         setLoading(true);
         setMessage(null);
         try {
-            const newDebt: NewDebt = {
-                id_user_creditor: debtIdUserCreditor,
-                id_user_debtor: debtIdUserDebtor,
-                detail: debtDetail,
-                amount: debtAmount,
-                dolar_google: debtDolarGoogle,
-                status: debtStatus,
-                date_due: debtDateDue,
-                currency: debtCurrency 
+            let response
+            if(debtEdit) {
+                const updateDebt: Debt = {
+                    _id: debtEdit._id,
+                    id_user_creditor: debtIdUserCreditor,
+                    id_user_debtor: debtIdUserDebtor,
+                    date_debt: debtDateDebt,
+                    detail: debtDetail,
+                    amount: debtAmount,
+                    dolar_google: debtDolarGoogle,
+                    status: debtStatus,
+                    date_due: debtDateDue,
+                    currency: debtCurrency,
+                    enabled: debtEnabled,
+                    deleted: debtDeleted
+                };
+                response = await patchDebt(updateDebt);
+            } else {
+                const newDebt: NewDebt = {
+                    id_user_creditor: debtIdUserCreditor,
+                    id_user_debtor: debtIdUserDebtor,
+                    detail: debtDetail,
+                    amount: debtAmount,
+                    dolar_google: debtDolarGoogle,
+                    status: debtStatus,
+                    date_due: debtDateDue,
+                    currency: debtCurrency 
+                }
+                response = await postDebt(newDebt);
             }
-            const response = await postDebt(newDebt);
             console.log("Created debt: ", response);
 
-            setMessage("Debt created successfully!");
+            setMessage(`Debt ${debtEdit ? "edited" : "created"} successfully!`);
             setDebtIdUserCreditor("");
             setDebtIdUserDebtor("");
             setDebtDetail("");
@@ -56,7 +94,7 @@ export default function PostDebt() {
     return (
         <div className="flex flex-col p-2 max-w-md">
             <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-                Create Debt
+                {debtEdit ? "Update" : "Create" } Debt
             </h2>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 border rounded-lg p-2 bg-green-300">
@@ -111,7 +149,14 @@ export default function PostDebt() {
                 <input
                     type="date"
                     placeholder="Date Due"
-                    value={debtDateDue ? debtDateDue.toISOString().slice(0, 10) : ""}
+                    value={debtDateDue && debtDateDue.toString() !== "Invalid Date" ? debtDateDue.toISOString().slice(0, 10) : ""}
+                    onChange={(e) => setDebtDateDue(e.target.value ? new Date(e.target.value) : null)}
+                    className="border rounded-lg p-2 bg-white text-gray-800"
+                />
+                <input
+                    type="date"
+                    placeholder="Date Due"
+                    value={debtDateDue && debtDateDue.toString() !== "Invalid Date" ? debtDateDue.toISOString().slice(0, 10) : ""}
                     onChange={(e) => setDebtDateDue(e.target.value ? new Date(e.target.value) : null)}
                     className="border rounded-lg p-2 bg-white text-gray-800"
                 />
@@ -131,7 +176,12 @@ export default function PostDebt() {
                     disabled={loading}
                     className="bg-gray-500 text-white py-2 m-auto w-30 rounded-lg hover:bg-gray-700 transition cursor-pointer"
                 >
-                    {loading ? "Creating..." : "Create Debt"}
+                    {debtEdit ? 
+                        (loading ? "Updating..." : "Update Debt")
+                        :
+                        (loading ? "Creating..." : "Create Debt")
+                        
+                    }
                 </button>
             </form>
 
