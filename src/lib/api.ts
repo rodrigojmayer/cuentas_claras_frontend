@@ -184,6 +184,7 @@ export async function patchUser({_id, email, phone, name, enabled, deleted}: Use
 }
 
 export async function patchDebt({_id, id_user_creditor, id_user_debtor, date_debt, detail, amount, dolar_google, status, date_due, currency, enabled, deleted}: Debt) {
+    console.log("dolar_google: ", dolar_google);
     try {
         const res = await fetch(`${API_URL}/debts/${_id}`, {
             method: "PATCH",
