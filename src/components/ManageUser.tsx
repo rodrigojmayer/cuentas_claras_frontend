@@ -64,25 +64,28 @@ export default function ManageUser({ userEdit, setVisibleUpdateUser }: ManageUse
                 {userEdit ? "Update" : "Create"} User
             </h2>
             
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4 border rounded-lg p-2 bg-blue-300">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 border rounded-lg p-2 bg-blue-300">
+                <label className="input-label">Email*</label>
                 <input 
                     type="email"
-                    placeholder="Email*"
+                    placeholder=" "
                     value={userEmail}
                     onChange={(e) => setUserEmail(e.target.value)}
                     className="border rounded-lg p-2 bg-white text-gray-800"
                     required
                 />
+                <label className="input-label">Phone</label>
                 <input
                     type="text"
-                    placeholder="Phone"
+                    placeholder=" "
                     value={userPhone}
                     onChange={(e) => setUserPhone(e.target.value)}
                     className="border rounded-lg p-2 bg-white text-gray-800"
                 />
+                <label className="input-label">Name</label>
                 <input
                     type="text"
-                    placeholder="Name"
+                    placeholder=" "
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
                     className="border rounded-lg p-2 bg-white text-gray-800"
