@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { postPayment } from "../lib/api";
+import { patchPayment, postPayment } from "../lib/api";
 import type { NewPayment, Payment } from "../types";
 
 interface ManagePaymentProps {
@@ -9,9 +9,12 @@ interface ManagePaymentProps {
 }
 
 export default function ManagePayment({ paymentEdit, setVisibleUpdatePayment }: ManagePaymentProps ) {
-    const [paymentIdDebt, setPaymentIdDebt] = useState<string>("");
-    const [paymentAmount, setPaymentAmount] = useState<number | null>(null);
-    const [paymentDolarGoogle, setPaymentDolarGoogle] = useState<number | null>(null);
+    const [paymentIdDebt, setPaymentIdDebt] = useState<string>(paymentEdit ? paymentEdit.id_debt : "");
+    const [paymentAmount, setPaymentAmount] = useState<number | null>(paymentEdit ? paymentEdit.amount : null);
+    const [paymentDatePayment, setPaymentDatePayment] = useState<Date | null>(paymentEdit ? new Date(paymentEdit.date_payment) : null);
+    const [paymentDolarGoogle, setPaymentDolarGoogle] = useState<number | null | undefined>(paymentEdit ? paymentEdit.dolar_google : null);
+    const [paymentEnabled, setPaymentEnabled] = useState<boolean>(paymentEdit ? paymentEdit.enabled : true);
+    const [paymentDeleted, setPaymentDeleted] = useState<boolean>(paymentEdit ? paymentEdit.deleted : false);
 
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
@@ -22,15 +25,29 @@ export default function ManagePayment({ paymentEdit, setVisibleUpdatePayment }: 
         setMessage(null);
 
         try {
-            const newPayment: NewPayment = {
-                id_debt: paymentIdDebt,
-                amount: paymentAmount,
-                dolar_google: paymentDolarGoogle,
+            if(paymentEdit) {
+                const updatePayment: Payment = {
+                    _id: paymentEdit._id,
+                    id_debt: paymentIdDebt,
+                    amount: paymentAmount,
+                    date_payment: paymentDatePayment,
+                    dolar_google: paymentDolarGoogle,
+                    enabled: paymentEnabled,
+                    deleted: paymentDeleted,
+                }
+                await patchPayment(updatePayment);
+                setVisibleUpdatePayment?.(false);
+            } else {
+                const newPayment: NewPayment = {
+                    id_debt: paymentIdDebt,
+                    amount: paymentAmount,
+                    dolar_google: paymentDolarGoogle,
+                }
+                await postPayment(newPayment);
             }
-            const response = await postPayment(newPayment);
-            console.log("Created payment: ", response);
             
-            setMessage("Payment created successfully!");
+            
+            setMessage(`Payment ${paymentEdit ? "edited" : "created" } successfully!`);
             setPaymentIdDebt("");
             setPaymentAmount(null);
             setPaymentDolarGoogle(null);
@@ -46,7 +63,7 @@ export default function ManagePayment({ paymentEdit, setVisibleUpdatePayment }: 
     return(
         <div className="flex flex-col p-2 max-w-md">
             <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-                Create Payment
+                {paymentEdit ? "Update" : "Create" } Payment
             </h2>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 border rounded-lg p-2 bg-yellow-200">
@@ -66,6 +83,17 @@ export default function ManagePayment({ paymentEdit, setVisibleUpdatePayment }: 
                     className="border rounded-lg p-2 bg-white text-gray-800"
                     required
                 />
+                {paymentEdit ?
+                    <input
+                        type="date"
+                        placeholder="Date Payment"
+                        value={paymentDatePayment && paymentDatePayment.toString() !== "Invalid Date" ? paymentDatePayment.toISOString().slice(0, 10) : ""}
+                        onChange={(e) => setPaymentDatePayment(e.target.value ? new Date(e.target.value) : null)}
+                        className="border rounded-lg p-2 bg-white text-gray-800"
+                    />
+                :
+                    <></>
+                }
                 <input
                     type="number"
                     placeholder="Dolar Google"
@@ -73,12 +101,53 @@ export default function ManagePayment({ paymentEdit, setVisibleUpdatePayment }: 
                     onChange={(e) => setPaymentDolarGoogle(e.target.value === "" ? null : Number(e.target.value))}
                     className="border rounded-lg p-2 bg-white text-gray-800"
                 />
+                {paymentEdit ?
+                    <>
+                       <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
+                            <span className="text-sm text-gray-800 truncate">Enabled</span>
+                            <input
+                                type="checkbox"
+                                checked={paymentEnabled}
+                                onChange={(e) => setPaymentEnabled(e.target.checked)}
+                                className="
+                                    w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
+                                    after:content-[''] after:top-0.5 after:left-[2px] after:bg-white 
+                                    after:border-gray-300 after:rounded-full after:h-5 after:w-5 
+                                    after:transition-all peer-checked:after:translate-x-full 
+                                    peer-checked:after:border-white
+                                "
+                            />
+                        </label>
+                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
+                            <span className="text-sm text-gray-800 truncate">Deleted</span>
+                            <input
+                                type="checkbox"
+                                checked={paymentDeleted}
+                                onChange={(e) => setPaymentDeleted(e.target.checked)}
+                                className="
+                                    w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
+                                    after:content-[''] after:top-0.5 after:left-[2px] after:bg-white 
+                                    after:border-gray-300 after:rounded-full after:h-5 after:w-5 
+                                    after:transition-all peer-checked:after:translate-x-full 
+                                    peer-checked:after:border-white
+                                "
+                            />
+                        </label>
+                    </>
+                :
+                    <></>
+                }
                 <button
                     type="submit"
                     disabled={loading}
                     className="bg-gray-500 text-white py-2 m-auto w-30 rounded-lg hover:bg-gray-700 transition cursor-pointer"
                 >
-                    {loading ? "Creating..." : "Create Payment"}    
+                    {   paymentEdit ?
+                        (loading ? "Updating..." : "Update Payment")
+                    :
+                        (loading ? "Creating..." : "Create Payment")
+                    
+                    }
                 </button>    
             </form>
 
