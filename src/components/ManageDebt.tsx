@@ -96,49 +96,55 @@ export default function ManageDebt({ debtEdit, setVisibleUpdateDebt }: ManageDeb
                 {debtEdit ? "Update" : "Create" } Debt
             </h2>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4 border rounded-lg p-2 bg-green-300">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 border rounded-lg p-2 bg-green-300 text-gray-800">
+                <label className="input-label">ID Creditor*</label>
                 <input
                     type="text"
-                    placeholder="ID Creditor*"
+                    placeholder=" "
                     value={debtIdUserCreditor}
                     onChange={(e) => setDebtIdUserCreditor(e.target.value)}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
+                    className="border rounded-lg p-2 bg-white"
                     required
                 />
+                <label className="input-label">ID Debtor*</label>
                 <input 
                     type="text" 
-                    placeholder="ID Debtor*"
+                    placeholder=" "
                     value={debtIdUserDebtor}
                     onChange={(e) => setDebtIdUserDebtor(e.target.value)}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
+                    className="border rounded-lg p-2 bg-white"
                     required    
                 />
+                <label className="input-label">Detail</label>
                 <input
                     type="text"
-                    placeholder="Detail"
+                    placeholder=" "
                     value={debtDetail}
                     onChange={(e) => setDebtDetail(e.target.value)}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
+                    className="border rounded-lg p-2 bg-white"
                 />
+                <label className="input-label">Amount*</label>
                 <input
                     type="number"
-                    placeholder="Amount*"
+                    placeholder=" "
                     value={debtAmount ?? ""}
                     onChange={(e) => setDebtAmount(e.target.value === "" ? null : Number(e.target.value))}
-                    className="border rounded-lg p-2 bg-white text-gray-800"  
+                    className="border rounded-lg p-2 bg-white"  
                 />
+                <label className="input-label">Dolar Google</label>
                 <input
                     type="number"
-                    placeholder="Dolar Google"
+                    placeholder=" "
                     value={debtDolarGoogle ?? ""}
                     onChange={(e) => setDebtDolarGoogle(e.target.value === "" ? null : Number(e.target.value))}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
+                    className="border rounded-lg p-2 bg-white"
                 />
+                <label className="input-label">Status</label>
                 <select 
                     name="status"
                     value={debtStatus} 
                     onChange={(e) => setDebtStatus(e.target.value)}
-                    className="border rounded-lg p-2 bg-white text-gray-800 cursor-pointer"
+                    className="border rounded-lg p-2 bg-white cursor-pointer"
                     required
                 >
                     <option value="open">Open</option>
@@ -146,28 +152,33 @@ export default function ManageDebt({ debtEdit, setVisibleUpdateDebt }: ManageDeb
                     <option value="overdue">Overdue</option>
                 </select>
                 {debtEdit ? 
-                    <input
-                        type="date"
-                        placeholder="Date Debt"
-                        value={debtDateDebt && debtDateDebt.toString() !== "Invalid Date" ? debtDateDebt.toISOString().slice(0, 10) : ""}
-                        onChange={(e) => setDebtDateDebt(e.target.value ? new Date(e.target.value) : null)}
-                        className="border rounded-lg p-2 bg-white text-gray-800"
-                    />
+                    <>
+                        <label className="input-label">Date Debt</label>    
+                        <input
+                            type="date"
+                            placeholder=" "
+                            value={debtDateDebt && debtDateDebt.toString() !== "Invalid Date" ? debtDateDebt.toISOString().slice(0, 10) : ""}
+                            onChange={(e) => setDebtDateDebt(e.target.value ? new Date(e.target.value) : null)}
+                            className="border rounded-lg p-2 bg-white"
+                        />
+                    </>
                 : 
                     <></>
                 }
+                <label className="input-label">Date Due</label>
                 <input
                     type="date"
-                    placeholder="Date Due"
+                    placeholder=" "
                     value={debtDateDue && debtDateDue.toString() !== "Invalid Date" ? debtDateDue.toISOString().slice(0, 10) : ""}
                     onChange={(e) => setDebtDateDue(e.target.value ? new Date(e.target.value) : null)}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
+                    className="border rounded-lg p-2 bg-white"
                 />
+                <label className="input-label">Currency</label>
                 <select 
                     name="currency"
                     value={debtCurrency} 
                     onChange={(e) => setDebtCurrency(e.target.value)}
-                    className="border rounded-lg p-2 bg-white text-gray-800 cursor-pointer"
+                    className="border rounded-lg p-2 bg-white cursor-pointer"
                     required
                 >
                     <option value="ARS">ARS</option>
@@ -178,7 +189,7 @@ export default function ManageDebt({ debtEdit, setVisibleUpdateDebt }: ManageDeb
                 {debtEdit ? 
                     <>
                         <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
-                            <span className="text-sm text-gray-800 truncate">Enabled</span>
+                            <span className="text-sm truncate">Enabled</span>
                             <input
                                 type="checkbox"
                                 checked={debtEnabled}
@@ -193,7 +204,7 @@ export default function ManageDebt({ debtEdit, setVisibleUpdateDebt }: ManageDeb
                             />
                         </label>
                         <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
-                            <span className="text-sm text-gray-800 truncate">Deleted</span>
+                            <span className="text-sm truncate">Deleted</span>
                             <input
                                 type="checkbox"
                                 checked={debtDeleted}
