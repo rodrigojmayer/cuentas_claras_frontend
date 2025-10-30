@@ -64,14 +64,14 @@ export default function ManageUser({ userEdit, setVisibleUpdateUser }: ManageUse
                 {userEdit ? "Update" : "Create"} User
             </h2>
             
-            <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 border rounded-lg p-2 bg-blue-300">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 border rounded-lg p-2 bg-blue-300 text-gray-800">
                 <label className="input-label">Email*</label>
                 <input 
                     type="email"
                     placeholder=" "
                     value={userEmail}
                     onChange={(e) => setUserEmail(e.target.value)}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
+                    className="border rounded-lg p-2 bg-white"
                     required
                 />
                 <label className="input-label">Phone</label>
@@ -80,7 +80,7 @@ export default function ManageUser({ userEdit, setVisibleUpdateUser }: ManageUse
                     placeholder=" "
                     value={userPhone}
                     onChange={(e) => setUserPhone(e.target.value)}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
+                    className="border rounded-lg p-2 bg-white"
                 />
                 <label className="input-label">Name</label>
                 <input
@@ -88,12 +88,12 @@ export default function ManageUser({ userEdit, setVisibleUpdateUser }: ManageUse
                     placeholder=" "
                     value={userName}
                     onChange={(e) => setUserName(e.target.value)}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
+                    className="border rounded-lg p-2 bg-white"
                 />
                 { userEdit ? 
                     <>
                         <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
-                            <span className="text-sm text-gray-800 truncate">Enabled</span>
+                            <span className="text-sm truncate">Enabled</span>
                             <input
                                 type="checkbox"
                                 checked={userEnabled}
@@ -108,7 +108,7 @@ export default function ManageUser({ userEdit, setVisibleUpdateUser }: ManageUse
                             />
                         </label>
                         <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
-                            <span className="text-sm text-gray-800 truncate">Deleted</span>
+                            <span className="text-sm truncate">Deleted</span>
                             <input
                                 type="checkbox"
                                 checked={userDeleted}

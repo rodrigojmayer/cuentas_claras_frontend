@@ -66,45 +66,51 @@ export default function ManagePayment({ paymentEdit, setVisibleUpdatePayment }: 
                 {paymentEdit ? "Update" : "Create" } Payment
             </h2>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4 border rounded-lg p-2 bg-yellow-200">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 border rounded-lg p-2 bg-yellow-200 text-gray-800 ">
+                <label className="input-label">ID Debt</label>
                 <input
                     type="text"
-                    placeholder="ID Debt"
+                    placeholder=" "
                     value={paymentIdDebt}
                     onChange={(e) => setPaymentIdDebt(e.target.value)}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
+                    className="border rounded-lg p-2 bg-white"
                     required
                 />
+                <label className="input-label">Amount</label>
                 <input
                     type="number"
-                    placeholder="Amount"
+                    placeholder=" "
                     value={paymentAmount ?? ""}
                     onChange={(e) => setPaymentAmount(e.target.value === "" ? null : Number(e.target.value))}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
+                    className="border rounded-lg p-2 bg-white"
                     required
                 />
                 {paymentEdit ?
-                    <input
-                        type="date"
-                        placeholder="Date Payment"
-                        value={paymentDatePayment && paymentDatePayment.toString() !== "Invalid Date" ? paymentDatePayment.toISOString().slice(0, 10) : ""}
-                        onChange={(e) => setPaymentDatePayment(e.target.value ? new Date(e.target.value) : null)}
-                        className="border rounded-lg p-2 bg-white text-gray-800"
-                    />
+                    <>
+                        <label className="input-label">Date Payment</label>
+                        <input
+                            type="date"
+                            placeholder=" "
+                            value={paymentDatePayment && paymentDatePayment.toString() !== "Invalid Date" ? paymentDatePayment.toISOString().slice(0, 10) : ""}
+                            onChange={(e) => setPaymentDatePayment(e.target.value ? new Date(e.target.value) : null)}
+                            className="border rounded-lg p-2 bg-white"
+                        />
+                    </>
                 :
                     <></>
                 }
+                <label className="input-label">Dolar Google</label>
                 <input
                     type="number"
-                    placeholder="Dolar Google"
+                    placeholder=" "
                     value={paymentDolarGoogle ?? ""}
                     onChange={(e) => setPaymentDolarGoogle(e.target.value === "" ? null : Number(e.target.value))}
-                    className="border rounded-lg p-2 bg-white text-gray-800"
+                    className="border rounded-lg p-2 bg-white"
                 />
                 {paymentEdit ?
                     <>
                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
-                            <span className="text-sm text-gray-800 truncate">Enabled</span>
+                            <span className="text-sm truncate">Enabled</span>
                             <input
                                 type="checkbox"
                                 checked={paymentEnabled}
@@ -119,7 +125,7 @@ export default function ManagePayment({ paymentEdit, setVisibleUpdatePayment }: 
                             />
                         </label>
                         <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
-                            <span className="text-sm text-gray-800 truncate">Deleted</span>
+                            <span className="text-sm truncate">Deleted</span>
                             <input
                                 type="checkbox"
                                 checked={paymentDeleted}
