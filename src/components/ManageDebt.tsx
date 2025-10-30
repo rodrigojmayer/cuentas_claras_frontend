@@ -40,7 +40,6 @@ export default function ManageDebt({ debtEdit, setVisibleUpdateDebt }: ManageDeb
         setLoading(true);
         setMessage(null);
         try {
-            let response
             if(debtEdit) {
                 const updateDebt: Debt = {
                     _id: debtEdit._id,
@@ -56,7 +55,7 @@ export default function ManageDebt({ debtEdit, setVisibleUpdateDebt }: ManageDeb
                     enabled: debtEnabled,
                     deleted: debtDeleted
                 };
-                response = await patchDebt(updateDebt);
+                await patchDebt(updateDebt);
                 setVisibleUpdateDebt?.(false);
             } else {
                 const newDebt: NewDebt = {
@@ -69,7 +68,7 @@ export default function ManageDebt({ debtEdit, setVisibleUpdateDebt }: ManageDeb
                     date_due: debtDateDue,
                     currency: debtCurrency 
                 }
-                response = await postDebt(newDebt);
+                await postDebt(newDebt);
             }
 
             setMessage(`Debt ${debtEdit ? "edited" : "created"} successfully!`);

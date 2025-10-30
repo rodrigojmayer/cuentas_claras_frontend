@@ -24,7 +24,6 @@ export default function ManageUser({ userEdit, setVisibleUpdateUser }: ManageUse
         setMessage(null);
 
         try {
-            let response
             if(userEdit) {
                 const updateUser: User = {
                     _id: userEdit._id,
@@ -34,7 +33,7 @@ export default function ManageUser({ userEdit, setVisibleUpdateUser }: ManageUse
                     enabled: userEnabled,
                     deleted: userDeleted
                 };
-                response = await patchUser(updateUser);
+                await patchUser(updateUser);
                 setVisibleUpdateUser?.(false);
             } else {
                 const newUser: NewUser = {
@@ -42,7 +41,7 @@ export default function ManageUser({ userEdit, setVisibleUpdateUser }: ManageUse
                     phone: userPhone,
                     name: userName,
                 };
-                response = await postUser(newUser);
+                await postUser(newUser);
             }
             // console.log("Created user:", response);
 

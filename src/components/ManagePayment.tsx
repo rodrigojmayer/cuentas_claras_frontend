@@ -1,9 +1,14 @@
 "use client";
 import { useState } from "react";
 import { postPayment } from "../lib/api";
-import type { NewPayment } from "../types";
+import type { NewPayment, Payment } from "../types";
 
-export default function ManagePayment() {
+interface ManagePaymentProps {
+    paymentEdit?: Payment;
+    setVisibleUpdatePayment?: (visible: boolean) => void;
+}
+
+export default function ManagePayment({ paymentEdit, setVisibleUpdatePayment }: ManagePaymentProps ) {
     const [paymentIdDebt, setPaymentIdDebt] = useState<string>("");
     const [paymentAmount, setPaymentAmount] = useState<number | null>(null);
     const [paymentDolarGoogle, setPaymentDolarGoogle] = useState<number | null>(null);

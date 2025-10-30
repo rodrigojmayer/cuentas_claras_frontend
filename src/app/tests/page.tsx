@@ -5,7 +5,7 @@ import ManageDebt from "@/components/ManageDebt";
 import ManagePayment from "@/components/ManagePayment";
 import ManageAlert from "@/components/ManageAlert";
 import DataList from "@/components/DataList"
-import type { Alert, Debt, User } from "@/types";
+import type { Alert, Debt, Payment, User } from "@/types";
 
 export default function TestApi() {
 
@@ -13,6 +13,8 @@ export default function TestApi() {
     const [userEdit, setUserEdit] = useState<User | undefined>(undefined);
     const [visibleUpdateDebt, setVisibleUpdateDebt] = useState(false);
     const [debtEdit, setDebtEdit] = useState<Debt | undefined>(undefined);
+    const [visibleUpdatePayment, setVisibleUpdatePayment] = useState(false);
+    const [paymentEdit, setPaymentEdit] = useState<Payment | undefined>(undefined);
     const [visibleUpdateAlert, setVisibleUpdateAlert] = useState(false);
     const [alertEdit, setAlertEdit] = useState<Alert | undefined>(undefined);
 
@@ -53,6 +55,23 @@ export default function TestApi() {
                 </div>
             </div>
         )}
+        {visibleUpdatePayment && (
+            <div 
+                className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+                onClick={() => setVisibleUpdatePayment(false)} // click background to close
+            >
+                {/* --- MODAL CONTENT --- */}
+                <div
+                    className="bg-yellow-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white"
+                    onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                >
+                    <ManagePayment 
+                        paymentEdit={paymentEdit}  
+                        setVisibleUpdatePayment={setVisibleUpdatePayment}
+                    />
+                </div>
+            </div>
+        )}
         {visibleUpdateAlert && (
             <div 
                 className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
@@ -80,6 +99,8 @@ export default function TestApi() {
             setUserEdit={setUserEdit} 
             setVisibleUpdateDebt={setVisibleUpdateDebt} 
             setDebtEdit={setDebtEdit} 
+            setVisibleUpdatePayment={setVisibleUpdatePayment} 
+            setPaymentEdit={setPaymentEdit} 
             setVisibleUpdateAlert={setVisibleUpdateAlert} 
             setAlertEdit={setAlertEdit} 
         />

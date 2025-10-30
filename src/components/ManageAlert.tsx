@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { patchAlert, postAlert } from "../lib/api";
 import type { Alert, NewAlert } from "../types";
 
@@ -23,7 +23,6 @@ export default function ManageAlert({ alertEdit, setVisibleUpdateAlert }: Manage
         setMessage(null);
 
         try {
-            let response
             if(alertEdit) {
                 const updateAlert : Alert = {
                     _id: alertEdit._id,
@@ -33,14 +32,14 @@ export default function ManageAlert({ alertEdit, setVisibleUpdateAlert }: Manage
                     enabled: alertEnabled,
                     deleted: alertDeleted
                 };
-                response = await patchAlert(updateAlert);
+                await patchAlert(updateAlert);
                 setVisibleUpdateAlert?.(false);
             } else {
                 const newAlert: NewAlert = {
                     id_debt: alertIdDebt,
                     date_alert: alertDateAlert,
                 };   
-                response = await postAlert(newAlert);
+                await postAlert(newAlert);
             }
             // console.log("Created alert: ", response);
 

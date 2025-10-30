@@ -10,6 +10,8 @@ interface DataListProps {
     setUserEdit: (visible: User) => void;
     setVisibleUpdateDebt: (visible: boolean) => void;
     setDebtEdit: (visible: Debt) => void;
+    setVisibleUpdatePayment: (visible: boolean) => void;
+    setPaymentEdit: (visible: Payment) => void;
     setVisibleUpdateAlert: (visible: boolean) => void;
     setAlertEdit: (visible: Alert) => void;
 }
@@ -19,6 +21,8 @@ export default function DataList({
     setUserEdit,
     setVisibleUpdateDebt,
     setDebtEdit,
+    setVisibleUpdatePayment,
+    setPaymentEdit,
     setVisibleUpdateAlert,
     setAlertEdit
     }: DataListProps) {
@@ -126,6 +130,15 @@ export default function DataList({
                             <p>Date: {new Date(p.date_payment).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                             <p>Enabled: {p.enabled ? "Si":"No"}</p>
                             <p>Deleted: {p.deleted ? "Si":"No"}</p>
+                            <button
+                                className="bg-gray-500 text-white py-1 m-auto w-15 rounded-lg hover:bg-gray-700 transition cursor-pointer"
+                                onClick={() => {
+                                    setVisibleUpdatePayment(true)
+                                    setPaymentEdit(p)
+                                }}
+                            >
+                                Edit
+                            </button>
                         </li>
                     ))}
                 </ul>
