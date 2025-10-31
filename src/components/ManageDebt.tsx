@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { patchDebt, postDebt } from "../lib/api";
 import type { Debt, NewDebt, User } from "../types";
+import DatePickerComponent from "./DatePickerComponent";
 
 interface ManageDebtProps {
     debtEdit?: Debt;
@@ -154,25 +155,13 @@ export default function ManageDebt({ debtEdit, setVisibleUpdateDebt }: ManageDeb
                 {debtEdit ? 
                     <>
                         <label className="input-label">Date Debt</label>    
-                        <input
-                            type="date"
-                            placeholder=" "
-                            value={debtDateDebt && debtDateDebt.toString() !== "Invalid Date" ? debtDateDebt.toISOString().slice(0, 10) : ""}
-                            onChange={(e) => setDebtDateDebt(e.target.value ? new Date(e.target.value) : null)}
-                            className="border rounded-lg p-2 bg-white"
-                        />
+                        <DatePickerComponent dateProp={debtDateDebt} setDateProp={setDebtDateDebt} />
                     </>
                 : 
                     <></>
                 }
                 <label className="input-label">Date Due</label>
-                <input
-                    type="date"
-                    placeholder=" "
-                    value={debtDateDue && debtDateDue.toString() !== "Invalid Date" ? debtDateDue.toISOString().slice(0, 10) : ""}
-                    onChange={(e) => setDebtDateDue(e.target.value ? new Date(e.target.value) : null)}
-                    className="border rounded-lg p-2 bg-white"
-                />
+                <DatePickerComponent dateProp={debtDateDue} setDateProp={setDebtDateDue} />
                 <label className="input-label">Currency</label>
                 <select 
                     name="currency"

@@ -1,12 +1,7 @@
 "use client";
 import dayjs, { Dayjs } from 'dayjs';// Import dayjs
 import { useState } from "react";
-import { Box,
-         Grid,
-         TextField,
-         Typography,
-         InputAdornment,
-        } from '@mui/material';
+import { InputAdornment } from '@mui/material';
 import { patchAlert, postAlert } from "../lib/api";
 import type { Alert, NewAlert } from "../types";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -96,37 +91,37 @@ export default function ManageAlert({ alertEdit, setVisibleUpdateAlert }: Manage
                 />
                 <label className="input-label">Date Alert</label>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DemoContainer components={['DatePicker']} >
-                                <DatePickerComponent
-                                    className="border rounded-lg p-2 bg-white"
-                                    format="DD/MM/YYYY"
-                                    defaultValue = { alertDateAlert? dayjs(alertDateAlert) : null}
-                                    onChange={ (newDate) => handleDatePickerChange(newDate) }
-                                    slotProps={{
-                                        textField: {
-                                            size: 'small',
-                                            InputProps: {
-                                            endAdornment: (
-                                            <InputAdornment
-                                                position="end"
-                                            >
-                                            <CalendarMonthRoundedIcon 
-                                                onClick = {() => setOpenDatePicker(true)}
-                                                style={{cursor: "pointer"} }
-                                            />
-                                            </InputAdornment>
-                                            ),
-                                            },
-                                        },
-                                    }}
-                                    sx={{ 
-                                        marginTop: "-8px !important"
-                                    }} 
-                                    open={breakpointLG ? openDatePicker :undefined}
-                                    onClose={breakpointLG ? () => setOpenDatePicker(false) :()=>{}}
-                                />
-                            </DemoContainer>
-                        </LocalizationProvider>
+                    <DemoContainer components={['DatePicker']} >
+                        <DatePickerComponent
+                            className="border rounded-lg p-2 bg-white"
+                            format="DD/MM/YYYY"
+                            defaultValue = { alertDateAlert? dayjs(alertDateAlert) : null}
+                            onChange={ (newDate) => handleDatePickerChange(newDate) }
+                            slotProps={{
+                                textField: {
+                                    size: 'small',
+                                    InputProps: {
+                                    endAdornment: (
+                                    <InputAdornment
+                                        position="end"
+                                    >
+                                    <CalendarMonthRoundedIcon 
+                                        onClick = {() => setOpenDatePicker(true)}
+                                        style={{cursor: "pointer"} }
+                                    />
+                                    </InputAdornment>
+                                    ),
+                                    },
+                                },
+                            }}
+                            sx={{ 
+                                marginTop: "-8px !important"
+                            }} 
+                            open={breakpointLG ? openDatePicker :undefined}
+                            onClose={breakpointLG ? () => setOpenDatePicker(false) :()=>{}}
+                        />
+                    </DemoContainer>
+                </LocalizationProvider>
                     {/* <input
                         type="date"
                         id="date_alert"
