@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { patchPayment, postPayment } from "../lib/api";
 import type { NewPayment, Payment } from "../types";
+import DatePickerComponent from "./DatePickerComponent";
 
 interface ManagePaymentProps {
     paymentEdit?: Payment;
@@ -88,13 +89,7 @@ export default function ManagePayment({ paymentEdit, setVisibleUpdatePayment }: 
                 {paymentEdit ?
                     <>
                         <label className="input-label">Date Payment</label>
-                        <input
-                            type="date"
-                            placeholder=" "
-                            value={paymentDatePayment && paymentDatePayment.toString() !== "Invalid Date" ? paymentDatePayment.toISOString().slice(0, 10) : ""}
-                            onChange={(e) => setPaymentDatePayment(e.target.value ? new Date(e.target.value) : null)}
-                            className="border rounded-lg p-2 bg-white"
-                        />
+                        <DatePickerComponent dateProp={paymentDatePayment} setDateProp={setPaymentDatePayment} />
                     </>
                 :
                     <></>
