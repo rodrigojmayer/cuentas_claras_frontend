@@ -5,10 +5,18 @@ import ManageDebt from "@/components/ManageDebt";
 import ManagePayment from "@/components/ManagePayment";
 import ManageAlert from "@/components/ManageAlert";
 import DataList from "@/components/DataList"
-import type { Alert, Debt, Payment, User } from "@/types";
+import type { UpdateDataProps, Alert, Debt, Payment, User } from "@/types";
 import ConfirmDelete from "@/components/ConfirmDelete";
+import { getAlerts, getDebts, getPayments, getUsers } from "@/lib/api";
+
 
 export default function TestApi() {
+    
+    const [users, setUsers] = useState<User[]>([]);
+    const [debts, setDebts] = useState<Debt[]>([]);
+    const [payments, setPayments] = useState<Payment[]>([]);
+    const [alerts, setAlerts] = useState<Alert[]>([]);
+    const [updateData, setUpdateData] = useState<UpdateDataProps>({state: true, data: "all"});
 
     const [visibleUpdateUser, setVisibleUpdateUser] = useState(false);
     const [userEdit, setUserEdit] = useState<User | undefined>(undefined);
@@ -24,6 +32,7 @@ export default function TestApi() {
     const [paymentDelete, setPaymentDelete] = useState<Payment | undefined>(undefined);
     const [alertDelete, setAlertDelete] = useState<Alert | undefined>(undefined);
 
+
     useEffect(() => {
         if(!visibleConfirmDelete) {
             setUserDelete(undefined)
@@ -33,9 +42,30 @@ export default function TestApi() {
         }
     }, [visibleConfirmDelete])
     useEffect(() => {
-       if(userDelete || debtDelete || paymentDelete || alertDelete)
-        setVisibleConfirmDelete(true)
+       if(userDelete || debtDelete || paymentDelete || alertDelete){
+           setVisibleConfirmDelete(true)
+        }
     }, [userDelete, debtDelete, paymentDelete, alertDelete])
+
+    useEffect(() => {
+        if(updateData.state){
+            if(updateData.data === "all"){
+                getUsers().then(setUsers);
+                getDebts().then(setDebts);
+                getPayments().then(setPayments);
+                getAlerts().then(setAlerts);
+                setUpdateData({state: false, data: ""})
+            } else if(updateData.data === "users"){
+                getUsers().then(setUsers);
+            } else if(updateData.data === "debts"){
+                getDebts().then(setDebts);
+            } else if(updateData.data === "payments"){
+                getPayments().then(setPayments);
+            } else if(updateData.data === "alerts"){
+                getAlerts().then(setAlerts);
+            }
+        }
+    }, [updateData]);
 
   return (
     <div className="flex justify-center bg-gray-700">
@@ -51,6 +81,7 @@ export default function TestApi() {
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ManageUser 
+                        setUpdateData={setUpdateData}
                         userEdit={userEdit}  
                         setVisibleUpdateUser={setVisibleUpdateUser}
                     />
@@ -126,12 +157,18 @@ export default function TestApi() {
             </div>
         )}
         <div className="flex flex-col ">
-            < ManageUser />
+            < ManageUser 
+                setUpdateData={setUpdateData}
+            />
             < ManageDebt />
             < ManagePayment />
             < ManageAlert />
         </div>
         < DataList 
+            users={users} 
+            debts={debts} 
+            payments={payments}  
+            alerts={alerts} 
             setVisibleUpdateUser={setVisibleUpdateUser} 
             setUserEdit={setUserEdit} 
             setVisibleUpdateDebt={setVisibleUpdateDebt} 

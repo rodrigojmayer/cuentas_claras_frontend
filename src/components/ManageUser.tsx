@@ -1,14 +1,15 @@
 "use client";
 import { useState } from "react";
 import { postUser, patchUser } from "../lib/api";
-import type { NewUser, User } from "../types";
+import type { UpdateDataProps, NewUser, User } from "../types";
 
 interface ManageUserProps {
+    setUpdateData: (visible: UpdateDataProps) => void;
     userEdit?:  User;
     setVisibleUpdateUser?: (visible: boolean) => void;
 }
 
-export default function ManageUser({ userEdit, setVisibleUpdateUser }: ManageUserProps) {
+export default function ManageUser({ setUpdateData, userEdit, setVisibleUpdateUser }: ManageUserProps) {
     const [userEmail, setUserEmail] = useState<string>(userEdit ? userEdit.email : "");
     const [userPhone, setUserPhone] = useState<string | undefined>(userEdit ? userEdit.phone : "");
     const [userName, setUserName] = useState<string | undefined>(userEdit ? userEdit.name : "");
@@ -55,6 +56,7 @@ export default function ManageUser({ userEdit, setVisibleUpdateUser }: ManageUse
             setMessage(`X ${err.message || "Failed to create user"}`);
         } finally {
             setLoading(false);
+            setUpdateData({state: true, data: "users"})
         }
     }
 

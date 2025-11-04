@@ -1,11 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
-import { getAlerts, getDebts, getPayments, getUsers, getDebtsByCreditor, getDebtsByDebtor } from "../lib/api";
+import { getDebtsByCreditor, getDebtsByDebtor } from "../lib/api";
 import type { Alert, Debt, Payment, User } from "../types";
 
 // import useUsers from "@/hooks/useUsers";
 
 interface DataListProps {
+    users?: User[]; 
+    debts?: Debt[]; 
+    payments?: Payment[]; 
+    alerts?: Alert[]; 
     setVisibleUpdateUser: (visible: boolean) => void;
     setUserEdit: (visible: User) => void;
     setVisibleUpdateDebt: (visible: boolean) => void;
@@ -21,6 +25,10 @@ interface DataListProps {
 }
 
 export default function DataList({ 
+    users, 
+    debts, 
+    payments, 
+    alerts, 
     setVisibleUpdateUser, 
     setUserEdit,
     setVisibleUpdateDebt,
@@ -36,28 +44,23 @@ export default function DataList({
     }: DataListProps) {
     // const { users, isLoading, isError  } = useUsers();
 
-
-    const [alerts, setAlerts] = useState<Alert[]>([]);
-    const [debts, setDebts] = useState<Debt[]>([]);
-    const [payments, setPayments] = useState<Payment[]>([]);
-    const [users, setUsers] = useState<User[]>([]);
+    
+    // const [users, setUsers] = useState<User[]>([]);
+    // const [debts, setDebts] = useState<Debt[]>([]);
+    // const [payments, setPayments] = useState<Payment[]>([]);
+    // const [alerts, setAlerts] = useState<Alert[]>([]);
 
     const [userSelected, setUserSelected] = useState<User | null>(null);
     const [debtsByCreditor, setDebtsByCreditor] = useState<Debt[]>([]);
     const [debtsByDebtor, setDebtsByDebtor] = useState<Debt[]>([]);
 
     const selectUser = (id: string) =>{
-        const user = users.filter(u => {
+        const user = users?.filter(u => {
             if(u._id===id) return u
         })
-        setUserSelected(user[0])
+        if(user)
+            setUserSelected(user[0])
     }
-    useEffect(() => {
-        getAlerts().then(setAlerts);
-        getDebts().then(setDebts);
-        getPayments().then(setPayments);
-        getUsers().then(setUsers);
-    }, []);
     useEffect(() => {
         if(userSelected){
             getDebtsByCreditor(userSelected._id).then(setDebtsByCreditor);
@@ -76,7 +79,7 @@ export default function DataList({
                     Users
                 </h2>
                 <ul className="space-y-2">
-                    {users.map((u: User) => (
+                    {users?.map((u: User) => (
                         <li 
                             key={u._id} 
                             className="p-3 bg-blue-300 rounded-lg shadow cursor-pointer"
@@ -112,7 +115,7 @@ export default function DataList({
                     Debts
                 </h2>
                 <ul className="space-y-2">
-                    {debts.map((d: Debt) => (
+                    {debts?.map((d: Debt) => (
                         <li key={d._id} className="p-3 bg-green-300 rounded-lg shadow">
                             <p>ID: {d._id}</p>
                             <p>Detail: {d.detail}</p>
@@ -147,7 +150,7 @@ export default function DataList({
                     Payments
                 </h2>
                 <ul className="space-y-2">
-                    {payments.map((p: Payment) => (
+                    {payments?.map((p: Payment) => (
                         <li key={p._id} className="p-3 bg-yellow-200 rounded-lg shadow">
                             <p>ID: {p._id}</p>
                             <p>Amount: ${p.amount}</p>
@@ -178,7 +181,7 @@ export default function DataList({
                     Alerts
                 </h2>
                 <ul className="space-y-2">
-                    {alerts.map((a: Alert) => (
+                    {alerts?.map((a: Alert) => (
                         <li key={a._id} className="p-3 bg-red-300 rounded-lg shadow">
                             <p>ID: {a._id}</p>
                             <p>Date: {new Date(a.date_alert).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>

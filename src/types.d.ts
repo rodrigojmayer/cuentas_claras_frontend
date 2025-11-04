@@ -1,3 +1,7 @@
+export interface UpdateDataProps {
+    state: boolean,
+    data: string
+}
 export interface User {
     _id: string;
     email: string;
