@@ -1,5 +1,5 @@
 
-import dayjs, { Dayjs } from 'dayjs';// Import dayjs
+import dayjs from 'dayjs';// Import dayjs
 import { useState } from 'react';
 import { InputAdornment } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
