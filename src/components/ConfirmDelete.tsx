@@ -2,9 +2,10 @@
 "use client";
 import { useState } from "react";
 import { deleteUser, deleteDebt, deletePayment, deleteAlert } from "../lib/api";
-import type { Alert, Debt, Payment, User } from "../types";
+import type { Alert, Debt, Payment, UpdateDataProps, User } from "../types";
 
 interface ConfirmDeleteProps {
+    setUpdateData: (visible: UpdateDataProps) => void;
     setVisibleConfirmDelete?: (visible: boolean) => void;
     userDelete?: User;
     debtDelete?: Debt;
@@ -12,14 +13,24 @@ interface ConfirmDeleteProps {
     alertDelete?: Alert;
 }
 
-export default function ConfirmDelete({ 
+export default function ConfirmDelete({
+    setUpdateData, 
     setVisibleConfirmDelete, 
     userDelete, 
     debtDelete, 
     paymentDelete,
     alertDelete
 }: ConfirmDeleteProps) {
-    
+    let toDelete = ""
+    if(userDelete){
+        toDelete = "users"
+    } else if (debtDelete){
+        toDelete = "debts"
+    } else if (paymentDelete){
+        toDelete = "payments"
+    } else if (alertDelete){
+        toDelete = "alerts"
+    }
     
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
@@ -30,16 +41,16 @@ export default function ConfirmDelete({
         setMessage(null);
 
         try {
-            if(userDelete && !debtDelete && !paymentDelete && !alertDelete) {
+            if(userDelete) {
                 await deleteUser(userDelete._id);
             } 
-            if(!userDelete && debtDelete && !paymentDelete && !alertDelete) {
+            if(debtDelete) {
                 await deleteDebt(debtDelete._id);
             } 
-            if(!userDelete && !debtDelete && paymentDelete && !alertDelete) {
+            if(paymentDelete) {
                 await deletePayment(paymentDelete._id);
             } 
-            if(!userDelete && !debtDelete && !paymentDelete && alertDelete) {
+            if(alertDelete) {
                 await deleteAlert(alertDelete._id);
             } 
             // console.log("Created user:", response);
@@ -51,6 +62,7 @@ export default function ConfirmDelete({
         } finally {
             setVisibleConfirmDelete?.(false);
             setLoading(false);
+            setUpdateData({state: true, data: toDelete})
         }
     }
 

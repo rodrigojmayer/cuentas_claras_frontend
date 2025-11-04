@@ -150,6 +150,7 @@ export default function TestApi() {
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ConfirmDelete  
+                        setUpdateData={setUpdateData}
                         setVisibleConfirmDelete={setVisibleConfirmDelete}  
                         userDelete={userDelete}  
                         debtDelete={debtDelete}  

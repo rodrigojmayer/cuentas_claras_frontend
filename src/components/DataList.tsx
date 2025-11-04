@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useEffect, useState } from "react";
 import { getDebtsByCreditor, getDebtsByDebtor } from "../lib/api";
@@ -42,24 +43,15 @@ export default function DataList({
     setPaymentDelete,
     setAlertDelete
     }: DataListProps) {
-    // const { users, isLoading, isError  } = useUsers();
-
-    
-    // const [users, setUsers] = useState<User[]>([]);
-    // const [debts, setDebts] = useState<Debt[]>([]);
-    // const [payments, setPayments] = useState<Payment[]>([]);
-    // const [alerts, setAlerts] = useState<Alert[]>([]);
 
     const [userSelected, setUserSelected] = useState<User | null>(null);
     const [debtsByCreditor, setDebtsByCreditor] = useState<Debt[]>([]);
     const [debtsByDebtor, setDebtsByDebtor] = useState<Debt[]>([]);
 
     const selectUser = (id: string) =>{
-        const user = users?.filter(u => {
-            if(u._id===id) return u
-        })
+        const user = users?.find(u => u._id === id )
         if(user)
-            setUserSelected(user[0])
+            setUserSelected({ ...user })
     }
     useEffect(() => {
         if(userSelected){
@@ -67,10 +59,13 @@ export default function DataList({
             getDebtsByDebtor(userSelected._id).then(setDebtsByDebtor);
         }
     }, [userSelected]);
-
     
-    // if (isLoading) return <p>Loading users...</p>;
-    // if (isError) return <p>Error loading users.</p>;
+    useEffect(() => {
+        if(userSelected){
+            const id = userSelected._id;
+            selectUser(id);
+        }
+    }, [users, debts, payments, alerts]);
     
     return (
         <div className="flex flex-row">
@@ -233,7 +228,7 @@ export default function DataList({
                 : 
                     <ul className="space-y-2">
                         {debtsByCreditor.map((d: Debt) => (
-                            <li key={d._id} className="p-3 bg-green-300 rounded-lg shadow">?
+                            <li key={d._id} className="p-3 bg-green-300 rounded-lg shadow">
                                 <p>ID: {d._id}</p>
                                 <p>Detail: {d.detail}</p>
                                 <p>Amount: ${d.amount}</p>
