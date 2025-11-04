@@ -271,3 +271,21 @@ export async function patchAlert({_id, id_debt, date_alert, sent, enabled, delet
         throw new Error("Unable to reach server");
     }
 }
+
+export async function deleteUser(_id: string): Promise<void> {
+    try {
+        const res = await fetch(`${API_URL}/users/${_id}`, {
+            method: 'DELETE',
+        })
+        if(!res.ok) {
+            const errorText = await res.text();
+            console.error("Error deleting user: ", res.status, errorText);
+            throw new Error(`Failed to delete user (status ${res.status})`);
+        }
+
+        console.log("User deleted successfully");
+    }catch (error) {
+        console.error("Network error deleting user: ", error);
+        throw new Error("Unable to reach server");
+    }
+}
