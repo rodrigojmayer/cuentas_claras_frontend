@@ -1,14 +1,15 @@
 "use client";
 import { useState } from "react";
 import { patchAlert, postAlert } from "../lib/api";
-import type { Alert, NewAlert } from "../types";
+import type { Alert, NewAlert, UpdateDataProps } from "../types";
 import DatePickerComponent from "./DatePickerComponent";
 
 interface ManageAlertProps {
+    setUpdateData: (visible: UpdateDataProps) => void;
     alertEdit?: Alert;
     setVisibleUpdateAlert?: (visible: boolean) => void;
 }
-export default function ManageAlert({ alertEdit, setVisibleUpdateAlert }: ManageAlertProps) {
+export default function ManageAlert({ setUpdateData, alertEdit, setVisibleUpdateAlert }: ManageAlertProps) {
     
     const [alertIdDebt, setAlertIdDebt] = useState<string>(alertEdit ? alertEdit.id_debt : "");
     const [alertDateAlert, setAlertDateAlert] = useState<Date | null>(alertEdit ? new Date(alertEdit.date_alert) : null);
@@ -54,6 +55,7 @@ export default function ManageAlert({ alertEdit, setVisibleUpdateAlert }: Manage
             setMessage(`X ${err.message || "Failed to create alert"}`);
         } finally {
             setLoading(false);
+            setUpdateData({state: true, data: "alerts"})
         }
     }
 
