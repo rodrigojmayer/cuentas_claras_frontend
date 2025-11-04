@@ -14,9 +14,9 @@ interface DataListProps {
     setPaymentEdit: (visible: Payment) => void;
     setVisibleUpdateAlert: (visible: boolean) => void;
     setAlertEdit: (visible: Alert) => void;
-    setVisibleConfirmDelete: (visible: boolean) => void;
     setUserDelete: (visible: User) => void;
     setDebtDelete: (visible: Debt) => void;
+    setPaymentDelete: (visible: Payment) => void;
 }
 
 export default function DataList({ 
@@ -28,9 +28,9 @@ export default function DataList({
     setPaymentEdit,
     setVisibleUpdateAlert,
     setAlertEdit,
-    setVisibleConfirmDelete,
     setUserDelete,
-    setDebtDelete
+    setDebtDelete,
+    setPaymentDelete
     }: DataListProps) {
     // const { users, isLoading, isError  } = useUsers();
 
@@ -99,7 +99,6 @@ export default function DataList({
                                 className="bg-red-500 text-white py-1 m-auto w-15 rounded-lg hover:bg-gray-700 transition cursor-pointer"
                                 onClick={() => {
                                     setUserDelete(u)
-                                    // setVisibleConfirmDelete(true)
                                 }}
                             >
                                 Delete
@@ -135,7 +134,6 @@ export default function DataList({
                                 className="bg-red-500 text-white py-1 m-auto w-15 rounded-lg hover:bg-gray-700 transition cursor-pointer"
                                 onClick={() => {
                                     setDebtDelete(d)
-                                    // setVisibleConfirmDelete(true)
                                 }}
                             >
                                 Delete
@@ -162,6 +160,14 @@ export default function DataList({
                                 }}
                             >
                                 Edit
+                            </button>
+                            <button
+                                className="bg-red-500 text-white py-1 m-auto w-15 rounded-lg hover:bg-gray-700 transition cursor-pointer"
+                                onClick={() => {
+                                    setPaymentDelete(p)
+                                }}
+                            >
+                                Delete
                             </button>
                         </li>
                     ))}

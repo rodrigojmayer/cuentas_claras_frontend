@@ -21,19 +21,21 @@ export default function TestApi() {
     const [visibleConfirmDelete, setVisibleConfirmDelete] = useState(false);
     const [userDelete, setUserDelete] = useState<User | undefined>(undefined);
     const [debtDelete, setDebtDelete] = useState<Debt | undefined>(undefined);
+    const [paymentDelete, setPaymentDelete] = useState<Payment | undefined>(undefined);
 
     useEffect(() => {
         if(!visibleConfirmDelete) {
             setUserDelete(undefined)
             setDebtDelete(undefined)
+            setPaymentDelete(undefined)
         }
     }, [visibleConfirmDelete])
     useEffect(() => {
         console.log("userDelete: ", userDelete)
         console.log("debtDelete: ", debtDelete)
-       if(userDelete || debtDelete)
+       if(userDelete || debtDelete || paymentDelete)
         setVisibleConfirmDelete(true)
-    }, [userDelete, debtDelete])
+    }, [userDelete, debtDelete, paymentDelete])
 
   return (
     <div className="flex justify-center bg-gray-700">
@@ -117,6 +119,7 @@ export default function TestApi() {
                         setVisibleConfirmDelete={setVisibleConfirmDelete}  
                         userDelete={userDelete}  
                         debtDelete={debtDelete}  
+                        paymentDelete={paymentDelete}
                     />
                 </div>
             </div>
@@ -136,9 +139,9 @@ export default function TestApi() {
             setPaymentEdit={setPaymentEdit} 
             setVisibleUpdateAlert={setVisibleUpdateAlert} 
             setAlertEdit={setAlertEdit} 
-            setVisibleConfirmDelete={setVisibleConfirmDelete} 
             setUserDelete={setUserDelete} 
             setDebtDelete={setDebtDelete} 
+            setPaymentDelete={setPaymentDelete}
         />
     </div>
     );

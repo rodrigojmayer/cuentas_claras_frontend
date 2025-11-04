@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useState } from "react";
-import { deleteUser, deleteDebt } from "../lib/api";
-import type { Debt, User } from "../types";
+import { deleteUser, deleteDebt, deletePayment } from "../lib/api";
+import type { Debt, Payment, User } from "../types";
 
 interface ConfirmDeleteProps {
     setVisibleConfirmDelete?: (visible: boolean) => void;
     userDelete?: User;
     debtDelete?: Debt;
+    paymentDelete?: Payment;
 }
 
-export default function ConfirmDelete({ setVisibleConfirmDelete, userDelete, debtDelete }: ConfirmDeleteProps) {
+export default function ConfirmDelete({ setVisibleConfirmDelete, userDelete, debtDelete, paymentDelete }: ConfirmDeleteProps) {
     
     
     const [loading, setLoading] = useState(false);
@@ -22,18 +23,20 @@ export default function ConfirmDelete({ setVisibleConfirmDelete, userDelete, deb
         setMessage(null);
 
         try {
-            if(userDelete && !debtDelete) {
+            if(userDelete && !debtDelete && !paymentDelete) {
                 await deleteUser(userDelete._id);
             } 
-            if(!userDelete && debtDelete) {
+            if(!userDelete && debtDelete && !paymentDelete) {
                 await deleteDebt(debtDelete._id);
+            } 
+            if(!userDelete && !debtDelete && paymentDelete) {
+                await deletePayment(paymentDelete._id);
             } 
             // console.log("Created user:", response);
 
             setMessage("Deleted successfully");
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch(err: any) {
-            console.error("Error deleting user:", err);
+            console.error("Error deleting: ", err);
             setMessage(`X ${err.message || "Failed to delete"}`);
         } finally {
             setVisibleConfirmDelete?.(false);
@@ -47,10 +50,17 @@ export default function ConfirmDelete({ setVisibleConfirmDelete, userDelete, deb
                 Delete 
                 {userDelete && " User"} 
                 {debtDelete && " Debt"}
+                {paymentDelete && " Payment"} 
             </h2>
             
-            <form onSubmit={handleSubmit} className={`flex flex-col gap-1.5 border rounded-lg p-2 ${userDelete && "bg-blue-300"} ${debtDelete && "bg-green-300"} text-gray-800`}>
-                {(userDelete?._id && !debtDelete?._id) && ( 
+            <form onSubmit={handleSubmit} className={`
+                flex flex-col gap-1.5 
+                border rounded-lg p-2 
+                ${userDelete && "bg-blue-300"} 
+                ${debtDelete && "bg-green-300"} 
+                ${paymentDelete && "bg-yellow-200"} 
+                text-gray-800`}>
+                {(userDelete?._id && !debtDelete?._id && !paymentDelete?._id) && ( 
                     <>
                         <label className="input-label">Email: {userDelete?.email}</label>
                         <label className="input-label">Phone: {userDelete?.phone}</label>
@@ -59,15 +69,13 @@ export default function ConfirmDelete({ setVisibleConfirmDelete, userDelete, deb
                         <label className="input-label">Deleted: {userDelete?.deleted}</label>
                     </>
                 ) }
-                {(!userDelete?._id && debtDelete?._id) && ( 
+                {(!userDelete?._id && debtDelete?._id && !paymentDelete?._id) && ( 
                     <>
-                        {/* <label className="input-label">ID Creditor: {debtDelete?.id_user_creditor}</label> */}
                         <label className="input-label">
                             ID Creditor: {typeof debtDelete?.id_user_creditor === "object"
                             ? (debtDelete.id_user_creditor as any)._id
                             : debtDelete?.id_user_creditor}
                         </label>
-                        {/* <label className="input-label">ID Debtor: {debtDelete?.id_user_debtor}</label> */}
                         <label className="input-label">
                             ID Debtor: {typeof debtDelete?.id_user_debtor === "object"
                             ? (debtDelete.id_user_debtor as any)._id
@@ -82,6 +90,16 @@ export default function ConfirmDelete({ setVisibleConfirmDelete, userDelete, deb
                         <label className="input-label">Currency: {debtDelete?.currency}</label>
                         <label className="input-label">Enabled: {debtDelete?.enabled}</label>
                         <label className="input-label">Deleted: {debtDelete?.deleted}</label>
+                    </>
+                ) }
+                {(!userDelete?._id && !debtDelete?._id && paymentDelete?._id) && ( 
+                    <>
+                        <label className="input-label">ID Debt: {paymentDelete?.id_debt}</label>
+                        <label className="input-label">Amount: {paymentDelete?.amount}</label>
+                        <label className="input-label">Date Payment: {paymentDelete?.date_payment}</label>
+                        <label className="input-label">Dolar Google: {paymentDelete?.dolar_google}</label>
+                        <label className="input-label">enabled: {paymentDelete?.enabled}</label>
+                        <label className="input-label">Deleted: {paymentDelete?.deleted}</label>
                     </>
                 ) }
 
