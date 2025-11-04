@@ -325,3 +325,21 @@ export async function deletePayment(_id: string): Promise<void> {
         throw new Error("Unable to reach server");
     }
 }
+
+export async function deleteAlert(_id: string): Promise<void> {
+    try {
+        const res = await fetch(`${API_URL}/alerts/${_id}`, {
+            method: 'DELETE',
+        })
+        if(!res.ok) {
+            const errorText = await res.text();
+            console.error("Error deleting alert: ", res.status, errorText);
+            throw new Error(`Faailed to delete alert (status ${res.status})`);
+        }
+
+        console.log("Alert deleted successfully");
+    } catch (error) {
+        console.error("Network error deleting alert: ", error);
+        throw new Error("Unable to reach server");
+    }
+}
