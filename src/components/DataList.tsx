@@ -17,6 +17,7 @@ interface DataListProps {
     setUserDelete: (visible: User) => void;
     setDebtDelete: (visible: Debt) => void;
     setPaymentDelete: (visible: Payment) => void;
+    setAlertDelete: (visible: Alert) => void;
 }
 
 export default function DataList({ 
@@ -30,7 +31,8 @@ export default function DataList({
     setAlertEdit,
     setUserDelete,
     setDebtDelete,
-    setPaymentDelete
+    setPaymentDelete,
+    setAlertDelete
     }: DataListProps) {
     // const { users, isLoading, isError  } = useUsers();
 
@@ -191,6 +193,14 @@ export default function DataList({
                                 }}
                             >
                                 Edit
+                            </button>
+                            <button
+                                className="bg-red-500 text-white py-1 m-auto w-15 rounded-lg hover:bg-gray-700 transition cursor-pointer"
+                                onClick={() => {
+                                    setAlertDelete(a)
+                                }}
+                            >
+                                Delete
                             </button>
                         </li>
                     ))}

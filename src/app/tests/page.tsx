@@ -22,20 +22,20 @@ export default function TestApi() {
     const [userDelete, setUserDelete] = useState<User | undefined>(undefined);
     const [debtDelete, setDebtDelete] = useState<Debt | undefined>(undefined);
     const [paymentDelete, setPaymentDelete] = useState<Payment | undefined>(undefined);
+    const [alertDelete, setAlertDelete] = useState<Alert | undefined>(undefined);
 
     useEffect(() => {
         if(!visibleConfirmDelete) {
             setUserDelete(undefined)
             setDebtDelete(undefined)
             setPaymentDelete(undefined)
+            setAlertDelete(undefined)
         }
     }, [visibleConfirmDelete])
     useEffect(() => {
-        console.log("userDelete: ", userDelete)
-        console.log("debtDelete: ", debtDelete)
-       if(userDelete || debtDelete || paymentDelete)
+       if(userDelete || debtDelete || paymentDelete || alertDelete)
         setVisibleConfirmDelete(true)
-    }, [userDelete, debtDelete, paymentDelete])
+    }, [userDelete, debtDelete, paymentDelete, alertDelete])
 
   return (
     <div className="flex justify-center bg-gray-700">
@@ -120,6 +120,7 @@ export default function TestApi() {
                         userDelete={userDelete}  
                         debtDelete={debtDelete}  
                         paymentDelete={paymentDelete}
+                        alertDelete={alertDelete}
                     />
                 </div>
             </div>
@@ -142,6 +143,7 @@ export default function TestApi() {
             setUserDelete={setUserDelete} 
             setDebtDelete={setDebtDelete} 
             setPaymentDelete={setPaymentDelete}
+            setAlertDelete={setAlertDelete}
         />
     </div>
     );
