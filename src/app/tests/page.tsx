@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ManageUser from "@/components/ManageUser"
 import ManageDebt from "@/components/ManageDebt";
 import ManagePayment from "@/components/ManagePayment";
@@ -20,7 +20,20 @@ export default function TestApi() {
     const [alertEdit, setAlertEdit] = useState<Alert | undefined>(undefined);
     const [visibleConfirmDelete, setVisibleConfirmDelete] = useState(false);
     const [userDelete, setUserDelete] = useState<User | undefined>(undefined);
+    const [debtDelete, setDebtDelete] = useState<Debt | undefined>(undefined);
 
+    useEffect(() => {
+        if(!visibleConfirmDelete) {
+            setUserDelete(undefined)
+            setDebtDelete(undefined)
+        }
+    }, [visibleConfirmDelete])
+    useEffect(() => {
+        console.log("userDelete: ", userDelete)
+        console.log("debtDelete: ", debtDelete)
+       if(userDelete || debtDelete)
+        setVisibleConfirmDelete(true)
+    }, [userDelete, debtDelete])
 
   return (
     <div className="flex justify-center bg-gray-700">
@@ -97,13 +110,13 @@ export default function TestApi() {
                 onClick={() => setVisibleConfirmDelete(false)} // click background to close
             >
                 <div
-                    className="bg-red-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white"
+                    className="bg-red-600 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white"
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ConfirmDelete  
-                        userDelete={userDelete}  
                         setVisibleConfirmDelete={setVisibleConfirmDelete}  
-                        setUserDelete={setUserDelete}
+                        userDelete={userDelete}  
+                        debtDelete={debtDelete}  
                     />
                 </div>
             </div>
@@ -123,8 +136,9 @@ export default function TestApi() {
             setPaymentEdit={setPaymentEdit} 
             setVisibleUpdateAlert={setVisibleUpdateAlert} 
             setAlertEdit={setAlertEdit} 
-            setVisibleConfirm={setVisibleConfirmDelete} 
+            setVisibleConfirmDelete={setVisibleConfirmDelete} 
             setUserDelete={setUserDelete} 
+            setDebtDelete={setDebtDelete} 
         />
     </div>
     );
