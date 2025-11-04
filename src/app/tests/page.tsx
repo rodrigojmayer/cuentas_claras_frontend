@@ -116,6 +116,7 @@ export default function TestApi() {
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ManagePayment 
+                        setUpdateData={setUpdateData}
                         paymentEdit={paymentEdit}  
                         setVisibleUpdatePayment={setVisibleUpdatePayment}
                     />
@@ -164,7 +165,9 @@ export default function TestApi() {
             < ManageDebt 
                 setUpdateData={setUpdateData}
             />
-            < ManagePayment />
+            < ManagePayment 
+                setUpdateData={setUpdateData}
+            />
             < ManageAlert />
         </div>
         < DataList 
