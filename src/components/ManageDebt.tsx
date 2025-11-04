@@ -1,14 +1,15 @@
 "use client";
 import { useState } from "react";
 import { patchDebt, postDebt } from "../lib/api";
-import type { Debt, NewDebt, User } from "../types";
+import type { Debt, NewDebt, UpdateDataProps, User } from "../types";
 import DatePickerComponent from "./DatePickerComponent";
 
 interface ManageDebtProps {
+    setUpdateData: (visible: UpdateDataProps) => void;
     debtEdit?: Debt;
     setVisibleUpdateDebt?: (visible: boolean) => void;
 }
-export default function ManageDebt({ debtEdit, setVisibleUpdateDebt }: ManageDebtProps) {
+export default function ManageDebt({ setUpdateData, debtEdit, setVisibleUpdateDebt }: ManageDebtProps) {
     const getInitialCreditorId = (debt?: Debt): string => {
         if (!debt) return "";
         const id = debt.id_user_creditor;
@@ -87,6 +88,7 @@ export default function ManageDebt({ debtEdit, setVisibleUpdateDebt }: ManageDeb
             setMessage(`X ${err.message || "Failed to create debt"}`);
         } finally {
             setLoading(false);
+            setUpdateData({state: true, data: "debts"})
         }
 
     }

@@ -54,7 +54,6 @@ export default function TestApi() {
                 getDebts().then(setDebts);
                 getPayments().then(setPayments);
                 getAlerts().then(setAlerts);
-                setUpdateData({state: false, data: ""})
             } else if(updateData.data === "users"){
                 getUsers().then(setUsers);
             } else if(updateData.data === "debts"){
@@ -64,6 +63,7 @@ export default function TestApi() {
             } else if(updateData.data === "alerts"){
                 getAlerts().then(setAlerts);
             }
+            setUpdateData({state: false, data: ""})
         }
     }, [updateData]);
 
@@ -98,6 +98,7 @@ export default function TestApi() {
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ManageDebt  
+                        setUpdateData={setUpdateData}
                         debtEdit={debtEdit}  
                         setVisibleUpdateDebt={setVisibleUpdateDebt}  
                     />
@@ -160,7 +161,9 @@ export default function TestApi() {
             < ManageUser 
                 setUpdateData={setUpdateData}
             />
-            < ManageDebt />
+            < ManageDebt 
+                setUpdateData={setUpdateData}
+            />
             < ManagePayment />
             < ManageAlert />
         </div>
