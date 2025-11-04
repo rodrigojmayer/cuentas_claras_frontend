@@ -6,6 +6,7 @@ import ManagePayment from "@/components/ManagePayment";
 import ManageAlert from "@/components/ManageAlert";
 import DataList from "@/components/DataList"
 import type { Alert, Debt, Payment, User } from "@/types";
+import ConfirmDelete from "@/components/ConfirmDelete";
 
 export default function TestApi() {
 
@@ -17,6 +18,8 @@ export default function TestApi() {
     const [paymentEdit, setPaymentEdit] = useState<Payment | undefined>(undefined);
     const [visibleUpdateAlert, setVisibleUpdateAlert] = useState(false);
     const [alertEdit, setAlertEdit] = useState<Alert | undefined>(undefined);
+    const [visibleConfirmDelete, setVisibleConfirmDelete] = useState(false);
+    const [userDelete, setUserDelete] = useState<User | undefined>(undefined);
 
 
   return (
@@ -88,6 +91,23 @@ export default function TestApi() {
                 </div>
             </div>
         )}
+        {visibleConfirmDelete && (
+            <div 
+                className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+                onClick={() => setVisibleConfirmDelete(false)} // click background to close
+            >
+                <div
+                    className="bg-red-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white"
+                    onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                >
+                    <ConfirmDelete  
+                        userDelete={userDelete}  
+                        setVisibleConfirmDelete={setVisibleConfirmDelete}  
+                        setUserDelete={setUserDelete}
+                    />
+                </div>
+            </div>
+        )}
         <div className="flex flex-col ">
             < ManageUser />
             < ManageDebt />
@@ -103,6 +123,8 @@ export default function TestApi() {
             setPaymentEdit={setPaymentEdit} 
             setVisibleUpdateAlert={setVisibleUpdateAlert} 
             setAlertEdit={setAlertEdit} 
+            setVisibleConfirm={setVisibleConfirmDelete} 
+            setUserDelete={setUserDelete} 
         />
     </div>
     );
