@@ -307,3 +307,21 @@ export async function deleteDebt(_id: string): Promise<void> {
         throw new Error("Unable to reach server");
     }
 }
+
+export async function deletePayment(_id: string): Promise<void> {
+    try {
+        const res = await fetch(`${API_URL}/payments/${_id}`, {
+            method: 'DELETE',
+        })
+        if(!res.ok) {
+            const errorText = await res.text();
+            console.error("Error deleting payment: ", res.status, errorText);
+            throw new Error(`Faailed to delete payment (status ${res.status})`);
+        }
+
+        console.log("Payment deleted successfully");
+    } catch (error) {
+        console.error("Network error deleting payment: ", error);
+        throw new Error("Unable to reach server");
+    }
+}
