@@ -52,6 +52,8 @@ export default function DataList({
         const user = users?.find(u => u._id === id )
         if(user)
             setUserSelected({ ...user })
+        else
+            setUserSelected(null)
     }
     useEffect(() => {
         if(userSelected){
