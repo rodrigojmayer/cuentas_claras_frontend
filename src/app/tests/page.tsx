@@ -8,6 +8,7 @@ import DataList from "@/components/DataList"
 import type { UpdateDataProps, Alert, Debt, Payment, User } from "@/types";
 import ConfirmDelete from "@/components/ConfirmDelete";
 import { getAlerts, getDebts, getPayments, getUsers } from "@/lib/api";
+import VoiceAssistant from "@/components/Voice";
 
 
 export default function TestApi() {
@@ -192,6 +193,16 @@ export default function TestApi() {
             setPaymentDelete={setPaymentDelete}
             setAlertDelete={setAlertDelete}
         />
+        <div
+            className="bg-green-200 p6 rounded-2xl shadow-lg w-[25%] max-w-md text-white"
+        >
+            <VoiceAssistant 
+                visibleUpdatePayment={visibleUpdatePayment}
+                setVisibleUpdatePayment={setVisibleUpdatePayment}
+                paymentEdit={paymentEdit}
+                setPaymentEdit={setPaymentEdit}
+            />
+        </div>
     </div>
     );
 }
