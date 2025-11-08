@@ -3,6 +3,27 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  --first-color: #414548;
+  --first-color2: #212528;
+  --first-color3: #2A2E31;
+  --second-color: #4938CA;
+  --second-alpha-color: rgba(73, 56, 202, 0.75);
+  --text-color: #EEFBFB;
+
+  --third-soft-color1: #474C54;
+  --third-soft-color2: #353B42;
+  --white-color: #FFFFFF;
+  --green: #27B67D;
+  --green-hover: rgba(39, 182, 125, 0.35);
+  --green2: #319F43;
+  
+  --black-alpha-color: rgba(0, 0, 0, 0.7);
+  --red: #F5615D;
+  --red-hover: rgba(245, 97, 93, 0.35);
+  --red2: #E33629;
+  --blue: #587DBD;
+  --yellow: #F8BD00;
 }
 h1 {
   font-size: 3rem;
@@ -32,7 +53,8 @@ h4 {
 }
 
 body {
-  background: var(--background);
+  /* background: var(--background); */
+  background: var(--rede);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
