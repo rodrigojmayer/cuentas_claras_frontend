@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { patchPayment, postPayment } from "../lib/api";
 import type { NewPayment, Payment, UpdateDataProps } from "../types";
 import DatePickerComponent from "./DatePickerComponent";
@@ -63,8 +63,13 @@ export default function ManagePayment({ setUpdateData, paymentEdit, setVisibleUp
         }
     }
 
-    paymentEdit
+    
 
+  useEffect(() => {
+    if(paymentEdit?.amount){
+      setPaymentAmount(paymentEdit.amount)
+    }
+  }, [paymentEdit]);
     return(
         <div className="flex flex-col p-2 max-w-md">
             <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
