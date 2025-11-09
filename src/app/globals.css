@@ -54,7 +54,7 @@ h4 {
 
 body {
   /* background: var(--background); */
-  background: var(--rede);
+  background: var(--first-color2);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
