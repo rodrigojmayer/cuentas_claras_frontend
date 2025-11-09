@@ -16,7 +16,7 @@ export function MenuButton({ onDataChanged }: ChildProps) {
     }
 
     return (
-        <IconButton
+        <IconButton 
             onClick={handleClick}
             className={`${classes.menuIcon} ${classes.menu_icon_color}`}
             id="hamburgerMenuButton">
