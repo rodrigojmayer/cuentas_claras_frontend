@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface UpdateDataProps {
     state: boolean,
     data: string
@@ -73,3 +74,61 @@ export interface NewAlert {
     id_debt: string;
     date_alert: date;
 }
+
+
+
+
+
+export interface Data {
+  _id: string;
+  id?: number;
+  id_client: number;
+  product: string;
+  amount: number ;
+  measure: string;
+  category: string;
+  sub_category: string;
+  [key?: string]: any;
+  custom_fields?: array;
+  id_custom_field_product?: number;
+  code?: string;
+  price?: number | string;
+  description?: string;
+  url_image?: string;
+  alert_amount?: number ;
+  alert_amount_enabled?: boolean;
+  alerted_amount?: boolean;
+  alert_date?: Date | string;
+  alert_date_enabled?: boolean;
+  alerted_date?: boolean;
+}
+
+export interface DataTable {
+  data: Data[] 
+  columns: ColumnData[]
+  // openUpdateAmountStock: (id_prod: Number, name_prod: String, amount_prod: Number) => void
+  // openUpdateAmountStock: (newData: ProductUpdateData) => void
+  openUpdateAmountStock: (newData: Data) => void
+//   handleDisabledUpdateButton: (newData: boolean) => void
+}
+export interface DataTableSubCategory {
+  data: CategoriesSubData[] 
+  columns: ColumnDataAdministrator[]
+  // openUpdateAmountStock: (id_prod: Number, name_prod: String, amount_prod: Number) => void
+  // openUpdateAmountStock: (newData: ProductUpdateData) => void
+  openSubCategoryUpdate: (newData: CategoriesSubData) => void
+//   handleDisabledUpdateButton: (newData: boolean) => void
+}
+
+export interface ColumnData {
+  id: number;
+  dataKey: string;
+  label: string;
+  numeric?: boolean;
+  width: number;
+  id_client?: number;
+  deleted: boolean;
+  [key: string]: any;
+}
+
+

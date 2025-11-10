@@ -26,6 +26,18 @@ const red2 = '#E33629';
 const blue = '#587DBD';
 const yellow = '#F8BD00';
 
+const linkColor = '#c1e8fb';  // Is used without a user so it should be only one
+const mainColor = 'rgb(45, 72, 91, 1)';
+const mainColorLighter = 'rgb(115, 142, 161, 1)';
+const mainColor3 = 'rgb(38,55, 66, 1)'; // is used just in the menu options with large screens
+const mainColorD = 'rgb(25, 54, 72)';
+const tableAlertOnBackground = 'rgb(290, 10, 50, .6)';
+const tableAlertOnColor = 'rgb(255, 255, 255, 1)';
+const tableRowColor = '#222';
+const rowEvenBackground = 'rgb(69, 144, 186)';
+const rowOddBackground = 'rgb(162, 199, 220)';
+const menuItem = '#DCF2F1';
+
 export const useStylesGlobal = makeStyles()({
     
     menuIcon: {
@@ -57,5 +69,48 @@ export const useStylesGlobal = makeStyles()({
     },
     main_colorDD: {
         color: tableHeaderColor,
+    },
+    table_menu : {
+        borderRadius: '4px', // Set border-radius to mimic scrollbar radius
+        '& .MuiPaper-root': {  
+            overflow: 'hidden', // Hide any overflow
+            overflowY: 'auto', // Show scrollbar on hover
+            borderRadius: '4px', // Set border-radius to mimic scrollbar radius
+            // paddingRight: '12px',
+            scrollbarColor: 'rgba(0, 0, 0, 0) rgba(0, 0, 0, 0)', // Adjust the color of the scrollbar
+            scrollbarWidth: 'thin', // Hide scrollbar for Firefox
+            '&:hover': {
+                scrollbarColor: 'rgba(0, 0, 0, .3) rgba(0, 0, 0, 0)', // Adjust the color of the scrollbar
+                overflowY: 'auto', // Show scrollbar on hover
+                // paddingRight: '0',
+                overflowX: 'hidden',
+            },
+        },
+    },
+    table_menu_background_color : {
+        '& .MuiPaper-root': { 
+            backgroundColor: menuItem,
+            '&:hover': {
+                backgroundColor: menuItem,
+             },
+        },
+    },
+    menu_item: {
+        padding: '0 5px',
+    },
+    menu_item_background_color: {
+        backgroundColor: menuItem,
+        '&:hover': {
+            backgroundColor: menuItem,
+        },
+    },
+    main_background_colorD: {
+        backgroundColor: mainColorD,
+    },
+    table_header_color: {
+        color: tableHeaderColor,
+        '&.Mui-checked': {
+            color: tableHeaderColor,
+        },
     },
 })
