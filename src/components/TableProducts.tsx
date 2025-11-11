@@ -102,7 +102,7 @@ function rowContent(
                 <Typography noWrap 
                 sx={{
                     padding: "0 4px ",
-                    // textDecoration:  ((column.dataKey === "alert_amount" && !newRow['alert_amount_enabled']) || (column.dataKey === "alert_date" && !newRow['alert_date_enabled'])) ? 'line-through' : "",
+                    // textDecoration: "",
                   }}
                     onClick={(e) => {
                         alert(`click en row table: ${row[column.dataKey]}`)

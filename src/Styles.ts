@@ -105,7 +105,7 @@ export const useStylesGlobal = makeStyles()({
         },
     },
     main_background_colorD: {
-        backgroundColor: mainColorD,
+        backgroundColor: first_color3,
     },
     table_header_color: {
         color: tableHeaderColor,
@@ -117,10 +117,16 @@ export const useStylesGlobal = makeStyles()({
       // display: "flex",
       // justifyContent: "center",
     },
-    
     table_rows : {
         padding: "8px 0",
         border: 0,
     },
-    
+    table_rows_color : {
+        color: tableHeaderColor,
+    },table_row_even: {
+        backgroundColor: third_soft_color1, 
+    },
+    table_row_odd: {
+        backgroundColor: third_soft_color2, 
+    },
 })
