@@ -6,7 +6,13 @@ import { AppBar, Grid } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useStylesGlobal } from '../Styles';
 import TableProducts from '@/components/TableProducts';
-import { Data } from '@/types';
+import { Data, DataTable } from '@/types';
+
+const data = [
+  {_id: "test1", gestion: "ges1", nombre: "nom2", vencimiento:"venc2", pendiente:"pend2"},
+  {_id: "test2", gestion: "ges2", nombre: "nom2", vencimiento:"venc2", pendiente:"pend2"}
+]
+
 
 export default function Home() {
 
@@ -15,13 +21,10 @@ export default function Home() {
   const [ openMenu, setOpenMenu] = useState(false);
   const handleOpenMenu = () => setOpenMenu(true);
 
-  const [filteredData, setFilteredData] = useState<Data[]>([])
-  const [columnsUserOrder, setColumnsUserOrder] = useState<any[]>([])
-  const [openUpdateAmountStock, setOpenUpdateAmountStock] = useState<any>({})
- 
+  const [filteredData, setFilteredData] = useState<Data[]>(data)
   
   return (
-    <div className="flex items-center justify-center bg-slate-100">
+    <div className={`${classes.page}`}>
       <AppBar
         className={`${classes.menu_appbar} ${classes.no_background_colorDD} ${classes.main_colorDD}`}
         sx={{ top: (breakpointLG?0:"auto"), bottom: 0 }}
@@ -41,8 +44,6 @@ export default function Home() {
       
       <TableProducts 
             data={filteredData} 
-            columns={columnsUserOrder} 
-            openUpdateAmountStock={openUpdateAmountStock} 
           />
     </div>
     );

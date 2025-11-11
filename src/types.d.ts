@@ -80,36 +80,16 @@ export interface NewAlert {
 
 
 export interface Data {
-  _id: string;
-  id?: number;
-  id_client: number;
-  product: string;
-  amount: number ;
-  measure: string;
-  category: string;
-  sub_category: string;
+    _id: string;
+  gestion: string;
+  nombre: string;
+  vencimiento: string;
+  pendiente: string;
   [key?: string]: any;
-  custom_fields?: array;
-  id_custom_field_product?: number;
-  code?: string;
-  price?: number | string;
-  description?: string;
-  url_image?: string;
-  alert_amount?: number ;
-  alert_amount_enabled?: boolean;
-  alerted_amount?: boolean;
-  alert_date?: Date | string;
-  alert_date_enabled?: boolean;
-  alerted_date?: boolean;
 }
 
 export interface DataTable {
   data: Data[] 
-  columns: ColumnData[]
-  // openUpdateAmountStock: (id_prod: Number, name_prod: String, amount_prod: Number) => void
-  // openUpdateAmountStock: (newData: ProductUpdateData) => void
-  openUpdateAmountStock: (newData: Data) => void
-//   handleDisabledUpdateButton: (newData: boolean) => void
 }
 export interface DataTableSubCategory {
   data: CategoriesSubData[] 

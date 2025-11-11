@@ -113,4 +113,14 @@ export const useStylesGlobal = makeStyles()({
             color: tableHeaderColor,
         },
     },
+    page: {
+      // display: "flex",
+      // justifyContent: "center",
+    },
+    
+    table_rows : {
+        padding: "8px 0",
+        border: 0,
+    },
+    
 })
