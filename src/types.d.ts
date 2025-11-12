@@ -17,10 +17,27 @@ export interface NewUser {
     name?: string;
 }
 
+// export interface Debt {
+//     _id: string;
+//     id_user_creditor: string;
+//     id_user_debtor: string;
+//     date_debt: date;
+//     detail?: string;
+//     amount: number | null;
+//     dolar_google?: number | null;
+//     status: string;
+//     date_due?: date;
+//     currency: string;
+//     enabled: boolean;
+//     deleted: boolean;
+//     payments?: Payment[];
+//     alerts?: Alert[];
+// }
+
 export interface Debt {
     _id: string;
-    id_user_creditor: string;
-    id_user_debtor: string;
+    id_user_creditor: User;
+    id_user_debtor: User;
     date_debt: date;
     detail?: string;
     amount: number | null;
@@ -81,11 +98,11 @@ export interface NewAlert {
 
 export interface Data {
     _id: string;
-  gestion: string;
-  nombre: string;
-  vencimiento: string;
-  pendiente: string;
-  [key?: string]: any;
+    gestion: string;
+    nombre: string;
+    vencimiento: string;
+    pendiente: string;
+    [key?: string]: any;
 }
 
 export interface DataTable {

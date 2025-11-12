@@ -37,7 +37,7 @@ const INITIAL_STATE = {
   pendiente: "",
 }
 const columnsTable = [
-   {label: "Gestion", id: 0, dataKey: "gestion", width: 20, deleted: false},
+  {label: "Gestion", id: 0, dataKey: "gestion", width: 20, deleted: false},
   {label: "Nombre", id: 1, dataKey: "nombre", width: 20, deleted: false},
   {label: "Vencimiento", id: 2, dataKey: "vencimiento", width: 20, deleted: false},
   {label: "Pendiente",  id: 3, dataKey: "pendiente", width: 20, deleted: false},
@@ -122,13 +122,15 @@ function rowContent(
 export default function TableProducts(
   { data, 
   }:  DataTable ) {
-
+    console.log("data: ", data);
   const  {classes} = useStylesGlobal()
   const breakpointLG = useMediaQuery('(min-width:1024px)');
   const breakpointMD = useMediaQuery('(min-width: 724px)');  
 
   const [sortedData, setSortedData] = useState(data)
-  
+  useEffect(() => {
+    setSortedData(data);
+  }, [data]);
   return (
     
 <div>

@@ -3,7 +3,7 @@ import { getUsers } from "@/lib/api";
 import type { User } from "@/types";
 
 export default function useUsers() {
-    const { data, error, isLoading, mutate } = useSWR<User[]>("/users", getUsers);
+    const { data, error, isLoading, mutate } = useSWR<User[]>("/", getUsers);
 
     return {
         users: data ?? [],

@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MenuButton } from "@/components/Buttons";
 import { AppBar, Grid } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useStylesGlobal } from '../Styles';
 import TableProducts from '@/components/TableProducts';
-import { Data, DataTable } from '@/types';
+import { Data, DataTable, User } from '@/types';
 import useUsers from "@/hooks/useUsers";
 import useDebts from "@/hooks/useDebts";
 import usePayments from "@/hooks/usePayments";
 import useAlerts from "@/hooks/useAlerts";
+import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
 
 const dataC = [
-  {_id: "test1", gestion: "ges1", nombre: "nom2", vencimiento:"venc2", pendiente:"pend2"},
+  {_id: "test1", gestion: "ges1", nombre: "nom1", vencimiento:"venc1", pendiente:"pend1"},
   {_id: "test2", gestion: "ges2", nombre: "nom2", vencimiento:"venc2", pendiente:"pend2"}
 ]
 
@@ -25,12 +26,34 @@ export default function Home() {
   const [ openMenu, setOpenMenu] = useState(false);
   const handleOpenMenu = () => setOpenMenu(true);
 
+  const [userLogged, setUserLogged] = useState<User>({_id: "68e5b887cfb837d89f00be9f", email: "test@gmail.com", phone: "12345678", name: "test", enabled: true, deleted: false})
   const [filteredData, setFilteredData] = useState<Data[]>(dataC)
   
   const { users, isErrorUsers, isLoadingUsers } = useUsers();
   const { debts, isErrorDebts, isLoadingDebts } = useDebts();
   const { payments, isErrorPayments, isLoadingPayments } = usePayments();
   const { alerts, isErrorAlerts, isLoadingAlerts } = useAlerts();
+  const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor } = useDebtsByCreditor();
+  useEffect(() => {
+       if (!debtsByCreditor || debtsByCreditor.length === 0) return;
+       
+       const fData = debtsByCreditor.map(d => {
+    return {
+      _id: d._id,
+      gestion: "Préstamo", 
+      nombre: d.id_user_creditor?.name ?? "",
+      vencimiento:"venc", 
+      pendiente: `${d.amount} USD`
+    }
+  })
+  setFilteredData(fData)
+    
+  }, [debtsByCreditor])
+    useEffect(() => {
+     console.log("filteredData: ", filteredData)
+     
+  }, [filteredData])
+
   if (isLoadingUsers) return <p>Cargando usuarios...</p>;
   if (isErrorUsers) return <p>Error al cargar usuarios</p>;
   if (isLoadingDebts) return <p>Cargando deudas...</p>;
@@ -43,6 +66,9 @@ export default function Home() {
   // console.log("debts: ", debts);
   // console.log("payments: ", payments);
   // console.log("alerts: ", alerts);
+  // console.log("debtsByCreditor: ", debtsByCreditor);
+
+  
 
   return (
     <div className={`${classes.page}`}>
