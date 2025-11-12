@@ -7,8 +7,8 @@ export default function useUsers() {
 
     return {
         users: data ?? [],
-        isLoading,
-        isError: error,
+        isLoadingUsers: isLoading,
+        isErrorUsers: error,
         mutateUsers: mutate,
     };
 }

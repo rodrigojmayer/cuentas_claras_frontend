@@ -7,8 +7,10 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useStylesGlobal } from '../Styles';
 import TableProducts from '@/components/TableProducts';
 import { Data, DataTable } from '@/types';
+import useUsers from "@/hooks/useUsers";
+import useDebts from "@/hooks/useDebts";
 
-const data = [
+const dataC = [
   {_id: "test1", gestion: "ges1", nombre: "nom2", vencimiento:"venc2", pendiente:"pend2"},
   {_id: "test2", gestion: "ges2", nombre: "nom2", vencimiento:"venc2", pendiente:"pend2"}
 ]
@@ -21,8 +23,13 @@ export default function Home() {
   const [ openMenu, setOpenMenu] = useState(false);
   const handleOpenMenu = () => setOpenMenu(true);
 
-  const [filteredData, setFilteredData] = useState<Data[]>(data)
+  const [filteredData, setFilteredData] = useState<Data[]>(dataC)
   
+  const { users, isErrorUsers, isLoadingUsers, mutateUsers  } = useUsers();
+  const { debts, isErrorDebts, isLoadingDebts, mutateDebts } = useDebts();
+  if (isLoadingUsers) return <p>Cargando usuarios...</p>;
+  if (isErrorUsers) return <p>Error al cargar usuarios</p>;
+
   return (
     <div className={`${classes.page}`}>
       <AppBar
