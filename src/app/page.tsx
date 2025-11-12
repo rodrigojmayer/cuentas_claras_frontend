@@ -10,6 +10,7 @@ import { Data, DataTable } from '@/types';
 import useUsers from "@/hooks/useUsers";
 import useDebts from "@/hooks/useDebts";
 import usePayments from "@/hooks/usePayments";
+import useAlerts from "@/hooks/useAlerts";
 
 const dataC = [
   {_id: "test1", gestion: "ges1", nombre: "nom2", vencimiento:"venc2", pendiente:"pend2"},
@@ -29,15 +30,19 @@ export default function Home() {
   const { users, isErrorUsers, isLoadingUsers } = useUsers();
   const { debts, isErrorDebts, isLoadingDebts } = useDebts();
   const { payments, isErrorPayments, isLoadingPayments } = usePayments();
+  const { alerts, isErrorAlerts, isLoadingAlerts } = useAlerts();
   if (isLoadingUsers) return <p>Cargando usuarios...</p>;
   if (isErrorUsers) return <p>Error al cargar usuarios</p>;
   if (isLoadingDebts) return <p>Cargando deudas...</p>;
   if (isErrorDebts) return <p>Error al cargar deudas</p>;
   if (isLoadingPayments) return <p>Cargando pagos</p>;
   if (isErrorPayments) return <p>Error al cargar pagos</p>;  
+  if (isLoadingAlerts) return <p>Cargando alertas</p>;
+  if (isErrorAlerts) return <p>Error al cargar alertas</p>;
   // console.log("users: ", users);
   // console.log("debts: ", debts);
   // console.log("payments: ", payments);
+  // console.log("alerts: ", alerts);
 
   return (
     <div className={`${classes.page}`}>
