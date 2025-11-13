@@ -85,7 +85,7 @@ function rowContent(
             className={`${classes.table_rows}  ${classes.table_rows_color}`}
           > 
             <Tooltip 
-                title={row[column.dataKey]} 
+                title={row?.[column.dataKey]} 
                 disableHoverListener={String(row[column.dataKey])?.length <= 13}
                 slotProps={{
                   popper: {
