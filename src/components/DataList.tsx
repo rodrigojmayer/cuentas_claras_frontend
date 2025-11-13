@@ -121,6 +121,8 @@ export default function DataList({
                             <p>Status: {d.status}</p>
                             <p>Creation: {new Date(d.date_debt).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
                             <p>Due: {new Date(d.date_due).toLocaleDateString("es-ES", { timeZone: 'UTC' })}</p>
+                            <p>Alert enabled: {d.alert_enabled ? "Si":"No"}</p>
+                            <p>Alerted: {d.alerted ? "Si":"No"}</p>
                             <p>Enabled: {d.enabled ? "Si":"No"}</p>
                             <p>Deleted: {d.deleted ? "Si":"No"}</p>
                             <button

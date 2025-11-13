@@ -30,6 +30,8 @@ export default function ManageDebt({ setUpdateData, debtEdit, setVisibleUpdateDe
     const [debtDolarGoogle, setDebtDolarGoogle] = useState<number | null | undefined>(debtEdit ? debtEdit.dolar_google : null);
     const [debtStatus, setDebtStatus] = useState<string>(debtEdit ? debtEdit.status : "open");
     const [debtDateDue, setDebtDateDue] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_due) : null);
+    const [debtAlertEnabled, setDebtAlertEnabled] = useState<boolean>(debtEdit ? debtEdit.alert_enabled : true);
+    const [debtAlerted, setDebtAlerted] = useState<boolean>(debtEdit ? debtEdit.alerted : false);
     const [debtCurrency, setDebtCurrency] = useState<string>(debtEdit ? debtEdit.currency : "ARS");
     const [debtEnabled, setDebtEnabled] = useState<boolean>(debtEdit ? debtEdit.enabled : true);
     const [debtDeleted, setDebtDeleted] = useState<boolean>(debtEdit ? debtEdit.deleted : false);
@@ -53,6 +55,8 @@ export default function ManageDebt({ setUpdateData, debtEdit, setVisibleUpdateDe
                     dolar_google: debtDolarGoogle,
                     status: debtStatus,
                     date_due: debtDateDue,
+                    alert_enabled: debtAlertEnabled,
+                    alerted: debtAlerted,
                     currency: debtCurrency,
                     enabled: debtEnabled,
                     deleted: debtDeleted
@@ -68,6 +72,8 @@ export default function ManageDebt({ setUpdateData, debtEdit, setVisibleUpdateDe
                     dolar_google: debtDolarGoogle,
                     status: debtStatus,
                     date_due: debtDateDue,
+                    alert_enabled: debtAlertEnabled,
+                    alerted: debtAlerted,
                     currency: debtCurrency 
                 }
                 await postDebt(newDebt);
@@ -79,9 +85,9 @@ export default function ManageDebt({ setUpdateData, debtEdit, setVisibleUpdateDe
             setDebtDetail("");
             setDebtAmount(null);
             setDebtDolarGoogle(null);
-            setDebtStatus("");
+            setDebtStatus("open");
             setDebtDateDue(null);
-            setDebtCurrency("");
+            setDebtCurrency("ARS");
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             console.error("Error creating debt:", err);
@@ -179,7 +185,37 @@ export default function ManageDebt({ setUpdateData, debtEdit, setVisibleUpdateDe
                 
                 {debtEdit ? 
                     <>
-                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
+                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-32">
+                            <span className="text-sm truncate">Alert Enabled</span>
+                            <input
+                                type="checkbox"
+                                checked={debtEnabled}
+                                onChange={(e) => setDebtAlertEnabled(e.target.checked)}
+                                className="
+                                    w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
+                                    after:content-[''] after:top-0.5 after:left-[2px] after:bg-white 
+                                    after:border-gray-300 after:rounded-full after:h-5 after:w-5 
+                                    after:transition-all peer-checked:after:translate-x-full 
+                                    peer-checked:after:border-white
+                                "
+                            />
+                        </label>
+                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-26">
+                            <span className="text-sm truncate">Alerted</span>
+                            <input
+                                type="checkbox"
+                                checked={debtEnabled}
+                                onChange={(e) => setDebtAlerted(e.target.checked)}
+                                className="
+                                    w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
+                                    after:content-[''] after:top-0.5 after:left-[2px] after:bg-white 
+                                    after:border-gray-300 after:rounded-full after:h-5 after:w-5 
+                                    after:transition-all peer-checked:after:translate-x-full 
+                                    peer-checked:after:border-white
+                                "
+                            />
+                        </label>
+                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-26">
                             <span className="text-sm truncate">Enabled</span>
                             <input
                                 type="checkbox"
@@ -194,7 +230,7 @@ export default function ManageDebt({ setUpdateData, debtEdit, setVisibleUpdateDe
                                 "
                             />
                         </label>
-                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-24">
+                        <label className="grid grid-cols-[1fr_auto] items-center gap-x-4 w-26">
                             <span className="text-sm truncate">Deleted</span>
                             <input
                                 type="checkbox"
