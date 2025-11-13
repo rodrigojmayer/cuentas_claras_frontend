@@ -7,12 +7,12 @@ const neutralMain = 'rgb(255, 255, 255, 1)';
 const tableHeaderColor = 'rgb(255, 255, 255, 1)';
 const first_color = '#414548';
 const first_color2 = '#212528';
-const first_color3 = '#2A2E31';
+const first_color3 = '#0b3555ff';
 const second_color = '#4938CA';
 const second_alpha_color = 'rgba(73, 56, 202, 0.75)';
 const text_color = '#EEFBFB';
 
-const third_soft_color1 ='#474C54';
+const third_soft_color1 ='#757b86ff';
 const third_soft_color2 =' #353B42';
 const white_color = '#FFFFFF';
 const green = '#27B67D';
@@ -128,5 +128,10 @@ export const useStylesGlobal = makeStyles()({
     },
     table_row_odd: {
         backgroundColor: third_soft_color2, 
+    },table_alert_on_background : {
+        backgroundColor: tableAlertOnBackground, 
     },
+    // table_alert_on_color : {
+    //     color: tableAlertOnColor,
+    // },
 })

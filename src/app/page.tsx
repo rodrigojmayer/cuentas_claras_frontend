@@ -49,7 +49,8 @@ export default function Home() {
       gestion: "Préstamo", 
       nombre: d.user_debtor?.name ?? "",
       vencimiento: d.date_due, 
-      pendiente: `${d.amount} ${d.currency}`
+      pendiente: `${d.amount} ${d.currency}`,
+      alerta: d.alert_enabled && d.alerted,
     }
   })
   setFilteredData([ ...filteredData, ...fData])
@@ -65,7 +66,8 @@ export default function Home() {
       gestion: "Deuda", 
       nombre: d.user_creditor?.name ?? "",
       vencimiento: d.date_due,
-      pendiente: `${d.amount} ${d.currency}`
+      pendiente: `${d.amount} ${d.currency}`,
+      alerta: d.alert_enabled && d.alerted,
     }
   })
   setFilteredData([ ...filteredData, ...fData2])

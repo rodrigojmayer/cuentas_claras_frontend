@@ -29,13 +29,6 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import LockIcon from '@mui/icons-material/Lock';
 
-
-const INITIAL_STATE = {
-  gestion: "",
-  nombre: "",
-  vencimiento: "",
-  pendiente: "",
-}
 const columnsTable = [
   {label: "Gestion", id: 0, dataKey: "gestion", width: 20, deleted: false},
   {label: "Nombre", id: 1, dataKey: "nombre", width: 20, deleted: false},
@@ -82,7 +75,7 @@ function rowContent(
           }}
         >
           <div 
-            className={`${classes.table_rows}  ${classes.table_rows_color}`}
+            className={ `${row.alerta ? classes.table_alert_on_background  : "" } ${classes.table_rows}  ${classes.table_rows_color}`}
           > 
             <Tooltip 
                 title={row?.[column.dataKey]} 
