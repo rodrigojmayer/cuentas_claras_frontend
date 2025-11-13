@@ -75,11 +75,11 @@ function rowContent(
           }}
         >
           <div 
-            className={ `${row.alerta ? classes.table_alert_on_background  : "" } ${classes.table_rows}  ${classes.table_rows_color}`}
+            className={ `${row?.alerta ? classes.table_alert_on_background  : "" } ${classes.table_rows}  ${classes.table_rows_color}`}
           > 
             <Tooltip 
                 title={row?.[column.dataKey]} 
-                disableHoverListener={String(row[column.dataKey])?.length <= 13}
+                disableHoverListener={String(row?.[column.dataKey])?.length <= 13}
                 slotProps={{
                   popper: {
                     sx: {
@@ -102,7 +102,7 @@ function rowContent(
                             e.stopPropagation()
                         }}
                 >
-                  { ( row[column.dataKey] || row[column.dataKey] === 0 ) ? row[column.dataKey] : "-"}
+                  { ( row?.[column.dataKey] || row?.[column.dataKey] === 0 ) ? row?.[column.dataKey] : "-"}
                 </Typography>
             </Tooltip> 
           </div>
