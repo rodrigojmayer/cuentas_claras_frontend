@@ -189,7 +189,7 @@ export default function ManageDebt({ setUpdateData, debtEdit, setVisibleUpdateDe
                             <span className="text-sm truncate">Alert Enabled</span>
                             <input
                                 type="checkbox"
-                                checked={debtEnabled}
+                                checked={debtAlertEnabled}
                                 onChange={(e) => setDebtAlertEnabled(e.target.checked)}
                                 className="
                                     w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
@@ -204,7 +204,7 @@ export default function ManageDebt({ setUpdateData, debtEdit, setVisibleUpdateDe
                             <span className="text-sm truncate">Alerted</span>
                             <input
                                 type="checkbox"
-                                checked={debtEnabled}
+                                checked={debtAlerted}
                                 onChange={(e) => setDebtAlerted(e.target.checked)}
                                 className="
                                     w-6 h-6 bg-gray-200 rounded-full peer peer-checked:bg-blue-600
