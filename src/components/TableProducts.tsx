@@ -115,15 +115,24 @@ function rowContent(
 export default function TableProducts(
   { data, 
   }:  DataTable ) {
-    console.log("data: ", data);
+    // console.log("data: ", data);
   const  {classes} = useStylesGlobal()
   const breakpointLG = useMediaQuery('(min-width:1024px)');
   const breakpointMD = useMediaQuery('(min-width: 724px)');  
 
   const [sortedData, setSortedData] = useState(data)
   useEffect(() => {
+    data.sort((a:any, b:any) => {
+      console.log("a: ", a)
+      console.log("b: ", b)
+      // if (a.label.toLowerCase() < b.label.toLowerCase()) return -1;
+      if (a.alerta <= b.alerta) return 1;
+      if (a.alerta > b.alerta) return -1;
+      return 0;
+    })
     setSortedData(data);
   }, [data]);
+
   return (
     <div>
       <Paper style={{backgroundColor: "rgb(0, 0, 0, 0)", height: `calc(100dvh - ${(breakpointLG?"105px":"120px")})`, width: (breakpointLG?"98vw":"94vw"), margin: "12px auto 0 auto" ,borderRadius: "10px"}}>

@@ -38,8 +38,8 @@ export default function Home() {
   const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor } = useDebtsByCreditor();
   const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor } = useDebtsByDebtor();
 
-  console.log("debtsByCreditor: ", debtsByCreditor)
-  console.log("debtsByDebtor: ", debtsByDebtor)
+  // console.log("debtsByCreditor: ", debtsByCreditor)
+  // console.log("debtsByDebtor: ", debtsByDebtor)
   useEffect(() => {
        if (!debtsByCreditor || debtsByCreditor.length === 0) return;
        
