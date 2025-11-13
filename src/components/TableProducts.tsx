@@ -30,9 +30,9 @@ import IconButton from '@mui/material/IconButton';
 import LockIcon from '@mui/icons-material/Lock';
 
 const columnsTable = [
-  {label: "Gestion", id: 0, dataKey: "gestion", width: 20, deleted: false},
+  {label: "Gestion", id: 0, dataKey: "gestion", width: 18, deleted: false},
   {label: "Nombre", id: 1, dataKey: "nombre", width: 20, deleted: false},
-  {label: "Vencimiento", id: 2, dataKey: "vencimiento", width: 20, deleted: false},
+  {label: "Vencimiento", id: 2, dataKey: "vencimiento", width: 18, deleted: false},
   {label: "Pendiente",  id: 3, dataKey: "pendiente", width: 20, deleted: false},
 ]
 

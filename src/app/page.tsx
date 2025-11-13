@@ -43,19 +43,21 @@ export default function Home() {
   useEffect(() => {
        if (!debtsByCreditor || debtsByCreditor.length === 0) return;
        
-       const fData = debtsByCreditor.map(d => {
-    return {
-      _id: d._id,
-      gestion: "Préstamo", 
-      // nombre: d.user_debtor?.name ?? "",
-      nombre: `${typeof d?.id_user_debtor === "object"
-                            ? (d.id_user_debtor as any).name
-                            : d?.id_user_debtor}`,
-      vencimiento: d.date_due, 
-      pendiente: `${d.amount} ${d.currency}`,
-      alerta: d.alert_enabled && d.alerted,
-    }
-  })
+      const fData = debtsByCreditor.map(d => {
+        const date = new Date(d.date_due);
+        const formatter = new Intl.DateTimeFormat('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit' });
+        const formattedDate = formatter.format(date);
+        return {
+          _id: d._id,
+          gestion: "Préstamo", 
+          nombre: `${typeof d?.id_user_debtor === "object"
+                  ? (d.id_user_debtor as any).name
+                  : d?.id_user_debtor}`,
+          vencimiento: formattedDate,
+          pendiente: `${d.amount} ${d.currency}`,
+          alerta: d.alert_enabled && d.alerted,
+        }
+      })
   setFilteredData([ ...filteredData, ...fData])
     
   }, [debtsByCreditor])
@@ -64,18 +66,20 @@ export default function Home() {
        if (!debtsByDebtor || debtsByDebtor.length === 0) return;
        
        const fData2 = debtsByDebtor.map(d => {
-    return {
-      _id: d._id,
-      gestion: "Deuda", 
-      // nombre: d.user_creditor?.name ?? "",
-      nombre: `${typeof d?.id_user_creditor === "object"
-                    ? (d.id_user_creditor as any).name
-                    : d?.id_user_creditor}`,
-      vencimiento: d.date_due,
-      pendiente: `${d.amount} ${d.currency}`,
-      alerta: d.alert_enabled && d.alerted,
-    }
-  })
+        const date = new Date(d.date_due);
+        const formatter = new Intl.DateTimeFormat('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit' });
+        const formattedDate = formatter.format(date);
+        return {
+          _id: d._id,
+          gestion: "Deuda", 
+          nombre: `${typeof d?.id_user_creditor === "object"
+                  ? (d.id_user_creditor as any).name
+                  : d?.id_user_creditor}`,
+          vencimiento: formattedDate,
+          pendiente: `${d.amount} ${d.currency}`,
+          alerta: d.alert_enabled && d.alerted,
+        }
+      })
   setFilteredData([ ...filteredData, ...fData2])
     
   }, [debtsByDebtor])
