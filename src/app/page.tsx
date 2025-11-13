@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useState } from 'react';
@@ -48,7 +49,7 @@ export default function Home() {
       gestion: "Préstamo", 
       nombre: d.id_user_debtor?.name ?? "",
       vencimiento:"venc", 
-      pendiente: `${d.amount} USD`
+      pendiente: `${d.amount} ${d.currency}`
     }
   })
   setFilteredData([ ...filteredData, ...fData])
@@ -64,7 +65,7 @@ export default function Home() {
       gestion: "Deuda", 
       nombre: d.id_user_creditor?.name ?? "",
       vencimiento:"venc", 
-      pendiente: `${d.amount} USD`
+      pendiente: `${d.amount} ${d.currency}`
     }
   })
   setFilteredData([ ...filteredData, ...fData2])
