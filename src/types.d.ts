@@ -36,14 +36,18 @@ export interface NewUser {
 
 export interface Debt {
     _id: string;
-    id_user_creditor: User;
-    id_user_debtor: User;
+    id_user_creditor: string;   // always an ID
+    user_creditor?: User;       // populated user (optional)
+    id_user_debtor:  string;
+    user_debtor?: User;  
     date_debt: date;
     detail?: string;
     amount: number | null;
     dolar_google?: number | null;
     status: string;
     date_due?: date;
+    alert_enabled: boolean;
+    alerted: boolean;
     currency: string;
     enabled: boolean;
     deleted: boolean;
@@ -59,6 +63,8 @@ export interface NewDebt {
     dolar_google?: number | null;
     status: string;
     date_due?: date;
+    alert_enabled: boolean;
+    alerted: boolean;
     currency: string;
 }
 

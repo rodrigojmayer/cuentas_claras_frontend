@@ -47,8 +47,8 @@ export default function Home() {
     return {
       _id: d._id,
       gestion: "Préstamo", 
-      nombre: d.id_user_debtor?.name ?? "",
-      vencimiento:"venc", 
+      nombre: d.user_debtor?.name ?? "",
+      vencimiento: d.date_due, 
       pendiente: `${d.amount} ${d.currency}`
     }
   })
@@ -63,8 +63,8 @@ export default function Home() {
     return {
       _id: d._id,
       gestion: "Deuda", 
-      nombre: d.id_user_creditor?.name ?? "",
-      vencimiento:"venc", 
+      nombre: d.user_creditor?.name ?? "",
+      vencimiento: d.date_due,
       pendiente: `${d.amount} ${d.currency}`
     }
   })

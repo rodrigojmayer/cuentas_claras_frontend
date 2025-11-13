@@ -96,14 +96,14 @@ export default function ConfirmDelete({
                 {(!userDelete?._id && debtDelete?._id && !paymentDelete?._id && !alertDelete?._id) && ( 
                     <>
                         <label className="input-label">
-                            ID Creditor: {typeof debtDelete?.id_user_creditor === "object"
-                            ? (debtDelete.id_user_creditor as any)._id
-                            : debtDelete?.id_user_creditor}
+                            ID Creditor: {typeof debtDelete?.user_creditor === "object"
+                            ? (debtDelete.user_creditor as any)._id
+                            : debtDelete?.user_creditor}
                         </label>
                         <label className="input-label">
-                            ID Debtor: {typeof debtDelete?.id_user_debtor === "object"
-                            ? (debtDelete.id_user_debtor as any)._id
-                            : debtDelete?.id_user_debtor}
+                            ID Debtor: {typeof debtDelete?.user_debtor === "object"
+                            ? (debtDelete.user_debtor as any)._id
+                            : debtDelete?.user_debtor}
                         </label>
                         <label className="input-label">Detail: {debtDelete?.detail}</label>
                         <label className="input-label">Amount: {debtDelete?.amount}</label>
