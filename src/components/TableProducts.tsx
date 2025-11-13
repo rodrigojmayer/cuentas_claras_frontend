@@ -132,56 +132,51 @@ export default function TableProducts(
     setSortedData(data);
   }, [data]);
   return (
-    
-<div>
-    <Paper style={{backgroundColor: "rgb(0, 0, 0, 0)", height: `calc(100dvh - ${(breakpointLG?"105px":"120px")})`, width: (breakpointLG?"98vw":"94vw"), margin: "12px auto 0 auto" ,borderRadius: "10px"}}>
-      <TableVirtuoso 
-        data={data}
-        components={VirtuosoTableComponents}
-        style={{
-          backgroundColor: "rgb(0, 0, 0, 0)", 
-          borderRadius: "10px", 
-          scrollbarWidth: "none", boxShadow: `-5px 5px 20px 2px black `,
-          cursor: "pointer"
-        }}
-        fixedHeaderContent={() => {
-            return (
-              <TableRow>
-                {columnsTable.map((columnTable:any, index: number) => (
-                  <TableCell
-                    key={columnTable.id}
-                    variant="head" 
-                    align='center'
-                    className={`${classes.main_background_colorD} ${classes.table_header_color} `}
-                    onClick={() => alert(`click en header table: ${columnTable.label}`)}
-                    style={{ 
-                      width: columnTable.width, 
-                      border:0
-                    }}
-                    sx={{
-                      padding: "8px 0",
-                    }}
-                  >
-                     {columnTable.label }
-                  </TableCell>
-                ))}
-              </TableRow>
-            );
+    <div>
+      <Paper style={{backgroundColor: "rgb(0, 0, 0, 0)", height: `calc(100dvh - ${(breakpointLG?"105px":"120px")})`, width: (breakpointLG?"98vw":"94vw"), margin: "12px auto 0 auto" ,borderRadius: "10px"}}>
+        <TableVirtuoso 
+          data={data}
+          components={VirtuosoTableComponents}
+          style={{
+            backgroundColor: "rgb(0, 0, 0, 0)", 
+            borderRadius: "10px", 
+            scrollbarWidth: "none", boxShadow: `-5px 5px 20px 2px black `,
+            cursor: "pointer"
           }}
-        itemContent={(index: number) =>
-          rowContent(
-              index, 
-              sortedData[index], 
-              columnsTable, 
-              classes
-          ) 
-        }
-        
-      />
-    </Paper>
-
-</div>
-
-  
+          fixedHeaderContent={() => {
+              return (
+                <TableRow>
+                  {columnsTable.map((columnTable:any, index: number) => (
+                    <TableCell
+                      key={columnTable.id}
+                      variant="head" 
+                      align='center'
+                      className={`${classes.main_background_colorD} ${classes.table_header_color} `}
+                      onClick={() => alert(`click en header table: ${columnTable.label}`)}
+                      style={{ 
+                        width: columnTable.width, 
+                        border:0
+                      }}
+                      sx={{
+                        padding: "8px 0",
+                      }}
+                    >
+                      {columnTable.label }
+                    </TableCell>
+                  ))}
+                </TableRow>
+              );
+            }}
+          itemContent={(index: number) =>
+            rowContent(
+                index, 
+                sortedData[index], 
+                columnsTable, 
+                classes
+            ) 
+          }
+        />
+      </Paper>
+    </div>
   );
 }
