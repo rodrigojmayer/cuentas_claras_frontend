@@ -47,7 +47,10 @@ export default function Home() {
     return {
       _id: d._id,
       gestion: "Préstamo", 
-      nombre: d.user_debtor?.name ?? "",
+      // nombre: d.user_debtor?.name ?? "",
+      nombre: `${typeof d?.id_user_debtor === "object"
+                            ? (d.id_user_debtor as any).name
+                            : d?.id_user_debtor}`,
       vencimiento: d.date_due, 
       pendiente: `${d.amount} ${d.currency}`,
       alerta: d.alert_enabled && d.alerted,
@@ -64,7 +67,10 @@ export default function Home() {
     return {
       _id: d._id,
       gestion: "Deuda", 
-      nombre: d.user_creditor?.name ?? "",
+      // nombre: d.user_creditor?.name ?? "",
+      nombre: `${typeof d?.id_user_creditor === "object"
+                    ? (d.id_user_creditor as any).name
+                    : d?.id_user_creditor}`,
       vencimiento: d.date_due,
       pendiente: `${d.amount} ${d.currency}`,
       alerta: d.alert_enabled && d.alerted,
