@@ -40,54 +40,55 @@ export default function Home() {
 
   // console.log("debtsByCreditor: ", debtsByCreditor)
   // console.log("debtsByDebtor: ", debtsByDebtor)
-  useEffect(() => {
-       if (!debtsByCreditor || debtsByCreditor.length === 0) return;
-       
-      const fData = debtsByCreditor.map(d => {
-        const date = new Date(d.date_due);
-        const formatter = new Intl.DateTimeFormat('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit' });
-        const formattedDate = formatter.format(date);
-        return {
-          _id: d._id,
-          gestion: "Préstamo", 
-          nombre: `${typeof d?.id_user_debtor === "object"
-                  ? (d.id_user_debtor as any).name
-                  : d?.id_user_debtor}`,
-          vencimiento: formattedDate,
-          pendiente: `${d.amount} ${d.currency}`,
-          alerta: d.alert_enabled && d.alerted,
-        }
-      })
-  setFilteredData([ ...filteredData, ...fData])
-    
-  }, [debtsByCreditor])
-  
-  useEffect(() => {
-       if (!debtsByDebtor || debtsByDebtor.length === 0) return;
-       
-       const fData2 = debtsByDebtor.map(d => {
-        const date = new Date(d.date_due);
-        const formatter = new Intl.DateTimeFormat('es-ES', { day: '2-digit', month: '2-digit', year: '2-digit' });
-        const formattedDate = formatter.format(date);
-        return {
-          _id: d._id,
-          gestion: "Deuda", 
-          nombre: `${typeof d?.id_user_creditor === "object"
-                  ? (d.id_user_creditor as any).name
-                  : d?.id_user_creditor}`,
-          vencimiento: formattedDate,
-          pendiente: `${d.amount} ${d.currency}`,
-          alerta: d.alert_enabled && d.alerted,
-        }
-      })
-  setFilteredData([ ...filteredData, ...fData2])
-    
-  }, [debtsByDebtor])
 
-  //   useEffect(() => {
-  //    console.log("filteredData: ", filteredData)
-     
-  // }, [filteredData])
+  useEffect(() => {
+    let newData: any[] = [];
+
+    if (debtsByCreditor?.length > 0) {
+      newData = newData.concat(
+        debtsByCreditor.map(d => ({
+          _id: d._id,
+          gestion: "Préstamo",
+          nombre: typeof d?.id_user_debtor === "object"
+            ? (d.id_user_debtor as any).name
+            : d?.id_user_debtor,
+          vencimiento: new Intl.DateTimeFormat('es-ES', {
+            day: '2-digit', month: '2-digit', year: '2-digit'
+          }).format(new Date(d.date_due)),
+          pendiente: `${d.amount} ${d.currency}`,
+          alerta: d.alert_enabled && d.alerted,
+        }))
+      );
+    }
+
+    if (debtsByDebtor?.length > 0) {
+      newData = newData.concat(
+        debtsByDebtor.map(d => ({
+          _id: d._id,
+          gestion: "Deuda",
+          nombre: typeof d?.id_user_creditor === "object"
+            ? (d.id_user_creditor as any).name
+            : d?.id_user_creditor,
+          vencimiento: new Intl.DateTimeFormat('es-ES', {
+            day: '2-digit', month: '2-digit', year: '2-digit'
+          }).format(new Date(d.date_due)),
+          pendiente: `${d.amount} ${d.currency}`,
+          alerta: d.alert_enabled && d.alerted,
+        }))
+      );
+    }
+
+    setFilteredData(prev => {
+      const map = new Map();
+
+      [...prev, ...newData].forEach(item => {
+        map.set(item._id, item);
+      });
+
+      return Array.from(map.values());
+    });
+
+  }, [debtsByCreditor, debtsByDebtor])
 
   if (isLoadingUsers) return <p>Cargando usuarios...</p>;
   if (isErrorUsers) return <p>Error al cargar usuarios</p>;
