@@ -38,18 +38,21 @@ export default function Home() {
   const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor } = useDebtsByCreditor();
   const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor } = useDebtsByDebtor();
 
-  // console.log("debtsByCreditor: ", debtsByCreditor)
-  // console.log("debtsByDebtor: ", debtsByDebtor)
-
   useEffect(() => {
     if (!debtsByCreditor && !debtsByDebtor) return;
 
-    const format = (date: string) => 
-      new Intl.DateTimeFormat("es-ES", {
+    const format = (date: string | null | undefined) => {
+      if (!date) return "—";
+
+      const d = new Date(date);
+      if (isNaN(d.getTime())) return "—";
+
+      return new Intl.DateTimeFormat("es-ES", {
         day: "2-digit",
         month: "2-digit",
         year: "2-digit"
-      }).format(new Date(date));
+      }).format(d);
+    };
 
     const dataCreditor = (debtsByCreditor ?? []).map(d => ({
       _id: d._id,

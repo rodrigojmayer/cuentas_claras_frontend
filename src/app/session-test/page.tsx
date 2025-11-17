@@ -1,9 +1,7 @@
 "use client";
 
 import { useStylesGlobal } from "@/Styles";
-import { signIn } from "next-auth/react";
-import { signOut } from "next-auth/react";
-import { useSession } from "next-auth/react"
+import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function SessionTestPage() {
   const { classes } = useStylesGlobal()

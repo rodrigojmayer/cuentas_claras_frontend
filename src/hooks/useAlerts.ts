@@ -6,7 +6,7 @@ export default function useAlerts() {
     const { data, error, isLoading, mutate } = useSWR<Alert[]>("/", getAlerts);
 
     return {
-        alerts: data ?? [],
+        alerts: data,
         isLoadingAlerts: isLoading,
         isErrorAlerts: error,
         mutateAlerts: mutate,

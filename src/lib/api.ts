@@ -7,6 +7,15 @@ export async function getUsers() {
     return res.json();
 }
 
+export async function findUserByEmail(email: string) {
+    const res = await fetch(`${API_URL}/users/find-by-email`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+    });
+    return res;
+}
+
 export async function getDebts() {
     const res = await fetch(`${API_URL}/debts`);
     return res.json();

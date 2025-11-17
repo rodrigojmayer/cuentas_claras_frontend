@@ -6,7 +6,7 @@ export default function useUsers() {
     const { data, error, isLoading, mutate } = useSWR<User[]>("/", getUsers);
 
     return {
-        users: data ?? [],
+        users: data,
         isLoadingUsers: isLoading,
         isErrorUsers: error,
         mutateUsers: mutate,

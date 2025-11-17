@@ -6,7 +6,7 @@ export default function useDebts() {
     const { data, error, isLoading, mutate } = useSWR<Debt[]>("/", getDebts);
 
     return {
-        debts: data ?? [],
+        debts: data,
         isLoadingDebts: isLoading,
         isErrorDebts: error,
         mutateDebts: mutate,
