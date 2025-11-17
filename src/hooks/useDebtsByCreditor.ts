@@ -8,7 +8,7 @@ export default function useDebtsByCreditor() {
     () => getDebtsByCreditor(creditorId));
 
     return {
-        debtsByCreditor: data ?? [],
+        debtsByCreditor: data,
         isLoadingDebtsByCreditor: isLoading,
         isErrorDebtsByCreditor: error,
         mutateDebtsByCreditor: mutate,

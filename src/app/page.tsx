@@ -42,52 +42,46 @@ export default function Home() {
   // console.log("debtsByDebtor: ", debtsByDebtor)
 
   useEffect(() => {
-    let newData: any[] = [];
+    if (!debtsByCreditor && !debtsByDebtor) return;
 
-    if (debtsByCreditor?.length > 0) {
-      newData = newData.concat(
-        debtsByCreditor.map(d => ({
-          _id: d._id,
-          gestion: "Préstamo",
-          nombre: typeof d?.id_user_debtor === "object"
-            ? (d.id_user_debtor as any).name
-            : d?.id_user_debtor,
-          vencimiento: new Intl.DateTimeFormat('es-ES', {
-            day: '2-digit', month: '2-digit', year: '2-digit'
-          }).format(new Date(d.date_due)),
-          pendiente: `${d.amount} ${d.currency}`,
-          alerta: d.alert_enabled && d.alerted,
-        }))
-      );
-    }
+    const format = (date: string) => 
+      new Intl.DateTimeFormat("es-ES", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "2-digit"
+      }).format(new Date(date));
 
-    if (debtsByDebtor?.length > 0) {
-      newData = newData.concat(
-        debtsByDebtor.map(d => ({
-          _id: d._id,
-          gestion: "Deuda",
-          nombre: typeof d?.id_user_creditor === "object"
-            ? (d.id_user_creditor as any).name
-            : d?.id_user_creditor,
-          vencimiento: new Intl.DateTimeFormat('es-ES', {
-            day: '2-digit', month: '2-digit', year: '2-digit'
-          }).format(new Date(d.date_due)),
-          pendiente: `${d.amount} ${d.currency}`,
-          alerta: d.alert_enabled && d.alerted,
-        }))
-      );
-    }
+    const dataCreditor = (debtsByCreditor ?? []).map(d => ({
+      _id: d._id,
+      gestion: "Préstamo",
+      nombre:
+        typeof d?.id_user_debtor === "object"
+          ? (d.id_user_debtor as any).name
+          : d?.id_user_debtor,
+      vencimiento: format(d.date_due),
+      pendiente: `${d.amount} ${d.currency}`,
+      alerta: d.alert_enabled && d.alerted
+    }));
 
-    setFilteredData(prev => {
-      const map = new Map();
+    const dataDebtor = (debtsByDebtor ?? []).map(d => ({
+      _id: d._id,
+      gestion: "Deuda",
+      nombre:
+        typeof d?.id_user_creditor === "object"
+          ? (d.id_user_creditor as any).name
+          : d?.id_user_creditor,
+      vencimiento: format(d.date_due),
+      pendiente: `${d.amount} ${d.currency}`,
+      alerta: d.alert_enabled && d.alerted
+    }));
 
-      [...prev, ...newData].forEach(item => {
-        map.set(item._id, item);
-      });
-
-      return Array.from(map.values());
+    // unir y eliminar duplicados
+    const map = new Map();
+    [...dataCreditor, ...dataDebtor].forEach(item => {
+      map.set(item._id, item);
     });
 
+    setFilteredData(Array.from(map.values()));
   }, [debtsByCreditor, debtsByDebtor])
 
   if (isLoadingUsers) return <p>Cargando usuarios...</p>;
@@ -109,7 +103,6 @@ export default function Home() {
   // console.log("debtsByCreditor: ", debtsByCreditor);
 
   
-
   return (
     <div className={`${classes.page}`}>
       <AppBar

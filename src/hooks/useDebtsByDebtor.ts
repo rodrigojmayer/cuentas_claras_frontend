@@ -8,7 +8,7 @@ export default function useDebtsByDebtor() {
     () => getDebtsByDebtor(debtorId));
 
     return {
-        debtsByDebtor: data ?? [],
+        debtsByDebtor: data,
         isLoadingDebtsByDebtor: isLoading,
         isErrorDebtsByDebtor: error,
         mutateDebtsByDebtor: mutate,
