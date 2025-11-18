@@ -4,9 +4,11 @@ import { Box, useMediaQuery } from '@mui/material';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import ButtonGroup from '@mui/material/ButtonGroup';
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation"
 import { useStylesGlobal } from '../Styles';
 import { CloseMenuButton } from './Buttons';
+import { useSession, signIn, signOut } from "next-auth/react"
 
 interface ChildProps {
     open:  boolean
@@ -19,6 +21,7 @@ export default function MenuOptions({ open, handleClose,  onData}: ChildProps) {
     const { classes } = useStylesGlobal()
     const breakpointLG = useMediaQuery('(min-width:1024px)');
     // const navigate = useNavigate();
+    const router = useRouter();
 
     const close = () => {
         handleClose(false)
@@ -39,11 +42,11 @@ export default function MenuOptions({ open, handleClose,  onData}: ChildProps) {
     function wait(ms:number) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
-    const signOut = async() => {
+    const closeSession = async() => {
 
         try {
             // await wait(2000); // ⏱️ You can tweak this (e.g., 2000ms if needed)
-            // await logout()
+            await signOut()
             await wait(2000); // ⏱️ You can tweak this (e.g., 2000ms if needed)
             // await wait(2000000); // ⏱️ You can tweak this (e.g., 2000ms if needed)
             // setUser(INITIAL_USER)
@@ -53,7 +56,8 @@ export default function MenuOptions({ open, handleClose,  onData}: ChildProps) {
             // console.log("Previous navigate to login**********")
             await wait(2000); // ⏱️ You can tweak this (e.g., 2000ms if needed)
             // console.log("Previous navigate to login**********")
-            // navigate('/login')
+            // navigate('/')
+            router.push('/');
         }
     }
 
@@ -62,7 +66,7 @@ export default function MenuOptions({ open, handleClose,  onData}: ChildProps) {
         // <Button value="fields" key="fields" variant="text" onClick={selOp}>Fields</Button>,
         <Button value="profile" key="profile" variant="text" onClick={selOp}>Perfil</Button>,
         <Button value="preferences" key="preferences" variant="text" onClick={selOp}>Modo claro/oscuro</Button>,
-        <Button value="logout" key="logout" variant="text" onClick={signOut}>Cerrar sesión</Button>,
+        <Button value="logout" key="logout" variant="text" onClick={closeSession}>Cerrar sesión</Button>,
         <CloseMenuButton key="close" clicked={() => handleClose(true)} />
     ];
  
