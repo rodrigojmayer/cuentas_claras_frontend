@@ -128,52 +128,21 @@ export function CancelButton({ sizeIco, roundedIco, clicked }: ButtonProps) {
 
 export function CloseMenuButton({ sizeIco, roundedIco, clicked }: ButtonProps) {
 
-  const { classes } = useStylesGlobal();
-//   const { user } = useContext<any>(UserContext)
-  let fontIco = 45
-  if(sizeIco) {
-    fontIco = (parseInt(sizeIco) - 12)
-  }
-//   if(roundedIco){
-//     noPadding=0
-//     borRad="50px !important"
-//   } 
-  
   const handleClick = (() => {
       clicked()
   })
   
-//   const selectedTheme = themeMap[user.background_color];
-
   return (
-    // <ThemeProvider theme={selectedTheme}>
-      <Button 
+    <Button 
         variant="text"
         color="inherit"
-        // className={`${classes.btnCommonStyle} ${classes.btn_cancel}`}
-        sx={{  
-        //   border: bor , 
-        //   padding:noPadding, 
-        //   paddingTop:0,  
-        //   paddingBottom:0, 
-        //   minWidth: sizeIco, 
-        //   width: sizeIco, 
-        //   height: sizeIco,
-        //   borderRadius: borRad,
-        // marginLeft: "8px"
-
-        }}
         onClick={handleClick}
-      >
-        
+    >
         <CloseRoundedIcon 
-        //  className={classes.close_rounded_icon_stroke_color}
-        sx={{ 
-          fontSize: fontIco, 
-        //   strokeWidth: 2 ,
-        }}>
+            sx={{ 
+                fontSize: 40, 
+            }}>
         </CloseRoundedIcon>
-      </Button>
-    // </ThemeProvider>   
+    </Button>
   )
 }
