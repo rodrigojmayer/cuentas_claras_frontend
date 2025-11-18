@@ -38,6 +38,16 @@ const rowEvenBackground = 'rgb(69, 144, 186)';
 const rowOddBackground = 'rgb(162, 199, 220)';
 const menuItem = '#DCF2F1';
 
+const succesMain = 'rgb(32, 205, 60, 1)';
+const succesContrastText = 'rgb(32, 205, 60, .2)';
+const succesDark = 'rgb(2, 145, 10, 1)';
+const warningMain = 'rgb(255, 47, 47, 1)';
+const warningContrastText = 'rgb(255, 47, 47, .2)';
+const warningDark = 'rgb(155, 27, 27, 1)';
+const neutralContrastText = 'rgb(255, 255, 255, .2)';
+const neutralDark = 'rgb(155, 155, 155, 1)';
+const plusIcon = 'rgb(77, 168, 218, 1)';
+
 export const useStylesGlobal = makeStyles()({
     
     menuIcon: {
@@ -134,4 +144,29 @@ export const useStylesGlobal = makeStyles()({
     // table_alert_on_color : {
     //     color: tableAlertOnColor,
     // },
+    plusIcon: {
+      display: "flex",
+      // margin: "0 5px",
+      marginRight: "15%",
+      marginTop: "5%",
+      padding: "1px 1px",
+      backgroundColor: "rgba(77, 168, 218, 0)",
+      '& .MuiSvgIcon-root': {
+        width: '2.9rem',
+        height: '2.9rem',
+      },
+    },
+    plus_icon_color: {
+      color: plusIcon,
+    },
+    customBoxRow: {
+        display: "flex",
+        justifyContent:  "flex-end",
+        alignItems: "center",
+        gap: 8,
+    },
+    customBoxRowHideSpace: {
+        height: "40px",
+        marginTop: "10px",
+    },
 })

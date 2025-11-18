@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useState } from 'react';
-import { MenuButton } from "@/components/Buttons";
-import { AppBar, Grid } from "@mui/material";
+import { MenuButton, PlusButton } from "@/components/Buttons";
+import { AppBar, Box, Grid } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useStylesGlobal } from '../Styles';
 import TableProducts from '@/components/TableProducts';
@@ -128,6 +128,13 @@ export default function Home() {
       <TableProducts 
             data={filteredData} 
           />
+                        <Box className={`${classes.customBoxRow} ${classes.customBoxRowHideSpace}`}>
+          <PlusButton
+            sizeIco={"55px !important"}
+            // clicked={addInputCustomField}
+            clicked={() => alert("plus button")}
+          />
+                        </Box>
     </div>
     );
 }
