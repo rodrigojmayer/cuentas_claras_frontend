@@ -178,6 +178,7 @@ export const useStylesGlobal = makeStyles()({
         '& Button': {
             // color: "white",
             height: "100%",
+            fontSize: '18px',
         },
     },
     menu_options_color : {
@@ -195,12 +196,13 @@ export const useStylesGlobal = makeStyles()({
     menu_options_SM : {
         bottom: 0,
         width: "100%",
+        borderRadius: "10px 10px 0 0",
     },
     background_color3 : {
         backgroundColor: mainColor3,
     },
     main_background_colorDD: {
-        backgroundColor: mainColorDD,
+        backgroundColor: first_color,
     },
     btnCommonStyle: {
         borderRadius: "10px",
