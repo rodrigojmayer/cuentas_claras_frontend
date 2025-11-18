@@ -46,18 +46,19 @@ export default function MenuOptions({ open, handleClose,  onData}: ChildProps) {
 
         try {
             // await wait(2000); // ⏱️ You can tweak this (e.g., 2000ms if needed)
-            await signOut()
+            await signOut({ redirect: false })
             await wait(2000); // ⏱️ You can tweak this (e.g., 2000ms if needed)
+            router.push('/login');
             // await wait(2000000); // ⏱️ You can tweak this (e.g., 2000ms if needed)
             // setUser(INITIAL_USER)
         } catch (error: unknown) {
             console.error('Logout error: ', error)
         } finally {
             // console.log("Previous navigate to login**********")
-            await wait(2000); // ⏱️ You can tweak this (e.g., 2000ms if needed)
+            // await wait(2000); // ⏱️ You can tweak this (e.g., 2000ms if needed)
             // console.log("Previous navigate to login**********")
             // navigate('/')
-            router.push('/');
+            router.push('/login');
         }
     }
 
