@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useState } from 'react';
-import { MenuButton, PlusButton } from "@/components/Buttons";
+import { CloseMenuButton, MenuButton, PlusButton } from "@/components/Buttons";
 import { AppBar, Box, Grid } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useStylesGlobal } from '../Styles';
@@ -14,6 +14,7 @@ import usePayments from "@/hooks/usePayments";
 import useAlerts from "@/hooks/useAlerts";
 import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
 import useDebtsByDebtor from "@/hooks/useDebtsByDebtor";
+import MenuOptions from '@/components/MenuOptions';
 
 // const dataC = [
 //   {_id: "test1", gestion: "ges1", nombre: "nom1", vencimiento:"venc1", pendiente:"pend1"},
@@ -27,6 +28,10 @@ export default function Home() {
   const { classes } = useStylesGlobal()
   const [ openMenu, setOpenMenu] = useState(false);
   const handleOpenMenu = () => setOpenMenu(true);
+  const handleCloseMenu = () => setOpenMenu(false);
+  // const handleOpenOptions = (newData:  {option: string, open: boolean}) => {
+  //         setOpenOptions({...openOptions, [newData.option]: newData.open});
+  // }
 
   const [userLogged, setUserLogged] = useState<User>({_id: "68e5b887cfb837d89f00be9f", email: "test@gmail.com", phone: "12345678", name: "test", enabled: true, deleted: false})
   const [filteredData, setFilteredData] = useState<Data[]>([])
@@ -116,9 +121,16 @@ export default function Home() {
             <Grid size="grow">
             </Grid>
             <Grid  size={3}>
-              <MenuButton
-                onDataChanged={handleOpenMenu}
-              />
+              {/* <div className={`${classes[(openMenu ? "hide" : "show")]}`}> */}
+                <MenuButton
+                  onDataChanged={handleOpenMenu}
+                />
+              {/* </div> */}
+              {/* <div className={`${classes[(openMenu ? "show" : "hide")]}`}>
+                <CloseMenuButton
+                  clicked={() => handleOpenMenu()}
+                />
+              </div> */}
             </Grid>
             <Grid size="grow">
             </Grid>
@@ -126,15 +138,20 @@ export default function Home() {
       </AppBar>
       
       <TableProducts 
-            data={filteredData} 
-          />
-                        <Box className={`${classes.customBoxRow} ${classes.customBoxRowHideSpace}`}>
+        data={filteredData} 
+      />
+        <Box className={`${classes.customBoxRow} ${classes.customBoxRowHideSpace}`}>
           <PlusButton
             sizeIco={"55px !important"}
             // clicked={addInputCustomField}
             clicked={() => alert("plus button")}
           />
-                        </Box>
+        </Box>
+        <MenuOptions
+            open={openMenu} 
+            handleClose={handleCloseMenu} 
+          //  onData = {handleOpenOptions}
+        /> 
     </div>
     );
 }

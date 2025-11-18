@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IconButton } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 import { useStylesGlobal } from '@/Styles'
 import ControlPointTwoToneIcon from '@mui/icons-material/ControlPointTwoTone';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 interface ChildProps {
     onDataChanged: (newData: boolean) => void;
@@ -61,5 +62,118 @@ export function PlusButton({ sizeIco, sizeIcoExt, sizeIcoInt, colorIco, clicked 
         sx={{width: sizeIcoInt, height: sizeIcoInt, color: colorIco}}
         />
     </IconButton>
+  )
+}
+interface ButtonProps {
+  sizeIco?: string
+  roundedIco?: boolean
+  cusField?: {id: number, value: string}
+  clicked: (id?: number, value?: string) => void
+  direction?: string
+  submitOk?: boolean
+  disabled?: boolean
+  widthIco?: number
+}
+
+export function CancelButton({ sizeIco, roundedIco, clicked }: ButtonProps) {
+
+  const { classes } = useStylesGlobal();
+//   const { user } = useContext<any>(UserContext)
+  let fontIco = 35, noPadding, bor = 5, borRad
+  if(sizeIco) {
+    fontIco = (parseInt(sizeIco) - 12)
+    bor = 3
+  }
+  if(roundedIco){
+    noPadding=0
+    borRad="50px !important"
+  } 
+  
+  const handleClick = (() => {
+      clicked()
+  })
+  
+//   const selectedTheme = themeMap[user.background_color];
+
+  return (
+    // <ThemeProvider theme={selectedTheme}>
+      <Button 
+        variant="outlined"
+        color="warning"
+        className={`${classes.btnCommonStyle} ${classes.btn_cancel}`}
+        sx={{  
+          border: bor , 
+          padding:noPadding, 
+          paddingTop:0,  
+          paddingBottom:0, 
+          minWidth: sizeIco, 
+          width: sizeIco, 
+          height: sizeIco,
+          borderRadius: borRad,
+        }}
+        onClick={handleClick}
+      >
+        
+        <CloseRoundedIcon 
+         className={classes.close_rounded_icon_stroke_color}
+        sx={{ 
+          fontSize: fontIco, 
+          strokeWidth: 2 ,
+        }}>
+        </CloseRoundedIcon>
+      </Button>
+    // </ThemeProvider>   
+  )
+}
+
+export function CloseMenuButton({ sizeIco, roundedIco, clicked }: ButtonProps) {
+
+  const { classes } = useStylesGlobal();
+//   const { user } = useContext<any>(UserContext)
+  let fontIco = 45
+  if(sizeIco) {
+    fontIco = (parseInt(sizeIco) - 12)
+  }
+//   if(roundedIco){
+//     noPadding=0
+//     borRad="50px !important"
+//   } 
+  
+  const handleClick = (() => {
+      clicked()
+  })
+  
+//   const selectedTheme = themeMap[user.background_color];
+
+  return (
+    // <ThemeProvider theme={selectedTheme}>
+      <Button 
+        variant="text"
+        color="inherit"
+        // className={`${classes.btnCommonStyle} ${classes.btn_cancel}`}
+        sx={{  
+        //   border: bor , 
+        //   padding:noPadding, 
+        //   paddingTop:0,  
+        //   paddingBottom:0, 
+        //   minWidth: sizeIco, 
+        //   width: sizeIco, 
+        //   height: sizeIco,
+        //   borderRadius: borRad,
+        // marginLeft: "8px"
+
+        }}
+        onClick={handleClick}
+      >
+        
+        <CloseRoundedIcon 
+        //  className={classes.close_rounded_icon_stroke_color}
+        sx={{ 
+          fontSize: fontIco, 
+        //   strokeWidth: 2 ,
+        }}>
+        </CloseRoundedIcon>
+      </Button>
+    // </ThemeProvider>   
   )
 }

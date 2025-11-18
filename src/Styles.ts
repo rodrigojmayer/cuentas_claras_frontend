@@ -169,4 +169,69 @@ export const useStylesGlobal = makeStyles()({
         height: "40px",
         marginTop: "10px",
     },
+    menu_options : {
+        position: 'absolute',
+        '&  > :nth-of-type(1)': {
+            width: "100%",
+            height: "100%",
+        },
+        '& Button': {
+            // color: "white",
+            height: "100%",
+        },
+    },
+    menu_options_color : {
+        '& Button': {
+            color: tableHeaderColor,
+        },
+    },
+    menu_options_LG : {
+        top: 64,
+        right: 0,
+        width: "15%",
+        height: "35%",
+        borderRadius: "0 0 10px 10px",
+    },
+    menu_options_SM : {
+        bottom: 0,
+        width: "100%",
+    },
+    background_color3 : {
+        backgroundColor: mainColor3,
+    },
+    main_background_colorDD: {
+        backgroundColor: mainColorDD,
+    },
+    btnCommonStyle: {
+        borderRadius: "10px",
+        transition: ".5s",
+        "& > *": {
+            transition: ".5s",
+        },
+        '&:hover': {
+            borderWidth: "5px",
+            "& > *": {
+                transition: ".5s",
+            }
+        }
+    },
+    btn_cancel: {
+      backgroundColor: warningContrastText,
+      '&:hover': {
+        borderColor: warningDark,
+        backgroundColor: warningContrastText,
+        "& > *": {
+          stroke: warningDark
+        }
+      }
+    },
+    close_rounded_icon_stroke_color: {
+        stroke: warningMain,
+    },
+    show: {
+        display: "block",
+    },
+    hide: {
+        display: "none",
+    },
 })
