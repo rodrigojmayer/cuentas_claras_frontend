@@ -3,13 +3,13 @@ import { useState } from "react";
 import { postUser, patchUser } from "../lib/api";
 import type { UpdateDataProps, NewUser, User } from "../types";
 
-interface ManageUserProps {
+interface TestManageUserProps {
     setUpdateData: (visible: UpdateDataProps) => void;
     userEdit?:  User;
     setVisibleUpdateUser?: (visible: boolean) => void;
 }
 
-export default function ManageUser({ setUpdateData, userEdit, setVisibleUpdateUser }: ManageUserProps) {
+export default function TestManageUser({ setUpdateData, userEdit, setVisibleUpdateUser }: TestManageUserProps) {
     const [userEmail, setUserEmail] = useState<string>(userEdit ? userEdit.email : "");
     const [userPhone, setUserPhone] = useState<string | undefined>(userEdit ? userEdit.phone : "");
     const [userName, setUserName] = useState<string | undefined>(userEdit ? userEdit.name : "");

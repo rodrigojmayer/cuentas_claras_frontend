@@ -4,13 +4,13 @@ import { patchPayment, postPayment } from "../lib/api";
 import type { NewPayment, Payment, UpdateDataProps } from "../types";
 import DatePickerComponent from "./DatePickerComponent";
 
-interface ManagePaymentProps {
+interface TestManagePaymentProps {
     setUpdateData: (visible: UpdateDataProps) => void;
     paymentEdit?: Payment;
     setVisibleUpdatePayment?: (visible: boolean) => void;
 }
 
-export default function ManagePayment({ setUpdateData, paymentEdit, setVisibleUpdatePayment }: ManagePaymentProps ) {
+export default function TestManagePayment({ setUpdateData, paymentEdit, setVisibleUpdatePayment }: TestManagePaymentProps ) {
     const [paymentIdDebt, setPaymentIdDebt] = useState<string>(paymentEdit ? paymentEdit.id_debt : "");
     const [paymentAmount, setPaymentAmount] = useState<number | null>(paymentEdit ? paymentEdit.amount : null);
     const [paymentDatePayment, setPaymentDatePayment] = useState<Date | null>(paymentEdit ? new Date(paymentEdit.date_payment) : null);

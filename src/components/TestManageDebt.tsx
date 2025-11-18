@@ -4,12 +4,12 @@ import { patchDebt, postDebt } from "../lib/api";
 import type { Debt, NewDebt, UpdateDataProps, User } from "../types";
 import DatePickerComponent from "./DatePickerComponent";
 
-interface ManageDebtProps {
+interface TestManageDebtProps {
     setUpdateData: (visible: UpdateDataProps) => void;
     debtEdit?: Debt;
     setVisibleUpdateDebt?: (visible: boolean) => void;
 }
-export default function ManageDebt({ setUpdateData, debtEdit, setVisibleUpdateDebt }: ManageDebtProps) {
+export default function TestManageDebt({ setUpdateData, debtEdit, setVisibleUpdateDebt }: TestManageDebtProps) {
     const getInitialCreditorId = (debt?: Debt): string => {
         if (!debt) return "";
         const id = debt.id_user_creditor;

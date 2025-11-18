@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import ManageUser from "@/components/ManageUser"
-import ManageDebt from "@/components/ManageDebt";
-import ManagePayment from "@/components/ManagePayment";
-import ManageAlert from "@/components/ManageAlert";
+import TestManageUser from "@/components/TestManageUser"
+import TestManageDebt from "@/components/TestManageDebt";
+import TestManagePayment from "@/components/TestManagePayment";
+import TestManageAlert from "@/components/TestManageAlert";
 import DataList from "@/components/DataList"
 import type { UpdateDataProps, Alert, Debt, Payment, User } from "@/types";
 import ConfirmDelete from "@/components/ConfirmDelete";
@@ -81,7 +81,7 @@ export default function TestApi() {
                     className="bg-blue-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white"
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
-                    <ManageUser 
+                    <TestManageUser 
                         setUpdateData={setUpdateData}
                         userEdit={userEdit}  
                         setVisibleUpdateUser={setVisibleUpdateUser}
@@ -98,7 +98,7 @@ export default function TestApi() {
                     className="bg-green-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white"
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
-                    <ManageDebt  
+                    <TestManageDebt  
                         setUpdateData={setUpdateData}
                         debtEdit={debtEdit}  
                         setVisibleUpdateDebt={setVisibleUpdateDebt}  
@@ -116,7 +116,7 @@ export default function TestApi() {
                     className="bg-yellow-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white"
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
-                    <ManagePayment 
+                    <TestManagePayment 
                         setUpdateData={setUpdateData}
                         paymentEdit={paymentEdit}  
                         setVisibleUpdatePayment={setVisibleUpdatePayment}
@@ -133,7 +133,7 @@ export default function TestApi() {
                     className="bg-red-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white"
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
-                    <ManageAlert  
+                    <TestManageAlert  
                         setUpdateData={setUpdateData}
                         alertEdit={alertEdit}  
                         setVisibleUpdateAlert={setVisibleUpdateAlert}  
@@ -162,16 +162,16 @@ export default function TestApi() {
             </div>
         )}
         <div className="flex flex-col ">
-            < ManageUser 
+            < TestManageUser 
                 setUpdateData={setUpdateData}
             />
-            < ManageDebt 
+            < TestManageDebt 
                 setUpdateData={setUpdateData}
             />
-            < ManagePayment 
+            < TestManagePayment 
                 setUpdateData={setUpdateData}
             />
-            < ManageAlert 
+            < TestManageAlert 
                 setUpdateData={setUpdateData}
             />
         </div>

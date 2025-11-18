@@ -4,12 +4,12 @@ import { patchAlert, postAlert } from "../lib/api";
 import type { Alert, NewAlert, UpdateDataProps } from "../types";
 import DatePickerComponent from "./DatePickerComponent";
 
-interface ManageAlertProps {
+interface TestManageAlertProps {
     setUpdateData: (visible: UpdateDataProps) => void;
     alertEdit?: Alert;
     setVisibleUpdateAlert?: (visible: boolean) => void;
 }
-export default function ManageAlert({ setUpdateData, alertEdit, setVisibleUpdateAlert }: ManageAlertProps) {
+export default function TestManageAlert({ setUpdateData, alertEdit, setVisibleUpdateAlert }: TestManageAlertProps) {
     
     const [alertIdDebt, setAlertIdDebt] = useState<string>(alertEdit ? alertEdit.id_debt : "");
     const [alertDateAlert, setAlertDateAlert] = useState<Date | null>(alertEdit ? new Date(alertEdit.date_alert) : null);
