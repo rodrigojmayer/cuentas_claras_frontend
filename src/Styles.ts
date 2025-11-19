@@ -7,7 +7,8 @@ const neutralMain = 'rgb(255, 255, 255, 1)';
 const tableHeaderColor = 'rgb(255, 255, 255, 1)';
 const first_color = '#414548';
 const first_color2 = '#212528';
-const first_color3 = '#0b3555ff';
+const first_color3 = '#2A2E31';
+const first_color4 = '#0b3555ff';
 const second_color = '#4938CA';
 const second_alpha_color = 'rgba(73, 56, 202, 0.75)';
 const text_color = '#EEFBFB';
@@ -115,7 +116,7 @@ export const useStylesGlobal = makeStyles()({
         },
     },
     main_background_colorD: {
-        backgroundColor: first_color3,
+        backgroundColor: first_color4,
     },
     table_header_color: {
         color: tableHeaderColor,
@@ -199,7 +200,7 @@ export const useStylesGlobal = makeStyles()({
         borderRadius: "10px 10px 0 0",
     },
     background_color3 : {
-        backgroundColor: mainColor3,
+        backgroundColor: first_color3,
     },
     main_background_colorDD: {
         backgroundColor: first_color,

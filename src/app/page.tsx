@@ -7,7 +7,7 @@ import { AppBar, Box, Grid } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useStylesGlobal } from '../Styles';
 import TableProducts from '@/components/TableProducts';
-import { Data, DataTable, User } from '@/types';
+import { Data, DataTable, UpdateDataProps, User } from '@/types';
 import useUsers from "@/hooks/useUsers";
 import useDebts from "@/hooks/useDebts";
 import usePayments from "@/hooks/usePayments";
@@ -15,6 +15,7 @@ import useAlerts from "@/hooks/useAlerts";
 import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
 import useDebtsByDebtor from "@/hooks/useDebtsByDebtor";
 import MenuOptions from '@/components/MenuOptions';
+import ManageCargarPrestamo from '@/components/ManageCargarPrestamo';
 
 // const dataC = [
 //   {_id: "test1", gestion: "ges1", nombre: "nom1", vencimiento:"venc1", pendiente:"pend1"},
@@ -42,6 +43,9 @@ export default function Home() {
   const { alerts, isErrorAlerts, isLoadingAlerts } = useAlerts();
   const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor } = useDebtsByCreditor();
   const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor } = useDebtsByDebtor();
+  
+  const [visibleManageCargarPrestamo, setVisibleManageCargarPrestamo] = useState(false);
+  const [updateData, setUpdateData] = useState<UpdateDataProps>({state: true, data: "all"});
 
   useEffect(() => {
     if (!debtsByCreditor && !debtsByDebtor) return;
@@ -144,7 +148,7 @@ export default function Home() {
           <PlusButton
             sizeIco={"55px !important"}
             // clicked={addInputCustomField}
-            clicked={() => alert("plus button")}
+            clicked={() => setVisibleManageCargarPrestamo(true)}
           />
         </Box>
         <MenuOptions
@@ -152,6 +156,25 @@ export default function Home() {
             handleClose={handleCloseMenu} 
           //  onData = {handleOpenOptions}
         /> 
+        {visibleManageCargarPrestamo && (
+            <div 
+                className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+                onClick={() => setVisibleManageCargarPrestamo(false)} // click background to close
+            >
+                {/* --- MODAL CONTENT --- */}
+                <div
+                    className={`${classes.background_color3} bg-green-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white`}
+                    onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                >
+                    <ManageCargarPrestamo
+                      setUpdateData={setUpdateData}
+                      // userEdit={userEdit}
+                      setVisibleManageCargarPrestamo={setVisibleManageCargarPrestamo}
+                    />
+                </div>
+            </div>
+        )}
+
     </div>
     );
 }
