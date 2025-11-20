@@ -160,15 +160,22 @@ export const useStylesGlobal = makeStyles()({
     plus_icon_color: {
       color: plusIcon,
     },
-    customBoxRow: {
+    customPlusIconBoxRow: {
         display: "flex",
         justifyContent:  "flex-end",
         alignItems: "center",
         gap: 8,
-    },
-    customBoxRowHideSpace: {
         height: "40px",
         marginTop: "10px",
+    },
+    customBoxRow: {
+        display: "flex",
+        justifyContent:  "center",
+        alignItems: "center",
+        gap: 8,
+    },
+    customGap: {
+        gap: 20,
     },
     menu_options : {
         position: 'absolute',
@@ -206,8 +213,9 @@ export const useStylesGlobal = makeStyles()({
         backgroundColor: first_color,
     },
     btnCommonStyle: {
-        borderRadius: "10px",
+        borderRadius: 7,
         transition: ".5s",
+        color: text_color,
         "& > *": {
             transition: ".5s",
         },
@@ -219,22 +227,37 @@ export const useStylesGlobal = makeStyles()({
         }
     },
     btn_cancel: {
-      backgroundColor: warningContrastText,
-      '&:hover': {
-        borderColor: warningDark,
-        backgroundColor: warningContrastText,
-        "& > *": {
-          stroke: warningDark
+        backgroundColor: red_hover,
+        width: "70px",
+        textTransform: 'none',
+        fontWeight: "bold",
+        '&:hover': {
+            backgroundColor: warningDark,
         }
-      }
     },
-    close_rounded_icon_stroke_color: {
-        stroke: warningMain,
+    btn_accept: {
+        backgroundColor: green_hover,
+        width: "70px",
+        textTransform: 'none',
+        fontWeight: "bold",
+
+        '&:hover': {
+            backgroundColor: succesContrastText,
+        }
     },
     show: {
         display: "block",
     },
     hide: {
         display: "none",
+    },
+    inputMainData: {
+        backgroundColor: "white",
+        borderRadius:7,
+        width: "100%",
+    },
+    inputClassName: {
+        borderRadius: 7,
+        // autoComplete: 'new-password',
     },
 })

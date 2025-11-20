@@ -144,7 +144,7 @@ export default function Home() {
       <TableProducts 
         data={filteredData} 
       />
-        <Box className={`${classes.customBoxRow} ${classes.customBoxRowHideSpace}`}>
+        <Box className={` ${classes.customPlusIconBoxRow}`}>
           <PlusButton
             sizeIco={"55px !important"}
             // clicked={addInputCustomField}

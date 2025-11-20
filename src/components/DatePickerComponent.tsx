@@ -14,9 +14,10 @@ import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 interface DatePickerComponentProps {
     dateProp: Date | null;
     setDateProp: (visible: Date) => void;
+    labelProp?: string;
 }
 
-export default function DatePickerComponent({ dateProp, setDateProp }: DatePickerComponentProps) {
+export default function DatePickerComponent({ dateProp, setDateProp, labelProp }: DatePickerComponentProps) {
     
     const breakpointLG = useMediaQuery('(min-width:1024px)')
     const DatePickerComponent = breakpointLG ? DatePicker : MobileDatePicker;
@@ -34,6 +35,7 @@ export default function DatePickerComponent({ dateProp, setDateProp }: DatePicke
             <DemoContainer components={['DatePicker']} >
                 <DatePickerComponent
                     className="border rounded-lg p-2 bg-white"
+                    label={labelProp}
                     format="DD/MM/YYYY"
                     defaultValue = { dateProp? dayjs(dateProp) : null}
                     onChange={ (newDate) => handleDatePickerChange(newDate) }

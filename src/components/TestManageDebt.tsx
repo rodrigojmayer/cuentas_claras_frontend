@@ -169,7 +169,7 @@ export default function TestManageDebt({ setUpdateData, debtEdit, setVisibleUpda
                     <></>
                 }
                 <label className="input-label">Date Due</label>
-                <DatePickerComponent dateProp={debtDateDue} setDateProp={setDebtDateDue} />
+                <DatePickerComponent dateProp={debtDateDue} setDateProp={setDebtDateDue} labelProp={"Fecha vencimiento"}/>
                 <label className="input-label">Currency</label>
                 <select 
                     name="currency"

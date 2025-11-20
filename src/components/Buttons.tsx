@@ -75,54 +75,32 @@ interface ButtonProps {
   widthIco?: number
 }
 
-export function CancelButton({ sizeIco, roundedIco, clicked }: ButtonProps) {
-
+export function CancelButton({ clicked }: ButtonProps) {
   const { classes } = useStylesGlobal();
-//   const { user } = useContext<any>(UserContext)
-  let fontIco = 35, noPadding, bor = 5, borRad
-  if(sizeIco) {
-    fontIco = (parseInt(sizeIco) - 12)
-    bor = 3
-  }
-  if(roundedIco){
-    noPadding=0
-    borRad="50px !important"
-  } 
-  
   const handleClick = (() => {
       clicked()
   })
-  
-//   const selectedTheme = themeMap[user.background_color];
-
   return (
-    // <ThemeProvider theme={selectedTheme}>
       <Button 
-        variant="outlined"
-        color="warning"
         className={`${classes.btnCommonStyle} ${classes.btn_cancel}`}
-        sx={{  
-          border: bor , 
-          padding:noPadding, 
-          paddingTop:0,  
-          paddingBottom:0, 
-          minWidth: sizeIco, 
-          width: sizeIco, 
-          height: sizeIco,
-          borderRadius: borRad,
-        }}
         onClick={handleClick}
       >
-        
-        <CloseRoundedIcon 
-         className={classes.close_rounded_icon_stroke_color}
-        sx={{ 
-          fontSize: fontIco, 
-          strokeWidth: 2 ,
-        }}>
-        </CloseRoundedIcon>
-      </Button>
-    // </ThemeProvider>   
+          Cancelar
+      </Button> 
+  )
+}
+export function AcceptButton({ clicked }: ButtonProps) {
+  const { classes } = useStylesGlobal();
+  const handleClick = (() => {
+      clicked()
+  })
+  return (
+      <Button 
+        className={`${classes.btnCommonStyle} ${classes.btn_accept}`}
+        onClick={handleClick}
+      >
+          Aceptar
+      </Button> 
   )
 }
 
