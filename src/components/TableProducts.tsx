@@ -123,8 +123,8 @@ export default function TableProducts(
   const [sortedData, setSortedData] = useState(data)
   useEffect(() => {
     data.sort((a:any, b:any) => {
-      console.log("a: ", a)
-      console.log("b: ", b)
+      // console.log("a: ", a)
+      // console.log("b: ", b)
       // if (a.label.toLowerCase() < b.label.toLowerCase()) return -1;
       if (a.alerta <= b.alerta) return 1;
       if (a.alerta > b.alerta) return -1;

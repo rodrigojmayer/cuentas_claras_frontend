@@ -109,6 +109,7 @@ export interface Data {
     vencimiento: string;
     pendiente: string;
     [key?: string]: any;
+    id_user?: string;
 }
 
 export interface DataTable {

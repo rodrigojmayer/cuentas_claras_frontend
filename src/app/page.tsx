@@ -48,6 +48,7 @@ export default function Home() {
   const [updateData, setUpdateData] = useState<UpdateDataProps>({state: true, data: "all"});
 
   useEffect(() => {
+    // console.log("debtsByCreditor: ", debtsByCreditor)
     if (!debtsByCreditor && !debtsByDebtor) return;
 
     const format = (date: string | null | undefined) => {
@@ -72,7 +73,10 @@ export default function Home() {
           : d?.id_user_debtor,
       vencimiento: format(d.date_due),
       pendiente: `${d.amount} ${d.currency}`,
-      alerta: d.alert_enabled && d.alerted
+      alerta: d.alert_enabled && d.alerted,
+      id_user: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any)._id,
+      email: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).email,
+      phone: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).phone,
     }));
 
     const dataDebtor = (debtsByDebtor ?? []).map(d => ({
@@ -84,7 +88,10 @@ export default function Home() {
           : d?.id_user_creditor,
       vencimiento: format(d.date_due),
       pendiente: `${d.amount} ${d.currency}`,
-      alerta: d.alert_enabled && d.alerted
+      alerta: d.alert_enabled && d.alerted,
+      id_user: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any)._id,
+      email: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).email,
+      phone: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).phone,
     }));
 
     // unir y eliminar duplicados
@@ -94,7 +101,20 @@ export default function Home() {
     });
 
     setFilteredData(Array.from(map.values()));
-  }, [debtsByCreditor, debtsByDebtor])
+  }, [debtsByCreditor, debtsByDebtor]);
+
+  useEffect(() => {
+    const contacts = filteredData.map(f => ({
+      email: f.email,
+      phone: f.phone,
+    }))
+    const uniqueContacts = Array.from(
+      new Map(contacts.map(item => [item.email, item])).values()
+    );
+    console.log("contacts: ", contacts)
+    console.log("uniqueContacts: ", uniqueContacts)
+  
+  }, [filteredData]);
 
   if (isLoadingUsers) return <p>Cargando usuarios...</p>;
   if (isErrorUsers) return <p>Error al cargar usuarios</p>;
@@ -170,6 +190,7 @@ export default function Home() {
                       setUpdateData={setUpdateData}
                       // userEdit={userEdit}
                       setVisibleManageCargarPrestamo={setVisibleManageCargarPrestamo}
+                      filteredData={filteredData}
                     />
                 </div>
             </div>

@@ -3,20 +3,26 @@
 
 import { postDebt } from "@/lib/api";
 import { useStylesGlobal } from "@/Styles";
-import { Debt, NewDebt, UpdateDataProps } from "@/types";
+import { Data, DataTable, Debt, NewDebt, UpdateDataProps } from "@/types";
 import { Autocomplete, Box, MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
 import DatePickerComponent from "./DatePickerComponent";
 import { AcceptButton, CancelButton } from "./Buttons";
+import useUsers from "@/hooks/useUsers";
+import { useSession } from "next-auth/react";
 
 
 interface ManageCargarPrestamoProps {
     setUpdateData: (visible: UpdateDataProps) => void;
     debtEdit?: Debt;
     setVisibleManageCargarPrestamo: (visible: boolean) => void;
+    filteredData: Data[];
 }
-export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisibleManageCargarPrestamo }: ManageCargarPrestamoProps ) {
+export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisibleManageCargarPrestamo, filteredData }: ManageCargarPrestamoProps ) {
     
+    const { users } = useUsers();
+    const { data: session } = useSession()
+
     const { classes } = useStylesGlobal()
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState<string>("");
@@ -33,6 +39,39 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
         {email: "support@example.com", phone: "333"},
         {email: "hello@domain.com", phone: "444"}
     ];
+    // console.log("filteredData: ", filteredData)
+    // const emailOptions = [];
+    // const seen = new Set<string>();
+
+    // filteredData.forEach((d) => {
+    //     if (d.id_user_creditor === session?.user._id) {
+    //         if (!seen.has(d._id)) {
+    //             seen.add(d._id);
+    //             emailOptions.push({
+    //                 email: d.email,
+    //                 phone: d.phone,
+    //             });
+    //         }
+    //     }
+    // });
+
+    // const emailOptions = Array.from(
+    //     new Map(
+    //         filteredData
+    //         .filter(d => d.id_user_creditor === session.user._id)
+    //         .map(d => [d._id, { email: d.email, phone: d.phone }])
+    //     ).values()
+    // );
+
+
+    // filteredData
+    //     .filter((d: any) => d.id_user_creditor !== session?.user._id)
+    //     .map((d: any) => ({
+    //         _id: d.id
+    //         email: d.email,
+    //         phone: d.phone
+    //     }));
+
     const currencyOptions = ["$ARS", "$USD", "$EUR"]
 
     const test = "test"
@@ -41,6 +80,9 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
         e.preventDefault();
         setLoading(true);
         setMessage(null);
+
+
+
 
         try {
             const newDebt: NewDebt = {
@@ -161,7 +203,7 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                 />
                 <DatePickerComponent dateProp={dateDue} setDateProp={setDateDue} labelProp={"Fecha vencimiento"}/>             
                      
-                <Box className={`${classes.customBoxRow} ${classes.customGap}` }>   
+                <Box className={`${classes.customBoxRow} ${classes.customBoxRowSpaces}` }>   
                     <CancelButton clicked={() => setVisibleManageCargarPrestamo(false)}/>
                     <AcceptButton clicked={() => setVisibleManageCargarPrestamo(false)}/> 
                 </Box>

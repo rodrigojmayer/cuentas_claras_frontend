@@ -174,8 +174,9 @@ export const useStylesGlobal = makeStyles()({
         alignItems: "center",
         gap: 8,
     },
-    customGap: {
-        gap: 20,
+    customBoxRowSpaces: {
+        gap: 25,
+        margin: "16px 0 5px 0",
     },
     menu_options : {
         position: 'absolute',
@@ -240,7 +241,6 @@ export const useStylesGlobal = makeStyles()({
         width: "70px",
         textTransform: 'none',
         fontWeight: "bold",
-
         '&:hover': {
             backgroundColor: succesContrastText,
         }
