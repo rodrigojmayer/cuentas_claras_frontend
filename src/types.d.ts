@@ -61,11 +61,12 @@ export interface NewDebt {
     detail?: string;
     amount: number | null;
     dolar_google?: number | null;
-    status: string;
+    status?: string;
     date_due?: date;
-    alert_enabled: boolean;
-    alerted: boolean;
+    alert_enabled?: boolean;
+    alerted?: boolean;
     currency: string;
+    email_debtor?: string;
 }
 
 export interface Payment {
@@ -135,4 +136,9 @@ export interface ColumnData {
   [key: string]: any;
 }
 
+export interface Contacts {
+    id_user?: string;
+    email?: string;
+    phone?: string;
+}
 

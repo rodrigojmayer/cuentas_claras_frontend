@@ -68,7 +68,7 @@ interface ButtonProps {
   sizeIco?: string
   roundedIco?: boolean
   cusField?: {id: number, value: string}
-  clicked: (id?: number, value?: string) => void
+  clicked?: (id?: number, value?: string) => void
   direction?: string
   submitOk?: boolean
   disabled?: boolean
@@ -78,10 +78,11 @@ interface ButtonProps {
 export function CancelButton({ clicked }: ButtonProps) {
   const { classes } = useStylesGlobal();
   const handleClick = (() => {
-      clicked()
+      clicked?.()
   })
   return (
       <Button 
+        type={clicked? "button" : "submit"}
         className={`${classes.btnCommonStyle} ${classes.btn_cancel}`}
         onClick={handleClick}
       >
@@ -92,10 +93,11 @@ export function CancelButton({ clicked }: ButtonProps) {
 export function AcceptButton({ clicked }: ButtonProps) {
   const { classes } = useStylesGlobal();
   const handleClick = (() => {
-      clicked()
+      clicked?.()
   })
   return (
       <Button 
+      type={clicked? "button" : "submit"}
         className={`${classes.btnCommonStyle} ${classes.btn_accept}`}
         onClick={handleClick}
       >
@@ -107,11 +109,12 @@ export function AcceptButton({ clicked }: ButtonProps) {
 export function CloseMenuButton({ sizeIco, roundedIco, clicked }: ButtonProps) {
 
   const handleClick = (() => {
-      clicked()
+      clicked?.()
   })
   
   return (
     <Button 
+        type={clicked? "button" : "submit"}
         variant="text"
         color="inherit"
         onClick={handleClick}

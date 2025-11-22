@@ -354,3 +354,30 @@ export async function deleteAlert(_id: string): Promise<void> {
         throw new Error("Unable to reach server");
     }
 }
+
+export async function createByDebtorEmail({id_user_creditor, id_user_debtor, email_debtor, detail, amount, currency, date_due }: NewDebt) {
+    try {
+        const res = await fetch(`${API_URL}/debts/create-by-debtor-email`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json"},
+            body: JSON.stringify ({
+                id_user_creditor,
+                id_user_debtor,
+                email_debtor,
+                detail,
+                amount,
+                currency,
+                date_due
+            })
+        })
+        if(!res.ok){
+            const errorText = await res.text();
+            console.error("Error posting debt by debtor email: ", res.status, errorText);
+            throw new Error(`Failed to post debt by debtor email (status ${res.status})`);
+        }
+        return res;
+    } catch (error) {
+        console.error("Network error posting debt by debtor email: ", error);
+        throw new Error("Unable to reach server");
+    }
+}

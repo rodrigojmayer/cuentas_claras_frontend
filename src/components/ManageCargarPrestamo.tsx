@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { postDebt } from "@/lib/api";
+import { createByDebtorEmail, findUserByEmail, postDebt, postUser } from "@/lib/api";
 import { useStylesGlobal } from "@/Styles";
-import { Data, DataTable, Debt, NewDebt, UpdateDataProps } from "@/types";
+import { Contacts, Data, DataTable, Debt, NewDebt, NewUser, UpdateDataProps } from "@/types";
 import { Autocomplete, Box, MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
 import DatePickerComponent from "./DatePickerComponent";
@@ -16,14 +16,15 @@ interface ManageCargarPrestamoProps {
     setUpdateData: (visible: UpdateDataProps) => void;
     debtEdit?: Debt;
     setVisibleManageCargarPrestamo: (visible: boolean) => void;
-    filteredData: Data[];
+    filteredContacts: Contacts[];
 }
-export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisibleManageCargarPrestamo, filteredData }: ManageCargarPrestamoProps ) {
+export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisibleManageCargarPrestamo, filteredContacts }: ManageCargarPrestamoProps ) {
     
     const { users } = useUsers();
     const { data: session } = useSession()
 
     const { classes } = useStylesGlobal()
+    const [idDebtor, setIdDebtor] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
@@ -33,12 +34,12 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
     
-    const emailOptions = [
-        {email: "test@gmail.com", phone: "111"},
-        {email: "info@company.com", phone: "222"},
-        {email: "support@example.com", phone: "333"},
-        {email: "hello@domain.com", phone: "444"}
-    ];
+    // const emailOptions = [
+    //     {email: "test@gmail.com", phone: "111"},
+    //     {email: "info@company.com", phone: "222"},
+    //     {email: "support@example.com", phone: "333"},
+    //     {email: "hello@domain.com", phone: "444"}
+    // ];
     // console.log("filteredData: ", filteredData)
     // const emailOptions = [];
     // const seen = new Set<string>();
@@ -81,30 +82,28 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
         setLoading(true);
         setMessage(null);
 
+        console.log("email: ", email)
 
-
-
-        try {
-            const newDebt: NewDebt = {
-                id_user_creditor: test,
-                id_user_debtor: test,
-                detail: test,
-                amount: 1,
-                dolar_google: 1,
-                status: test,
-                date_due: new Date("18/04/1990"),
-                alert_enabled: false,
-                alerted: false,
-                currency: test,
+        if(email) { 
+            try {
+                const newDebt: NewDebt = {
+                    id_user_creditor: session?.user._id,
+                    id_user_debtor: idDebtor,
+                    email_debtor: email,
+                    detail,
+                    amount: Number(amount),
+                    currency,
+                    date_due: dateDue,
+                }
+                await createByDebtorEmail(newDebt);
+                setVisibleManageCargarPrestamo?.(false);
+            } catch (err: any) {
+                console.error("Error creating debt: ", err);
+                setMessage(`X ${err.message || "Failed to create debt"}`);
+            } finally {
+                setLoading(false);
+                setUpdateData({state: true, data: "debts"})
             }
-            // await postDebt(newDebt);
-            setVisibleManageCargarPrestamo?.(false);
-        } catch (err: any) {
-            console.error("Error creating debt: ", err);
-            setMessage(`X ${err.message || "Failed to create debt"}`);
-        } finally {
-            setLoading(false);
-            setUpdateData({state: true, data: "debts"})
         }
     }
 
@@ -118,24 +117,27 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
             <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 rounded-lg p-2 text-gray-800">
                 <Autocomplete
                     freeSolo                // allows typing any value
-                    options={emailOptions}  // your array of emails
+                    options={filteredContacts}  // your array of emails
                     value={email}
                     onChange={(event, newValue) => {
                         // If the user selects an option (object)
                         if (typeof newValue === "object" && newValue !== null) {
-                            setEmail(newValue.email);
-                            setPhone(newValue.phone);
+                            setEmail(newValue.email ?? "");
+                            // setPhone(newValue.phone ?? "");
+                            setIdDebtor(newValue.id_user ?? "")
                         } else {
                             // If the user clears or types manually (string)
                             setEmail(newValue ?? "")
-                            setPhone("")
+                            // setPhone("")
                         }
                     }}
                     onInputChange={(event, newInputValue) => {
                         setEmail(newInputValue);    // update while typing
+                        // const match = filteredContacts.find(c => c.email === newInputValue)
+                        // setPhone(match?.phone ?? "")
                     }}
                     getOptionLabel={(option) =>
-                        typeof option === "string" ? option : option.email
+                        typeof option === "string" ? option : (option.email ?? "")
                     }
                     size="small"
                     renderInput={(params) => (
@@ -148,7 +150,7 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                         />
                     )}
                 />
-                <TextField
+                {/* <TextField
                     label="Teléfono"
                     value={phone}
                     onChange={(event:any) => {
@@ -160,7 +162,7 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                     }}
                     size="small"
                     className={classes.inputMainData}
-                />
+                /> */}
                 <Box className={classes.customBoxRow}>
 
                     <TextField
@@ -205,7 +207,7 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                      
                 <Box className={`${classes.customBoxRow} ${classes.customBoxRowSpaces}` }>   
                     <CancelButton clicked={() => setVisibleManageCargarPrestamo(false)}/>
-                    <AcceptButton clicked={() => setVisibleManageCargarPrestamo(false)}/> 
+                    <AcceptButton />
                 </Box>
             </form>
         </div>

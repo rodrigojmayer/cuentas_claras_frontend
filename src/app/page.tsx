@@ -7,7 +7,7 @@ import { AppBar, Box, Grid } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useStylesGlobal } from '../Styles';
 import TableProducts from '@/components/TableProducts';
-import { Data, DataTable, UpdateDataProps, User } from '@/types';
+import { Contacts, Data, DataTable, UpdateDataProps, User } from '@/types';
 import useUsers from "@/hooks/useUsers";
 import useDebts from "@/hooks/useDebts";
 import usePayments from "@/hooks/usePayments";
@@ -36,6 +36,7 @@ export default function Home() {
 
   const [userLogged, setUserLogged] = useState<User>({_id: "68e5b887cfb837d89f00be9f", email: "test@gmail.com", phone: "12345678", name: "test", enabled: true, deleted: false})
   const [filteredData, setFilteredData] = useState<Data[]>([])
+  const [filteredContacts, setFilteredContacts] = useState<Contacts[]>([])
   
   const { users, isErrorUsers, isLoadingUsers } = useUsers();
   const { debts, isErrorDebts, isLoadingDebts } = useDebts();
@@ -105,14 +106,16 @@ export default function Home() {
 
   useEffect(() => {
     const contacts = filteredData.map(f => ({
+      id_user: f.id_user,
       email: f.email,
       phone: f.phone,
     }))
     const uniqueContacts = Array.from(
       new Map(contacts.map(item => [item.email, item])).values()
     );
-    console.log("contacts: ", contacts)
-    console.log("uniqueContacts: ", uniqueContacts)
+    setFilteredContacts(uniqueContacts)
+    // console.log("contacts: ", contacts)
+    // console.log("uniqueContacts: ", uniqueContacts)
   
   }, [filteredData]);
 
@@ -190,7 +193,7 @@ export default function Home() {
                       setUpdateData={setUpdateData}
                       // userEdit={userEdit}
                       setVisibleManageCargarPrestamo={setVisibleManageCargarPrestamo}
-                      filteredData={filteredData}
+                      filteredContacts={filteredContacts}
                     />
                 </div>
             </div>
