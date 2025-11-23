@@ -16,6 +16,7 @@ import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
 import useDebtsByDebtor from "@/hooks/useDebtsByDebtor";
 import MenuOptions from '@/components/MenuOptions';
 import ManageCargarPrestamo from '@/components/ManageCargarPrestamo';
+import ManagePago from '@/components/ManagePago';
 
 // const dataC = [
 //   {_id: "test1", gestion: "ges1", nombre: "nom1", vencimiento:"venc1", pendiente:"pend1"},
@@ -47,7 +48,9 @@ export default function Home() {
   
   const [visibleManageCargarPrestamo, setVisibleManageCargarPrestamo] = useState(false);
   const [updateData, setUpdateData] = useState<UpdateDataProps>({state: true, data: "all"});
-
+  
+  const [visibleManagePago, setVisibleManagePago] = useState(false);
+  
   useEffect(() => {
     // console.log("debtsByCreditor: ", debtsByCreditor)
     if (!debtsByCreditor && !debtsByDebtor) return;
@@ -166,6 +169,7 @@ export default function Home() {
       
       <TableProducts 
         data={filteredData} 
+        setVisibleManagePago={setVisibleManagePago}
       />
         <Box className={` ${classes.customPlusIconBoxRow}`}>
           <PlusButton
@@ -190,6 +194,25 @@ export default function Home() {
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ManageCargarPrestamo
+                      setUpdateData={setUpdateData}
+                      // userEdit={userEdit}
+                      setVisibleManageCargarPrestamo={setVisibleManageCargarPrestamo}
+                      filteredContacts={filteredContacts}
+                    />
+                </div>
+            </div>
+        )}
+        {visibleManagePago && (
+            <div 
+                className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+                onClick={() => setVisibleManageCargarPrestamo(false)} // click background to close
+            >
+                {/* --- MODAL CONTENT --- */}
+                <div
+                    className={`${classes.background_color3} bg-green-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white`}
+                    onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                >
+                    <ManagePago
                       setUpdateData={setUpdateData}
                       // userEdit={userEdit}
                       setVisibleManageCargarPrestamo={setVisibleManageCargarPrestamo}

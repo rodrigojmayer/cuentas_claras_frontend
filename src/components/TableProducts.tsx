@@ -56,6 +56,7 @@ function rowContent(
     row: Data, 
     columnsTable: ColumnData[], 
     classes: any,
+    setVisibleManagePago: (visible: boolean) => void,
   ) {
 
 
@@ -98,8 +99,9 @@ function rowContent(
                     // textDecoration: "",
                   }}
                     onClick={(e) => {
-                        alert(`click en row table: ${row[column.dataKey]}`)
-                            e.stopPropagation()
+                          // alert(`click en row table: ${row[column.dataKey]}`)
+                          setVisibleManagePago(true)
+                          e.stopPropagation()
                         }}
                 >
                   { ( row?.[column.dataKey] || row?.[column.dataKey] === 0 ) ? row?.[column.dataKey] : "-"}
@@ -112,9 +114,15 @@ function rowContent(
   );
 }
 
+interface TableProductsProps {
+    data: Data[];
+    setVisibleManagePago: (visible: boolean) => void;
+}
+
 export default function TableProducts(
   { data, 
-  }:  DataTable ) {
+    setVisibleManagePago,
+  }:  TableProductsProps ) {
     // console.log("data: ", data);
   const  {classes} = useStylesGlobal()
   const breakpointLG = useMediaQuery('(min-width:1024px)');
@@ -174,7 +182,8 @@ export default function TableProducts(
                 index, 
                 sortedData[index], 
                 columnsTable, 
-                classes
+                classes,
+                setVisibleManagePago
             ) 
           }
         />
