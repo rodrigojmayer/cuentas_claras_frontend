@@ -77,7 +77,7 @@ export default function ManagePago({
     return (
         <div className="flex flex-col p-2 max-w-md">
             <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
-                Nombre del otro usuario
+                {newPayment?.nameUser}
             </h3>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 rounded-lg p-2 text-gray-800">

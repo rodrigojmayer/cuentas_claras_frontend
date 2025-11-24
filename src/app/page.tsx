@@ -18,6 +18,7 @@ import MenuOptions from '@/components/MenuOptions';
 import ManageCargarPrestamo from '@/components/ManageCargarPrestamo';
 import ManagePago from '@/components/ManagePago';
 import { getUser } from '@/lib/api';
+import { useSession } from 'next-auth/react';
 
 // const dataC = [
 //   {_id: "test1", gestion: "ges1", nombre: "nom1", vencimiento:"venc1", pendiente:"pend1"},
@@ -36,7 +37,8 @@ export default function Home() {
   //         setOpenOptions({...openOptions, [newData.option]: newData.open});
   // }
 
-  const [userLogged, setUserLogged] = useState<User>({_id: "68e5b887cfb837d89f00be9f", email: "test@gmail.com", phone: "12345678", name: "test", enabled: true, deleted: false})
+  const { data: session } = useSession()
+  // const [userLogged, setUserLogged] = useState<User>({_id: "68e5b887cfb837d89f00be9f", email: "test@gmail.com", phone: "12345678", name: "test", enabled: true, deleted: false})
   const [filteredData, setFilteredData] = useState<Data[]>([])
   const [filteredContacts, setFilteredContacts] = useState<Contacts[]>([])
   const [visibleManageCargarPrestamo, setVisibleManageCargarPrestamo] = useState(false);
@@ -112,15 +114,24 @@ export default function Home() {
     setFilteredData(Array.from(map.values()));
   }, [debtsByCreditor, debtsByDebtor]);
 
+  // useEffect(() => {
+  //   if(visibleManagePago && newPayment?.id_debt){
+  //     const debt = debts?.find(d => d._id === newPayment.id_debt )
+  //     console.log("debt: ", debt)
+  //     let paymentUser
+      
+  //      if(typeof debt?.id_user_debtor === "object" && typeof debt?.id_user_debtor === "object"){
+  //        paymentUser = debt?.id_user_creditor === session?.user._id ? debt?.id_user_debtor : debt?.id_user_creditor;
+  //        console.log("paymentUser: ", paymentUser)
+         
+  //        setNewPayment({...newPayment, nameUser: paymentUser.name})
+  //       }
+  //   }
+  // }, [visibleManagePago])
   useEffect(() => {
-    if(visibleManagePago && newPayment?.id_debt){
-      const debt = debts?.find(d => d._id === newPayment.id_debt )
-      console.error("debt: ", debt)
-      // getUser("123")
-
-      // setNewPayment({...newPayment, nameUser: .})
-    }
-  }, [visibleManagePago])
+    if(newPayment)
+      console.log("newPayment: ", newPayment)
+  }, [newPayment])
   useEffect(() => {
     const contacts = filteredData.map(f => ({
       id_user: f.id_user,
