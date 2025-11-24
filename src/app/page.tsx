@@ -7,7 +7,7 @@ import { AppBar, Box, Grid } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useStylesGlobal } from '../Styles';
 import TableProducts from '@/components/TableProducts';
-import { Contacts, Data, DataTable, UpdateDataProps, User } from '@/types';
+import { Contacts, Data, DataTable, NewPayment, UpdateDataProps, User } from '@/types';
 import useUsers from "@/hooks/useUsers";
 import useDebts from "@/hooks/useDebts";
 import usePayments from "@/hooks/usePayments";
@@ -38,6 +38,8 @@ export default function Home() {
   const [userLogged, setUserLogged] = useState<User>({_id: "68e5b887cfb837d89f00be9f", email: "test@gmail.com", phone: "12345678", name: "test", enabled: true, deleted: false})
   const [filteredData, setFilteredData] = useState<Data[]>([])
   const [filteredContacts, setFilteredContacts] = useState<Contacts[]>([])
+  const [visibleManageCargarPrestamo, setVisibleManageCargarPrestamo] = useState(false);
+  
   
   const { users, isErrorUsers, isLoadingUsers } = useUsers();
   const { debts, isErrorDebts, isLoadingDebts } = useDebts();
@@ -46,10 +48,10 @@ export default function Home() {
   const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor } = useDebtsByCreditor();
   const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor } = useDebtsByDebtor();
   
-  const [visibleManageCargarPrestamo, setVisibleManageCargarPrestamo] = useState(false);
   const [updateData, setUpdateData] = useState<UpdateDataProps>({state: true, data: "all"});
   
   const [visibleManagePago, setVisibleManagePago] = useState(false);
+  const [newPayment, setNewPayment] = useState<NewPayment | null>(null)
   
   useEffect(() => {
     // console.log("debtsByCreditor: ", debtsByCreditor)
@@ -77,6 +79,7 @@ export default function Home() {
           : d?.id_user_debtor,
       vencimiento: format(d.date_due),
       pendiente: `${d.amount} ${d.currency}`,
+      dolar_google: d.dolar_google,
       alerta: d.alert_enabled && d.alerted,
       id_user: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any)._id,
       email: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).email,
@@ -92,6 +95,7 @@ export default function Home() {
           : d?.id_user_creditor,
       vencimiento: format(d.date_due),
       pendiente: `${d.amount} ${d.currency}`,
+      dolar_google: d.dolar_google,
       alerta: d.alert_enabled && d.alerted,
       id_user: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any)._id,
       email: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).email,
@@ -170,6 +174,7 @@ export default function Home() {
       <TableProducts 
         data={filteredData} 
         setVisibleManagePago={setVisibleManagePago}
+        setNewPayment= {setNewPayment}
       />
         <Box className={` ${classes.customPlusIconBoxRow}`}>
           <PlusButton
@@ -190,7 +195,7 @@ export default function Home() {
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
-                    className={`${classes.background_color3} bg-green-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white`}
+                    className={`${classes.background_color3} p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white`}
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ManageCargarPrestamo
@@ -209,14 +214,14 @@ export default function Home() {
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
-                    className={`${classes.background_color3} bg-green-900 p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white`}
+                    className={`${classes.background_color3} p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white`}
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ManagePago
                       setUpdateData={setUpdateData}
                       // userEdit={userEdit}
                       setVisibleManageCargarPrestamo={setVisibleManageCargarPrestamo}
-                      filteredContacts={filteredContacts}
+                      // filteredContacts={filteredContacts}
                     />
                 </div>
             </div>

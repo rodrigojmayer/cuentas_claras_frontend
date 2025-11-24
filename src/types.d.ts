@@ -134,6 +134,7 @@ export interface ColumnData {
   id_client?: number;
   deleted: boolean;
   [key: string]: any;
+  dolar_google?: number | null;
 }
 
 export interface Contacts {
@@ -141,4 +142,3 @@ export interface Contacts {
     email?: string;
     phone?: string;
 }
-

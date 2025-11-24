@@ -14,11 +14,16 @@ import { useSession } from "next-auth/react";
 
 interface ManagePagoProps {
     setUpdateData: (visible: UpdateDataProps) => void;
-    debtEdit?: Debt;
+    // debtEdit?: Debt;
     setVisibleManageCargarPrestamo: (visible: boolean) => void;
-    filteredContacts: Contacts[];
+    // filteredContacts: Contacts[];
 }
-export default function ManagePago({ setUpdateData, debtEdit, setVisibleManageCargarPrestamo, filteredContacts }: ManagePagoProps ) {
+export default function ManagePago({ 
+    setUpdateData, 
+    // debtEdit, 
+    setVisibleManageCargarPrestamo, 
+    // filteredContacts 
+}: ManagePagoProps ) {
     
     const { users } = useUsers();
     const { data: session } = useSession()
@@ -29,49 +34,10 @@ export default function ManagePago({ setUpdateData, debtEdit, setVisibleManageCa
     const [phone, setPhone] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
     const [detail, setDetail] = useState<string>("");
-    const [dateDue, setDateDue] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_due) : null);
+    // const [dateDue, setDateDue] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_due) : null);
     const [currency, setCurrency] = useState<string>("$ARS");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
-    
-    // const emailOptions = [
-    //     {email: "test@gmail.com", phone: "111"},
-    //     {email: "info@company.com", phone: "222"},
-    //     {email: "support@example.com", phone: "333"},
-    //     {email: "hello@domain.com", phone: "444"}
-    // ];
-    // console.log("filteredData: ", filteredData)
-    // const emailOptions = [];
-    // const seen = new Set<string>();
-
-    // filteredData.forEach((d) => {
-    //     if (d.id_user_creditor === session?.user._id) {
-    //         if (!seen.has(d._id)) {
-    //             seen.add(d._id);
-    //             emailOptions.push({
-    //                 email: d.email,
-    //                 phone: d.phone,
-    //             });
-    //         }
-    //     }
-    // });
-
-    // const emailOptions = Array.from(
-    //     new Map(
-    //         filteredData
-    //         .filter(d => d.id_user_creditor === session.user._id)
-    //         .map(d => [d._id, { email: d.email, phone: d.phone }])
-    //     ).values()
-    // );
-
-
-    // filteredData
-    //     .filter((d: any) => d.id_user_creditor !== session?.user._id)
-    //     .map((d: any) => ({
-    //         _id: d.id
-    //         email: d.email,
-    //         phone: d.phone
-    //     }));
 
     const currencyOptions = ["$ARS", "$USD", "$EUR"]
 
@@ -93,7 +59,7 @@ export default function ManagePago({ setUpdateData, debtEdit, setVisibleManageCa
                     detail,
                     amount: Number(amount),
                     currency,
-                    date_due: dateDue,
+                    // date_due: dateDue,
                 }
                 await createByDebtorEmail(newDebt);
                 setVisibleManageCargarPrestamo?.(false);
@@ -115,41 +81,7 @@ export default function ManagePago({ setUpdateData, debtEdit, setVisibleManageCa
             </h3>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 rounded-lg p-2 text-gray-800">
-                <Autocomplete
-                    freeSolo                // allows typing any value
-                    options={filteredContacts}  // your array of emails
-                    value={email}
-                    onChange={(event, newValue) => {
-                        // If the user selects an option (object)
-                        if (typeof newValue === "object" && newValue !== null) {
-                            setEmail(newValue.email ?? "");
-                            // setPhone(newValue.phone ?? "");
-                            setIdDebtor(newValue.id_user ?? "")
-                        } else {
-                            // If the user clears or types manually (string)
-                            setEmail(newValue ?? "")
-                            // setPhone("")
-                        }
-                    }}
-                    onInputChange={(event, newInputValue) => {
-                        setEmail(newInputValue);    // update while typing
-                        // const match = filteredContacts.find(c => c.email === newInputValue)
-                        // setPhone(match?.phone ?? "")
-                    }}
-                    getOptionLabel={(option) =>
-                        typeof option === "string" ? option : (option.email ?? "")
-                    }
-                    size="small"
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            label="Correo electrónico"
-                            variant="outlined"        
-                            className={classes.inputMainData}
-                            // className="border rounded-lg bg-white"
-                        />
-                    )}
-                />
+                
                 {/* <TextField
                     label="Teléfono"
                     value={phone}
@@ -203,8 +135,6 @@ export default function ManagePago({ setUpdateData, debtEdit, setVisibleManageCa
                     size="small"
                     className={classes.inputMainData}
                 />
-                <DatePickerComponent dateProp={dateDue} setDateProp={setDateDue} labelProp={"Fecha vencimiento"}/>             
-                     
                 <Box className={`${classes.customBoxRow} ${classes.customBoxRowSpaces}` }>   
                     <CancelButton clicked={() => setVisibleManageCargarPrestamo(false)}/>
                     <AcceptButton />

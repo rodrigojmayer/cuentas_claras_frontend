@@ -19,7 +19,7 @@ import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
-import { Data, DataTable, ColumnData } from '../types';
+import { Data, DataTable, ColumnData, NewPayment } from '../types';
 // import { UserContext } from '../context/UserContext'
 // import { ColumnsContext } from '../context/ColumnsContext'
 import { useStylesGlobal } from '../Styles';
@@ -51,77 +51,16 @@ const VirtuosoTableComponents: TableComponents<Data> = {
   )),
 };
 
-function rowContent(
-    _index: number, 
-    row: Data, 
-    columnsTable: ColumnData[], 
-    classes: any,
-    setVisibleManagePago: (visible: boolean) => void,
-  ) {
-
-
-  return (
-    <React.Fragment >
-      {columnsTable.map((column) => (
-        <TableCell
-          key={column.id}
-          align='center'
-        //   onClick={() => alert(`click en header table: ${column.label}`)}
-          className={`${ _index%2 ? classes.table_row_odd : classes.table_row_even }`}
-          style={{ 
-             border:0,
-          }}
-          sx={{
-            padding: "0",
-          }}
-        >
-          <div 
-            className={ `${row?.alerta ? classes.table_alert_on_background  : "" } ${classes.table_rows}  ${classes.table_rows_color}`}
-          > 
-            <Tooltip 
-                title={row?.[column.dataKey]} 
-                disableHoverListener={String(row?.[column.dataKey])?.length <= 13}
-                slotProps={{
-                  popper: {
-                    sx: {
-                      [`&.${tooltipClasses.popper}[data-popper-placement*="bottom"] .${tooltipClasses.tooltip}`]:
-                      {
-                        marginTop: '0px',
-                        marginLeft: '5px',
-                      },
-                    }
-                  }
-                }}
-                >
-                <Typography noWrap 
-                sx={{
-                    padding: "0 4px ",
-                    // textDecoration: "",
-                  }}
-                    onClick={(e) => {
-                          // alert(`click en row table: ${row[column.dataKey]}`)
-                          setVisibleManagePago(true)
-                          e.stopPropagation()
-                        }}
-                >
-                  { ( row?.[column.dataKey] || row?.[column.dataKey] === 0 ) ? row?.[column.dataKey] : "-"}
-                </Typography>
-            </Tooltip> 
-          </div>
-        </TableCell>
-      ))}
-    </React.Fragment>
-  );
-}
-
 interface TableProductsProps {
     data: Data[];
     setVisibleManagePago: (visible: boolean) => void;
+    setNewPayment: (visible: NewPayment) => void;
 }
 
 export default function TableProducts(
   { data, 
     setVisibleManagePago,
+    setNewPayment,
   }:  TableProductsProps ) {
     // console.log("data: ", data);
   const  {classes} = useStylesGlobal()
@@ -183,11 +122,83 @@ export default function TableProducts(
                 sortedData[index], 
                 columnsTable, 
                 classes,
-                setVisibleManagePago
+                setVisibleManagePago,
+                setNewPayment,
             ) 
           }
         />
       </Paper>
     </div>
+  );
+}
+
+function rowContent(
+    _index: number, 
+    row: Data, 
+    columnsTable: ColumnData[], 
+    classes: any,
+    setVisibleManagePago: (visible: boolean) => void,
+    setNewPayment: (visible: NewPayment) => void,
+  ) {
+
+  function selectDebtForPayment(debtData: Data) {
+    setNewPayment({
+      id_debt: debtData._id,
+      amount: null,
+      dolar_google: debtData.dolar_google, //  ATTENTION IMPORTANT this dolar google should update to the dolar google on the current date
+    })
+    setVisibleManagePago(true)
+  }
+  return (
+    <React.Fragment >
+      {columnsTable.map((column) => (
+        <TableCell
+          key={column.id}
+          align='center'
+        //   onClick={() => alert(`click en header table: ${column.label}`)}
+          className={`${ _index%2 ? classes.table_row_odd : classes.table_row_even }`}
+          style={{ 
+             border:0,
+          }}
+          sx={{
+            padding: "0",
+          }}
+        >
+          <div 
+            className={ `${row?.alerta ? classes.table_alert_on_background  : "" } ${classes.table_rows}  ${classes.table_rows_color}`}
+          > 
+            <Tooltip 
+                title={row?.[column.dataKey]} 
+                disableHoverListener={String(row?.[column.dataKey])?.length <= 13}
+                slotProps={{
+                  popper: {
+                    sx: {
+                      [`&.${tooltipClasses.popper}[data-popper-placement*="bottom"] .${tooltipClasses.tooltip}`]:
+                      {
+                        marginTop: '0px',
+                        marginLeft: '5px',
+                      },
+                    }
+                  }
+                }}
+                >
+                <Typography noWrap 
+                sx={{
+                    padding: "0 4px ",
+                    // textDecoration: "",
+                  }}
+                    onClick={(e) => {
+                          // alert(`click en row table: ${row[column.dataKey]}`)
+                          selectDebtForPayment(row)
+                          e.stopPropagation()
+                        }}
+                >
+                  { ( row?.[column.dataKey] || row?.[column.dataKey] === 0 ) ? row?.[column.dataKey] : "-"}
+                </Typography>
+            </Tooltip> 
+          </div>
+        </TableCell>
+      ))}
+    </React.Fragment>
   );
 }

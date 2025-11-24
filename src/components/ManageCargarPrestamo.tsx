@@ -29,60 +29,17 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
     const [phone, setPhone] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
     const [detail, setDetail] = useState<string>("");
-    const [dateDue, setDateDue] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_due) : null);
+    const [dateDue, setDateDue] = useState<Date | null>(null);
     const [currency, setCurrency] = useState<string>("$ARS");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
     
-    // const emailOptions = [
-    //     {email: "test@gmail.com", phone: "111"},
-    //     {email: "info@company.com", phone: "222"},
-    //     {email: "support@example.com", phone: "333"},
-    //     {email: "hello@domain.com", phone: "444"}
-    // ];
-    // console.log("filteredData: ", filteredData)
-    // const emailOptions = [];
-    // const seen = new Set<string>();
-
-    // filteredData.forEach((d) => {
-    //     if (d.id_user_creditor === session?.user._id) {
-    //         if (!seen.has(d._id)) {
-    //             seen.add(d._id);
-    //             emailOptions.push({
-    //                 email: d.email,
-    //                 phone: d.phone,
-    //             });
-    //         }
-    //     }
-    // });
-
-    // const emailOptions = Array.from(
-    //     new Map(
-    //         filteredData
-    //         .filter(d => d.id_user_creditor === session.user._id)
-    //         .map(d => [d._id, { email: d.email, phone: d.phone }])
-    //     ).values()
-    // );
-
-
-    // filteredData
-    //     .filter((d: any) => d.id_user_creditor !== session?.user._id)
-    //     .map((d: any) => ({
-    //         _id: d.id
-    //         email: d.email,
-    //         phone: d.phone
-    //     }));
-
     const currencyOptions = ["$ARS", "$USD", "$EUR"]
-
-    const test = "test"
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         setLoading(true);
         setMessage(null);
-
-        console.log("email: ", email)
 
         if(email) { 
             try {
