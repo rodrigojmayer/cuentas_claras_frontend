@@ -7,6 +7,11 @@ export async function getUsers() {
     return res.json();
 }
 
+export async function getUser(id_user: string) {
+    const res = await fetch(`${API_URL}/users/${id_user}`);
+    return res.json();
+}
+
 export async function findUserByEmail(email: string) {
     const res = await fetch(`${API_URL}/users/find-by-email`, {
         method: "POST",

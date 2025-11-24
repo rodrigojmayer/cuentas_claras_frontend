@@ -17,6 +17,7 @@ import useDebtsByDebtor from "@/hooks/useDebtsByDebtor";
 import MenuOptions from '@/components/MenuOptions';
 import ManageCargarPrestamo from '@/components/ManageCargarPrestamo';
 import ManagePago from '@/components/ManagePago';
+import { getUser } from '@/lib/api';
 
 // const dataC = [
 //   {_id: "test1", gestion: "ges1", nombre: "nom1", vencimiento:"venc1", pendiente:"pend1"},
@@ -111,6 +112,15 @@ export default function Home() {
     setFilteredData(Array.from(map.values()));
   }, [debtsByCreditor, debtsByDebtor]);
 
+  useEffect(() => {
+    if(visibleManagePago && newPayment?.id_debt){
+      const debt = debts?.find(d => d._id === newPayment.id_debt )
+      console.error("debt: ", debt)
+      // getUser("123")
+
+      // setNewPayment({...newPayment, nameUser: .})
+    }
+  }, [visibleManagePago])
   useEffect(() => {
     const contacts = filteredData.map(f => ({
       id_user: f.id_user,
@@ -219,7 +229,7 @@ export default function Home() {
                 >
                     <ManagePago
                       setUpdateData={setUpdateData}
-                      // userEdit={userEdit}
+                      newPayment={newPayment}
                       setVisibleManagePago={setVisibleManagePago}
                       // filteredContacts={filteredContacts}
                     />

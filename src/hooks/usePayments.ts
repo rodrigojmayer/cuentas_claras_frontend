@@ -3,7 +3,7 @@ import { getPayments } from "@/lib/api";
 import type { Payment } from "@/types";
 
 export default function usePayments() {
-    const { data, error, isLoading, mutate } = useSWR<Payment[]>("/", getPayments);
+    const { data, error, isLoading, mutate } = useSWR<Payment[]>("/payments", getPayments);
     
     return {
         payments: data,

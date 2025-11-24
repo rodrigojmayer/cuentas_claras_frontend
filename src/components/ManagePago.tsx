@@ -3,7 +3,7 @@
 
 import { createByDebtorEmail, findUserByEmail, postDebt, postUser } from "@/lib/api";
 import { useStylesGlobal } from "@/Styles";
-import { Contacts, Data, DataTable, Debt, NewDebt, NewUser, UpdateDataProps } from "@/types";
+import { Contacts, Data, DataTable, Debt, NewDebt, NewPayment, NewUser, UpdateDataProps } from "@/types";
 import { Autocomplete, Box, MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
 import DatePickerComponent from "./DatePickerComponent";
@@ -14,13 +14,13 @@ import { useSession } from "next-auth/react";
 
 interface ManagePagoProps {
     setUpdateData: (visible: UpdateDataProps) => void;
-    // debtEdit?: Debt;
+    newPayment?: NewPayment | null;
     setVisibleManagePago: (visible: boolean) => void;
     // filteredContacts: Contacts[];
 }
 export default function ManagePago({ 
     setUpdateData, 
-    // debtEdit, 
+    newPayment, 
     setVisibleManagePago, 
     // filteredContacts 
 }: ManagePagoProps ) {
@@ -30,7 +30,7 @@ export default function ManagePago({
 
     const { classes } = useStylesGlobal()
     const [idDebtor, setIdDebtor] = useState("");
-    const [email, setEmail] = useState("");
+    // const [nameDebtor, setNameDebtorl] = useState(newPayment.id_debt);
     const [phone, setPhone] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
     const [detail, setDetail] = useState<string>("");
@@ -48,20 +48,20 @@ export default function ManagePago({
         setLoading(true);
         setMessage(null);
 
-        console.log("email: ", email)
+        // console.log("email: ", email)
 
-        if(email) { 
+        // if(email) { 
             try {
-                const newDebt: NewDebt = {
-                    id_user_creditor: session?.user._id,
-                    id_user_debtor: idDebtor,
-                    email_debtor: email,
-                    detail,
-                    amount: Number(amount),
-                    currency,
-                    // date_due: dateDue,
-                }
-                await createByDebtorEmail(newDebt);
+                // const newPayment: NewPayment = {
+                //     id_debt: session?.user._id,
+                //     id_user_debtor: idDebtor,
+                //     email_debtor: email,
+                //     detail,
+                //     amount: Number(amount),
+                //     currency,
+                //     // date_due: dateDue,
+                // }
+                // await createByDebtorEmail(newDebt);
                 setVisibleManagePago?.(false);
             } catch (err: any) {
                 console.error("Error creating debt: ", err);
@@ -70,7 +70,7 @@ export default function ManagePago({
                 setLoading(false);
                 setUpdateData({state: true, data: "debts"})
             }
-        }
+        // }
     }
 
 
