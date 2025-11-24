@@ -210,7 +210,7 @@ export default function Home() {
         {visibleManagePago && (
             <div 
                 className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
-                onClick={() => setVisibleManageCargarPrestamo(false)} // click background to close
+                onClick={() => setVisibleManagePago(false)} // click background to close
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
@@ -220,7 +220,7 @@ export default function Home() {
                     <ManagePago
                       setUpdateData={setUpdateData}
                       // userEdit={userEdit}
-                      setVisibleManageCargarPrestamo={setVisibleManageCargarPrestamo}
+                      setVisibleManagePago={setVisibleManagePago}
                       // filteredContacts={filteredContacts}
                     />
                 </div>

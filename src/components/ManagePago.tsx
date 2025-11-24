@@ -15,13 +15,13 @@ import { useSession } from "next-auth/react";
 interface ManagePagoProps {
     setUpdateData: (visible: UpdateDataProps) => void;
     // debtEdit?: Debt;
-    setVisibleManageCargarPrestamo: (visible: boolean) => void;
+    setVisibleManagePago: (visible: boolean) => void;
     // filteredContacts: Contacts[];
 }
 export default function ManagePago({ 
     setUpdateData, 
     // debtEdit, 
-    setVisibleManageCargarPrestamo, 
+    setVisibleManagePago, 
     // filteredContacts 
 }: ManagePagoProps ) {
     
@@ -62,7 +62,7 @@ export default function ManagePago({
                     // date_due: dateDue,
                 }
                 await createByDebtorEmail(newDebt);
-                setVisibleManageCargarPrestamo?.(false);
+                setVisibleManagePago?.(false);
             } catch (err: any) {
                 console.error("Error creating debt: ", err);
                 setMessage(`X ${err.message || "Failed to create debt"}`);
@@ -136,7 +136,7 @@ export default function ManagePago({
                     className={classes.inputMainData}
                 />
                 <Box className={`${classes.customBoxRow} ${classes.customBoxRowSpaces}` }>   
-                    <CancelButton clicked={() => setVisibleManageCargarPrestamo(false)}/>
+                    <CancelButton clicked={() => setVisibleManagePago(false)}/>
                     <AcceptButton />
                 </Box>
             </form>
