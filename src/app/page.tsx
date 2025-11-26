@@ -128,10 +128,10 @@ export default function Home() {
   //       }
   //   }
   // }, [visibleManagePago])
-  useEffect(() => {
-    if(newPayment)
-      console.log("newPayment: ", newPayment)
-  }, [newPayment])
+  // useEffect(() => {
+  //   if(newPayment)
+  //     console.log("newPayment: ", newPayment)
+  // }, [newPayment])
   useEffect(() => {
     const contacts = filteredData.map(f => ({
       id_user: f.id_user,

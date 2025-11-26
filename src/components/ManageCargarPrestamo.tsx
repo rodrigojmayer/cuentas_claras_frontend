@@ -67,7 +67,7 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
 
     return (
         <div className="flex flex-col p-2 max-w-md">
-            <h3 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+            <h3 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-100 mb-4">
                 Cargar préstamo
             </h3>
 

@@ -145,6 +145,7 @@ function rowContent(
     setNewPayment({
       id_debt: debtData._id,
       nameUser: debtData.nombre,
+      emailUser: debtData.email,
       amount: null,
       dolar_google: debtData.dolar_google, //  ATTENTION IMPORTANT this dolar google should update to the dolar google on the current date
     })
