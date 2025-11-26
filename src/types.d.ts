@@ -83,8 +83,9 @@ export interface NewPayment {
     id_debt: string;
     amount: number | null;
     dolar_google?: number | null;
-    nameUser?: string | null;
-    emailUser?: string | null;
+    name?: string | null;
+    email?: string | null;
+    currency?: string;
 }
 
 export interface Alert {

@@ -7,7 +7,7 @@ import { AppBar, Box, Grid } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useStylesGlobal } from '../Styles';
 import TableProducts from '@/components/TableProducts';
-import { Contacts, Data, DataTable, NewPayment, UpdateDataProps, User } from '@/types';
+import { Contacts, Data, DataTable, Debt, NewPayment, UpdateDataProps, User } from '@/types';
 import useUsers from "@/hooks/useUsers";
 import useDebts from "@/hooks/useDebts";
 import usePayments from "@/hooks/usePayments";
@@ -55,7 +55,7 @@ export default function Home() {
   
   const [visibleManagePago, setVisibleManagePago] = useState(false);
   const [newPayment, setNewPayment] = useState<NewPayment | null>(null)
-  
+ 
   useEffect(() => {
     // console.log("debtsByCreditor: ", debtsByCreditor)
     if (!debtsByCreditor && !debtsByDebtor) return;
@@ -87,6 +87,7 @@ export default function Home() {
       id_user: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any)._id,
       email: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).email,
       phone: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).phone,
+      currency: d?.currency,
     }));
 
     const dataDebtor = (debtsByDebtor ?? []).map(d => ({
@@ -103,6 +104,7 @@ export default function Home() {
       id_user: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any)._id,
       email: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).email,
       phone: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).phone,
+      currency: d?.currency,
     }));
 
     // unir y eliminar duplicados
