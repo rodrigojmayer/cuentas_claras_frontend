@@ -146,6 +146,7 @@ function rowContent(
     setNewPayment({
       id_debt: debtData._id,
       amount: null,
+      pending: debtData.pendiente.split(" ")[0],
       dolar_google: debtData.dolar_google, //  ATTENTION IMPORTANT this dolar google should update to the dolar google on the current date
       name: debtData.nombre,
       email: debtData.email,

@@ -4,7 +4,7 @@
 import { createByDebtorEmail, findUserByEmail, postDebt, postUser } from "@/lib/api";
 import { useStylesGlobal } from "@/Styles";
 import { Contacts, Data, DataTable, Debt, NewDebt, NewPayment, NewUser, UpdateDataProps } from "@/types";
-import { Autocomplete, Box, MenuItem, TextField } from "@mui/material";
+import { Autocomplete, Box, Button, MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
 import DatePickerComponent from "./DatePickerComponent";
 import { AcceptButton, CancelButton } from "./Buttons";
@@ -25,28 +25,28 @@ export default function ManagePago({
     // filteredContacts 
 }: ManagePagoProps ) {
     
-    const { users } = useUsers();
-    const { data: session } = useSession()
+    // const { users } = useUsers();
+    // const { data: session } = useSession()
 
     const { classes } = useStylesGlobal()
-    const [idDebtor, setIdDebtor] = useState("");
+    // const [idDebtor, setIdDebtor] = useState("");
     // const [nameDebtor, setNameDebtorl] = useState(newPayment.id_debt);
-    const [phone, setPhone] = useState<string>("");
+    // const [phone, setPhone] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
     const [detail, setDetail] = useState<string>("");
     // const [dateDue, setDateDue] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_due) : null);
-    const [currency, setCurrency] = useState<string>("$ARS");
-    const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState<string | null>(null);
+    // const [currency, setCurrency] = useState<string>("$ARS");
+    // const [loading, setLoading] = useState(false);
+    // const [message, setMessage] = useState<string | null>(null);
 
-    const currencyOptions = ["$ARS", "$USD", "$EUR"]
+    // const currencyOptions = ["$ARS", "$USD", "$EUR"]
 
-    const test = "test"
+    // const test = "test"
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        setLoading(true);
-        setMessage(null);
+        // setLoading(true);
+        // setMessage(null);
 
         // console.log("email: ", email)
 
@@ -65,9 +65,9 @@ export default function ManagePago({
                 setVisibleManagePago?.(false);
             } catch (err: any) {
                 console.error("Error creating debt: ", err);
-                setMessage(`X ${err.message || "Failed to create debt"}`);
+                // setMessage(`X ${err.message || "Failed to create debt"}`);
             } finally {
-                setLoading(false);
+                // setLoading(false);
                 setUpdateData({state: true, data: "debts"})
             }
         // }
@@ -82,14 +82,15 @@ export default function ManagePago({
 
             
             <Box className={classes.customBoxRow}>
-                <div>
+                <a>
                     Pendiente
-                </div>
-                <div>
-                    {900}
-                </div><div>
+                </a>
+                <a>
+                    {newPayment?.pending}
+                </a>
+                <a>
                     {newPayment?.currency}
-                </div>
+                </a>
             </Box>
             <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 rounded-lg p-2 text-gray-800">
                 
@@ -109,43 +110,29 @@ export default function ManagePago({
                 <Box className={classes.customBoxRow}>
 
                     <TextField
-                        label="Cantidad"
+                        label="Pago"
                         value={amount}
                         onChange={(event:any) => {
                             const val = event.target.value;
-                            if (/^\d*$/.test(val)) {
+                            if (/^\d*$/.test(val) && Number(val) <= Number(newPayment?.pending)) {
                                 setAmount(val);
                             }
                         }}
                         size="small"
                         className={classes.inputMainData}
                     />
-                    <TextField
-                        value={currency}
-                        select
-                        onChange={(event:any) => setCurrency(event.target.value)}
-                        size="small"
-                        className={`${classes.inputMainData}  max-w-25`}
-                        
+                    <Button
+                        // type={clicked? "button" : "submit"}
+                        variant="text"
+                        // color="inherit"
+                        onClick={() => {
+                            // const a = parseInt(newPayment?.pending, 10)
+                            setAmount(newPayment?.pending ? newPayment?.pending.toString() : "")
+                        }}
                     > 
-                        {currencyOptions.map((c) => (
-                            <MenuItem 
-                                key={c} 
-                                value={c}
-                                sx={{ justifyContent: "space-between" }}
-                            >
-                                {c}
-                            </MenuItem>
-                        ))}
-                    </TextField>
+                        Total
+                    </Button>
                 </Box>
-                <TextField
-                    label="Detalle"
-                    value={detail}
-                    onChange={(event:any) => setDetail(event.target.value)}
-                    size="small"
-                    className={classes.inputMainData}
-                />
                 <Box className={`${classes.customBoxRow} ${classes.customBoxRowSpaces}` }>   
                     <CancelButton clicked={() => setVisibleManagePago(false)}/>
                     <AcceptButton />
