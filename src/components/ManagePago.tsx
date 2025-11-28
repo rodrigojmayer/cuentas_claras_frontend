@@ -113,6 +113,7 @@ export default function ManagePago({
                     </a>
                     <TextField
                         // label="Pago"
+                        autoFocus
                         value={amount}
                         onChange={(event:any) => {
                             const val = event.target.value;
