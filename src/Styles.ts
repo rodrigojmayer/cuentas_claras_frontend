@@ -245,6 +245,15 @@ export const useStylesGlobal = makeStyles()({
             backgroundColor: succesContrastText,
         }
     },
+    btn_info: {
+        backgroundColor: second_alpha_color,
+        width: "70px",
+        textTransform: 'none',
+        fontWeight: "bold",
+        '&:hover': {
+            backgroundColor: second_color,
+        }
+    },
     show: {
         display: "block",
     },
@@ -255,6 +264,9 @@ export const useStylesGlobal = makeStyles()({
         backgroundColor: "white",
         borderRadius:7,
         width: "100%",
+    },
+    inputPago: {
+        width: "30%",
     },
     inputClassName: {
         borderRadius: 7,

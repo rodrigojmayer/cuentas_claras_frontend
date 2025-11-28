@@ -92,7 +92,7 @@ export default function ManagePago({
                     {newPayment?.currency}
                 </a>
             </Box>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 rounded-lg p-2 text-gray-800">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 rounded-lg p-2">
                 
                 {/* <TextField
                     label="Teléfono"
@@ -108,9 +108,11 @@ export default function ManagePago({
                     className={classes.inputMainData}
                 /> */}
                 <Box className={classes.customBoxRow}>
-
+                    <a>
+                        Pago
+                    </a>
                     <TextField
-                        label="Pago"
+                        // label="Pago"
                         value={amount}
                         onChange={(event:any) => {
                             const val = event.target.value;
@@ -119,11 +121,12 @@ export default function ManagePago({
                             }
                         }}
                         size="small"
-                        className={classes.inputMainData}
+                        className={`${classes.inputMainData} ${classes.inputPago}`}
                     />
                     <Button
                         // type={clicked? "button" : "submit"}
                         variant="text"
+                        className={`${classes.btnCommonStyle} ${classes.btn_info}`}
                         // color="inherit"
                         onClick={() => {
                             // const a = parseInt(newPayment?.pending, 10)
