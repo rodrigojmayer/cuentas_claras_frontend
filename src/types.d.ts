@@ -68,7 +68,10 @@ export interface NewDebt {
     currency: string;
     email_debtor?: string;
 }
-
+export interface UpdateDebt {
+    _id: string;
+    amount: number | null;
+}
 export interface Payment {
     _id: string;
     id_debt: string;

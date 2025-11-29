@@ -33,7 +33,8 @@ export default function ConfirmDelete({
     }
     
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState<string | null>(null);
+    // const [message, setMessage] = useState<string | null>(null);
+    const [message, setMessage] = useState<string | null>("null");
     
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault(); // prevent full page reload

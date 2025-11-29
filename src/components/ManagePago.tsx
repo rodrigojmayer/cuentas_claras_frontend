@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { createByDebtorEmail, findUserByEmail, postDebt, postUser } from "@/lib/api";
+import { createByDebtorEmail, findUserByEmail, postDebt, postPayment, postUser } from "@/lib/api";
 import { useStylesGlobal } from "@/Styles";
-import { Contacts, Data, DataTable, Debt, NewDebt, NewPayment, NewUser, UpdateDataProps } from "@/types";
+import { Contacts, Data, DataTable, Debt, NewDebt, NewPayment, NewUser, UpdateDataProps, UpdateDebt } from "@/types";
 import { Autocomplete, Box, Button, MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
 import DatePickerComponent from "./DatePickerComponent";
@@ -26,18 +26,17 @@ export default function ManagePago({
 }: ManagePagoProps ) {
     
     // const { users } = useUsers();
-    // const { data: session } = useSession()
+    const { data: session } = useSession()
 
     const { classes } = useStylesGlobal()
     // const [idDebtor, setIdDebtor] = useState("");
     // const [nameDebtor, setNameDebtorl] = useState(newPayment.id_debt);
     // const [phone, setPhone] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
-    const [detail, setDetail] = useState<string>("");
     // const [dateDue, setDateDue] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_due) : null);
     // const [currency, setCurrency] = useState<string>("$ARS");
-    // const [loading, setLoading] = useState(false);
-    // const [message, setMessage] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState<string | null>(null);
 
     // const currencyOptions = ["$ARS", "$USD", "$EUR"]
 
@@ -45,32 +44,33 @@ export default function ManagePago({
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        // setLoading(true);
-        // setMessage(null);
+        setLoading(true);
+        setMessage(null);
 
         // console.log("email: ", email)
 
-        // if(email) { 
+        if(amount) { 
             try {
-                // const newPayment: NewPayment = {
-                //     id_debt: session?.user._id,
-                //     id_user_debtor: idDebtor,
-                //     email_debtor: email,
-                //     detail,
-                //     amount: Number(amount),
-                //     currency,
-                //     // date_due: dateDue,
-                // }
-                // await createByDebtorEmail(newDebt);
+                const createNewPayment: NewPayment = {
+                    id_debt: newPayment?.id_debt || "",
+                    amount: Number(amount),
+                    // dolar_google: ???,   //  ATTENTION IMPORTANT this dolar google should update to the dolar google on the current date
+                }
+                console.log("createNewPayment: ", createNewPayment);
+                await postPayment(createNewPayment);
                 setVisibleManagePago?.(false);
             } catch (err: any) {
                 console.error("Error creating debt: ", err);
                 // setMessage(`X ${err.message || "Failed to create debt"}`);
             } finally {
-                // setLoading(false);
+                setLoading(false);
                 setUpdateData({state: true, data: "debts"})
             }
-        // }
+        } else {
+            setMessage("Ingresar pago")
+            alert("Ingresar pago")
+        }
+
     }
 
 
@@ -94,19 +94,6 @@ export default function ManagePago({
             </Box>
             <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 rounded-lg p-2">
                 
-                {/* <TextField
-                    label="Teléfono"
-                    value={phone}
-                    onChange={(event:any) => {
-                        const val = event.target.value;
-                        // Allow only digits
-                        if (/^\d*$/.test(val)) {
-                            setPhone(val);
-                        }
-                    }}
-                    size="small"
-                    className={classes.inputMainData}
-                /> */}
                 <Box className={classes.customBoxRow}>
                     <a>
                         Pago
