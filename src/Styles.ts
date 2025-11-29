@@ -242,7 +242,7 @@ export const useStylesGlobal = makeStyles()({
         textTransform: 'none',
         fontWeight: "bold",
         '&:hover': {
-            backgroundColor: succesContrastText,
+            backgroundColor: green2,
         }
     },
     btn_info: {
