@@ -117,8 +117,11 @@ export default function ManagePago({
                         value={amount}
                         onChange={(event:any) => {
                             const val = event.target.value;
-                            if (/^\d*$/.test(val) && Number(val) <= Number(newPayment?.pending)) {
-                                setAmount(val);
+                            if (/^\d*$/.test(val)) {
+                                if(Number(val) > Number(newPayment?.pending))
+                                    setAmount(newPayment?.pending || "");
+                                else
+                                    setAmount(val);
                             }
                         }}
                         size="small"
