@@ -10,6 +10,8 @@ import DatePickerComponent from "./DatePickerComponent";
 import { AcceptButton, CancelButton } from "./Buttons";
 import useUsers from "@/hooks/useUsers";
 import { useSession } from "next-auth/react";
+import useDebtsByDebtor from "@/hooks/useDebtsByDebtor";
+import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
 
 
 interface ManageCargarPrestamoProps {
@@ -22,7 +24,9 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
     
     const { users } = useUsers();
     const { data: session } = useSession()
-
+    const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor, mutateDebtsByCreditor } = useDebtsByCreditor();
+    const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor, mutateDebtsByDebtor } = useDebtsByDebtor();
+ 
     const { classes } = useStylesGlobal()
     const [idDebtor, setIdDebtor] = useState("");
     const [email, setEmail] = useState("");
@@ -53,6 +57,8 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                     date_due: dateDue,
                 }
                 await createByDebtorEmail(newDebt);
+                mutateDebtsByCreditor()
+                mutateDebtsByDebtor()
                 setVisibleManageCargarPrestamo?.(false);
             } catch (err: any) {
                 console.error("Error creating debt: ", err);

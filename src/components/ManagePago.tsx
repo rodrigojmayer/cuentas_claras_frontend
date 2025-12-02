@@ -70,9 +70,7 @@ export default function ManagePago({
             setMessage("Ingresar pago")
             alert("Ingresar pago")
         }
-
     }
-
 
     return (
         <div className="flex flex-col p-2 max-w-md">

@@ -131,9 +131,10 @@ export default function Home() {
   //   }
   // }, [visibleManagePago])
   // useEffect(() => {
-  //   if(newPayment)
-  //     console.log("newPayment: ", newPayment)
-  // }, [newPayment])
+  //   // if(newPayment)
+  //   console.log("updateData: ", updateData)
+  //     mutateDebtsByCreditor();
+  // }, [updateData])
   useEffect(() => {
     const contacts = filteredData.map(f => ({
       id_user: f.id_user,
