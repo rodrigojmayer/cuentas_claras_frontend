@@ -210,6 +210,9 @@ export const useStylesGlobal = makeStyles()({
     background_color3 : {
         backgroundColor: first_color3,
     },
+    modalPago : {
+        borderRadius: "10px 10px 0 10px",
+    },
     main_background_colorDD: {
         backgroundColor: first_color,
     },
@@ -271,5 +274,14 @@ export const useStylesGlobal = makeStyles()({
     inputClassName: {
         borderRadius: 7,
         // autoComplete: 'new-password',
+    },
+    deployModalButton: {
+        color: text_color,
+        width: "40px",
+        height: "22px",
+        top: "30px",
+        left: "calc(100% - 56px)",
+        backgroundColor: first_color3,
+        borderRadius: "0px 0px 10px 10px",
     },
 })

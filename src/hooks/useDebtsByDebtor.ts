@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import useSWR from "swr";
 import { getDebtsByDebtor } from "@/lib/api";
 import type { Debt } from "@/types";

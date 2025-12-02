@@ -238,7 +238,7 @@ export default function Home() {
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
-                    className={`${classes.background_color3} p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white`}
+                    className={`${classes.background_color3} ${classes.modalPago} p6 shadow-lg w-[90%] max-w-md text-white`}
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ManagePago

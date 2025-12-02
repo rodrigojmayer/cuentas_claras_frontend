@@ -10,7 +10,7 @@ import DatePickerComponent from "./DatePickerComponent";
 import { AcceptButton, CancelButton } from "./Buttons";
 import useUsers from "@/hooks/useUsers";
 import { useSession } from "next-auth/react";
-
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 interface ManagePagoProps {
     setUpdateData: (visible: UpdateDataProps) => void;
@@ -130,6 +130,9 @@ export default function ManagePago({
                     <AcceptButton />
                 </Box>
             </form>
+            <Button className={classes.deployModalButton}>
+                <KeyboardArrowDownIcon fontSize="large"/>
+            </Button>
         </div>
     )
 }
