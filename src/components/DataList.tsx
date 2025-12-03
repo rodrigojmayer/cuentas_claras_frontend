@@ -116,6 +116,7 @@ export default function DataList({
                         <li key={d._id} className="p-3 bg-green-300 rounded-lg shadow">
                             <p>ID: {d._id}</p>
                             <p>Detail: {d.detail}</p>
+                            <p>Initial Amount: ${d.initial_amount}</p>
                             <p>Amount: ${d.amount}</p>
                             <p>Currency: {d.currency}</p>
                             <p>Status: {d.status}</p>

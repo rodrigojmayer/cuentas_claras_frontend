@@ -42,6 +42,7 @@ export interface Debt {
     user_debtor?: User;  
     date_debt: date;
     detail?: string;
+    initial_amount?: number | null;
     amount: number | null;
     dolar_google?: number | null;
     status: string;
@@ -59,6 +60,7 @@ export interface NewDebt {
     id_user_creditor: string;
     id_user_debtor: string;
     detail?: string;
+    initial_amount?: number | null;
     amount: number | null;
     dolar_google?: number | null;
     status?: string;

@@ -89,7 +89,7 @@ export async function postUser({email, phone, name}: NewUser) {
     }
 }
 
-export async function postDebt({id_user_creditor, id_user_debtor, detail, amount, dolar_google, status, date_due, currency}: NewDebt) {
+export async function postDebt({id_user_creditor, id_user_debtor, detail, initial_amount, amount, dolar_google, status, date_due, currency}: NewDebt) {
     try {
         const res = await fetch(`${API_URL}/debts`, {
             method: "POST",
@@ -101,6 +101,7 @@ export async function postDebt({id_user_creditor, id_user_debtor, detail, amount
                 id_user_debtor, 
                 // date_debt, 
                 detail, 
+                initial_amount,
                 amount, 
                 dolar_google, 
                 status, 
@@ -197,7 +198,7 @@ export async function patchUser({_id, email, phone, name, enabled, deleted}: Use
     }
 }
 
-export async function patchDebt({_id, id_user_creditor, id_user_debtor, date_debt, detail, amount, dolar_google, status, date_due,alert_enabled, alerted, currency, enabled, deleted}: Debt) {
+export async function patchDebt({_id, id_user_creditor, id_user_debtor, date_debt, detail, initial_amount, amount, dolar_google, status, date_due,alert_enabled, alerted, currency, enabled, deleted}: Debt) {
     console.log("dolar_google: ", dolar_google);
     try {
         const res = await fetch(`${API_URL}/debts/${_id}`, {
@@ -208,6 +209,7 @@ export async function patchDebt({_id, id_user_creditor, id_user_debtor, date_deb
                 id_user_debtor,
                 date_debt,
                 detail,
+                initial_amount,
                 amount,
                 dolar_google,
                 status,

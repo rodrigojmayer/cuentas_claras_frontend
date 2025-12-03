@@ -26,6 +26,7 @@ export default function TestManageDebt({ setUpdateData, debtEdit, setVisibleUpda
     const [debtIdUserDebtor, setDebtIdUserDebtor] = useState<string>(getInitialDebtorId(debtEdit));
     const [debtDateDebt, setDebtDateDebt] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_debt) : null);
     const [debtDetail, setDebtDetail] = useState<string | undefined>(debtEdit ? debtEdit.detail : "");
+    const [debtInitialAmount, setDebtInitialAmount] = useState<number | null | undefined>(debtEdit ? debtEdit.initial_amount : null);
     const [debtAmount, setDebtAmount] = useState<number | null>(debtEdit ? debtEdit.amount : null);
     const [debtDolarGoogle, setDebtDolarGoogle] = useState<number | null | undefined>(debtEdit ? debtEdit.dolar_google : null);
     const [debtStatus, setDebtStatus] = useState<string>(debtEdit ? debtEdit.status : "open");
@@ -51,6 +52,7 @@ export default function TestManageDebt({ setUpdateData, debtEdit, setVisibleUpda
                     id_user_debtor: debtIdUserDebtor,
                     date_debt: debtDateDebt,
                     detail: debtDetail,
+                    initial_amount: debtInitialAmount,
                     amount: debtAmount,
                     dolar_google: debtDolarGoogle,
                     status: debtStatus,
@@ -68,6 +70,7 @@ export default function TestManageDebt({ setUpdateData, debtEdit, setVisibleUpda
                     id_user_creditor: debtIdUserCreditor,
                     id_user_debtor: debtIdUserDebtor,
                     detail: debtDetail,
+                    initial_amount: debtAmount,
                     amount: debtAmount,
                     dolar_google: debtDolarGoogle,
                     status: debtStatus,
@@ -83,6 +86,7 @@ export default function TestManageDebt({ setUpdateData, debtEdit, setVisibleUpda
             setDebtIdUserCreditor("");
             setDebtIdUserDebtor("");
             setDebtDetail("");
+            setDebtInitialAmount(null);
             setDebtAmount(null);
             setDebtDolarGoogle(null);
             setDebtStatus("open");
@@ -132,6 +136,23 @@ export default function TestManageDebt({ setUpdateData, debtEdit, setVisibleUpda
                     onChange={(e) => setDebtDetail(e.target.value)}
                     className="border rounded-lg p-2 bg-white"
                 />
+                {debtEdit ? 
+                    <>
+                        <label className="input-label">Initial Amount</label>
+                        <input
+                            type="number"
+                            placeholder=" "
+                            value={debtInitialAmount ?? ""}
+                            onChange={(e) => setDebtInitialAmount(e.target.value === "" ? null : Number(e.target.value))}
+                            className="border rounded-lg p-2 bg-white"  
+                        />
+                    </>
+                : 
+                    <>
+                    </>
+                }
+
+                
                 <label className="input-label">Amount*</label>
                 <input
                     type="number"
