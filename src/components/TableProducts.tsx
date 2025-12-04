@@ -142,7 +142,7 @@ function rowContent(
   ) {
 
   function selectDebtForPayment(debtData: Data) {
-    console.log("debtData: ", debtData)
+    // console.log("debtData: ", debtData)
     setNewPayment({
       id_debt: debtData._id,
       amount: null,
@@ -150,6 +150,9 @@ function rowContent(
       dolar_google: debtData.dolar_google, //  ATTENTION IMPORTANT this dolar google should update to the dolar google on the current date
       name: debtData.nombre,
       email: debtData.email,
+      phone: debtData.phone,
+      date_debt: debtData.date_debt,
+      initial_amount: debtData.initial_amount,
       currency: debtData.currency,
     })
     setVisibleManagePago(true)

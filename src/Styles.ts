@@ -260,6 +260,9 @@ export const useStylesGlobal = makeStyles()({
     show: {
         display: "block",
     },
+    showFlex: {
+        display: "flex",
+    },
     hide: {
         display: "none",
     },

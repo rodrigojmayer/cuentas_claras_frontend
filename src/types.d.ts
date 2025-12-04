@@ -91,6 +91,9 @@ export interface NewPayment {
     dolar_google?: number | null;
     name?: string | null;
     email?: string | null;
+    phone?: string | null;
+    date_debt?: date;
+    initial_amount?: number | null;
     currency?: string;
 }
 

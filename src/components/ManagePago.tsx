@@ -11,6 +11,7 @@ import { AcceptButton, CancelButton } from "./Buttons";
 import useUsers from "@/hooks/useUsers";
 import { useSession } from "next-auth/react";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 interface ManagePagoProps {
     setUpdateData: (visible: UpdateDataProps) => void;
@@ -33,6 +34,8 @@ export default function ManagePago({
     // const [nameDebtor, setNameDebtorl] = useState(newPayment.id_debt);
     // const [phone, setPhone] = useState<string>("");
     const [amount, setAmount] = useState<string>("");
+    const [showDetails, setShowDetails] = useState<boolean>(false);
+    
     // const [dateDue, setDateDue] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_due) : null);
     // const [currency, setCurrency] = useState<string>("$ARS");
     const [loading, setLoading] = useState(false);
@@ -130,8 +133,53 @@ export default function ManagePago({
                     <AcceptButton />
                 </Box>
             </form>
-            <Button className={classes.deployModalButton}>
-                <KeyboardArrowDownIcon fontSize="large"/>
+                <Box className={`${classes.customBoxRow} ${showDetails ? classes.show : classes.hide}`}>
+                    <a>
+                        Correo: {(newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email}
+                    </a>
+                </Box>
+                <Box className={`${classes.customBoxRow} ${showDetails ? classes.show : classes.hide}`}>
+                    <a>
+                        Teléfono: {newPayment?.phone}
+                    </a>
+                </Box>
+                <Box className={`${classes.customBoxRow} ${showDetails ? classes.show : classes.hide}`}>
+                    <a>
+                        Fecha: {newPayment?.date_debt}
+                    </a>
+                </Box>
+                <Box className={`${classes.customBoxRow} ${showDetails ? classes.show : classes.hide}`}>
+                    <a>
+                        Préstamo: {newPayment?.initial_amount}
+                    </a>
+                </Box>
+                <Box className={`${classes.customBoxRow} ${showDetails ? classes.show : classes.hide}`}>
+                    <a>
+                        Vencimiento: {newPayment?.email}
+                    </a>
+                </Box>
+                    
+                    {/* <Button
+                        // type={clicked? "button" : "submit"}
+                        variant="text"
+                        className={`${classes.btnCommonStyle} ${classes.btn_info}`}
+                        // color="inherit"
+                        onClick={() => {
+                            // const a = parseInt(newPayment?.pending, 10)
+                            setAmount(newPayment?.pending ? newPayment?.pending.toString() : "")
+                        }}
+                    > 
+                        Total
+                    </Button> */}
+            <Button 
+                className={classes.deployModalButton} 
+                onClick={() => setShowDetails(!showDetails)}
+            >
+                {showDetails ?
+                    <KeyboardArrowUpIcon fontSize="large"/>
+                    :
+                    <KeyboardArrowDownIcon fontSize="large"/>
+                }
             </Button>
         </div>
     )

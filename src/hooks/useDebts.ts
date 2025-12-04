@@ -4,7 +4,7 @@ import type { Debt } from "@/types";
 
 export default function useDebts() {
     const { data, error, isLoading, mutate } = useSWR<Debt[]>("/debts", getDebts);
-    console.log("data: ", data)
+    // console.log("data: ", data)
 
     return {
         debts: data,

@@ -58,6 +58,7 @@ export default function Home() {
  
   useEffect(() => {
     // console.log("debtsByCreditor: ", debtsByCreditor)
+    // console.log("debtsByDebtor: ", debtsByDebtor)
     if (!debtsByCreditor && !debtsByDebtor) return;
 
     const format = (date: string | null | undefined) => {
@@ -87,6 +88,8 @@ export default function Home() {
       id_user: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any)._id,
       email: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).email,
       phone: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).phone,
+      date_debt: format(d.date_debt),
+      initial_amount: d.initial_amount,
       currency: d?.currency,
     }));
 
@@ -104,9 +107,11 @@ export default function Home() {
       id_user: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any)._id,
       email: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).email,
       phone: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).phone,
+      date_debt: format(d.date_debt),
+      initial_amount: d.initial_amount,
       currency: d?.currency,
     }));
-
+    console.log("dataDebtor: ", dataDebtor)
     // unir y eliminar duplicados
     const map = new Map();
     [...dataCreditor, ...dataDebtor].forEach(item => {
@@ -150,18 +155,18 @@ export default function Home() {
   
   }, [filteredData]);
 
-  if (isLoadingUsers) return <p>Cargando usuarios...</p>;
-  if (isErrorUsers) return <p>Error al cargar usuarios</p>;
-  if (isLoadingDebts) return <p>Cargando deudas...</p>;
-  if (isErrorDebts) return <p>Error al cargar deudas</p>;
-  if (isLoadingPayments) return <p>Cargando pagos</p>;
-  if (isErrorPayments) return <p>Error al cargar pagos</p>;  
-  if (isLoadingAlerts) return <p>Cargando alertas</p>;
-  if (isErrorAlerts) return <p>Error al cargar alertas</p>;
-  if (isLoadingDebtsByCreditor) return <p>Cargando deudas por acreedor</p>;
-  if (isErrorDebtsByCreditor) return <p>Error al cargar deudas por acreedor</p>;
-  if (isLoadingDebtsByDebtor) return <p>Cargando deudas por deudor</p>;
-  if (isErrorDebtsByDebtor) return <p>Error al cargar deudas por deudor</p>;
+  // if (isLoadingUsers) return <p>Cargando usuarios...</p>;
+  // if (isErrorUsers) return <p>Error al cargar usuarios</p>;
+  // if (isLoadingDebts) return <p>Cargando deudas...</p>;
+  // if (isErrorDebts) return <p>Error al cargar deudas</p>;
+  // if (isLoadingPayments) return <p>Cargando pagos</p>;
+  // if (isErrorPayments) return <p>Error al cargar pagos</p>;  
+  // if (isLoadingAlerts) return <p>Cargando alertas</p>;
+  // if (isErrorAlerts) return <p>Error al cargar alertas</p>;
+  // if (isLoadingDebtsByCreditor) return <p>Cargando deudas por acreedor</p>;
+  // if (isErrorDebtsByCreditor) return <p>Error al cargar deudas por acreedor</p>;
+  // if (isLoadingDebtsByDebtor) return <p>Cargando deudas por deudor</p>;
+  // if (isErrorDebtsByDebtor) return <p>Error al cargar deudas por deudor</p>;
   // console.log("users: ", users);
   // console.log("debts: ", debts);
   // console.log("payments: ", payments);
