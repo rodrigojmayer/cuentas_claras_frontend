@@ -12,6 +12,8 @@ import useUsers from "@/hooks/useUsers";
 import { useSession } from "next-auth/react";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import useDebtsByDebtor from "@/hooks/useDebtsByDebtor";
+import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
 
 interface ManagePagoProps {
     setUpdateData: (visible: UpdateDataProps) => void;
@@ -30,6 +32,8 @@ export default function ManagePago({
     const { data: session } = useSession()
 
     const { classes } = useStylesGlobal()
+        const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor, mutateDebtsByCreditor } = useDebtsByCreditor();
+        const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor, mutateDebtsByDebtor } = useDebtsByDebtor();
     // const [idDebtor, setIdDebtor] = useState("");
     // const [nameDebtor, setNameDebtorl] = useState(newPayment.id_debt);
     // const [phone, setPhone] = useState<string>("");
@@ -61,6 +65,8 @@ export default function ManagePago({
                 }
                 console.log("createNewPayment: ", createNewPayment);
                 await postPayment(createNewPayment);
+                mutateDebtsByCreditor()
+                mutateDebtsByDebtor()
                 setVisibleManagePago?.(false);
             } catch (err: any) {
                 console.error("Error creating debt: ", err);
