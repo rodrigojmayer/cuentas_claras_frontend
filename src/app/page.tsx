@@ -89,6 +89,7 @@ export default function Home() {
       email: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).email,
       phone: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).phone,
       date_debt: format(d.date_debt),
+      date_due: format(d.date_due),
       initial_amount: d.initial_amount,
       currency: d?.currency,
     }));
@@ -108,6 +109,7 @@ export default function Home() {
       email: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).email,
       phone: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).phone,
       date_debt: format(d.date_debt),
+      date_due: format(d.date_due),
       initial_amount: d.initial_amount,
       currency: d?.currency,
     }));

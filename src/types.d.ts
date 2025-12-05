@@ -93,6 +93,7 @@ export interface NewPayment {
     email?: string | null;
     phone?: string | null;
     date_debt?: date;
+    date_due?: date;
     initial_amount?: number | null;
     currency?: string;
 }

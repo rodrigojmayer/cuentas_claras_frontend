@@ -168,11 +168,32 @@ export const useStylesGlobal = makeStyles()({
         height: "40px",
         marginTop: "10px",
     },
+    customBoxColumn: { 
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        width: "90%",
+        gap: 8,
+    },
     customBoxRow: {
         display: "flex",
         justifyContent:  "center",
         alignItems: "center",
         gap: 8,
+    },
+    detailPay: {
+        width: "10px",
+        margin: "0 auto",
+    },
+    detailPay1: {
+        width: "20%",
+        margin: "0 100",
+        marginRight: "1",
+    },
+    detailPay2: {
+        width: "20%",
+        margin: "0 100",
+        marginLeft: "1",
     },
     customBoxRowSpaces: {
         gap: 25,
@@ -287,4 +308,24 @@ export const useStylesGlobal = makeStyles()({
         backgroundColor: first_color3,
         borderRadius: "0px 0px 10px 10px",
     },
+
+    container: {
+        display: "flex",
+        flexDirection: "column",
+        gap: 10,
+        color: "white",
+        fontSize: "18px",
+    },
+    row: {
+        display: "flex",
+        alignItems: "center",   /* Alinea todo a la misma altura */
+        gap: 10,             /* Espacio entre columnas */
+    },
+    label: {
+        width: "140px",          /* MISMO ancho → columnas alineadas */
+        textAlign: "right",     /* Alinea etiquetas a la derecha */
+    },
+    value: {
+        minWidth: "150px",      /* Alinea inicio de los valores */
+     }
 })

@@ -84,7 +84,9 @@ export default function ManagePago({
     return (
         <div className="flex flex-col p-2 max-w-md">
             <h3 className="text-3xl text-center font-bold text-gray-800 dark:text-gray-100 mb-4">
-                {newPayment?.name || newPayment?.email}
+                {/* {newPayment?.name || newPayment?.email} */}
+                {newPayment?.name || ((newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email)}
+                
             </h3>
 
             
@@ -139,30 +141,48 @@ export default function ManagePago({
                     <AcceptButton />
                 </Box>
             </form>
-                <Box className={`${classes.customBoxRow} ${showDetails ? classes.show : classes.hide}`}>
-                    <a>
-                        Correo: {(newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email}
-                    </a>
-                </Box>
-                <Box className={`${classes.customBoxRow} ${showDetails ? classes.show : classes.hide}`}>
-                    <a>
-                        Teléfono: {newPayment?.phone}
-                    </a>
-                </Box>
-                <Box className={`${classes.customBoxRow} ${showDetails ? classes.show : classes.hide}`}>
-                    <a>
-                        Fecha: {newPayment?.date_debt}
-                    </a>
-                </Box>
-                <Box className={`${classes.customBoxRow} ${showDetails ? classes.show : classes.hide}`}>
-                    <a>
-                        Préstamo: {newPayment?.initial_amount}
-                    </a>
-                </Box>
-                <Box className={`${classes.customBoxRow} ${showDetails ? classes.show : classes.hide}`}>
-                    <a>
-                        Vencimiento: {newPayment?.email}
-                    </a>
+                {/* <Box className={`${showDetails ? classes.customBoxColumn : classes.hide } grid grid-cols-5 grid-rows-5 gap-4` }> */}
+                <Box className={classes.container }>
+                    <Box className={classes.row}>
+                        <a className={classes.label}>
+                            Teléfono: 
+                        </a>
+                        <a className={classes.value}>
+                            {newPayment?.phone}
+                        </a>
+                    </Box>
+                    <Box className={classes.row }>
+                        <a className={classes.label}>
+                            Correo:
+                        </a>
+                        <a className={classes.value}>  
+                            {(newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email}
+                        </a>
+                    </Box>
+                    <Box className={classes.row}>
+                        <a className={classes.label}>
+                            Fecha: 
+                        </a>
+                        <a className={classes.value}>
+                            {newPayment?.date_debt}
+                        </a>
+                    </Box>
+                    <Box className={classes.row}>
+                        <a className={classes.label}>
+                            Préstamo: 
+                        </a>
+                        <a className={classes.value}>
+                            {newPayment?.initial_amount}
+                        </a>
+                    </Box>
+                    <Box className={classes.row}>
+                        <a className={classes.label}>
+                            Vencimiento: 
+                        </a>    
+                        <a className={classes.value}>
+                            {newPayment?.date_due}
+                        </a>
+                    </Box>
                 </Box>
                     
                     {/* <Button

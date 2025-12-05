@@ -152,6 +152,7 @@ function rowContent(
       email: debtData.email,
       phone: debtData.phone,
       date_debt: debtData.date_debt,
+      date_due: debtData.date_due,
       initial_amount: debtData.initial_amount,
       currency: debtData.currency,
     })
