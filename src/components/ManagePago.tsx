@@ -142,7 +142,7 @@ export default function ManagePago({
                 </Box>
             </form>
                 {/* <Box className={`${showDetails ? classes.customBoxColumn : classes.hide } grid grid-cols-5 grid-rows-5 gap-4` }> */}
-                <Box className={classes.container }>
+                <Box className={`${showDetails ? classes.container : classes.hide }`}>
                     <Box className={classes.row}>
                         <a className={classes.label}>
                             Teléfono: 
