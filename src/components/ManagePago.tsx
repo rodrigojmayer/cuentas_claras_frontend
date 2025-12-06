@@ -165,6 +165,20 @@ export default function ManagePago({
                         </a>
                         <a className={classes.value}>
                             {newPayment?.date_debt}
+                            <a  className={"m-2"}>
+                                <Button
+                                    // type={clicked? "button" : "submit"}
+                                    variant="text"
+                                    className={`${classes.btnCommonStyle} ${classes.btn_info}`}
+                                    // color="inherit"
+                                    onClick={() => {
+                                        // const a = parseInt(newPayment?.pending, 10)
+                                        // setAmount(newPayment?.pending ? newPayment?.pending.toString() : "")
+                                    }}
+                                    > 
+                                    Historial
+                                </Button>
+                            </a>
                         </a>
                     </Box>
                     <Box className={classes.row}>
@@ -172,7 +186,7 @@ export default function ManagePago({
                             Préstamo: 
                         </a>
                         <a className={classes.value}>
-                            {newPayment?.initial_amount}
+                            {newPayment?.initial_amount} {newPayment?.currency}
                         </a>
                     </Box>
                     <Box className={classes.row}>
@@ -181,22 +195,24 @@ export default function ManagePago({
                         </a>    
                         <a className={classes.value}>
                             {newPayment?.date_due}
+                            <a  className={"m-2"}>
+                                <Button
+                                    // type={clicked? "button" : "submit"}
+                                    variant="text"
+                                    className={`${classes.btnCommonStyle} ${classes.btn_info}`}
+                                    // color="inherit"
+                                    onClick={() => {
+                                        // const a = parseInt(newPayment?.pending, 10)
+                                        // setAmount(newPayment?.pending ? newPayment?.pending.toString() : "")
+                                    }}
+                                    > 
+                                    Cambiar
+                                </Button>
+                            </a>
                         </a>
                     </Box>
                 </Box>
                     
-                    {/* <Button
-                        // type={clicked? "button" : "submit"}
-                        variant="text"
-                        className={`${classes.btnCommonStyle} ${classes.btn_info}`}
-                        // color="inherit"
-                        onClick={() => {
-                            // const a = parseInt(newPayment?.pending, 10)
-                            setAmount(newPayment?.pending ? newPayment?.pending.toString() : "")
-                        }}
-                    > 
-                        Total
-                    </Button> */}
             <Button 
                 className={classes.deployModalButton} 
                 onClick={() => setShowDetails(!showDetails)}

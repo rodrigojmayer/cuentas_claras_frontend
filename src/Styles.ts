@@ -196,7 +196,7 @@ export const useStylesGlobal = makeStyles()({
         marginLeft: "1",
     },
     customBoxRowSpaces: {
-        gap: 25,
+        gap: 10,
         margin: "16px 0 5px 0",
     },
     menu_options : {
