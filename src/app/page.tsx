@@ -279,7 +279,7 @@ export default function Home() {
         {visibleModalHistorial && (
             <div 
                 className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
-                onClick={() => setVisibleManagePago(false)} // click background to close
+                onClick={() => setVisibleModalHistorial(false)} // click background to close
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
@@ -289,7 +289,7 @@ export default function Home() {
                     <ModalHistorial
                       setUpdateData={setUpdateData}
                       debtSelected={newPayment}
-                      setVisibleManagePago={setVisibleManagePago}
+                      setVisibleModalHistorial={setVisibleModalHistorial}
                       historialDebt={historialDebt}
                       // filteredContacts={filteredContacts}
                     />

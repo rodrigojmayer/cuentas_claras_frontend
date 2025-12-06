@@ -18,14 +18,14 @@ import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
 interface ModalHistorialProps {
     setUpdateData: (visible: UpdateDataProps) => void;
     debtSelected?: NewPayment | null;
-    setVisibleManagePago: (visible: boolean) => void;
+    setVisibleModalHistorial: (visible: boolean) => void;
     historialDebt?: Debt[];
     // filteredContacts: Contacts[];
 }
 export default function ModalHistorial({ 
     setUpdateData, 
     debtSelected, 
-    setVisibleManagePago,
+    setVisibleModalHistorial,
     historialDebt, 
     // filteredContacts 
 }: ModalHistorialProps ) {
