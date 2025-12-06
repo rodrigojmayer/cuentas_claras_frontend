@@ -19,12 +19,14 @@ interface ManagePagoProps {
     setUpdateData: (visible: UpdateDataProps) => void;
     newPayment?: NewPayment | null;
     setVisibleManagePago: (visible: boolean) => void;
+    setVisibleModalHistorial: (visible: boolean) => void;
     // filteredContacts: Contacts[];
 }
 export default function ManagePago({ 
     setUpdateData, 
     newPayment, 
     setVisibleManagePago, 
+    setVisibleModalHistorial,
     // filteredContacts 
 }: ManagePagoProps ) {
     
@@ -32,8 +34,8 @@ export default function ManagePago({
     const { data: session } = useSession()
 
     const { classes } = useStylesGlobal()
-        const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor, mutateDebtsByCreditor } = useDebtsByCreditor();
-        const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor, mutateDebtsByDebtor } = useDebtsByDebtor();
+    const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor, mutateDebtsByCreditor } = useDebtsByCreditor();
+    const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor, mutateDebtsByDebtor } = useDebtsByDebtor();
     // const [idDebtor, setIdDebtor] = useState("");
     // const [nameDebtor, setNameDebtorl] = useState(newPayment.id_debt);
     // const [phone, setPhone] = useState<string>("");
@@ -44,10 +46,6 @@ export default function ManagePago({
     // const [currency, setCurrency] = useState<string>("$ARS");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
-
-    // const currencyOptions = ["$ARS", "$USD", "$EUR"]
-
-    // const test = "test"
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -88,8 +86,6 @@ export default function ManagePago({
                 {newPayment?.name || ((newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email)}
                 
             </h3>
-
-            
             <Box className={classes.customBoxRow}>
                 <a>
                     Pendiente
@@ -102,7 +98,6 @@ export default function ManagePago({
                 </a>
             </Box>
             <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 rounded-lg p-2">
-                
                 <Box className={classes.customBoxRow}>
                     <a>
                         Pago
@@ -165,7 +160,7 @@ export default function ManagePago({
                         </a>
                         <a className={classes.value}>
                             {newPayment?.date_debt}
-                            <a  className={"m-2"}>
+                            <b  className={"m-2"}>
                                 <Button
                                     // type={clicked? "button" : "submit"}
                                     variant="text"
@@ -173,12 +168,12 @@ export default function ManagePago({
                                     // color="inherit"
                                     onClick={() => {
                                         // const a = parseInt(newPayment?.pending, 10)
-                                        // setAmount(newPayment?.pending ? newPayment?.pending.toString() : "")
+                                        setVisibleModalHistorial(true)
                                     }}
                                     > 
                                     Historial
                                 </Button>
-                            </a>
+                            </b>
                         </a>
                     </Box>
                     <Box className={classes.row}>
@@ -195,7 +190,7 @@ export default function ManagePago({
                         </a>    
                         <a className={classes.value}>
                             {newPayment?.date_due}
-                            <a  className={"m-2"}>
+                            <b  className={"m-2"}>
                                 <Button
                                     // type={clicked? "button" : "submit"}
                                     variant="text"
@@ -208,11 +203,10 @@ export default function ManagePago({
                                     > 
                                     Cambiar
                                 </Button>
-                            </a>
+                            </b>
                         </a>
                     </Box>
                 </Box>
-                    
             <Button 
                 className={classes.deployModalButton} 
                 onClick={() => setShowDetails(!showDetails)}

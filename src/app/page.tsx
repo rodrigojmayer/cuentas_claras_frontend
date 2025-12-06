@@ -17,8 +17,9 @@ import useDebtsByDebtor from "@/hooks/useDebtsByDebtor";
 import MenuOptions from '@/components/MenuOptions';
 import ManageCargarPrestamo from '@/components/ManageCargarPrestamo';
 import ManagePago from '@/components/ManagePago';
-import { getUser } from '@/lib/api';
+import { getPaymentsByDebt, getUser } from '@/lib/api';
 import { useSession } from 'next-auth/react';
+import ModalHistorial from '@/components/ModalHistorial';
 
 // const dataC = [
 //   {_id: "test1", gestion: "ges1", nombre: "nom1", vencimiento:"venc1", pendiente:"pend1"},
@@ -55,7 +56,10 @@ export default function Home() {
   
   const [visibleManagePago, setVisibleManagePago] = useState(false);
   const [newPayment, setNewPayment] = useState<NewPayment | null>(null)
- 
+  
+  const [visibleModalHistorial, setVisibleModalHistorial] = useState(false);
+  const [historialDebt, setHistorialDebt] = useState();
+
   useEffect(() => {
     // console.log("debtsByCreditor: ", debtsByCreditor)
     // console.log("debtsByDebtor: ", debtsByDebtor)
@@ -156,7 +160,20 @@ export default function Home() {
     // console.log("uniqueContacts: ", uniqueContacts)
   
   }, [filteredData]);
+  useEffect(() => {
+     if (!visibleModalHistorial || !newPayment?.id_debt) return;
 
+    const fetchPayments = async () => {
+    try {
+      const payments = await getPaymentsByDebt(newPayment.id_debt);
+      setHistorialDebt(payments);
+    } catch (err: any) {
+      console.error("Error fetching payments: ", err);
+    }
+  };
+
+  fetchPayments();
+  }, [visibleModalHistorial, newPayment])
   // if (isLoadingUsers) return <p>Cargando usuarios...</p>;
   // if (isErrorUsers) return <p>Error al cargar usuarios</p>;
   // if (isLoadingDebts) return <p>Cargando deudas...</p>;
@@ -252,6 +269,28 @@ export default function Home() {
                       setUpdateData={setUpdateData}
                       newPayment={newPayment}
                       setVisibleManagePago={setVisibleManagePago}
+                      setVisibleModalHistorial={setVisibleModalHistorial}
+                      // filteredContacts={filteredContacts}
+                    />
+                </div>
+            </div>
+        )}
+
+        {visibleModalHistorial && (
+            <div 
+                className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+                onClick={() => setVisibleManagePago(false)} // click background to close
+            >
+                {/* --- MODAL CONTENT --- */}
+                <div
+                    className={`${classes.background_color3} ${classes.modalPago} p6 shadow-lg w-[90%] max-w-md text-white`}
+                    onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                >
+                    <ModalHistorial
+                      setUpdateData={setUpdateData}
+                      debtSelected={newPayment}
+                      setVisibleManagePago={setVisibleManagePago}
+                      historialDebt={historialDebt}
                       // filteredContacts={filteredContacts}
                     />
                 </div>

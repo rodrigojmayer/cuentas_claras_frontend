@@ -30,6 +30,19 @@ export async function getPayments() {
     const res = await fetch(`${API_URL}/payments`);
     return res.json();
 }
+export async function getPaymentsByDebt(id_debt: string ) {
+    const res = await fetch(`${API_URL}/payments/debt/${id_debt}`);
+    
+    if(!res.ok) {
+        // Try to read the message if the server sent one
+        const errorText = await res.text();
+        console.error("Error fetching payments: ", res.status, errorText);
+
+        // Throw a clear error so your component can catch it
+        throw new Error(`Failed to fetch payments (status ${res.status})`);
+    }
+    return res.json();
+}
 
 export async function getAlerts() {
     const res = await fetch(`${API_URL}/alerts`);
