@@ -87,7 +87,7 @@ export default function ModalHistorial({
                 Historial
             </h3>
             <Box className={classes.customBoxRow}>
-                <a>
+                {/* <a>
                     Pendiente
                 </a>
                 <a>
@@ -95,8 +95,59 @@ export default function ModalHistorial({
                 </a>
                 <a>
                     {debtSelected?.currency}
+                </a> */}
+            </Box>
+            <Box className={classes.customBoxRow}>
+                <a>
+                    {debtSelected?.date_debt}
                 </a>
             </Box>
+            <Box className={classes.customBoxRow}>
+                 <a>
+                    Cotización Dolar: 
+                </a>
+                <a>
+                    {debtSelected?.dolar_google}
+                </a>
+            </Box>
+            <Box className={classes.customBoxRow}>
+                 <a>
+                    Pendiente: 
+                </a>
+                <a>
+                    {debtSelected?.initial_amount} {debtSelected?.currency}
+                </a>
+            </Box>
+            { historialDebt && historialDebt.length > 0 &&
+                historialDebt.map((debt:Debt, index: number) => (
+                    <Box key={index}>
+                        <Box className={classes.customBoxRow} >
+                            <a>
+                                Cotización Dolar: 
+                            </a>
+                            <a>
+                                {debt?.dolar_google}
+                            </a>
+                        </Box>
+                        <Box className={classes.customBoxRow}>
+                            <a>
+                                Pago: 
+                            </a>
+                            <a>
+                                {debt?.amount}
+                            </a>
+                        </Box>
+                        <Box className={classes.customBoxRow}>
+                            <a>
+                                Pendiente: 
+                            </a>
+                            <a>
+                                {debt?.amount}
+                            </a>
+                        </Box>
+                    </Box>
+                ))
+            }
           
         </div>
     )
