@@ -152,7 +152,7 @@ export default function ModalHistorial({
                                 Pendiente: 
                             </a>
                             <a>
-                                {payment?.amount}
+                                {payment?.pending}  {debtSelected?.currency}
                             </a>
                         </Box>
                     </Box>

@@ -78,6 +78,7 @@ export interface Payment {
     _id: string;
     id_debt: string;
     amount: number | null;
+    pending: number | null;
     date_payment: date;
     dolar_google?: number | null;
     enabled: boolean;
@@ -87,7 +88,8 @@ export interface Payment {
 export interface NewPayment {
     id_debt: string;
     amount: number | null;
-    pending?: string | null;
+    // pending?: string | null;
+    pending?: number | null;
     dolar_google?: number | null;
     name?: string | null;
     email?: string | null;

@@ -135,7 +135,7 @@ export async function postDebt({id_user_creditor, id_user_debtor, detail, initia
     }
 }
 
-export async function postPayment({id_debt, amount, dolar_google}: NewPayment) {
+export async function postPayment({id_debt, amount, pending, dolar_google}: NewPayment) {
     try {
         const res = await fetch(`${API_URL}/payments`, {
             method: "POST",
@@ -145,6 +145,7 @@ export async function postPayment({id_debt, amount, dolar_google}: NewPayment) {
             body: JSON.stringify({
                 id_debt,
                 amount,
+                pending,
                 dolar_google
             })
         })

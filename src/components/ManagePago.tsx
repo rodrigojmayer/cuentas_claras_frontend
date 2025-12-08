@@ -59,6 +59,7 @@ export default function ManagePago({
                 const createNewPayment: NewPayment = {
                     id_debt: newPayment?.id_debt || "",
                     amount: Number(amount),
+                    pending: Number(newPayment?.pending) - Number(amount)
                     // dolar_google: ???,   //  ATTENTION IMPORTANT this dolar google should update to the dolar google on the current date
                 }
                 console.log("createNewPayment: ", createNewPayment);
@@ -110,7 +111,7 @@ export default function ManagePago({
                             const val = event.target.value;
                             if (/^\d*$/.test(val)) {
                                 if(Number(val) > Number(newPayment?.pending))
-                                    setAmount(newPayment?.pending || "");
+                                    setAmount(newPayment?.pending ? newPayment?.pending.toString() : "");
                                 else
                                     setAmount(val);
                             }
