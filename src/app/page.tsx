@@ -59,6 +59,8 @@ export default function Home() {
   
   const [visibleModalHistorial, setVisibleModalHistorial] = useState(false);
   const [historialDebtPayments, setHistorialDebtPayments] = useState();
+  const [visibleModalCambiarFecha, setVisibleModalCambiarFecha] = useState(false);
+  const [dataCambiarFecha, setDataCambiarFecha] = useState();
 
     const date_format = (date: string | null | undefined) => {
       if (!date) return "—";
@@ -292,12 +294,30 @@ export default function Home() {
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ModalHistorial
-                      setUpdateData={setUpdateData}
                       debtSelected={newPayment}
-                      setVisibleModalHistorial={setVisibleModalHistorial}
                       historialDebtPayments={historialDebtPayments}
-                      // filteredContacts={filteredContacts}
                     />
+                </div>
+            </div>
+        )}
+
+        {visibleModalCambiarFecha && (
+            <div 
+                className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+                onClick={() => setVisibleModalHistorial(false)} // click background to close
+            >
+                {/* --- MODAL CONTENT --- */}
+                <div
+                    className={`${classes.background_color3} ${classes.modalBorder} p6 shadow-lg w-[85%] max-w-md text-white`}
+                    onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                >
+                  {/* <ModalCambiarFecha
+                    setUpdateData={setUpdateData}
+                    debtSelected={newPayment}
+                    setVisibleModalHistorial={setVisibleModalHistorial}
+                    historialDebtPayments={historialDebtPayments}
+                    // filteredContacts={filteredContacts}
+                  /> */}
                 </div>
             </div>
         )}
