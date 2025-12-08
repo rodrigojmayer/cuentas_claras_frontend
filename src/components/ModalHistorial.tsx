@@ -66,7 +66,7 @@ export default function ModalHistorial({
                                 Cantidad: 
                             </a>
                             <a>
-                                {payment?.amount}
+                                {payment?.amount} {debtSelected?.currency}
                             </a>
                         </Box>
                         <Box className={classes.customBoxRow}>
@@ -74,7 +74,7 @@ export default function ModalHistorial({
                                 Pendiente: 
                             </a>
                             <a>
-                                {payment?.pending}  {debtSelected?.currency}
+                                {payment?.pending} {debtSelected?.currency}
                             </a>
                         </Box>
                     </Box>
