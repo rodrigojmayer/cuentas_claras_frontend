@@ -1,4 +1,4 @@
-import { NewUser, NewDebt, NewPayment, NewAlert, User, Alert, Debt, Payment } from "@/types";
+import { NewUser, NewDebt, NewPayment, NewAlert, User, Alert, Debt, Payment, UpdateDebt } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/api";
 
@@ -213,7 +213,7 @@ export async function patchUser({_id, email, phone, name, enabled, deleted}: Use
 }
 
 export async function patchDebt({_id, id_user_creditor, id_user_debtor, date_debt, detail, initial_amount, amount, dolar_google, status, date_due,alert_enabled, alerted, currency, enabled, deleted}: Debt) {
-    console.log("dolar_google: ", dolar_google);
+    // console.log("dolar_google: ", dolar_google);
     try {
         const res = await fetch(`${API_URL}/debts/${_id}`, {
             method: "PATCH",
@@ -233,6 +233,31 @@ export async function patchDebt({_id, id_user_creditor, id_user_debtor, date_deb
                 currency,
                 enabled,
                 deleted
+            })
+        })
+        if(!res.ok) {
+            const errorText = await res.text();
+            console.error("Error patching debt: ", res.status, errorText);
+            throw new Error(`Failed to patch debt (status ${res.status})`);
+        }
+
+        const updateDebt = await res.json();
+        return updateDebt;
+    } catch (error) {
+        console.error("Network error patching debt: ", error);
+        throw new Error("Unable to reach server");
+    }
+}
+
+export async function patchDebtDateDue({ _id, amount, date_due }: UpdateDebt) {
+    // console.log("dolar_google: ", dolar_google);
+    try {
+        const res = await fetch(`${API_URL}/debts/${_id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                amount,
+                date_due,
             })
         })
         if(!res.ok) {
