@@ -72,7 +72,8 @@ export interface NewDebt {
 }
 export interface UpdateDebt {
     _id: string;
-    amount: number | null;
+    amount?: number | null;
+    date_due?: date;
 }
 export interface Payment {
     _id: string;
