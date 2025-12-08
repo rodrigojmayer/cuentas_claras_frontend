@@ -3,7 +3,7 @@
 
 import { createByDebtorEmail, findUserByEmail, getPaymentsByDebt, postDebt, postPayment, postUser } from "@/lib/api";
 import { useStylesGlobal } from "@/Styles";
-import { Contacts, Data, DataTable, Debt, NewDebt, NewPayment, NewUser, UpdateDataProps, UpdateDebt } from "@/types";
+import { Contacts, Data, DataTable, Debt, NewDebt, NewPayment, NewUser, Payment, UpdateDataProps, UpdateDebt } from "@/types";
 import { Autocomplete, Box, Button, MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
 import DatePickerComponent from "./DatePickerComponent";
@@ -19,14 +19,14 @@ interface ModalHistorialProps {
     setUpdateData: (visible: UpdateDataProps) => void;
     debtSelected?: NewPayment | null;
     setVisibleModalHistorial: (visible: boolean) => void;
-    historialDebt?: Debt[];
+    historialDebtPayments?: Payment[];
     // filteredContacts: Contacts[];
 }
 export default function ModalHistorial({ 
     setUpdateData, 
     debtSelected, 
     setVisibleModalHistorial,
-    historialDebt, 
+    historialDebtPayments, 
     // filteredContacts 
 }: ModalHistorialProps ) {
     
@@ -46,7 +46,7 @@ export default function ModalHistorial({
     // const [currency, setCurrency] = useState<string>("$ARS");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
-    console.log("historialDebt: ", historialDebt)
+    console.log("historialDebtPayments: ", historialDebtPayments)
     // async function handleSubmit(e: React.FormEvent) {
     //     e.preventDefault();
     //     setLoading(true);
@@ -118,15 +118,25 @@ export default function ModalHistorial({
                     {debtSelected?.initial_amount} {debtSelected?.currency}
                 </a>
             </Box>
-            { historialDebt && historialDebt.length > 0 &&
-                historialDebt.map((debt:Debt, index: number) => (
+            { historialDebtPayments && historialDebtPayments.length > 0 &&
+                historialDebtPayments.map((payment:Payment, index: number) => (
                     <Box key={index}>
+                        <Box className={classes.customBoxRow} >
+                            <a>
+                               -
+                            </a>   
+                        </Box>
+                        <Box className={classes.customBoxRow} >
+                            <a>
+                                {payment?.date_payment}
+                            </a>
+                        </Box>
                         <Box className={classes.customBoxRow} >
                             <a>
                                 Cotización Dolar: 
                             </a>
                             <a>
-                                {debt?.dolar_google}
+                                {payment?.dolar_google}
                             </a>
                         </Box>
                         <Box className={classes.customBoxRow}>
@@ -134,7 +144,7 @@ export default function ModalHistorial({
                                 Pago: 
                             </a>
                             <a>
-                                {debt?.amount}
+                                {payment?.amount}
                             </a>
                         </Box>
                         <Box className={classes.customBoxRow}>
@@ -142,7 +152,7 @@ export default function ModalHistorial({
                                 Pendiente: 
                             </a>
                             <a>
-                                {debt?.amount}
+                                {payment?.amount}
                             </a>
                         </Box>
                     </Box>
