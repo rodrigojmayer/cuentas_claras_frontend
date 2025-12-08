@@ -87,7 +87,6 @@ export default function ManagePago({
             <h3 className="text-3xl text-center font-bold text-gray-800 dark:text-gray-100 mb-4">
                 {/* {newPayment?.name || newPayment?.email} */}
                 {newPayment?.name || ((newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email)}
-                
             </h3>
             <Box className={classes.customBoxRow}>
                 <a>
