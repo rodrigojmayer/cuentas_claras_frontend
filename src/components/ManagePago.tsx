@@ -20,6 +20,7 @@ interface ManagePagoProps {
     newPayment?: NewPayment | null;
     setVisibleManagePago: (visible: boolean) => void;
     setVisibleModalHistorial: (visible: boolean) => void;
+    setVisibleModalCambiarFecha: (visible: boolean) => void;
     // filteredContacts: Contacts[];
 }
 export default function ManagePago({ 
@@ -27,6 +28,7 @@ export default function ManagePago({
     newPayment, 
     setVisibleManagePago, 
     setVisibleModalHistorial,
+    setVisibleModalCambiarFecha,
     // filteredContacts 
 }: ManagePagoProps ) {
     
@@ -199,7 +201,7 @@ export default function ManagePago({
                                     // color="inherit"
                                     onClick={() => {
                                         // const a = parseInt(newPayment?.pending, 10)
-                                        // setAmount(newPayment?.pending ? newPayment?.pending.toString() : "")
+                                        setVisibleModalCambiarFecha(true)
                                     }}
                                     > 
                                     Cambiar

@@ -15,12 +15,14 @@ interface DatePickerComponentProps {
     dateProp: Date | null;
     setDateProp: (visible: Date) => void;
     labelProp?: string;
+    widthProp?: string;
 }
 
-export default function DatePickerComponent({ dateProp, setDateProp, labelProp }: DatePickerComponentProps) {
+export default function DatePickerComponent({ dateProp, setDateProp, labelProp, widthProp }: DatePickerComponentProps) {
     
     const breakpointLG = useMediaQuery('(min-width:1024px)')
-    const DatePickerComponent = breakpointLG ? DatePicker : MobileDatePicker;
+    // const DatePickerComponent = breakpointLG ? DatePicker : MobileDatePicker;
+    const DatePickerComponent = DatePicker ;
     
     const [openDatePicker, setOpenDatePicker] = useState(false);
     
@@ -32,8 +34,9 @@ export default function DatePickerComponent({ dateProp, setDateProp, labelProp }
 
     return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={['DatePicker']} >
-                <DatePickerComponent
+            {/* <DemoContainer components={['DatePicker']} > */}
+            <DatePicker
+                // <DatePickerComponent
                     className="border rounded-lg p-2 bg-white"
                     label={labelProp}
                     format="DD/MM/YYYY"
@@ -42,27 +45,33 @@ export default function DatePickerComponent({ dateProp, setDateProp, labelProp }
                     slotProps={{
                         textField: {
                             size: 'small',
+                            fullWidth: false,            // <- make sure it's not full width
+                            sx: {
+                                width: `${widthProp || "auto"}`,          // ← FINAL WIDTH
+                            },
                             InputProps: {
-                            endAdornment: (
-                            <InputAdornment
-                                position="end"
-                            >
-                            <CalendarMonthRoundedIcon 
-                                onClick = {() => setOpenDatePicker(true)}
-                                style={{cursor: "pointer"} }
-                            />
-                            </InputAdornment>
-                            ),
+                                endAdornment: (
+                                <InputAdornment
+                                    position="end"
+                                >
+                                <CalendarMonthRoundedIcon 
+                                    onClick = {() => setOpenDatePicker(true)}
+                                    style={{cursor: "pointer"} }
+                                />
+                                </InputAdornment>
+                                ),
                             },
                         },
                     }}
                     sx={{ 
                         marginTop: "-8px !important"
                     }} 
-                    open={breakpointLG ? openDatePicker :undefined}
-                    onClose={breakpointLG ? () => setOpenDatePicker(false) :()=>{}}
+                    // open={breakpointLG ? openDatePicker :undefined}
+                    open={openDatePicker}
+                    // onClose={breakpointLG ? () => setOpenDatePicker(false) :()=>{}}
+                    onClose={() => setOpenDatePicker(false)}
                 />
-            </DemoContainer>
+            {/* </DemoContainer> */}
         </LocalizationProvider>
     )
 }
