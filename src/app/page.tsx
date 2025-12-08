@@ -58,14 +58,9 @@ export default function Home() {
   const [newPayment, setNewPayment] = useState<NewPayment | null>(null)
   
   const [visibleModalHistorial, setVisibleModalHistorial] = useState(false);
-  const [historialDebt, setHistorialDebt] = useState();
+  const [historialDebtPayments, setHistorialDebtPayments] = useState();
 
-  useEffect(() => {
-    // console.log("debtsByCreditor: ", debtsByCreditor)
-    // console.log("debtsByDebtor: ", debtsByDebtor)
-    if (!debtsByCreditor && !debtsByDebtor) return;
-
-    const format = (date: string | null | undefined) => {
+    const date_format = (date: string | null | undefined) => {
       if (!date) return "—";
 
       const d = new Date(date);
@@ -78,6 +73,12 @@ export default function Home() {
       }).format(d);
     };
 
+  useEffect(() => {
+    // console.log("debtsByCreditor: ", debtsByCreditor)
+    // console.log("debtsByDebtor: ", debtsByDebtor)
+    if (!debtsByCreditor && !debtsByDebtor) return;
+
+
     const dataCreditor = (debtsByCreditor ?? []).map(d => ({
       _id: d._id,
       gestion: "Préstamo",
@@ -85,15 +86,15 @@ export default function Home() {
         typeof d?.id_user_debtor === "object"
           ? (d.id_user_debtor as any).name
           : d?.id_user_debtor,
-      vencimiento: format(d.date_due),
+      vencimiento: date_format(d.date_due),
       pendiente: `${d.amount} ${d.currency}`,
       dolar_google: d.dolar_google,
       alerta: d.alert_enabled && d.alerted,
       id_user: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any)._id,
       email: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).email,
       phone: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).phone,
-      date_debt: format(d.date_debt),
-      date_due: format(d.date_due),
+      date_debt: date_format(d.date_debt),
+      date_due: date_format(d.date_due),
       initial_amount: d.initial_amount,
       currency: d?.currency,
     }));
@@ -105,15 +106,15 @@ export default function Home() {
         typeof d?.id_user_creditor === "object"
           ? (d.id_user_creditor as any).name
           : d?.id_user_creditor,
-      vencimiento: format(d.date_due),
+      vencimiento: date_format(d.date_due),
       pendiente: `${d.amount} ${d.currency}`,
       dolar_google: d.dolar_google,
       alerta: d.alert_enabled && d.alerted,
       id_user: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any)._id,
       email: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).email,
       phone: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).phone,
-      date_debt: format(d.date_debt),
-      date_due: format(d.date_due),
+      date_debt: date_format(d.date_debt),
+      date_due: date_format(d.date_due),
       initial_amount: d.initial_amount,
       currency: d?.currency,
     }));
@@ -166,7 +167,11 @@ export default function Home() {
     const fetchPayments = async () => {
     try {
       const payments = await getPaymentsByDebt(newPayment.id_debt);
-      setHistorialDebt(payments);
+      const paymentsDateFormat = payments.map((p: any) => ({
+        ...p,
+        date_payment: date_format(p.date_payment),
+      }))
+      setHistorialDebtPayments(paymentsDateFormat);
     } catch (err: any) {
       console.error("Error fetching payments: ", err);
     }
@@ -290,7 +295,7 @@ export default function Home() {
                       setUpdateData={setUpdateData}
                       debtSelected={newPayment}
                       setVisibleModalHistorial={setVisibleModalHistorial}
-                      historialDebt={historialDebt}
+                      historialDebtPayments={historialDebtPayments}
                       // filteredContacts={filteredContacts}
                     />
                 </div>
