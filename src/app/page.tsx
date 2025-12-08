@@ -20,6 +20,7 @@ import ManagePago from '@/components/ManagePago';
 import { getPaymentsByDebt, getUser } from '@/lib/api';
 import { useSession } from 'next-auth/react';
 import ModalHistorial from '@/components/ModalHistorial';
+import ModalCambiarFecha from '@/components/ModalCambiarFecha';
 
 // const dataC = [
 //   {_id: "test1", gestion: "ges1", nombre: "nom1", vencimiento:"venc1", pendiente:"pend1"},
@@ -277,6 +278,7 @@ export default function Home() {
                       newPayment={newPayment}
                       setVisibleManagePago={setVisibleManagePago}
                       setVisibleModalHistorial={setVisibleModalHistorial}
+                      setVisibleModalCambiarFecha={setVisibleModalCambiarFecha}
                       // filteredContacts={filteredContacts}
                     />
                 </div>
@@ -304,20 +306,20 @@ export default function Home() {
         {visibleModalCambiarFecha && (
             <div 
                 className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
-                onClick={() => setVisibleModalHistorial(false)} // click background to close
+                onClick={() => setVisibleModalCambiarFecha(false)} // click background to close
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
                     className={`${classes.background_color3} ${classes.modalBorder} p6 shadow-lg w-[85%] max-w-md text-white`}
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
-                  {/* <ModalCambiarFecha
-                    setUpdateData={setUpdateData}
+                  <ModalCambiarFecha
+                    // setUpdateData={setUpdateData}
                     debtSelected={newPayment}
-                    setVisibleModalHistorial={setVisibleModalHistorial}
-                    historialDebtPayments={historialDebtPayments}
+                    setVisibleModalCambiarFecha={setVisibleModalCambiarFecha}
+                    // historialDebtPayments={historialDebtPayments}
                     // filteredContacts={filteredContacts}
-                  /> */}
+                  />
                 </div>
             </div>
         )}
