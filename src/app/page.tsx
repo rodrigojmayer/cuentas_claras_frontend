@@ -21,6 +21,7 @@ import { getPaymentsByDebt, getUser } from '@/lib/api';
 import { useSession } from 'next-auth/react';
 import ModalHistorial from '@/components/ModalHistorial';
 import ModalCambiarFecha from '@/components/ModalCambiarFecha';
+import { dateFormat } from '@/utils/dateFormat';
 
 // const dataC = [
 //   {_id: "test1", gestion: "ges1", nombre: "nom1", vencimiento:"venc1", pendiente:"pend1"},
@@ -63,18 +64,6 @@ export default function Home() {
   const [visibleModalCambiarFecha, setVisibleModalCambiarFecha] = useState(false);
   const [dataCambiarFecha, setDataCambiarFecha] = useState();
 
-    const date_format = (date: string | null | undefined) => {
-      if (!date) return "—";
-
-      const d = new Date(date);
-      if (isNaN(d.getTime())) return "—";
-
-      return new Intl.DateTimeFormat("es-ES", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "2-digit"
-      }).format(d);
-    };
 
   useEffect(() => {
     // console.log("debtsByCreditor: ", debtsByCreditor)
@@ -89,15 +78,15 @@ export default function Home() {
         typeof d?.id_user_debtor === "object"
           ? (d.id_user_debtor as any).name
           : d?.id_user_debtor,
-      vencimiento: date_format(d.date_due),
+      vencimiento: dateFormat(d.date_due),
       pendiente: `${d.amount} ${d.currency}`,
       dolar_google: d.dolar_google,
       alerta: d.alert_enabled && d.alerted,
       id_user: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any)._id,
       email: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).email,
       phone: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).phone,
-      date_debt: date_format(d.date_debt),
-      date_due: date_format(d.date_due),
+      date_debt: dateFormat(d.date_debt),
+      date_due: dateFormat(d.date_due),
       initial_amount: d.initial_amount,
       currency: d?.currency,
     }));
@@ -109,15 +98,15 @@ export default function Home() {
         typeof d?.id_user_creditor === "object"
           ? (d.id_user_creditor as any).name
           : d?.id_user_creditor,
-      vencimiento: date_format(d.date_due),
+      vencimiento: dateFormat(d.date_due),
       pendiente: `${d.amount} ${d.currency}`,
       dolar_google: d.dolar_google,
       alerta: d.alert_enabled && d.alerted,
       id_user: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any)._id,
       email: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).email,
       phone: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).phone,
-      date_debt: date_format(d.date_debt),
-      date_due: date_format(d.date_due),
+      date_debt: dateFormat(d.date_debt),
+      date_due: dateFormat(d.date_due),
       initial_amount: d.initial_amount,
       currency: d?.currency,
     }));
@@ -172,7 +161,7 @@ export default function Home() {
       const payments = await getPaymentsByDebt(newPayment.id_debt);
       const paymentsDateFormat = payments.map((p: any) => ({
         ...p,
-        date_payment: date_format(p.date_payment),
+        date_payment: dateFormat(p.date_payment),
       }))
       setHistorialDebtPayments(paymentsDateFormat);
     } catch (err: any) {
@@ -319,6 +308,7 @@ export default function Home() {
                     setVisibleModalCambiarFecha={setVisibleModalCambiarFecha}
                     // historialDebtPayments={historialDebtPayments}
                     // filteredContacts={filteredContacts}
+                    setNewPayment={setNewPayment}
                   />
                 </div>
             </div>
