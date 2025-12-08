@@ -234,6 +234,9 @@ export const useStylesGlobal = makeStyles()({
     modalPago : {
         borderRadius: "10px 10px 0 10px",
     },
+    modalBorder : {
+        borderRadius: "10px",
+    },
     main_background_colorDD: {
         backgroundColor: first_color,
     },
