@@ -13,6 +13,7 @@ interface TestManagePaymentProps {
 export default function TestManagePayment({ setUpdateData, paymentEdit, setVisibleUpdatePayment }: TestManagePaymentProps ) {
     const [paymentIdDebt, setPaymentIdDebt] = useState<string>(paymentEdit ? paymentEdit.id_debt : "");
     const [paymentAmount, setPaymentAmount] = useState<number | null>(paymentEdit ? paymentEdit.amount : null);
+    const [paymentPending, setPaymentPending] = useState<number | null>(paymentEdit ? paymentEdit.amount : null);
     const [paymentDatePayment, setPaymentDatePayment] = useState<Date | null>(paymentEdit ? new Date(paymentEdit.date_payment) : null);
     const [paymentDolarGoogle, setPaymentDolarGoogle] = useState<number | null | undefined>(paymentEdit ? paymentEdit.dolar_google : null);
     const [paymentEnabled, setPaymentEnabled] = useState<boolean>(paymentEdit ? paymentEdit.enabled : true);
@@ -32,6 +33,7 @@ export default function TestManagePayment({ setUpdateData, paymentEdit, setVisib
                     _id: paymentEdit._id,
                     id_debt: paymentIdDebt,
                     amount: paymentAmount,
+                    pending: paymentPending,
                     date_payment: paymentDatePayment,
                     dolar_google: paymentDolarGoogle,
                     enabled: paymentEnabled,
@@ -92,6 +94,15 @@ export default function TestManagePayment({ setUpdateData, paymentEdit, setVisib
                     placeholder=" "
                     value={paymentAmount ?? ""}
                     onChange={(e) => setPaymentAmount(e.target.value === "" ? null : Number(e.target.value))}
+                    className="border rounded-lg p-2 bg-white"
+                    required
+                />
+                <label className="input-label">Pending</label>
+                <input
+                    type="number"
+                    placeholder=" "
+                    value={paymentPending ?? ""}
+                    onChange={(e) => setPaymentPending(e.target.value === "" ? null : Number(e.target.value))}
                     className="border rounded-lg p-2 bg-white"
                     required
                 />
