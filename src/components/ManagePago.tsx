@@ -56,7 +56,7 @@ export default function ManagePago({
 
         // console.log("email: ", email)
 
-        if(amount) { 
+        if(amount && Number(amount) > 0) { 
             try {
                 const createNewPayment: NewPayment = {
                     id_debt: newPayment?.id_debt || "",
