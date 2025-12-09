@@ -39,7 +39,7 @@ export default function ModalCambiarFecha({
         setLoading(true);
         setMessage(null);
 
-        if(newDate && debtSelected) { 
+        if( debtSelected) { 
             try {
                 const updateDateDueDebt: UpdateDebt = {
                     _id: debtSelected.id_debt ,
@@ -47,7 +47,7 @@ export default function ModalCambiarFecha({
                 }
                 // console.log("updateDateDueDebt: ", updateDateDueDebt);
                 await patchDebtDateDue(updateDateDueDebt);
-                await setNewPayment({...debtSelected, date_due: dateFormat(newDate.toString()) })
+                await setNewPayment({...debtSelected, date_due: dateFormat(newDate?.toString()) })
                 mutateDebtsByCreditor()
                 mutateDebtsByDebtor()
                 setVisibleModalCambiarFecha(false)
@@ -59,8 +59,8 @@ export default function ModalCambiarFecha({
                 // setUpdateData({state: true, data: "debts"})
             }
         } else {
-            setMessage("Ingresar pago")
-            alert("Ingresar pago")
+            setMessage("Deuda no seleccionada")
+            // alert("Ingresar pago")
         }
     }
 
