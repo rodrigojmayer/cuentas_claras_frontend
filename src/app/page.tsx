@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useState } from 'react';
-import { CloseMenuButton, MenuButton, PlusButton } from "@/components/Buttons";
+import { CloseMenuButton, FilterButton, MenuButton, PlusButton } from "@/components/Buttons";
 import { AppBar, Box, Grid } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useStylesGlobal } from '../Styles';
@@ -221,36 +221,41 @@ export default function Home() {
         setVisibleManagePago={setVisibleManagePago}
         setNewPayment= {setNewPayment}
       />
-        <Box className={` ${classes.customPlusIconBoxRow}`}>
-          <PlusButton
-            sizeIco={"55px !important"}
-            // clicked={addInputCustomField}
-            clicked={() => setVisibleManageCargarPrestamo(true)}
-          />
-        </Box>
-        <MenuOptions
-            open={openMenu} 
-            handleClose={handleCloseMenu} 
-          //  onData = {handleOpenOptions}
-        /> 
-        {visibleManageCargarPrestamo && (
-            <div 
-                className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
-                onClick={() => setVisibleManageCargarPrestamo(false)} // click background to close
-            >
-                {/* --- MODAL CONTENT --- */}
-                <div
-                    className={`${classes.background_color3} p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white`}
-                    onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
-                >
-                    <ManageCargarPrestamo
-                      setUpdateData={setUpdateData}
-                      // userEdit={userEdit}
-                      setVisibleManageCargarPrestamo={setVisibleManageCargarPrestamo}
-                      filteredContacts={filteredContacts}
-                    />
-                </div>
-            </div>
+      <Box className={` ${classes.customPlusIconBoxRow}`}>
+        <FilterButton
+          // sizeIco={"55px !important"}
+          // clicked={addInputCustomField}
+          clicked={() => setVisibleManageCargarPrestamo(true)}
+        />
+        <PlusButton
+          // sizeIco={"55px !important"}
+          // clicked={addInputCustomField}
+          clicked={() => setVisibleManageCargarPrestamo(true)}
+        />
+      </Box>
+      <MenuOptions
+          open={openMenu} 
+          handleClose={handleCloseMenu} 
+        //  onData = {handleOpenOptions}
+      /> 
+      {visibleManageCargarPrestamo && (
+          <div 
+              className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+              onClick={() => setVisibleManageCargarPrestamo(false)} // click background to close
+          >
+              {/* --- MODAL CONTENT --- */}
+              <div
+                  className={`${classes.background_color3} p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white`}
+                  onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+              >
+                  <ManageCargarPrestamo
+                    setUpdateData={setUpdateData}
+                    // userEdit={userEdit}
+                    setVisibleManageCargarPrestamo={setVisibleManageCargarPrestamo}
+                    filteredContacts={filteredContacts}
+                  />
+              </div>
+          </div>
         )}
         {visibleManagePago && (
             <div 

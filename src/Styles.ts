@@ -58,7 +58,7 @@ export const useStylesGlobal = makeStyles()({
         height: '44px',
       },
       display: 'flex',
-    //   margin: "auto",
+      margin: "auto",
     //   marginRight: "0",
       borderRadius: "18px 18px 0px 0px",
     },
@@ -148,8 +148,8 @@ export const useStylesGlobal = makeStyles()({
     plusIcon: {
       display: "flex",
       // margin: "0 5px",
-      marginRight: "15%",
-      marginTop: "5%",
+    //   marginRight: "15%",
+    //   marginTop: "5%",
       padding: "1px 1px",
       backgroundColor: "rgba(77, 168, 218, 0)",
       '& .MuiSvgIcon-root': {
@@ -162,10 +162,11 @@ export const useStylesGlobal = makeStyles()({
     },
     customPlusIconBoxRow: {
         display: "flex",
-        justifyContent:  "flex-end",
-        alignItems: "center",
-        gap: 8,
-        height: "40px",
+        // justifyContent:  "flex-end",
+        // justifyContent:  "center",
+        // alignItems: "center",
+        // gap: 40,
+        height: "50px",
         marginTop: "10px",
     },
     customBoxColumn: { 
