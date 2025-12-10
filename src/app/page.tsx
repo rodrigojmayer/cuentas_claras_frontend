@@ -44,7 +44,7 @@ export default function Home() {
 
   const { data: session } = useSession()
   // const [userLogged, setUserLogged] = useState<User>({_id: "68e5b887cfb837d89f00be9f", email: "test@gmail.com", phone: "12345678", name: "test", enabled: true, deleted: false})
-  const [filteredData, setFilteredData] = useState<Data[]>([])
+  // const [filteredData, setFilteredData] = useState<Data[]>([])
   const [filteredContacts, setFilteredContacts] = useState<Contacts[]>([])
   const [visibleManageCargarPrestamo, setVisibleManageCargarPrestamo] = useState(false);
   
@@ -91,15 +91,11 @@ export default function Home() {
     // }, 100); // Adjust the delay as needed
 };
 
+const filteredData = React.useMemo(() => {
+  if (!debtsByCreditor && !debtsByDebtor) return [];
 
-  useEffect(() => {
-    // console.log("debtsByCreditor: ", debtsByCreditor)
-    // console.log("debtsByDebtor: ", debtsByDebtor)
-    if (!debtsByCreditor && !debtsByDebtor) return;
-
-
-    const dataCreditor = (debtsByCreditor ?? [])
-     .filter(d => showFinishedDebts || (d.amount && d.amount > 0))
+  const dataCreditor = (debtsByCreditor ?? [])
+    .filter(d => showFinishedDebts || (d.amount && d.amount > 0))
     .map(d => ({
       _id: d._id,
       gestion: "Préstamo",
@@ -111,16 +107,25 @@ export default function Home() {
       pendiente: `${d.amount} ${d.currency}`,
       dolar_google: d.dolar_google,
       alerta: d.alert_enabled && d.alerted,
-      id_user: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any)._id,
-      email: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).email,
-      phone: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).phone,
+      id_user:
+        typeof d?.id_user_debtor === "object"
+          ? (d.id_user_debtor as any)._id
+          : d?.id_user_debtor,
+      email:
+        typeof d?.id_user_debtor === "object"
+          ? (d.id_user_debtor as any).email
+          : d?.id_user_debtor,
+      phone:
+        typeof d?.id_user_debtor === "object"
+          ? (d.id_user_debtor as any).phone
+          : d?.id_user_debtor,
       date_debt: dateFormat(d.date_debt),
       date_due: dateFormat(d.date_due),
       initial_amount: d.initial_amount,
-      currency: d?.currency,
+      currency: d.currency,
     }));
 
-    const dataDebtor = (debtsByDebtor ?? [])
+  const dataDebtor = (debtsByDebtor ?? [])
     .filter(d => showFinishedDebts || (d.amount && d.amount > 0))
     .map(d => ({
       _id: d._id,
@@ -133,23 +138,92 @@ export default function Home() {
       pendiente: `${d.amount} ${d.currency}`,
       dolar_google: d.dolar_google,
       alerta: d.alert_enabled && d.alerted,
-      id_user: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any)._id,
-      email: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).email,
-      phone: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).phone,
+      id_user:
+        typeof d?.id_user_creditor === "object"
+          ? (d.id_user_creditor as any)._id
+          : d?.id_user_creditor,
+      email:
+        typeof d?.id_user_creditor === "object"
+          ? (d.id_user_creditor as any).email
+          :d?.id_user_creditor,
+      phone:
+        typeof d?.id_user_creditor === "object"
+          ? (d.id_user_creditor as any).phone
+          : d?.id_user_creditor,
       date_debt: dateFormat(d.date_debt),
       date_due: dateFormat(d.date_due),
       initial_amount: d.initial_amount,
-      currency: d?.currency,
+      currency: d.currency,
     }));
-    console.log("dataDebtor: ", dataDebtor)
-    // unir y eliminar duplicados
-    const map = new Map();
-    [...dataCreditor, ...dataDebtor].forEach(item => {
-      map.set(item._id, item);
-    });
 
-    setFilteredData(Array.from(map.values()));
-  }, [debtsByCreditor, debtsByDebtor, showFinishedDebts]);
+  // merge & remove duplicates
+  const map = new Map();
+  [...dataCreditor, ...dataDebtor].forEach(item => {
+    map.set(item._id, item);
+  });
+
+  return Array.from(map.values());
+}, [debtsByCreditor, debtsByDebtor, showFinishedDebts]);
+
+
+  // useEffect(() => {
+  //   // console.log("debtsByCreditor: ", debtsByCreditor)
+  //   // console.log("debtsByDebtor: ", debtsByDebtor)
+  //   if (!debtsByCreditor && !debtsByDebtor) return;
+
+
+  //   const dataCreditor = (debtsByCreditor ?? [])
+  //    .filter(d => showFinishedDebts || (d.amount && d.amount > 0))
+  //   .map(d => ({
+  //     _id: d._id,
+  //     gestion: "Préstamo",
+  //     nombre:
+  //       typeof d?.id_user_debtor === "object"
+  //         ? (d.id_user_debtor as any).name
+  //         : d?.id_user_debtor,
+  //     vencimiento: dateFormat(d.date_due),
+  //     pendiente: `${d.amount} ${d.currency}`,
+  //     dolar_google: d.dolar_google,
+  //     alerta: d.alert_enabled && d.alerted,
+  //     id_user: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any)._id,
+  //     email: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).email,
+  //     phone: typeof d?.id_user_debtor === "object" && (d.id_user_debtor as any).phone,
+  //     date_debt: dateFormat(d.date_debt),
+  //     date_due: dateFormat(d.date_due),
+  //     initial_amount: d.initial_amount,
+  //     currency: d?.currency,
+  //   }));
+
+  //   const dataDebtor = (debtsByDebtor ?? [])
+  //   .filter(d => showFinishedDebts || (d.amount && d.amount > 0))
+  //   .map(d => ({
+  //     _id: d._id,
+  //     gestion: "Deuda",
+  //     nombre:
+  //       typeof d?.id_user_creditor === "object"
+  //         ? (d.id_user_creditor as any).name
+  //         : d?.id_user_creditor,
+  //     vencimiento: dateFormat(d.date_due),
+  //     pendiente: `${d.amount} ${d.currency}`,
+  //     dolar_google: d.dolar_google,
+  //     alerta: d.alert_enabled && d.alerted,
+  //     id_user: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any)._id,
+  //     email: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).email,
+  //     phone: typeof d?.id_user_creditor === "object" && (d.id_user_creditor as any).phone,
+  //     date_debt: dateFormat(d.date_debt),
+  //     date_due: dateFormat(d.date_due),
+  //     initial_amount: d.initial_amount,
+  //     currency: d?.currency,
+  //   }));
+  //   console.log("dataDebtor: ", dataDebtor)
+  //   // unir y eliminar duplicados
+  //   const map = new Map();
+  //   [...dataCreditor, ...dataDebtor].forEach(item => {
+  //     map.set(item._id, item);
+  //   });
+
+  //   setFilteredData(Array.from(map.values()));
+  // }, [debtsByCreditor, debtsByDebtor, showFinishedDebts]);
 
   // useEffect(() => {
   //   if(visibleManagePago && newPayment?.id_debt){
