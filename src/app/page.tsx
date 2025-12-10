@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { CloseMenuButton, FilterButton, MenuButton, PlusButton } from "@/components/Buttons";
-import { AppBar, Box, Grid } from "@mui/material";
+import { AppBar, Box, Grid, IconButton, Menu, MenuItem, Switch, Typography } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useStylesGlobal } from '../Styles';
 import TableProducts from '@/components/TableProducts';
@@ -22,6 +22,8 @@ import { useSession } from 'next-auth/react';
 import ModalHistorial from '@/components/ModalHistorial';
 import ModalCambiarFecha from '@/components/ModalCambiarFecha';
 import { dateFormat } from '@/utils/dateFormat';
+import LockIcon from '@mui/icons-material/Lock';
+import FilterListIcon from '@mui/icons-material/FilterList'
 
 // const dataC = [
 //   {_id: "test1", gestion: "ges1", nombre: "nom1", vencimiento:"venc1", pendiente:"pend1"},
@@ -63,6 +65,31 @@ export default function Home() {
   const [historialDebtPayments, setHistorialDebtPayments] = useState();
   const [visibleModalCambiarFecha, setVisibleModalCambiarFecha] = useState(false);
   const [dataCambiarFecha, setDataCambiarFecha] = useState();
+
+  const [option1, setoption1] = useState(false);
+  const [option2, setoption2] = useState(false);
+  const [option3, setoption3] = useState();
+  // const [handleClose, setHandleClose] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const open2 = Boolean(anchorEl2);
+  const openTableOptions = (event: React.MouseEvent<HTMLElement>) => {
+    console.log("openTableOptions pressed")
+    event.stopPropagation()
+    setAnchorEl(event.currentTarget);
+    // setCheckListStock([])
+  };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
+  const handleClose = () => {
+    // Delay resetting anchorEl until after the menu has closed
+    // setTimeout(() => {
+      // if(anchorEl)
+        setAnchorEl(null);
+    // }, 100); // Adjust the delay as needed
+};
 
 
   useEffect(() => {
@@ -221,15 +248,80 @@ export default function Home() {
         setVisibleManagePago={setVisibleManagePago}
         setNewPayment= {setNewPayment}
       />
+
+      <>
+        <Menu
+          disableScrollLock={true}
+          id="demo-positioned-menu"
+          aria-labelledby="demo-positioned-button"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          transformOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          style={{ 
+            marginTop: '-25px', 
+            marginLeft: '25px',
+          }}
+
+          MenuListProps={{
+              sx: { padding: 0,  
+              },
+          }}
+        >
+          <MenuItem 
+            onClick={(e) => 
+              {setoption1(!option1)
+              e.stopPropagation()
+            }}
+            className={`${classes.menu_item} ${classes.menu_item_background_color}`} 
+          >
+            <Typography 
+              // variant="body2" 
+            > 
+              Alertas primero
+              </Typography>
+              <Switch 
+                size='small'
+                color='success'  
+                checked={option1}
+              />
+          </MenuItem>
+          <MenuItem 
+            onClick={(e) => 
+              {setoption2(!option2)
+              e.stopPropagation()
+            }}
+            className={`${classes.menu_item} ${classes.menu_item_background_color}`} 
+          >
+            <Typography 
+              // variant="body2" 
+            > 
+                Ver finalizados
+            </Typography>
+            <Switch 
+              size='small'
+              color='success'  
+              checked={option2}
+            />  
+          </MenuItem>
+        </Menu>
+      </>
       <Box className={` ${classes.customPlusIconBoxRow}`}>
-        <FilterButton
-          // sizeIco={"55px !important"}
-          // clicked={addInputCustomField}
-          clicked={() => setVisibleManageCargarPrestamo(true)}
-        />
+        <IconButton
+          onClick={ openTableOptions }
+          className={`${classes.plusIcon} ${classes.plus_icon_color}`}
+          sx={{ margin: "0 auto" }}
+        >
+          <FilterListIcon />
+        </IconButton>
         <PlusButton
-          // sizeIco={"55px !important"}
-          // clicked={addInputCustomField}
           clicked={() => setVisibleManageCargarPrestamo(true)}
         />
       </Box>

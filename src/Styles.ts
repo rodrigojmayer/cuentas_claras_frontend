@@ -108,6 +108,9 @@ export const useStylesGlobal = makeStyles()({
     },
     menu_item: {
         padding: '0 5px',
+        display: "flex",
+        // alignContent: "center" ,
+        justifyContent: "space-between"
     },
     menu_item_background_color: {
         backgroundColor: menuItem,
