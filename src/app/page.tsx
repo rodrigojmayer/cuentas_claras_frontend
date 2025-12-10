@@ -98,7 +98,9 @@ export default function Home() {
     if (!debtsByCreditor && !debtsByDebtor) return;
 
 
-    const dataCreditor = (debtsByCreditor ?? []).map(d => ({
+    const dataCreditor = (debtsByCreditor ?? [])
+     .filter(d => showFinishedDebts || (d.amount && d.amount > 0))
+    .map(d => ({
       _id: d._id,
       gestion: "Préstamo",
       nombre:
@@ -118,7 +120,9 @@ export default function Home() {
       currency: d?.currency,
     }));
 
-    const dataDebtor = (debtsByDebtor ?? []).map(d => ({
+    const dataDebtor = (debtsByDebtor ?? [])
+    .filter(d => showFinishedDebts || (d.amount && d.amount > 0))
+    .map(d => ({
       _id: d._id,
       gestion: "Deuda",
       nombre:
@@ -145,7 +149,7 @@ export default function Home() {
     });
 
     setFilteredData(Array.from(map.values()));
-  }, [debtsByCreditor, debtsByDebtor]);
+  }, [debtsByCreditor, debtsByDebtor, showFinishedDebts]);
 
   // useEffect(() => {
   //   if(visibleManagePago && newPayment?.id_debt){
