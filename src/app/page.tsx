@@ -66,8 +66,8 @@ export default function Home() {
   const [visibleModalCambiarFecha, setVisibleModalCambiarFecha] = useState(false);
   const [dataCambiarFecha, setDataCambiarFecha] = useState();
 
-  const [option1, setoption1] = useState(false);
-  const [option2, setoption2] = useState(false);
+  const [showAlertsFirst, setShowAlertsFirst] = useState(false);
+  const [showFinishedDebts, setShowFinishedDebts] = useState(false);
   const [option3, setoption3] = useState();
   // const [handleClose, setHandleClose] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -198,24 +198,7 @@ export default function Home() {
 
   fetchPayments();
   }, [visibleModalHistorial, newPayment])
-  // if (isLoadingUsers) return <p>Cargando usuarios...</p>;
-  // if (isErrorUsers) return <p>Error al cargar usuarios</p>;
-  // if (isLoadingDebts) return <p>Cargando deudas...</p>;
-  // if (isErrorDebts) return <p>Error al cargar deudas</p>;
-  // if (isLoadingPayments) return <p>Cargando pagos</p>;
-  // if (isErrorPayments) return <p>Error al cargar pagos</p>;  
-  // if (isLoadingAlerts) return <p>Cargando alertas</p>;
-  // if (isErrorAlerts) return <p>Error al cargar alertas</p>;
-  // if (isLoadingDebtsByCreditor) return <p>Cargando deudas por acreedor</p>;
-  // if (isErrorDebtsByCreditor) return <p>Error al cargar deudas por acreedor</p>;
-  // if (isLoadingDebtsByDebtor) return <p>Cargando deudas por deudor</p>;
-  // if (isErrorDebtsByDebtor) return <p>Error al cargar deudas por deudor</p>;
-  // console.log("users: ", users);
-  // console.log("debts: ", debts);
-  // console.log("payments: ", payments);
-  // console.log("alerts: ", alerts);
-  // console.log("debtsByCreditor: ", debtsByCreditor);
-
+  
   
   return (
     <div className={`${classes.page}`}>
@@ -227,16 +210,9 @@ export default function Home() {
             <Grid size="grow">
             </Grid>
             <Grid  size={3}>
-              {/* <div className={`${classes[(openMenu ? "hide" : "show")]}`}> */}
-                <MenuButton
-                  onDataChanged={handleOpenMenu}
-                />
-              {/* </div> */}
-              {/* <div className={`${classes[(openMenu ? "show" : "hide")]}`}>
-                <CloseMenuButton
-                  clicked={() => handleOpenMenu()}
-                />
-              </div> */}
+              <MenuButton
+                onDataChanged={handleOpenMenu}
+              />
             </Grid>
             <Grid size="grow">
             </Grid>
@@ -277,7 +253,7 @@ export default function Home() {
         >
           <MenuItem 
             onClick={(e) => 
-              {setoption1(!option1)
+              {setShowAlertsFirst(!showAlertsFirst)
               e.stopPropagation()
             }}
             className={`${classes.menu_item} ${classes.menu_item_background_color}`} 
@@ -290,12 +266,12 @@ export default function Home() {
               <Switch 
                 size='small'
                 color='success'  
-                checked={option1}
+                checked={showAlertsFirst}
               />
           </MenuItem>
           <MenuItem 
             onClick={(e) => 
-              {setoption2(!option2)
+              {setShowFinishedDebts(!showFinishedDebts)
               e.stopPropagation()
             }}
             className={`${classes.menu_item} ${classes.menu_item_background_color}`} 
@@ -308,7 +284,7 @@ export default function Home() {
             <Switch 
               size='small'
               color='success'  
-              checked={option2}
+              checked={showFinishedDebts}
             />  
           </MenuItem>
         </Menu>
