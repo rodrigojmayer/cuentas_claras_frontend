@@ -55,36 +55,84 @@ interface TableProductsProps {
     data: Data[];
     setVisibleManagePago: (visible: boolean) => void;
     setNewPayment: (visible: NewPayment) => void;
+    showAlertsFirst: boolean;
 }
 
 export default function TableProducts(
   { data, 
     setVisibleManagePago,
     setNewPayment,
+    showAlertsFirst,
   }:  TableProductsProps ) {
     // console.log("data: ", data);
   const  {classes} = useStylesGlobal()
   const breakpointLG = useMediaQuery('(min-width:1024px)');
   const breakpointMD = useMediaQuery('(min-width: 724px)');  
+  
+  const [orderByField, setOrderByField] = useState("")
 
-  const [sortedData, setSortedData] = useState(data)
-  useEffect(() => {
-    data.sort((a:any, b:any) => {
-      // console.log("a: ", a)
-      // console.log("b: ", b)
-      // if (a.label.toLowerCase() < b.label.toLowerCase()) return -1;
-      if (a.alerta <= b.alerta) return 1;
-      if (a.alerta > b.alerta) return -1;
-      return 0;
-    })
-    setSortedData(data);
-  }, [data]);
+  // const orderByField = (field: any, id: number) => {
+  //   console.log("field: ", field)
+  //   console.log("id: ", id)
+
+
+  // }
+
+  // const [sortedData, setSortedData] = useState(data)
+  // useEffect(() => {
+  //   if(showAlertsFirst){
+  //     data.sort((a:any, b:any) => {
+  //       console.log("a: ", a)
+  //       console.log("b: ", b)
+  //       // if (a.label.toLowerCase() < b.label.toLowerCase()) return -1;
+  //       if (a.alerta <= b.alerta) return 1;
+  //       if (a.alerta > b.alerta) return -1;
+  //       return 0;
+  //     })
+  //   } else {
+  //     data.sort((a:any, b:any) => {
+  //       console.log("a: ", a)
+  //       console.log("b: ", b)
+  //       // if (a.label.toLowerCase() < b.label.toLowerCase()) return -1;
+  //       // if (new Date(a.date_debt) <= new Date(b.date_debt)) return 1;
+  //       // if (new Date(a.date_debt) > new Date(b.date_debt)) return -1;
+  //       if (a.amount <= b.amount) return 1;
+  //       if (a.amount > b.amount) return -1;
+  //        return 0;
+  //     })
+  //   }
+  //   setSortedData(data);
+  // }, [data, showAlertsFirst]);
+  const sortedData = React.useMemo(() => {
+    console.log("orderByField: ", orderByField)
+    const copy = [...data];
+    
+    // 1) If clicking a column
+    if (orderByField) {
+      copy.sort((a, b) => {
+        const x = a[orderByField];
+        const y = b[orderByField];
+
+        if (x < y) return -1;
+        if (x > y) return 1;
+        return 0;
+      });
+    }
+
+    if (showAlertsFirst) {
+      return copy.sort((a, b) => Number(b.alerta) - Number(a.alerta));
+    }
+      // return  copy.sort((a, b) => Number(a.date_debt) - Number(b.date_debt));
+
+    // return copy.sort((a, b) => b.amount - a.amount);
+  }, [data, showAlertsFirst, orderByField]);
 
   return (
     <div>
       <Paper style={{backgroundColor: "rgb(0, 0, 0, 0)", height: `calc(100dvh - ${(breakpointLG?"105px":"120px")})`, width: (breakpointLG?"98vw":"94vw"), margin: "12px auto 0 auto" ,borderRadius: "10px"}}>
         <TableVirtuoso 
-          data={data}
+          // data={data}
+          data={sortedData}
           components={VirtuosoTableComponents}
           style={{
             backgroundColor: "rgb(0, 0, 0, 0)", 
@@ -101,7 +149,12 @@ export default function TableProducts(
                       variant="head" 
                       align='center'
                       className={`${classes.main_background_colorD} ${classes.table_header_color} `}
-                      onClick={() => alert(`click en header table: ${columnTable.label}`)}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        // orderByField(columnTable.dataKey, columnTable.id)
+                        setOrderByField(columnTable.dataKey)
+                      }
+                    }
                       style={{ 
                         width: columnTable.width, 
                         border:0
@@ -116,16 +169,7 @@ export default function TableProducts(
                 </TableRow>
               );
             }}
-          itemContent={(index: number) =>
-            rowContent(
-                index, 
-                sortedData[index], 
-                columnsTable, 
-                classes,
-                setVisibleManagePago,
-                setNewPayment,
-            ) 
-          }
+        'sortedData' is possibly 'undefined'.
         />
       </Paper>
     </div>

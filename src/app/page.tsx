@@ -301,6 +301,7 @@ const filteredData = React.useMemo(() => {
         data={filteredData} 
         setVisibleManagePago={setVisibleManagePago}
         setNewPayment= {setNewPayment}
+        showAlertsFirst={showAlertsFirst}
       />
 
       <>
