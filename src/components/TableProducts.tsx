@@ -70,6 +70,7 @@ export default function TableProducts(
   const breakpointMD = useMediaQuery('(min-width: 724px)');  
   
   const [orderByField, setOrderByField] = useState("")
+  const [lastOrderByField, setLastOrderByField] = useState("")
 
   // const orderByField = (field: any, id: number) => {
   //   console.log("field: ", field)
@@ -113,17 +114,16 @@ export default function TableProducts(
         const x = a[orderByField];
         const y = b[orderByField];
 
-        if (x < y) return -1;
-        if (x > y) return 1;
-        return 0;
+        return x < y ? -1 : x > y ? 1 : 0;
       });
     }
 
     if (showAlertsFirst) {
-      return copy.sort((a, b) => Number(b.alerta) - Number(a.alerta));
+      copy.sort((a, b) => Number(b.alerta) - Number(a.alerta));
     }
       // return  copy.sort((a, b) => Number(a.date_debt) - Number(b.date_debt));
 
+    return copy; // ALWAYS an array
     // return copy.sort((a, b) => b.amount - a.amount);
   }, [data, showAlertsFirst, orderByField]);
 
@@ -169,7 +169,16 @@ export default function TableProducts(
                 </TableRow>
               );
             }}
-        'sortedData' is possibly 'undefined'.
+          itemContent={(index: number) =>
+            rowContent(
+                index, 
+                sortedData[index], 
+                columnsTable, 
+                classes,
+                setVisibleManagePago,
+                setNewPayment,
+            ) 
+          }
         />
       </Paper>
     </div>
