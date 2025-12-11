@@ -69,8 +69,11 @@ export default function TableProducts(
   const breakpointLG = useMediaQuery('(min-width:1024px)');
   const breakpointMD = useMediaQuery('(min-width: 724px)');  
   
-  const [orderByField, setOrderByField] = useState("")
-  const [lastOrderByField, setLastOrderByField] = useState("")
+  const [orderByField, setOrderByField] = useState("")  
+  const [rowsUserSort, setRowsUserSort] = useState({
+    field: "date_debt",
+    asc: true
+  })
 
   // const orderByField = (field: any, id: number) => {
   //   console.log("field: ", field)
@@ -106,26 +109,46 @@ export default function TableProducts(
   // }, [data, showAlertsFirst]);
   const sortedData = React.useMemo(() => {
     console.log("orderByField: ", orderByField)
-    const copy = [...data];
+    // // setRowsUserSort
+    // const copy = [...data];
     
-    // 1) If clicking a column
-    if (orderByField) {
-      copy.sort((a, b) => {
-        const x = a[orderByField];
-        const y = b[orderByField];
+    // // 1) If clicking a column
+    // if (orderByField) {
+    //   console.log("llega aca0")
+    //   copy.sort((a, b) => {
+    //     const x = a[orderByField];
+    //     const y = b[orderByField];
 
-        return x < y ? -1 : x > y ? 1 : 0;
-      });
-    }
+    //   console.log("llega aca1")
+    //     return x < y ? -1 : x > y ? 1 : 0;
+    //   });
+    // }
+
+    const copy = [...data];
+
+  if (rowsUserSort.field) {
+    const { field, asc } = rowsUserSort;
+    copy.sort((a, b) => {
+      const x = a[field];
+      const y = b[field];
+      if (x == null || y == null) return 0;
+      if (x < y) return asc ? -1 : 1;
+      if (x > y) return asc ? 1 : -1;
+      return 0;
+    });
+  }
+
+
 
     if (showAlertsFirst) {
+      console.log("llega aca2")
       copy.sort((a, b) => Number(b.alerta) - Number(a.alerta));
     }
       // return  copy.sort((a, b) => Number(a.date_debt) - Number(b.date_debt));
 
     return copy; // ALWAYS an array
     // return copy.sort((a, b) => b.amount - a.amount);
-  }, [data, showAlertsFirst, orderByField]);
+  }, [data, showAlertsFirst, rowsUserSort]);
 
   return (
     <div>
@@ -152,7 +175,13 @@ export default function TableProducts(
                       onClick={(e) => {
                         e.stopPropagation()
                         // orderByField(columnTable.dataKey, columnTable.id)
-                        setOrderByField(columnTable.dataKey)
+                        // setOrderByField(columnTable.dataKey)
+                        const field = columnTable.dataKey;
+                        setRowsUserSort(prev =>
+                          prev.field === field
+                            ? { field, asc: !prev.asc }
+                            : { field, asc: true }
+                        );
                       }
                     }
                       style={{ 
