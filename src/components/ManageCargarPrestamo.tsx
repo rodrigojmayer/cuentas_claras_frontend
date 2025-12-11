@@ -21,7 +21,7 @@ interface ManageCargarPrestamoProps {
     filteredContacts: Contacts[];
 }
 export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisibleManageCargarPrestamo, filteredContacts }: ManageCargarPrestamoProps ) {
-    
+    const maxAmount = 1000000000;
     const { users } = useUsers();
     const { data: session } = useSession()
     const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor, mutateDebtsByCreditor } = useDebtsByCreditor();
@@ -134,7 +134,10 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                         onChange={(event:any) => {
                             const val = event.target.value;
                             if (/^\d*$/.test(val)) {
-                                setAmount(val);
+                                if(Number(val) > maxAmount)
+                                    setAmount(maxAmount.toString());
+                                else
+                                    setAmount(val);
                             }
                         }}
                         size="small"

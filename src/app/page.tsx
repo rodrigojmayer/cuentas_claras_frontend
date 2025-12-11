@@ -1,28 +1,27 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useState } from 'react';
-import { CloseMenuButton, FilterButton, MenuButton, PlusButton } from "@/components/Buttons";
+import { MenuButton, PlusButton } from "@/components/Buttons";
 import { AppBar, Box, Grid, IconButton, Menu, MenuItem, Switch, Typography } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useStylesGlobal } from '../Styles';
 import TableProducts from '@/components/TableProducts';
-import { Contacts, Data, DataTable, Debt, NewPayment, UpdateDataProps, User } from '@/types';
-import useUsers from "@/hooks/useUsers";
-import useDebts from "@/hooks/useDebts";
-import usePayments from "@/hooks/usePayments";
-import useAlerts from "@/hooks/useAlerts";
+import { Contacts, NewPayment, UpdateDataProps } from '@/types';
+// import useUsers from "@/hooks/useUsers";
+// import useDebts from "@/hooks/useDebts";
+// import usePayments from "@/hooks/usePayments";
+// import useAlerts from "@/hooks/useAlerts";
 import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
 import useDebtsByDebtor from "@/hooks/useDebtsByDebtor";
 import MenuOptions from '@/components/MenuOptions';
 import ManageCargarPrestamo from '@/components/ManageCargarPrestamo';
 import ManagePago from '@/components/ManagePago';
-import { getPaymentsByDebt, getUser } from '@/lib/api';
-import { useSession } from 'next-auth/react';
+import { getPaymentsByDebt } from '@/lib/api';
+// import { useSession } from 'next-auth/react';
 import ModalHistorial from '@/components/ModalHistorial';
 import ModalCambiarFecha from '@/components/ModalCambiarFecha';
 import { dateFormat } from '@/utils/dateFormat';
-import LockIcon from '@mui/icons-material/Lock';
+// import LockIcon from '@mui/icons-material/Lock';
 import FilterListIcon from '@mui/icons-material/FilterList'
 
 // const dataC = [
@@ -42,17 +41,17 @@ export default function Home() {
   //         setOpenOptions({...openOptions, [newData.option]: newData.open});
   // }
 
-  const { data: session } = useSession()
+  // const { data: session } = useSession()
   // const [userLogged, setUserLogged] = useState<User>({_id: "68e5b887cfb837d89f00be9f", email: "test@gmail.com", phone: "12345678", name: "test", enabled: true, deleted: false})
   // const [filteredData, setFilteredData] = useState<Data[]>([])
   const [filteredContacts, setFilteredContacts] = useState<Contacts[]>([])
   const [visibleManageCargarPrestamo, setVisibleManageCargarPrestamo] = useState(false);
   
   
-  const { users, isErrorUsers, isLoadingUsers } = useUsers();
-  const { debts, isErrorDebts, isLoadingDebts } = useDebts();
-  const { payments, isErrorPayments, isLoadingPayments } = usePayments();
-  const { alerts, isErrorAlerts, isLoadingAlerts } = useAlerts();
+  // const { users, isErrorUsers, isLoadingUsers } = useUsers();
+  // const { debts, isErrorDebts, isLoadingDebts } = useDebts();
+  // const { payments, isErrorPayments, isLoadingPayments } = usePayments();
+  // const { alerts, isErrorAlerts, isLoadingAlerts } = useAlerts();
   const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor } = useDebtsByCreditor();
   const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor } = useDebtsByDebtor();
   
@@ -64,16 +63,15 @@ export default function Home() {
   const [visibleModalHistorial, setVisibleModalHistorial] = useState(false);
   const [historialDebtPayments, setHistorialDebtPayments] = useState();
   const [visibleModalCambiarFecha, setVisibleModalCambiarFecha] = useState(false);
-  const [dataCambiarFecha, setDataCambiarFecha] = useState();
+  // const [dataCambiarFecha, setDataCambiarFecha] = useState();
 
   const [showAlertsFirst, setShowAlertsFirst] = useState(false);
   const [showFinishedDebts, setShowFinishedDebts] = useState(false);
-  const [option3, setoption3] = useState();
+  // const [option3, setoption3] = useState();
   // const [handleClose, setHandleClose] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
+  // const [anchorEl2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const open2 = Boolean(anchorEl2);
   const openTableOptions = (event: React.MouseEvent<HTMLElement>) => {
     console.log("openTableOptions pressed")
     event.stopPropagation()

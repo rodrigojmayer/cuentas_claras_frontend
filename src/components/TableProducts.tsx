@@ -8,26 +8,16 @@ import {
   TableCell, 
   TableBody, 
   Paper, 
-  Switch,
   Tooltip
 } from '@mui/material';
 import CustomTableHead from './wrappers/TableHeadWrapper';
 import { tooltipClasses } from '@mui/material/Tooltip';
 import { TableVirtuoso, TableComponents } from 'react-virtuoso';
-import { useState, useEffect, useContext } from 'react';
+import { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
-import { Data, DataTable, ColumnData, NewPayment } from '../types';
-// import { UserContext } from '../context/UserContext'
-// import { ColumnsContext } from '../context/ColumnsContext'
+import { Data, ColumnData, NewPayment } from '../types';
 import { useStylesGlobal } from '../Styles';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import IconButton from '@mui/material/IconButton';
-import LockIcon from '@mui/icons-material/Lock';
 
 const columnsTable = [
   {label: "Gestion", id: 0, dataKey: "gestion", width: 18, deleted: false},
@@ -68,83 +58,29 @@ export default function TableProducts(
   const  {classes} = useStylesGlobal()
   const breakpointLG = useMediaQuery('(min-width:1024px)');
   const breakpointMD = useMediaQuery('(min-width: 724px)');  
-  
-  const [orderByField, setOrderByField] = useState("")  
+   
   const [rowsUserSort, setRowsUserSort] = useState({
     field: "date_debt",
     asc: true
   })
 
-  // const orderByField = (field: any, id: number) => {
-  //   console.log("field: ", field)
-  //   console.log("id: ", id)
-
-
-  // }
-
-  // const [sortedData, setSortedData] = useState(data)
-  // useEffect(() => {
-  //   if(showAlertsFirst){
-  //     data.sort((a:any, b:any) => {
-  //       console.log("a: ", a)
-  //       console.log("b: ", b)
-  //       // if (a.label.toLowerCase() < b.label.toLowerCase()) return -1;
-  //       if (a.alerta <= b.alerta) return 1;
-  //       if (a.alerta > b.alerta) return -1;
-  //       return 0;
-  //     })
-  //   } else {
-  //     data.sort((a:any, b:any) => {
-  //       console.log("a: ", a)
-  //       console.log("b: ", b)
-  //       // if (a.label.toLowerCase() < b.label.toLowerCase()) return -1;
-  //       // if (new Date(a.date_debt) <= new Date(b.date_debt)) return 1;
-  //       // if (new Date(a.date_debt) > new Date(b.date_debt)) return -1;
-  //       if (a.amount <= b.amount) return 1;
-  //       if (a.amount > b.amount) return -1;
-  //        return 0;
-  //     })
-  //   }
-  //   setSortedData(data);
-  // }, [data, showAlertsFirst]);
   const sortedData = React.useMemo(() => {
-    console.log("orderByField: ", orderByField)
-    // // setRowsUserSort
-    // const copy = [...data];
-    
-    // // 1) If clicking a column
-    // if (orderByField) {
-    //   console.log("llega aca0")
-    //   copy.sort((a, b) => {
-    //     const x = a[orderByField];
-    //     const y = b[orderByField];
-
-    //   console.log("llega aca1")
-    //     return x < y ? -1 : x > y ? 1 : 0;
-    //   });
-    // }
-
     const copy = [...data];
 
-  if (rowsUserSort.field) {
-    const { field, asc } = rowsUserSort;
-    copy.sort((a, b) => {
-      const x = a[field];
-      const y = b[field];
-      if (x == null || y == null) return 0;
-      if (x < y) return asc ? -1 : 1;
-      if (x > y) return asc ? 1 : -1;
-      return 0;
-    });
-  }
-
-
-
+    if (rowsUserSort.field) {
+      const { field, asc } = rowsUserSort;
+      copy.sort((a, b) => {
+        const x = a[field];
+        const y = b[field];
+        if (x == null || y == null) return 0;
+        if (x < y) return asc ? -1 : 1;
+        if (x > y) return asc ? 1 : -1;
+        return 0;
+      });
+    }
     if (showAlertsFirst) {
-      console.log("llega aca2")
       copy.sort((a, b) => Number(b.alerta) - Number(a.alerta));
     }
-      // return  copy.sort((a, b) => Number(a.date_debt) - Number(b.date_debt));
 
     return copy; // ALWAYS an array
     // return copy.sort((a, b) => b.amount - a.amount);
@@ -174,8 +110,6 @@ export default function TableProducts(
                       className={`${classes.main_background_colorD} ${classes.table_header_color} `}
                       onClick={(e) => {
                         e.stopPropagation()
-                        // orderByField(columnTable.dataKey, columnTable.id)
-                        // setOrderByField(columnTable.dataKey)
                         const field = columnTable.dataKey;
                         setRowsUserSort(prev =>
                           prev.field === field

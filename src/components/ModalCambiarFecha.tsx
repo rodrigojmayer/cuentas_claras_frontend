@@ -2,7 +2,7 @@
 "use client";
 
 import { useStylesGlobal } from "@/Styles";
-import { NewPayment, UpdateDataProps, UpdateDebt } from "@/types";
+import { NewPayment, UpdateDebt } from "@/types";
 import { Box } from "@mui/material";
 import { AcceptButton, CancelButton } from "./Buttons";
 import { useState } from "react";

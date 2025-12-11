@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { createByDebtorEmail, findUserByEmail, postDebt, postPayment, postUser } from "@/lib/api";
+import { postPayment } from "@/lib/api";
 import { useStylesGlobal } from "@/Styles";
-import { Contacts, Data, DataTable, Debt, NewDebt, NewPayment, NewUser, UpdateDataProps, UpdateDebt } from "@/types";
-import { Autocomplete, Box, Button, MenuItem, TextField } from "@mui/material";
+import { NewPayment, UpdateDataProps } from "@/types";
+import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
-import DatePickerComponent from "./DatePickerComponent";
 import { AcceptButton, CancelButton } from "./Buttons";
-import useUsers from "@/hooks/useUsers";
 import { useSession } from "next-auth/react";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
