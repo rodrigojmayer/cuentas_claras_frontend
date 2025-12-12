@@ -14,9 +14,15 @@ interface ChildProps {
     open:  boolean
     handleClose: (newData: boolean) => void
     onData?: (data: { option: string, open: boolean }) => void;
+    setVisibleManagePerfil: (visible: boolean) => void;
 }
 
-export default function MenuOptions({ open, handleClose,  onData}: ChildProps) {
+export default function MenuOptions({ 
+    open, 
+    handleClose,  
+    onData, 
+    setVisibleManagePerfil,
+}: ChildProps) {
     
     const { classes } = useStylesGlobal()
     const breakpointLG = useMediaQuery('(min-width:1024px)');
@@ -31,6 +37,7 @@ export default function MenuOptions({ open, handleClose,  onData}: ChildProps) {
         e.preventDefault();
         const buttonElement = e.currentTarget.value 
         // onData({option:buttonElement, open: true})
+        setVisibleManagePerfil(true)
         handleClose(false)
     }
 

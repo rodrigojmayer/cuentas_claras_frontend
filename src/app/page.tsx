@@ -23,6 +23,7 @@ import ModalCambiarFecha from '@/components/ModalCambiarFecha';
 import { dateFormat } from '@/utils/dateFormat';
 // import LockIcon from '@mui/icons-material/Lock';
 import FilterListIcon from '@mui/icons-material/FilterList'
+import ManagePerfil from '@/components/ManagePerfil';
 
 // const dataC = [
 //   {_id: "test1", gestion: "ges1", nombre: "nom1", vencimiento:"venc1", pendiente:"pend1"},
@@ -47,6 +48,7 @@ export default function Home() {
   const [filteredContacts, setFilteredContacts] = useState<Contacts[]>([])
   const [visibleManageCargarPrestamo, setVisibleManageCargarPrestamo] = useState(false);
   
+  const [visibleManagePerfil, setVisibleManagePerfil] = useState(false);
   
   // const { users, isErrorUsers, isLoadingUsers } = useUsers();
   // const { debts, isErrorDebts, isLoadingDebts } = useDebts();
@@ -380,7 +382,8 @@ const filteredData = React.useMemo(() => {
       </Box>
       <MenuOptions
           open={openMenu} 
-          handleClose={handleCloseMenu} 
+          handleClose={handleCloseMenu}
+          setVisibleManagePerfil={setVisibleManagePerfil} 
         //  onData = {handleOpenOptions}
       /> 
       {visibleManageCargarPrestamo && (
@@ -459,6 +462,26 @@ const filteredData = React.useMemo(() => {
                     // historialDebtPayments={historialDebtPayments}
                     // filteredContacts={filteredContacts}
                     setNewPayment={setNewPayment}
+                  />
+                </div>
+            </div>
+        )}
+        {visibleManagePerfil && (
+            <div 
+                className="fixed inset-0 flex items-center justify-center bg-black/50 z-50"
+                onClick={() => setVisibleManagePerfil(false)} // click background to close
+            >
+                {/* --- MODAL CONTENT --- */}
+                <div
+                    className={`${classes.background_color3} ${classes.modalBorder} p6 shadow-lg w-[85%] max-w-md text-white`}
+                    onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                >
+                  <ManagePerfil
+                      setUpdateData={setUpdateData}
+                      newPayment={newPayment}
+                      setVisibleManagePerfil={setVisibleManagePerfil}
+                      // setVisibleModalHistorial={setVisibleModalHistorial}
+                      setVisibleModalCambiarFecha={setVisibleModalCambiarFecha}
                   />
                 </div>
             </div>
