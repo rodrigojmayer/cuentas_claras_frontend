@@ -18,12 +18,14 @@ import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Data, ColumnData, NewPayment } from '../types';
 import { useStylesGlobal } from '../Styles';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 const columnsTable = [
-  {label: "Gestion", id: 0, dataKey: "gestion", width: 18, deleted: false},
-  {label: "Nombre", id: 1, dataKey: "nombre", width: 20, deleted: false},
-  {label: "Vencimiento", id: 2, dataKey: "vencimiento", width: 18, deleted: false},
-  {label: "Pendiente",  id: 3, dataKey: "pendiente", width: 20, deleted: false},
+  {label: "Gestion", id: 0, dataKey: "gestion", width: 17, deleted: false},
+  {label: "Nombre", id: 1, dataKey: "nombre", width: 18, deleted: false},
+  {label: "Vencimiento", id: 2, dataKey: "vencimiento", width: 23, deleted: false},
+  {label: "Pendiente",  id: 3, dataKey: "pendiente", width: 18, deleted: false},
 ]
 
 
@@ -127,6 +129,12 @@ export default function TableProducts(
                       }}
                     >
                       {columnTable.label }
+                      
+                      { rowsUserSort.field === columnTable.dataKey ?
+                          rowsUserSort.asc ? <KeyboardArrowDownIcon fontSize="small"/>
+                            : <KeyboardArrowUpIcon fontSize="small"/>
+                            : ""
+                      }
                     </TableCell>
                   ))}
                 </TableRow>

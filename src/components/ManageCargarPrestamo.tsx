@@ -148,8 +148,7 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                         select
                         onChange={(event:any) => setCurrency(event.target.value)}
                         size="small"
-                        className={`${classes.inputMainData}  max-w-25`}
-                        
+                        className={`${classes.inputMainData}  max-w-25`} 
                     > 
                         {currencyOptions.map((c) => (
                             <MenuItem 
