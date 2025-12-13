@@ -1,5 +1,4 @@
 import React from 'react'
-import { useContext } from 'react';
 import { Box, useMediaQuery } from '@mui/material';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -8,7 +7,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import { useRouter } from "next/navigation"
 import { useStylesGlobal } from '../Styles';
 import { CloseMenuButton } from './Buttons';
-import { useSession, signIn, signOut } from "next-auth/react"
+import { signOut } from "next-auth/react"
 
 interface ChildProps {
     open:  boolean
