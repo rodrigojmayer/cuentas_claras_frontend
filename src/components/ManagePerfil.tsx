@@ -15,7 +15,7 @@ import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
 
 interface ManagePerfilProps {
     setUpdateData: (visible: UpdateDataProps) => void;
-    newPayment?: NewPayment | null;
+    // newPayment?: NewPayment | null;
     setVisibleManagePerfil: (visible: boolean) => void;
     // setVisibleModalHistorial: (visible: boolean) => void;
     setVisibleModalCambiarFecha: (visible: boolean) => void;
@@ -23,7 +23,7 @@ interface ManagePerfilProps {
 }
 export default function ManagePerfil({ 
     setUpdateData, 
-    newPayment, 
+    // newPayment, 
     setVisibleManagePerfil, 
     // setVisibleModalHistorial,
     setVisibleModalCambiarFecha,
@@ -32,14 +32,16 @@ export default function ManagePerfil({
     
     // const { users } = useUsers();
     const { data: session } = useSession()
-
+console.log("session: ", session)
     const { classes } = useStylesGlobal()
     const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor, mutateDebtsByCreditor } = useDebtsByCreditor();
     const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor, mutateDebtsByDebtor } = useDebtsByDebtor();
     // const [idDebtor, setIdDebtor] = useState("");
     // const [nameDebtor, setNameDebtorl] = useState(newPayment.id_debt);
     // const [phone, setPhone] = useState<string>("");
-    const [amount, setAmount] = useState<string>("");
+    const [name, setName] = useState<string>("");
+    const [phone, setPhone] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
     const [showDetails, setShowDetails] = useState<boolean>(false);
     
     // const [dateDue, setDateDue] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_due) : null);
@@ -54,65 +56,106 @@ export default function ManagePerfil({
 
         // console.log("email: ", email)
 
-        if(amount && Number(amount) > 0) { 
-            try {
-                const createNewPayment: NewPayment = {
-                    id_debt: newPayment?.id_debt || "",
-                    amount: Number(amount),
-                    pending: Number(newPayment?.pending) - Number(amount)
-                    // dolar_google: ???,   //  ATTENTION IMPORTANT this dolar google should update to the dolar google on the current date
-                }
-                console.log("createNewPayment: ", createNewPayment);
-                await postPayment(createNewPayment);
-                mutateDebtsByCreditor()
-                mutateDebtsByDebtor()
-                setVisibleManagePerfil?.(false);
-            } catch (err: any) {
-                console.error("Error creating debt: ", err);
-                // setMessage(`X ${err.message || "Failed to create debt"}`);
-            } finally {
-                setLoading(false);
-                setUpdateData({state: true, data: "debts"})
-            }
-        } else {
-            setMessage("Ingresar pago")
-            alert("Ingresar pago")
-        }
+    //     if(amount && Number(amount) > 0) { 
+    //         try {
+    //             const createNewPayment: NewPayment = {
+    //                 id_debt: newPayment?.id_debt || "",
+    //                 amount: Number(amount),
+    //                 pending: Number(newPayment?.pending) - Number(amount)
+    //                 // dolar_google: ???,   //  ATTENTION IMPORTANT this dolar google should update to the dolar google on the current date
+    //             }
+    //             console.log("createNewPayment: ", createNewPayment);
+    //             await postPayment(createNewPayment);
+    //             mutateDebtsByCreditor()
+    //             mutateDebtsByDebtor()
+    //             setVisibleManagePerfil?.(false);
+    //         } catch (err: any) {
+    //             console.error("Error creating debt: ", err);
+    //             // setMessage(`X ${err.message || "Failed to create debt"}`);
+    //         } finally {
+    //             setLoading(false);
+    //             setUpdateData({state: true, data: "debts"})
+    //         }
+    //     } else {
+    //         setMessage("Ingresar pago")
+    //         alert("Ingresar pago")
+    //     }
     }
 
     return (
         <div className="flex flex-col p-2 max-w-md">
             <h3 className="text-3xl text-center font-bold text-gray-800 dark:text-gray-100 mb-4">
-                {/* {newPayment?.name || newPayment?.email} */}
-                {newPayment?.name || ((newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email)}
+                Perfil
             </h3>
-            <Box className={classes.customBoxRow}>
-                <a>
-                    Pendiente
-                </a>
-                <a>
-                    {newPayment?.pending}
-                </a>
-                <a>
-                    {newPayment?.currency}
-                </a>
-            </Box>
             <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 rounded-lg p-2">
                 <Box className={classes.customBoxRow}>
                     <a>
-                        Pago
+                        Nombre
                     </a>
                     <TextField
-                        // label="Pago"
+                        // label="Nombre"
                         autoFocus
-                        value={amount}
+                        value={name}
                         onChange={(event:any) => {
                             const val = event.target.value;
                             if (/^\d*$/.test(val)) {
-                                if(Number(val) > Number(newPayment?.pending))
-                                    setAmount(newPayment?.pending ? newPayment?.pending.toString() : "");
-                                else
-                                    setAmount(val);
+                                // if(Number(val) > Number(newPayment?.pending))
+                                //     setName(newPayment?.pending ? newPayment?.pending.toString() : "");
+                                // else
+                                    setName(val);
+                            }
+                        }}
+                        size="small"
+                        className={`${classes.inputMainData} ${classes.inputPago}`}
+                    />
+                    <div> 
+                    </div>
+                </Box>
+                <Box className={classes.customBoxRow}>
+                    <a>
+                        Teléfono
+                    </a>
+                    <TextField
+                        // label="Nombre"
+                        autoFocus
+                        value={phone}
+                        onChange={(event:any) => {
+                            const val = event.target.value;
+                            if (/^\d*$/.test(val)) {
+                                // if(Number(val) > Number(newPayment?.pending))
+                                //     setAmount(newPayment?.pending ? newPayment?.pending.toString() : "");
+                                // else
+                                    setPhone(val);
+                            }
+                        }}
+                        size="small"
+                        className={`${classes.inputMainData} ${classes.inputPago}`}
+                    />
+                    <Button
+                        // type={clicked? "button" : "submit"}
+                        variant="text"
+                        className={`${classes.btnCommonStyle} ${classes.btn_info}`}
+                        onClick={() => {
+                            alert("Validar teléfono")
+                        }}
+                    > 
+                        Validar
+                    </Button>
+                </Box><Box className={classes.customBoxRow}>
+                    <a>
+                        Email
+                    </a>
+                    <TextField
+                        // label="Nombre"
+                        autoFocus
+                        value={email}
+                        onChange={(event:any) => {
+                            const val = event.target.value;
+                            if (/^\d*$/.test(val)) {
+                                // if(Number(val) > Number(newPayment?.pending))
+                                //     setAmount(newPayment?.pending ? newPayment?.pending.toString() : "");
+                                // else
+                                    setEmail(val);
                             }
                         }}
                         size="small"
@@ -125,10 +168,11 @@ export default function ManagePerfil({
                         // color="inherit"
                         onClick={() => {
                             // const a = parseInt(newPayment?.pending, 10)
-                            setAmount(newPayment?.pending ? newPayment?.pending.toString() : "")
+                            // setAmount(newPayment?.pending ? newPayment?.pending.toString() : "")
+                            alert("Validar email")
                         }}
                     > 
-                        Total
+                        Validar
                     </Button>
                 </Box>
                 <Box className={`${classes.customBoxRow} ${classes.customBoxRowSpaces}` }>   
@@ -137,7 +181,7 @@ export default function ManagePerfil({
                 </Box>
             </form>
                 {/* <Box className={`${showDetails ? classes.customBoxColumn : classes.hide } grid grid-cols-5 grid-rows-5 gap-4` }> */}
-                <Box className={`${showDetails ? classes.container : classes.hide }`}>
+                {/* <Box className={`${showDetails ? classes.container : classes.hide }`}>
                     <Box className={classes.row}>
                         <a className={classes.label}>
                             Teléfono: 
@@ -206,7 +250,7 @@ export default function ManagePerfil({
                             </b>
                         </a>
                     </Box>
-                </Box>
+                </Box> */}
             {/* <Button 
                 className={classes.deployModalButton} 
                 onClick={() => setShowDetails(!showDetails)}
