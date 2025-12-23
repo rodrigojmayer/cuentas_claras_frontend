@@ -478,7 +478,7 @@ const filteredData = React.useMemo(() => {
                 >
                   <ManagePerfil
                       setUpdateData={setUpdateData}
-                      newPayment={newPayment}
+                      // newPayment={newPayment}
                       setVisibleManagePerfil={setVisibleManagePerfil}
                       // setVisibleModalHistorial={setVisibleModalHistorial}
                       setVisibleModalCambiarFecha={setVisibleModalCambiarFecha}

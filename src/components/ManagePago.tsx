@@ -136,77 +136,77 @@ export default function ManagePago({
                     <AcceptButton />
                 </Box>
             </form>
-                {/* <Box className={`${showDetails ? classes.customBoxColumn : classes.hide } grid grid-cols-5 grid-rows-5 gap-4` }> */}
-                <Box className={`${showDetails ? classes.container : classes.hide }`}>
-                    <Box className={classes.row}>
-                        <a className={classes.label}>
-                            Teléfono: 
-                        </a>
-                        <a className={classes.value}>
-                            {newPayment?.phone}
-                        </a>
-                    </Box>
-                    <Box className={classes.row }>
-                        <a className={classes.label}>
-                            Correo:
-                        </a>
-                        <a className={classes.value}>  
-                            {(newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email}
-                        </a>
-                    </Box>
-                    <Box className={classes.row}>
-                        <a className={classes.label}>
-                            Fecha: 
-                        </a>
-                        <a className={classes.value}>
-                            {newPayment?.date_debt}
-                            <b  className={"m-2"}>
-                                <Button
-                                    // type={clicked? "button" : "submit"}
-                                    variant="text"
-                                    className={`${classes.btnCommonStyle} ${classes.btn_info}`}
-                                    // color="inherit"
-                                    onClick={() => {
-                                        // const a = parseInt(newPayment?.pending, 10)
-                                        setVisibleModalHistorial(true)
-                                    }}
-                                    > 
-                                    Historial
-                                </Button>
-                            </b>
-                        </a>
-                    </Box>
-                    <Box className={classes.row}>
-                        <a className={classes.label}>
-                            Préstamo: 
-                        </a>
-                        <a className={classes.value}>
-                            {newPayment?.initial_amount} {newPayment?.currency}
-                        </a>
-                    </Box>
-                    <Box className={classes.row}>
-                        <a className={classes.label}>
-                            Vencimiento: 
-                        </a>    
-                        <a className={classes.value}>
-                            {newPayment?.date_due}
-                            <b  className={"m-2"}>
-                                <Button
-                                    // type={clicked? "button" : "submit"}
-                                    variant="text"
-                                    className={`${classes.btnCommonStyle} ${classes.btn_info}`}
-                                    // color="inherit"
-                                    onClick={() => {
-                                        // const a = parseInt(newPayment?.pending, 10)
-                                        setVisibleModalCambiarFecha(true)
-                                    }}
-                                    > 
-                                    Cambiar
-                                </Button>
-                            </b>
-                        </a>
-                    </Box>
+            {/* <Box className={`${showDetails ? classes.customBoxColumn : classes.hide } grid grid-cols-5 grid-rows-5 gap-4` }> */}
+            <Box className={`${showDetails ? classes.container : classes.hide }`}>
+                <Box className={classes.row}>
+                    <a className={classes.label}>
+                        Teléfono: 
+                    </a>
+                    <a className={classes.value}>
+                        {newPayment?.phone}
+                    </a>
                 </Box>
+                <Box className={classes.row }>
+                    <a className={classes.label}>
+                        Correo:
+                    </a>
+                    <a className={classes.value}>  
+                        {(newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email}
+                    </a>
+                </Box>
+                <Box className={classes.row}>
+                    <a className={classes.label}>
+                        Fecha: 
+                    </a>
+                    <a className={classes.value}>
+                        {newPayment?.date_debt}
+                        <b  className={"m-2"}>
+                            <Button
+                                // type={clicked? "button" : "submit"}
+                                variant="text"
+                                className={`${classes.btnCommonStyle} ${classes.btn_info}`}
+                                // color="inherit"
+                                onClick={() => {
+                                    // const a = parseInt(newPayment?.pending, 10)
+                                    setVisibleModalHistorial(true)
+                                }}
+                                > 
+                                Historial
+                            </Button>
+                        </b>
+                    </a>
+                </Box>
+                <Box className={classes.row}>
+                    <a className={classes.label}>
+                        Préstamo: 
+                    </a>
+                    <a className={classes.value}>
+                        {newPayment?.initial_amount} {newPayment?.currency}
+                    </a>
+                </Box>
+                <Box className={classes.row}>
+                    <a className={classes.label}>
+                        Vencimiento: 
+                    </a>    
+                    <a className={classes.value}>
+                        {newPayment?.date_due}
+                        <b  className={"m-2"}>
+                            <Button
+                                // type={clicked? "button" : "submit"}
+                                variant="text"
+                                className={`${classes.btnCommonStyle} ${classes.btn_info}`}
+                                // color="inherit"
+                                onClick={() => {
+                                    // const a = parseInt(newPayment?.pending, 10)
+                                    setVisibleModalCambiarFecha(true)
+                                }}
+                                > 
+                                Cambiar
+                            </Button>
+                        </b>
+                    </a>
+                </Box>
+            </Box>
             <Button 
                 className={classes.deployModalButton} 
                 onClick={() => setShowDetails(!showDetails)}

@@ -87,8 +87,11 @@ console.log("session: ", session)
             <h3 className="text-3xl text-center font-bold text-gray-800 dark:text-gray-100 mb-4">
                 Perfil
             </h3>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 rounded-lg p-2">
-                <Box className={classes.customBoxRow}>
+            {/* <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 rounded-lg p-2"> */}
+            <form onSubmit={handleSubmit} >
+                 <Box className={`${classes.container}`}>
+                    <Box className={classes.row}>
+                {/* <Box className={classes.customBoxRow}> */}
                     <a>
                         Nombre
                     </a>
@@ -111,7 +114,8 @@ console.log("session: ", session)
                     <div> 
                     </div>
                 </Box>
-                <Box className={classes.customBoxRow}>
+                {/* <Box className={classes.customBoxRow}> */}
+                    <Box className={classes.row}>
                     <a>
                         Teléfono
                     </a>
@@ -141,7 +145,9 @@ console.log("session: ", session)
                     > 
                         Validar
                     </Button>
-                </Box><Box className={classes.customBoxRow}>
+                </Box>
+                {/* <Box className={classes.customBoxRow}> */}
+                    <Box className={classes.row}>
                     <a>
                         Email
                     </a>
@@ -178,6 +184,7 @@ console.log("session: ", session)
                 <Box className={`${classes.customBoxRow} ${classes.customBoxRowSpaces}` }>   
                     <CancelButton clicked={() => setVisibleManagePerfil(false)}/>
                     <AcceptButton />
+                </Box>
                 </Box>
             </form>
                 {/* <Box className={`${showDetails ? classes.customBoxColumn : classes.hide } grid grid-cols-5 grid-rows-5 gap-4` }> */}
