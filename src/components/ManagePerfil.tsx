@@ -92,9 +92,10 @@ console.log("session: ", session)
                  <Box className={`${classes.container}`}>
                     <Box className={classes.row}>
                 {/* <Box className={classes.customBoxRow}> */}
-                    <a>
+                    <a className={classes.label}>
                         Nombre
                     </a>
+                    {/* <a className={classes.value}> */}
                     <TextField
                         // label="Nombre"
                         autoFocus
@@ -111,12 +112,12 @@ console.log("session: ", session)
                         size="small"
                         className={`${classes.inputMainData} ${classes.inputPago}`}
                     />
-                    <div> 
-                    </div>
+                    {/* </a> */}
                 </Box>
                 {/* <Box className={classes.customBoxRow}> */}
                     <Box className={classes.row}>
-                    <a>
+                                       <a className={classes.label}>
+
                         Teléfono
                     </a>
                     <TextField
@@ -148,7 +149,8 @@ console.log("session: ", session)
                 </Box>
                 {/* <Box className={classes.customBoxRow}> */}
                     <Box className={classes.row}>
-                    <a>
+                                        <a className={classes.label}>
+
                         Email
                     </a>
                     <TextField
