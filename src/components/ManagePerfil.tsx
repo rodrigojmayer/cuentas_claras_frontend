@@ -55,7 +55,7 @@ console.log("session: ", session)
         setMessage(null);
 
         // console.log("email: ", email)
-
+if(email) { 
     //     if(amount && Number(amount) > 0) { 
     //         try {
     //             const createNewPayment: NewPayment = {
@@ -76,10 +76,10 @@ console.log("session: ", session)
     //             setLoading(false);
     //             setUpdateData({state: true, data: "debts"})
     //         }
-    //     } else {
-    //         setMessage("Ingresar pago")
-    //         alert("Ingresar pago")
-    //     }
+        } else {
+            setMessage("Ingresar email")
+            alert("Ingresar email")
+        }
     }
 
     return (

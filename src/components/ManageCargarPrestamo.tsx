@@ -106,7 +106,7 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                     renderInput={(params) => (
                         <TextField
                             {...params}
-                            label="Correo electrónico"
+                            label="Email"
                             variant="outlined"        
                             className={classes.inputMainData}
                             // className="border rounded-lg bg-white"
