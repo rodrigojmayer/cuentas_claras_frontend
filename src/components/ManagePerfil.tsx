@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { postPayment } from "@/lib/api";
+import { patchUser, postPayment } from "@/lib/api";
 import { useStylesGlobal } from "@/Styles";
-import { NewPayment, UpdateDataProps } from "@/types";
+import { NewPayment, NewUser, UpdateDataProps, User } from "@/types";
 import { Box, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import { AcceptButton, CancelButton } from "./Buttons";
@@ -36,18 +36,11 @@ export default function ManagePerfil({
     const { classes } = useStylesGlobal()
     const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor, mutateDebtsByCreditor } = useDebtsByCreditor();
     const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor, mutateDebtsByDebtor } = useDebtsByDebtor();
-    // const [idDebtor, setIdDebtor] = useState("");
-    // const [nameDebtor, setNameDebtorl] = useState(newPayment.id_debt);
-    // const [phone, setPhone] = useState<string>("");
     const [name, setName] = useState<string>(session?.user.name ? session.user.name : "");
     const [phone, setPhone] = useState<string>(session?.user.phone ? session.user.phone : "");
     // const [phoneValidated, setPhoneValidated] = useState<boolean>(false);
     const [email, setEmail] = useState<string>(session?.user.email ? session.user.email : "");
     // const [emailValidated, setEmailValidated] = useState<boolean>(false);
-    const [showDetails, setShowDetails] = useState<boolean>(false);
-    
-    // const [dateDue, setDateDue] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_due) : null);
-    // const [currency, setCurrency] = useState<string>("$ARS");
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
 
@@ -59,26 +52,26 @@ export default function ManagePerfil({
         // console.log("email: ", email)
         // if(email && emailValidated) { 
         if(email) { 
-    //     if(amount && Number(amount) > 0) { 
-    //         try {
-    //             const createNewPayment: NewPayment = {
-    //                 id_debt: newPayment?.id_debt || "",
-    //                 amount: Number(amount),
-    //                 pending: Number(newPayment?.pending) - Number(amount)
-    //                 // dolar_google: ???,   //  ATTENTION IMPORTANT this dolar google should update to the dolar google on the current date
-    //             }
-    //             console.log("createNewPayment: ", createNewPayment);
-    //             await postPayment(createNewPayment);
-    //             mutateDebtsByCreditor()
-    //             mutateDebtsByDebtor()
-    //             setVisibleManagePerfil?.(false);
-    //         } catch (err: any) {
-    //             console.error("Error creating debt: ", err);
-    //             // setMessage(`X ${err.message || "Failed to create debt"}`);
-    //         } finally {
-    //             setLoading(false);
-    //             setUpdateData({state: true, data: "debts"})
-    //         }
+            try {
+                const editUser: User = {
+                _id: session?.user._id || "", 
+                email: email,
+                phone: phone,
+                name: name,
+                }
+                // console.log("session?.user: ", session?.user);
+                // console.log("editUser: ", editUser);
+                // await patchUser(editUser);
+                // mutateDebtsByCreditor()
+                // mutateDebtsByDebtor()
+                setVisibleManagePerfil?.(false);
+            } catch (err: any) {
+                console.error("Error creating debt: ", err);
+                // setMessage(`X ${err.message || "Failed to create debt"}`);
+            } finally {
+                setLoading(false);
+                // setUpdateData({state: true, data: "debts"})
+            }
         } else {
             setMessage("Ingresar email")
             alert("Ingresar email")

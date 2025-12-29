@@ -8,8 +8,8 @@ export interface User {
     email: string;
     phone?: string;
     name?: string;
-    enabled: boolean;
-    deleted: boolean;
+    enabled?: boolean;
+    deleted?: boolean;
 }
 export interface NewUser {
     email: string;
