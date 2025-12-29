@@ -72,7 +72,8 @@ export const useStylesGlobal = makeStyles()({
         height: '44px',
         display: "flex",
         justifyContent: "center", 
-        boxShadow: 'none'
+        boxShadow: 'none',
+        zIndex: 40,
     },
     no_background_colorDD: {
         backgroundColor: transparent,

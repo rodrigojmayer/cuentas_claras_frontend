@@ -280,22 +280,7 @@ const filteredData = React.useMemo(() => {
   
   return (
     <div className={`${classes.page}`}>
-      <AppBar
-        className={`${classes.menu_appbar} ${classes.no_background_colorDD} ${classes.main_colorDD}`}
-        sx={{ top: (breakpointLG?0:"auto"), bottom: 0 }}
-      >
-          <Grid container spacing={3}>
-            <Grid size="grow">
-            </Grid>
-            <Grid  size={3}>
-              <MenuButton
-                onDataChanged={handleOpenMenu}
-              />
-            </Grid>
-            <Grid size="grow">
-            </Grid>
-          </Grid>
-      </AppBar>
+      
       
       <TableProducts 
         data={filteredData} 
@@ -486,7 +471,22 @@ const filteredData = React.useMemo(() => {
                 </div>
             </div>
         )}
-
+      <AppBar
+        className={`${classes.menu_appbar} ${classes.no_background_colorDD} ${classes.main_colorDD}`}
+        sx={{ top: (breakpointLG?0:"auto"), bottom: 0 }}
+      >
+          <Grid container spacing={3}>
+            <Grid size="grow">
+            </Grid>
+            <Grid  size={3}>
+              <MenuButton
+                onDataChanged={handleOpenMenu}
+              />
+            </Grid>
+            <Grid size="grow">
+            </Grid>
+          </Grid>
+      </AppBar>
     </div>
     );
 }
