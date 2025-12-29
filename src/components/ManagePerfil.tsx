@@ -32,14 +32,14 @@ export default function ManagePerfil({
     
     // const { users } = useUsers();
     const { data: session } = useSession()
-console.log("session: ", session)
+// console.log("session: ", session)
     const { classes } = useStylesGlobal()
     const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor, mutateDebtsByCreditor } = useDebtsByCreditor();
     const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor, mutateDebtsByDebtor } = useDebtsByDebtor();
     // const [idDebtor, setIdDebtor] = useState("");
     // const [nameDebtor, setNameDebtorl] = useState(newPayment.id_debt);
     // const [phone, setPhone] = useState<string>("");
-    const [name, setName] = useState<string>("");
+    const [name, setName] = useState<string>(session?.user.name ? session.user.name : "");
     const [phone, setPhone] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [showDetails, setShowDetails] = useState<boolean>(false);
@@ -87,57 +87,40 @@ if(email) {
             <h3 className="text-3xl text-center font-bold text-gray-800 dark:text-gray-100 mb-4">
                 Perfil
             </h3>
-            {/* <form onSubmit={handleSubmit} className="flex flex-col gap-1.5 rounded-lg p-2"> */}
             <form onSubmit={handleSubmit} >
                  <Box className={`${classes.container}`}>
                     <Box className={classes.row}>
-                {/* <Box className={classes.customBoxRow}> */}
                     <a className={classes.labelPerfil}>
                         Nombre
                     </a>
-                    {/* <a className={classes.value}> */}
                     <TextField
-                        // label="Nombre"
                         autoFocus
                         value={name}
                         onChange={(event:any) => {
                             const val = event.target.value;
-                            if (/^\d*$/.test(val)) {
-                                // if(Number(val) > Number(newPayment?.pending))
-                                //     setName(newPayment?.pending ? newPayment?.pending.toString() : "");
-                                // else
-                                    setName(val);
-                            }
+                            setName(val);
                         }}
                         size="small"
-                        className={`${classes.inputMainData} ${classes.inputPago}`}
+                        className={`${classes.inputMainData} ${classes.valuePerfil}`}
                     />
-                    {/* </a> */}
                 </Box>
-                {/* <Box className={classes.customBoxRow}> */}
-                    <Box className={classes.row}>
-                                       <a className={classes.labelPerfil}>
-
+                <Box className={classes.row}>
+                    <a className={classes.labelPerfil}>
                         Teléfono
                     </a>
                     <TextField
-                        // label="Nombre"
                         autoFocus
                         value={phone}
                         onChange={(event:any) => {
                             const val = event.target.value;
                             if (/^\d*$/.test(val)) {
-                                // if(Number(val) > Number(newPayment?.pending))
-                                //     setAmount(newPayment?.pending ? newPayment?.pending.toString() : "");
-                                // else
                                     setPhone(val);
                             }
                         }}
                         size="small"
-                        className={`${classes.inputMainData} ${classes.inputPago}`}
+                        className={`${classes.inputMainData} ${classes.valuePerfil}`}
                     />
                     <Button
-                        // type={clicked? "button" : "submit"}
                         variant="text"
                         className={`${classes.btnCommonStyle} ${classes.btn_info}`}
                         onClick={() => {
@@ -147,36 +130,25 @@ if(email) {
                         Validar
                     </Button>
                 </Box>
-                {/* <Box className={classes.customBoxRow}> */}
                     <Box className={classes.row}>
                                         <a className={classes.labelPerfil}>
 
                         Email
                     </a>
                     <TextField
-                        // label="Nombre"
                         autoFocus
                         value={email}
                         onChange={(event:any) => {
                             const val = event.target.value;
-                            if (/^\d*$/.test(val)) {
-                                // if(Number(val) > Number(newPayment?.pending))
-                                //     setAmount(newPayment?.pending ? newPayment?.pending.toString() : "");
-                                // else
-                                    setEmail(val);
-                            }
+                            setEmail(val);
                         }}
                         size="small"
-                        className={`${classes.inputMainData} ${classes.inputPago}`}
+                        className={`${classes.inputMainData} ${classes.valuePerfil}`}
                     />
                     <Button
-                        // type={clicked? "button" : "submit"}
                         variant="text"
                         className={`${classes.btnCommonStyle} ${classes.btn_info}`}
-                        // color="inherit"
                         onClick={() => {
-                            // const a = parseInt(newPayment?.pending, 10)
-                            // setAmount(newPayment?.pending ? newPayment?.pending.toString() : "")
                             alert("Validar email")
                         }}
                     > 
@@ -189,87 +161,6 @@ if(email) {
                 </Box>
                 </Box>
             </form>
-                {/* <Box className={`${showDetails ? classes.customBoxColumn : classes.hide } grid grid-cols-5 grid-rows-5 gap-4` }> */}
-                {/* <Box className={`${showDetails ? classes.container : classes.hide }`}>
-                    <Box className={classes.row}>
-                        <a className={classes.label}>
-                            Teléfono: 
-                        </a>
-                        <a className={classes.value}>
-                            {newPayment?.phone}
-                        </a>
-                    </Box>
-                    <Box className={classes.row }>
-                        <a className={classes.label}>
-                            Correo:
-                        </a>
-                        <a className={classes.value}>  
-                            {(newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email}
-                        </a>
-                    </Box>
-                    <Box className={classes.row}>
-                        <a className={classes.label}>
-                            Fecha: 
-                        </a>
-                        <a className={classes.value}>
-                            {newPayment?.date_debt}
-                            <b  className={"m-2"}>
-                                <Button
-                                    // type={clicked? "button" : "submit"}
-                                    variant="text"
-                                    className={`${classes.btnCommonStyle} ${classes.btn_info}`}
-                                    // color="inherit"
-                                    onClick={() => {
-                                        // const a = parseInt(newPayment?.pending, 10)
-                                        setVisibleManagePerfil(true)
-                                    }}
-                                    > 
-                                    Historial
-                                </Button>
-                            </b>
-                        </a>
-                    </Box>
-                    <Box className={classes.row}>
-                        <a className={classes.label}>
-                            Préstamo: 
-                        </a>
-                        <a className={classes.value}>
-                            {newPayment?.initial_amount} {newPayment?.currency}
-                        </a>
-                    </Box>
-                    <Box className={classes.row}>
-                        <a className={classes.label}>
-                            Vencimiento: 
-                        </a>    
-                        <a className={classes.value}>
-                            {newPayment?.date_due}
-                            <b  className={"m-2"}>
-                                <Button
-                                    // type={clicked? "button" : "submit"}
-                                    variant="text"
-                                    className={`${classes.btnCommonStyle} ${classes.btn_info}`}
-                                    // color="inherit"
-                                    onClick={() => {
-                                        // const a = parseInt(newPayment?.pending, 10)
-                                        setVisibleModalCambiarFecha(true)
-                                    }}
-                                    > 
-                                    Cambiar
-                                </Button>
-                            </b>
-                        </a>
-                    </Box>
-                </Box> */}
-            {/* <Button 
-                className={classes.deployModalButton} 
-                onClick={() => setShowDetails(!showDetails)}
-            >
-                {showDetails ?
-                    <KeyboardArrowUpIcon fontSize="large"/>
-                    :
-                    <KeyboardArrowDownIcon fontSize="large"/>
-                }
-            </Button> */}
         </div>
     )
 }

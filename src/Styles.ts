@@ -333,10 +333,14 @@ export const useStylesGlobal = makeStyles()({
         textAlign: "right",     /* Alinea etiquetas a la derecha */
     },
     labelPerfil: {
-        width: "110px",          /* MISMO ancho → columnas alineadas */
+        width: "80px",          /* MISMO ancho → columnas alineadas */
         textAlign: "right",     /* Alinea etiquetas a la derecha */
     },
     value: {
         minWidth: "150px",      /* Alinea inicio de los valores */
+    },
+    valuePerfil: {
+        minWidth: "120px",      /* Alinea inicio de los valores */
+        maxWidth: "125px",      /* Alinea inicio de los valores */
     }
 })
