@@ -92,7 +92,7 @@ if(email) {
                  <Box className={`${classes.container}`}>
                     <Box className={classes.row}>
                 {/* <Box className={classes.customBoxRow}> */}
-                    <a className={classes.label}>
+                    <a className={classes.labelPerfil}>
                         Nombre
                     </a>
                     {/* <a className={classes.value}> */}
@@ -116,7 +116,7 @@ if(email) {
                 </Box>
                 {/* <Box className={classes.customBoxRow}> */}
                     <Box className={classes.row}>
-                                       <a className={classes.label}>
+                                       <a className={classes.labelPerfil}>
 
                         Teléfono
                     </a>
@@ -149,7 +149,7 @@ if(email) {
                 </Box>
                 {/* <Box className={classes.customBoxRow}> */}
                     <Box className={classes.row}>
-                                        <a className={classes.label}>
+                                        <a className={classes.labelPerfil}>
 
                         Email
                     </a>
