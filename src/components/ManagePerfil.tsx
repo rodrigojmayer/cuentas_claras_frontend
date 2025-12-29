@@ -40,8 +40,10 @@ export default function ManagePerfil({
     // const [nameDebtor, setNameDebtorl] = useState(newPayment.id_debt);
     // const [phone, setPhone] = useState<string>("");
     const [name, setName] = useState<string>(session?.user.name ? session.user.name : "");
-    const [phone, setPhone] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
+    const [phone, setPhone] = useState<string>(session?.user.phone ? session.user.phone : "");
+    // const [phoneValidated, setPhoneValidated] = useState<boolean>(false);
+    const [email, setEmail] = useState<string>(session?.user.email ? session.user.email : "");
+    // const [emailValidated, setEmailValidated] = useState<boolean>(false);
     const [showDetails, setShowDetails] = useState<boolean>(false);
     
     // const [dateDue, setDateDue] = useState<Date | null>(debtEdit ? new Date(debtEdit.date_due) : null);
@@ -55,7 +57,8 @@ export default function ManagePerfil({
         setMessage(null);
 
         // console.log("email: ", email)
-if(email) { 
+        // if(email && emailValidated) { 
+        if(email) { 
     //     if(amount && Number(amount) > 0) { 
     //         try {
     //             const createNewPayment: NewPayment = {
@@ -120,7 +123,7 @@ if(email) {
                         size="small"
                         className={`${classes.inputMainData} ${classes.valuePerfil}`}
                     />
-                    <Button
+                    {/* <Button
                         variant="text"
                         className={`${classes.btnCommonStyle} ${classes.btn_info}`}
                         onClick={() => {
@@ -128,7 +131,7 @@ if(email) {
                         }}
                     > 
                         Validar
-                    </Button>
+                    </Button> */}
                 </Box>
                     <Box className={classes.row}>
                                         <a className={classes.labelPerfil}>
@@ -145,7 +148,7 @@ if(email) {
                         size="small"
                         className={`${classes.inputMainData} ${classes.valuePerfil}`}
                     />
-                    <Button
+                    {/* <Button
                         variant="text"
                         className={`${classes.btnCommonStyle} ${classes.btn_info}`}
                         onClick={() => {
@@ -153,7 +156,7 @@ if(email) {
                         }}
                     > 
                         Validar
-                    </Button>
+                    </Button> */}
                 </Box>
                 <Box className={`${classes.customBoxRow} ${classes.customBoxRowSpaces}` }>   
                     <CancelButton clicked={() => setVisibleManagePerfil(false)}/>

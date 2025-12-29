@@ -327,6 +327,7 @@ export const useStylesGlobal = makeStyles()({
         display: "flex",
         alignItems: "center",   /* Alinea todo a la misma altura */
         gap: 10,             /* Espacio entre columnas */
+        justifyContent: "center"
     },
     label: {
         width: "140px",          /* MISMO ancho → columnas alineadas */
@@ -337,10 +338,10 @@ export const useStylesGlobal = makeStyles()({
         textAlign: "right",     /* Alinea etiquetas a la derecha */
     },
     value: {
-        minWidth: "150px",      /* Alinea inicio de los valores */
+        minWidth: "170px",      /* Alinea inicio de los valores */
     },
     valuePerfil: {
         minWidth: "120px",      /* Alinea inicio de los valores */
-        maxWidth: "125px",      /* Alinea inicio de los valores */
+        maxWidth: "170px",      /* Alinea inicio de los valores */
     }
 })
