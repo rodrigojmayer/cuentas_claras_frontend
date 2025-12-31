@@ -5,7 +5,7 @@ import { patchUser, postPayment } from "@/lib/api";
 import { useStylesGlobal } from "@/Styles";
 import { NewPayment, NewUser, UpdateDataProps, User } from "@/types";
 import { Box, Button, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AcceptButton, CancelButton } from "./Buttons";
 import { useSession } from "next-auth/react";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -31,8 +31,8 @@ export default function ManagePerfil({
 }: ManagePerfilProps ) {
     
     // const { users } = useUsers();
-    const { data: session } = useSession()
-// console.log("session: ", session)
+    const { data: session, update } = useSession()
+console.log("session: ", session)
     const { classes } = useStylesGlobal()
     const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor, mutateDebtsByCreditor } = useDebtsByCreditor();
     const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor, mutateDebtsByDebtor } = useDebtsByDebtor();
@@ -43,6 +43,13 @@ export default function ManagePerfil({
     // const [emailValidated, setEmailValidated] = useState<boolean>(false);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
+    useEffect(() => {
+    if (session?.user) {
+        setName(session.user.name ?? "");
+        setPhone(session.user.phone ?? "");
+        setEmail(session.user.email ?? "");
+    }
+    }, [session]);
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -60,8 +67,16 @@ export default function ManagePerfil({
                 name: name,
                 }
                 // console.log("session?.user: ", session?.user);
-                // console.log("editUser: ", editUser);
-                // await patchUser(editUser);
+                console.log("editUser: ", editUser);
+                await patchUser(editUser);
+                await update({
+                    user: {
+                        ...session?.user,
+                        name,
+                        phone,
+                        email,
+                    },
+                });
                 // mutateDebtsByCreditor()
                 // mutateDebtsByDebtor()
                 setVisibleManagePerfil?.(false);
