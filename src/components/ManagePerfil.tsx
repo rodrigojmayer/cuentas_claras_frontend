@@ -31,8 +31,8 @@ export default function ManagePerfil({
 }: ManagePerfilProps ) {
     
     // const { users } = useUsers();
-    const { data: session, update } = useSession()
-console.log("session: ", session)
+    const { data: session, update: updateSession } = useSession()
+// console.log("session: ", session)
     const { classes } = useStylesGlobal()
     const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor, mutateDebtsByCreditor } = useDebtsByCreditor();
     const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor, mutateDebtsByDebtor } = useDebtsByDebtor();
@@ -69,7 +69,7 @@ console.log("session: ", session)
                 // console.log("session?.user: ", session?.user);
                 console.log("editUser: ", editUser);
                 await patchUser(editUser);
-                await update({
+                await updateSession({
                     user: {
                         ...session?.user,
                         name,
