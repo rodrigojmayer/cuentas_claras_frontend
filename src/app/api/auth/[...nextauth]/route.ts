@@ -1,7 +1,8 @@
 import NextAuth from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { findUserByEmail } from "@/lib/api";
+import { findUserByEmail, postUser } from "@/lib/api";
+import { NewUser } from "@/types";
 
 const handler = NextAuth({
   providers: [
@@ -45,6 +46,7 @@ const handler = NextAuth({
     async signIn({ user, account }) {
       if (account?.provider === "google") {
         const email = user.email;
+        const name = user.name;
       
         // 1. Buscar usuario en la base de datos
         const findRes = await findUserByEmail(email)
@@ -57,7 +59,12 @@ const handler = NextAuth({
         
         if (!existingUser) {
           console.log(`Usuario con email ${email} no encontrado`)
-          return true;
+          const newUser: NewUser = {
+            email: email,
+            name: name
+          }
+          existingUser = await postUser(newUser)
+          // return true;
         } 
 
         console.log(`Usuario con email ${email} encontrado: `, existingUser)
@@ -79,7 +86,7 @@ const handler = NextAuth({
           ...session.user,
         }
       }
-      
+
       return token
     },
 
