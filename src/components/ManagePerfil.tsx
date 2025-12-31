@@ -43,13 +43,6 @@ export default function ManagePerfil({
     // const [emailValidated, setEmailValidated] = useState<boolean>(false);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
-    useEffect(() => {
-    if (session?.user) {
-        setName(session.user.name ?? "");
-        setPhone(session.user.phone ?? "");
-        setEmail(session.user.email ?? "");
-    }
-    }, [session]);
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
