@@ -13,8 +13,8 @@ export default function TestManageUser({ setUpdateData, userEdit, setVisibleUpda
     const [userEmail, setUserEmail] = useState<string>(userEdit ? userEdit.email : "");
     const [userPhone, setUserPhone] = useState<string | undefined>(userEdit ? userEdit.phone : "");
     const [userName, setUserName] = useState<string | undefined>(userEdit ? userEdit.name : "");
-    const [userEnabled, setUserEnabled] = useState<boolean>(userEdit ? userEdit.enabled : true);
-    const [userDeleted, setUserDeleted] = useState<boolean>(userEdit ? userEdit.deleted : false);
+    const [userEnabled, setUserEnabled] = useState<boolean>(userEdit ? userEdit.enabled ?? true : true);
+    const [userDeleted, setUserDeleted] = useState<boolean>(userEdit ? userEdit.deleted ?? false : false);
     
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
