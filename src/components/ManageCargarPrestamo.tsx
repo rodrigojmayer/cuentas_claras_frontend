@@ -45,7 +45,14 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
         setLoading(true);
         setMessage(null);
 
-        if(email) { 
+        if(!email) { 
+            setMessage(`Introduce the email`);
+            alert(`Introduce the email`);
+        }
+        else if(Number(amount) <= 0) {
+            setMessage(`Introduce the amount`);
+            alert(`Introduce the amount`);
+        } else {
             try {
                 const newDebt: NewDebt = {
                     id_user_creditor: session?.user._id,
