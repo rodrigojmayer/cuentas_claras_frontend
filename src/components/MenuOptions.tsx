@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, useMediaQuery } from '@mui/material';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 import { useStylesGlobal } from '../Styles';
 import { CloseMenuButton } from './Buttons';
 import { signOut } from "next-auth/react"
+import { useTheme } from "next-themes";
 
 interface ChildProps {
     open:  boolean
@@ -27,6 +28,11 @@ export default function MenuOptions({
     const breakpointLG = useMediaQuery('(min-width:1024px)');
     // const navigate = useNavigate();
     const router = useRouter();
+    const { theme, setTheme } = useTheme();
+    
+    const toggleTheme = () => {
+        setTheme(theme === "dark" ? "light" : "dark");
+    };
 
     const close = () => {
         handleClose(false)
@@ -72,7 +78,14 @@ export default function MenuOptions({
     const  buttons = [
         // <Button value="fields" key="fields" variant="text" onClick={selOp}>Fields</Button>,
         <Button value="profile" key="profile" variant="text" onClick={selOp}>Perfil</Button>,
-        <Button value="preferences" key="preferences" variant="text" onClick={selOp}>Modo claro/oscuro</Button>,
+        // <Button value="preferences" key="preferences" variant="text" onClick={selOp}>Modo claro/oscuro</Button>,
+       <Button
+            key="preferences"
+            variant="text"
+            onClick={toggleTheme}
+        >
+                Modo {`${theme === "dark" ? "oscuro" : "claro"}`}
+        </Button>,
         <Button value="logout" key="logout" variant="text" onClick={closeSession}>Cerrar sesión</Button>,
         <CloseMenuButton key="close" clicked={() => handleClose(true)} />
     ];
