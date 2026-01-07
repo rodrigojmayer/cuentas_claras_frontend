@@ -201,10 +201,16 @@ export const useStylesGlobal = makeStyles()({
     light_main_background_colorD: {
         backgroundColor: first_color4Light,
     },
-    table_header_color: {
+    dark_table_header_color: {
         color: tableHeaderColorDark,
         '&.Mui-checked': {
             color: tableHeaderColorDark,
+        },
+    },
+    light_table_header_color: {
+        color: tableHeaderColorLight,
+        '&.Mui-checked': {
+            color: tableHeaderColorLight,
         },
     },
     page: {

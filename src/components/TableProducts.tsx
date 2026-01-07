@@ -111,7 +111,10 @@ export default function TableProducts(
                       key={columnTable.id}
                       variant="head" 
                       align='center'
-                      className={`${classes[`${theme}_main_background_colorD` as keyof typeof classes]} ${classes.table_header_color} `}
+                      className={`
+                        ${classes[`${theme}_main_background_colorD` as keyof typeof classes]} 
+                        ${classes[`${theme}_table_header_color` as keyof typeof classes]} 
+                      `}
                       onClick={(e) => {
                         e.stopPropagation()
                         const field = columnTable.dataKey;
