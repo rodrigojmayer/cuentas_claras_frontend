@@ -20,6 +20,7 @@ import { Data, ColumnData, NewPayment } from '../types';
 import { useStylesGlobal } from '../Styles';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { useTheme } from "next-themes";
 
 const columnsTable = [
   {label: "Gestion", id: 0, dataKey: "gestion", width: 17, deleted: false},
@@ -58,6 +59,7 @@ export default function TableProducts(
   }:  TableProductsProps ) {
     // console.log("data: ", data);
   const  {classes} = useStylesGlobal()
+  const { theme } = useTheme();
   const breakpointLG = useMediaQuery('(min-width:1024px)');
   const breakpointMD = useMediaQuery('(min-width: 724px)');  
    
@@ -109,7 +111,7 @@ export default function TableProducts(
                       key={columnTable.id}
                       variant="head" 
                       align='center'
-                      className={`${classes.main_background_colorD} ${classes.table_header_color} `}
+                      className={`${classes[`${theme}_main_background_colorD` as keyof typeof classes]} ${classes.table_header_color} `}
                       onClick={(e) => {
                         e.stopPropagation()
                         const field = columnTable.dataKey;

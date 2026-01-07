@@ -22,7 +22,7 @@ const first_colorLight = '#FF0';
 const first_color3Dark = '#2A2E31';
 const first_color3Light = '#0F0';
 
-const first_color4 = '#0b3555ff';
+// const first_color4 = '#0b3555ff';
 const first_color4Dark = '#0b3555ff';
 const first_color4Light = '#F0F';
 
@@ -177,8 +177,11 @@ export const useStylesGlobal = makeStyles()({
             backgroundColor: menuItem,
         },
     },
-    main_background_colorD: {
-        backgroundColor: first_color4,
+    dark_main_background_colorD: {
+        backgroundColor: first_color4Dark,
+    },
+    light_main_background_colorD: {
+        backgroundColor: first_color4Light,
     },
     table_header_color: {
         color: tableHeaderColorDark,
