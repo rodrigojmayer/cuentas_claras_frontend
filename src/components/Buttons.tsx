@@ -5,6 +5,7 @@ import { useStylesGlobal } from '@/Styles'
 import ControlPointTwoToneIcon from '@mui/icons-material/ControlPointTwoTone';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import FilterListIcon from '@mui/icons-material/FilterList'
+import { useTheme } from "next-themes";
 
 interface ChildProps {
     onDataChanged: (newData: boolean) => void;
@@ -12,6 +13,7 @@ interface ChildProps {
 
 export function MenuButton({ onDataChanged }: ChildProps) {
     const { classes } = useStylesGlobal();
+    const { theme } = useTheme();
     // const { user } = useContext<any>(UserContext);
 
     const handleClick:any = () => {
@@ -21,7 +23,10 @@ export function MenuButton({ onDataChanged }: ChildProps) {
     return (
         <IconButton 
             onClick={handleClick}
-            className={`${classes.menuIcon} ${classes.menu_icon_color}`}
+            className={`
+              ${classes.menuIcon} 
+              ${classes[`${theme}_menu_icon_color` as keyof typeof classes]}
+            `}
             id="hamburgerMenuButton"
         >
             <MenuRoundedIcon />

@@ -24,6 +24,7 @@ import { dateFormat } from '@/utils/dateFormat';
 // import LockIcon from '@mui/icons-material/Lock';
 import FilterListIcon from '@mui/icons-material/FilterList'
 import ManagePerfil from '@/components/ManagePerfil';
+import { useTheme } from "next-themes";
 
 // const dataC = [
 //   {_id: "test1", gestion: "ges1", nombre: "nom1", vencimiento:"venc1", pendiente:"pend1"},
@@ -38,6 +39,7 @@ export default function Home() {
   const [ openMenu, setOpenMenu] = useState(false);
   const handleOpenMenu = () => setOpenMenu(true);
   const handleCloseMenu = () => setOpenMenu(false);
+      const { theme } = useTheme();
   // const handleOpenOptions = (newData:  {option: string, open: boolean}) => {
   //         setOpenOptions({...openOptions, [newData.option]: newData.open});
   // }
@@ -378,7 +380,7 @@ const filteredData = React.useMemo(() => {
           >
               {/* --- MODAL CONTENT --- */}
               <div
-                  className={`${classes.background_color3} p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white`}
+                  className={`${classes[`${theme}_background_color3` as keyof typeof classes]} p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white`}
                   onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
               >
                   <ManageCargarPrestamo
@@ -397,7 +399,7 @@ const filteredData = React.useMemo(() => {
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
-                    className={`${classes.background_color3} ${classes.modalPago} p6 shadow-lg w-[90%] max-w-md text-white`}
+                    className={`${classes[`${theme}_background_color3` as keyof typeof classes]} ${classes.modalPago} p6 shadow-lg w-[90%] max-w-md text-white`}
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ManagePago
@@ -419,7 +421,7 @@ const filteredData = React.useMemo(() => {
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
-                    className={`${classes.background_color3} ${classes.modalBorder} p6 shadow-lg w-[85%] max-w-md text-white`}
+                    className={`${classes[`${theme}_background_color3` as keyof typeof classes]} ${classes.modalBorder} p6 shadow-lg w-[85%] max-w-md text-white`}
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ModalHistorial
@@ -437,7 +439,7 @@ const filteredData = React.useMemo(() => {
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
-                    className={`${classes.background_color3} ${classes.modalBorder} p6 shadow-lg w-[85%] max-w-md text-white`}
+                    className={`${classes[`${theme}_background_color3` as keyof typeof classes]} ${classes.modalBorder} p6 shadow-lg w-[85%] max-w-md text-white`}
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                   <ModalCambiarFecha
@@ -458,7 +460,7 @@ const filteredData = React.useMemo(() => {
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
-                    className={`${classes.background_color3} ${classes.modalBorder} p6 shadow-lg w-[85%] max-w-md text-white`}
+                    className={`${classes[`${theme}_background_color3` as keyof typeof classes]} ${classes.modalBorder} p6 shadow-lg w-[85%] max-w-md text-white`}
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                   <ManagePerfil

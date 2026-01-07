@@ -12,6 +12,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import useDebtsByDebtor from "@/hooks/useDebtsByDebtor";
 import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
+import { useTheme } from "next-themes";
 
 interface ManagePagoProps {
     setUpdateData: (visible: UpdateDataProps) => void;
@@ -32,6 +33,7 @@ export default function ManagePago({
     
     // const { users } = useUsers();
     const { data: session } = useSession()
+    const { theme } = useTheme();
 
     const { classes } = useStylesGlobal()
     const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor, mutateDebtsByCreditor } = useDebtsByCreditor();
@@ -208,7 +210,7 @@ export default function ManagePago({
                 </Box>
             </Box>
             <Button 
-                className={classes.deployModalButton} 
+                className={`${classes[`${theme}_background_color3` as keyof typeof classes]} ${classes.deployModalButton}`}
                 onClick={() => setShowDetails(!showDetails)}
             >
                 {showDetails ?
