@@ -53,7 +53,7 @@ const third_soft_color2Light =' #090';
 const green_hoverDark = 'rgba(39, 182, 125, 0.35)';
 const green_hoverLight = 'rgba(1, 55, 99, 0.35)';
 
-const green2 = '#319F43';
+// const green2 = '#319F43';
 const green2Dark = '#319F43';
 const green2Light = '#991';
   
@@ -357,15 +357,18 @@ export const useStylesGlobal = makeStyles()({
         width: "70px",
         textTransform: 'none',
         fontWeight: "bold",
-        '&:hover': {
-            backgroundColor: green2,
-        }
     },
     dark_btn_accept_color: {
         backgroundColor: green_hoverDark,
+        '&:hover': {
+            backgroundColor: green2Dark,
+        }
     },
     light_btn_accept_color: {
         backgroundColor: green_hoverLight,
+        '&:hover': {
+            backgroundColor: green2Light,
+        }
     },
     btn_info: {
         width: "70px",
