@@ -469,7 +469,11 @@ const filteredData = React.useMemo(() => {
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
-                    className={`${classes[`${theme}_background_color3` as keyof typeof classes]} ${classes.modalBorder} p6 shadow-lg w-[85%] max-w-md text-white`}
+                    className={`
+                      ${classes[`${theme}_background_color3` as keyof typeof classes]} 
+                      ${classes.modalBorder} 
+                      p6 shadow-lg w-[85%] max-w-md text-white
+                    `}
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                   <ManagePerfil
@@ -483,7 +487,11 @@ const filteredData = React.useMemo(() => {
             </div>
         )}
       <AppBar
-        className={`${classes.menu_appbar} ${classes.no_background_colorDD} ${classes.main_colorDD}`}
+        className={`
+          ${classes.menu_appbar} 
+          ${classes.no_background_colorDD} 
+          ${classes[`${theme}_main_colorDD` as keyof typeof classes]}
+        `}
         sx={{ top: (breakpointLG?0:"auto"), bottom: 0 }}
       >
           <Grid container spacing={3}>

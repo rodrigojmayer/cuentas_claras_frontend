@@ -68,7 +68,10 @@ export function PlusButton({ sizeIco, sizeIcoExt, sizeIcoInt, colorIco, clicked 
   
   return(
     <IconButton
-      className={`${classes[`${theme}_plus_icon_color` as keyof typeof classes]}`}
+      className={`
+        ${classes.plusIcon} 
+        ${classes[`${theme}_plus_icon_color` as keyof typeof classes]}
+      `}
       id="plusButton"
       sx={{
         // width: widthIcoExt, 

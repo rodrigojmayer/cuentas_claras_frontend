@@ -62,7 +62,7 @@ const green2Light = '#991';
 
 // const red_hover = 'rgba(245, 97, 93, 0.35)';
 const red_hoverDark = 'rgba(245, 97, 93, 0.35)';
-const red_hoverLight = 'rgba(245, 97, 93, 0.35)';
+const red_hoverLight = 'rgba(24, 7, 193, 0.35)';
 
 // const red2 = '#E33629';
 // const blue = '#587DBD';
@@ -138,8 +138,11 @@ export const useStylesGlobal = makeStyles()({
         backgroundColor: transparent,
         boxShadow: "none",
     },
-    main_colorDD: {
+    dark_main_colorDD: {
         color: tableHeaderColorDark,
+    },
+    light_main_colorDD: {
+        color: tableHeaderColorLight,
     },
     table_menu : {
         borderRadius: '4px', // Set border-radius to mimic scrollbar radius
@@ -212,7 +215,7 @@ export const useStylesGlobal = makeStyles()({
         padding: "8px 0",
         border: 0,
     },
-    table_rows_color : {
+    dark_table_rows_color : {
         color: tableHeaderColorDark,
     },
     light_table_row_even: {
