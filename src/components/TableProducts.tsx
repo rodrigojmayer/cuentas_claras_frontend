@@ -193,7 +193,7 @@ function rowContent(
           key={column.id}
           align='center'
         //   onClick={() => alert(`click en header table: ${column.label}`)}
-          className={`${ _index%2 ? classes.table_row_odd : classes[`${theme}_table_row_even` as keyof typeof classes]}`}
+          className={`${ _index%2 ? classes[`${theme}_table_row_odd` as keyof typeof classes] : classes[`${theme}_table_row_even` as keyof typeof classes]}`}
           style={{ 
              border:0,
           }}

@@ -42,7 +42,7 @@ const text_colorLight = '#F95';
 const third_soft_color1Dark ='#757b86ff';
 const third_soft_color1Light ='#993';
 
-const third_soft_color2 =' #353B42';
+// const third_soft_color2 =' #353B42';
 const third_soft_color2Dark =' #353B42';
 const third_soft_color2Light =' #090';
 
@@ -206,8 +206,11 @@ export const useStylesGlobal = makeStyles()({
     dark_table_row_even: {
         backgroundColor: third_soft_color1Dark, 
     },
-    table_row_odd: {
-        backgroundColor: third_soft_color2, 
+    light_table_row_odd: {
+        backgroundColor: third_soft_color2Light, 
+    },
+    dark_table_row_odd: {
+        backgroundColor: third_soft_color2Dark, 
     },
     table_alert_on_background : {
         backgroundColor: tableAlertOnBackground, 
