@@ -38,7 +38,7 @@ const second_alpha_colorLight = 'rgba(0, 333, 333, 0.75)';
 const text_colorDark = '#EEFBFB';
 const text_colorLight = '#F95';
 
-const third_soft_color1 ='#757b86ff';
+// const third_soft_color1 ='#757b86ff';
 const third_soft_color1Dark ='#757b86ff';
 const third_soft_color1Light ='#993';
 
@@ -199,12 +199,17 @@ export const useStylesGlobal = makeStyles()({
     },
     table_rows_color : {
         color: tableHeaderColorDark,
-    },table_row_even: {
-        backgroundColor: third_soft_color1, 
+    },
+    light_table_row_even: {
+        backgroundColor: third_soft_color1Light,
+    },
+    dark_table_row_even: {
+        backgroundColor: third_soft_color1Dark, 
     },
     table_row_odd: {
         backgroundColor: third_soft_color2, 
-    },table_alert_on_background : {
+    },
+    table_alert_on_background : {
         backgroundColor: tableAlertOnBackground, 
     },
     // table_alert_on_color : {

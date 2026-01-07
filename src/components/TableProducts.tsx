@@ -150,6 +150,7 @@ export default function TableProducts(
                 classes,
                 setVisibleManagePago,
                 setNewPayment,
+                theme
             ) 
           }
         />
@@ -165,6 +166,7 @@ function rowContent(
     classes: any,
     setVisibleManagePago: (visible: boolean) => void,
     setNewPayment: (visible: NewPayment) => void,
+    theme: any
   ) {
 
   function selectDebtForPayment(debtData: Data) {
@@ -191,7 +193,7 @@ function rowContent(
           key={column.id}
           align='center'
         //   onClick={() => alert(`click en header table: ${column.label}`)}
-          className={`${ _index%2 ? classes.table_row_odd : classes.table_row_even }`}
+          className={`${ _index%2 ? classes.table_row_odd : classes[`${theme}_table_row_even` as keyof typeof classes]}`}
           style={{ 
              border:0,
           }}
