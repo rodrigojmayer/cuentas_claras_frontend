@@ -123,7 +123,7 @@ export default function ManagePago({
                     <Button
                         // type={clicked? "button" : "submit"}
                         variant="text"
-                        className={`${classes.btnCommonStyle} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
+                        className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
                         // color="inherit"
                         onClick={() => {
                             // const a = parseInt(newPayment?.pending, 10)
@@ -166,7 +166,7 @@ export default function ManagePago({
                             <Button
                                 // type={clicked? "button" : "submit"}
                                 variant="text"
-                                className={`${classes.btnCommonStyle} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
+                                className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
                                 // color="inherit"
                                 onClick={() => {
                                     // const a = parseInt(newPayment?.pending, 10)
@@ -196,7 +196,7 @@ export default function ManagePago({
                             <Button
                                 // type={clicked? "button" : "submit"}
                                 variant="text"
-                                className={`${classes.btnCommonStyle} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
+                                className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
                                 // color="inherit"
                                 onClick={() => {
                                     // const a = parseInt(newPayment?.pending, 10)
@@ -210,7 +210,7 @@ export default function ManagePago({
                 </Box>
             </Box>
             <Button 
-                className={`${classes[`${theme}_background_color3` as keyof typeof classes]} ${classes.deployModalButton}`}
+                className={`${classes[`${theme}_background_color3` as keyof typeof classes]} ${classes.deployModalButton} ${classes[`${theme}_deployModalButton_color` as keyof typeof classes]}`}
                 onClick={() => setShowDetails(!showDetails)}
             >
                 {showDetails ?

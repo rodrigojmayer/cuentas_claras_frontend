@@ -139,13 +139,14 @@ interface ButtonProps {
 
 export function CancelButton({ clicked }: ButtonProps) {
   const { classes } = useStylesGlobal();
+  const { theme } = useTheme();
   const handleClick = (() => {
       clicked?.()
   })
   return (
       <Button 
         type={clicked? "button" : "submit"}
-        className={`${classes.btnCommonStyle} ${classes.btn_cancel}`}
+        className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_cancel}`}
         onClick={handleClick}
       >
           Cancelar
@@ -154,13 +155,14 @@ export function CancelButton({ clicked }: ButtonProps) {
 }
 export function AcceptButton({ clicked }: ButtonProps) {
   const { classes } = useStylesGlobal();
+  const { theme } = useTheme();
   const handleClick = (() => {
       clicked?.()
   })
   return (
       <Button 
       type={clicked? "button" : "submit"}
-        className={`${classes.btnCommonStyle} ${classes.btn_accept}`}
+        className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_accept}`}
         onClick={handleClick}
       >
           Aceptar

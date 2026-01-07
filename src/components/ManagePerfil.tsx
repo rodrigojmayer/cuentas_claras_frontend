@@ -126,7 +126,7 @@ export default function ManagePerfil({
                     />
                     {/* <Button
                         variant="text"
-                        className={`${classes.btnCommonStyle} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
+                        className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
                         onClick={() => {
                             alert("Validar teléfono")
                         }}
@@ -151,7 +151,7 @@ export default function ManagePerfil({
                     />
                     {/* <Button
                         variant="text"
-                        className={`${classes.btnCommonStyle} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
+                        className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
                         onClick={() => {
                             alert("Validar email")
                         }}

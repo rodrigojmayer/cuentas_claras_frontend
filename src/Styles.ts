@@ -34,7 +34,7 @@ const second_colorLight = '#0FF';
 const second_alpha_colorDark = 'rgba(73, 56, 202, 0.75)';
 const second_alpha_colorLight = 'rgba(0, 333, 333, 0.75)';
 
-const text_color = '#EEFBFB';
+// const text_color = '#EEFBFB';
 const text_colorDark = '#EEFBFB';
 const text_colorLight = '#F95';
 
@@ -320,7 +320,6 @@ export const useStylesGlobal = makeStyles()({
     btnCommonStyle: {
         borderRadius: 7,
         transition: ".5s",
-        color: text_color,
         "& > *": {
             transition: ".5s",
         },
@@ -330,6 +329,12 @@ export const useStylesGlobal = makeStyles()({
                 transition: ".5s",
             }
         }
+    },
+    dark_btnCommonStyle_color: {
+        color: text_colorDark,
+    },
+    light_btnCommonStyle_color: {
+        color: text_colorLight,
     },
     btn_cancel: {
         backgroundColor: red_hover,
@@ -388,12 +393,17 @@ export const useStylesGlobal = makeStyles()({
         // autoComplete: 'new-password',
     },
     deployModalButton: {
-        color: text_color,
         width: "40px",
         height: "22px",
         top: "30px",
         left: "calc(100% - 56px)",
         borderRadius: "0px 0px 10px 10px",
+    },
+    dark_deployModalButton_color: {
+        color: text_colorDark,
+    },
+    light_deployModalButton_color: {
+        color: text_colorLight,
     },
 
     container: {
