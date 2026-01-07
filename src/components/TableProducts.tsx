@@ -202,7 +202,13 @@ function rowContent(
           }}
         >
           <div 
-            className={ `${row?.alerta ? classes.table_alert_on_background  : "" } ${classes.table_rows}  ${classes.table_rows_color}`}
+            className={ `
+              ${row?.alerta ? 
+                classes[`${theme}_table_alert_on_background` as keyof typeof classes]                
+              : 
+                "" } 
+              ${classes.table_rows}  
+              ${classes.table_rows_color}`}
           > 
             <Tooltip 
                 title={row?.[column.dataKey]} 

@@ -74,7 +74,7 @@ const red_hoverLight = 'rgba(245, 97, 93, 0.35)';
 // const mainColor3 = 'rgb(38,55, 66, 1)'; // is used just in the menu options with large screens
 // const mainColorD = 'rgb(25, 54, 72)';
 
-const tableAlertOnBackground = 'rgb(290, 10, 50, .6)';
+// const tableAlertOnBackground = 'rgb(290, 10, 50, .6)';
 const tableAlertOnBackgroundDark = 'rgb(290, 10, 50, .6)';
 const tableAlertOnBackgroundLight = 'rgb(222, 110, 0, .6)';
 
@@ -212,8 +212,11 @@ export const useStylesGlobal = makeStyles()({
     dark_table_row_odd: {
         backgroundColor: third_soft_color2Dark, 
     },
-    table_alert_on_background : {
-        backgroundColor: tableAlertOnBackground, 
+    dark_table_alert_on_background : {
+        backgroundColor: tableAlertOnBackgroundDark, 
+    },
+    light_table_alert_on_background : {
+        backgroundColor: tableAlertOnBackgroundLight, 
     },
     // table_alert_on_color : {
     //     color: tableAlertOnColor,
