@@ -26,11 +26,11 @@ const first_color3Light = '#0F0';
 const first_color4Dark = '#0b3555ff';
 const first_color4Light = '#F0F';
 
-const second_color = '#4938CA';
+// const second_color = '#4938CA';
 const second_colorDark = '#4938CA';
 const second_colorLight = '#0FF';
 
-const second_alpha_color = 'rgba(73, 56, 202, 0.75)';
+// const second_alpha_color = 'rgba(73, 56, 202, 0.75)';
 const second_alpha_colorDark = 'rgba(73, 56, 202, 0.75)';
 const second_alpha_colorLight = 'rgba(0, 333, 333, 0.75)';
 
@@ -350,12 +350,20 @@ export const useStylesGlobal = makeStyles()({
         }
     },
     btn_info: {
-        backgroundColor: second_alpha_color,
         width: "70px",
         textTransform: 'none',
         fontWeight: "bold",
+    },
+    dark_btn_info_color: {
+        backgroundColor: second_alpha_colorDark,
         '&:hover': {
-            backgroundColor: second_color,
+            backgroundColor: second_colorDark,
+        }
+    },
+    light_btn_info_color: {
+        backgroundColor: second_alpha_colorLight,
+        '&:hover': {
+            backgroundColor: second_colorLight,
         }
     },
     show: {

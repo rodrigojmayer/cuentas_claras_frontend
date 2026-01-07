@@ -123,7 +123,7 @@ export default function ManagePago({
                     <Button
                         // type={clicked? "button" : "submit"}
                         variant="text"
-                        className={`${classes.btnCommonStyle} ${classes.btn_info}`}
+                        className={`${classes.btnCommonStyle} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
                         // color="inherit"
                         onClick={() => {
                             // const a = parseInt(newPayment?.pending, 10)
@@ -166,7 +166,7 @@ export default function ManagePago({
                             <Button
                                 // type={clicked? "button" : "submit"}
                                 variant="text"
-                                className={`${classes.btnCommonStyle} ${classes.btn_info}`}
+                                className={`${classes.btnCommonStyle} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
                                 // color="inherit"
                                 onClick={() => {
                                     // const a = parseInt(newPayment?.pending, 10)
@@ -196,7 +196,7 @@ export default function ManagePago({
                             <Button
                                 // type={clicked? "button" : "submit"}
                                 variant="text"
-                                className={`${classes.btnCommonStyle} ${classes.btn_info}`}
+                                className={`${classes.btnCommonStyle} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
                                 // color="inherit"
                                 onClick={() => {
                                     // const a = parseInt(newPayment?.pending, 10)
