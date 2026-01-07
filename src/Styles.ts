@@ -60,7 +60,7 @@ const green2Light = '#991';
 // const black_alpha_color = 'rgba(0, 0, 0, 0.7)';
 // const red = '#F5615D';
 
-const red_hover = 'rgba(245, 97, 93, 0.35)';
+// const red_hover = 'rgba(245, 97, 93, 0.35)';
 const red_hoverDark = 'rgba(245, 97, 93, 0.35)';
 const red_hoverLight = 'rgba(245, 97, 93, 0.35)';
 
@@ -92,7 +92,7 @@ const menuItemLight = '#FF8';
 // const warningMain = 'rgb(255, 47, 47, 1)';
 // const warningContrastText = 'rgb(255, 47, 47, .2)';
 
-const warningDark = 'rgb(155, 27, 27, 1)';
+// const warningDark = 'rgb(155, 27, 27, 1)';
 const warningDarkDark = 'rgb(155, 27, 27, 1)';
 const warningDarkLight = 'rgb(1, 272, 127, 1)';
 
@@ -345,12 +345,20 @@ export const useStylesGlobal = makeStyles()({
         color: text_colorLight,
     },
     btn_cancel: {
-        backgroundColor: red_hover,
         width: "70px",
         textTransform: 'none',
         fontWeight: "bold",
+    },
+    dark_btn_cancel_color: {
+        backgroundColor: red_hoverDark,
         '&:hover': {
-            backgroundColor: warningDark,
+            backgroundColor: warningDarkDark,
+        }
+    },
+    light_btn_cancel_color: {
+        backgroundColor: red_hoverLight,
+        '&:hover': {
+            backgroundColor: warningDarkLight,
         }
     },
     btn_accept: {

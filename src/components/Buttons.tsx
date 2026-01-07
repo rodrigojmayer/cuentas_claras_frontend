@@ -146,7 +146,12 @@ export function CancelButton({ clicked }: ButtonProps) {
   return (
       <Button 
         type={clicked? "button" : "submit"}
-        className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_cancel}`}
+        className={`
+          ${classes.btnCommonStyle} 
+          ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} 
+          ${classes.btn_cancel}
+          ${classes[`${theme}_btn_cancel_color` as keyof typeof classes]} 
+        `}
         onClick={handleClick}
       >
           Cancelar
