@@ -162,7 +162,12 @@ export function AcceptButton({ clicked }: ButtonProps) {
   return (
       <Button 
       type={clicked? "button" : "submit"}
-        className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_accept}`}
+        className={`
+          ${classes.btnCommonStyle} 
+          ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} 
+          ${classes.btn_accept} 
+          ${classes[`${theme}_btn_accept_color` as keyof typeof classes]}
+        `}
         onClick={handleClick}
       >
           Aceptar
