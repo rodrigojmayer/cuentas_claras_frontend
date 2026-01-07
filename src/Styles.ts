@@ -82,7 +82,8 @@ const tableAlertOnBackgroundLight = 'rgb(222, 110, 0, .6)';
 // const tableRowColor = '#222';
 // const rowEvenBackground = 'rgb(69, 144, 186)';
 // const rowOddBackground = 'rgb(162, 199, 220)';
-const menuItem = '#DCF2F1';
+
+// const menuItem = '#DCF2F1';
 const menuItemDark = '#DCF2F1';
 const menuItemLight = '#FF8';
 
@@ -99,7 +100,7 @@ const warningDarkLight = 'rgb(1, 272, 127, 1)';
 // const neutralContrastText = 'rgb(255, 255, 255, .2)';
 // const neutralDark = 'rgb(155, 155, 155, 1)';
 
-const plusIcon = 'rgb(77, 168, 218, 1)';
+// const plusIcon = 'rgb(77, 168, 218, 1)';
 const plusIconDark = 'rgb(77, 168, 218, 1)';
 const plusIconLight = 'rgb(177, 68, 18, 1)';
 
@@ -157,24 +158,38 @@ export const useStylesGlobal = makeStyles()({
             },
         },
     },
-    table_menu_background_color : {
-        '& .MuiPaper-root': { 
-            backgroundColor: menuItem,
-            '&:hover': {
-                backgroundColor: menuItem,
-             },
-        },
-    },
+    // dark_table_menu_background_color : {
+    //     '& .MuiPaper-root': { 
+    //         backgroundColor: menuItemDark,
+    //         '&:hover': {
+    //             backgroundColor: menuItemDark,
+    //          },
+    //     },
+    // },
+    // light_table_menu_background_color : {
+    //     '& .MuiPaper-root': { 
+    //         backgroundColor: menuItemLight,
+    //         '&:hover': {
+    //             backgroundColor: menuItemLight,
+    //          },
+    //     },
+    // },
     menu_item: {
         padding: '0 5px',
         display: "flex",
         // alignContent: "center" ,
         justifyContent: "space-between"
     },
-    menu_item_background_color: {
-        backgroundColor: menuItem,
+    dark_menu_item_background_color: {
+        backgroundColor: menuItemDark,
         '&:hover': {
-            backgroundColor: menuItem,
+            backgroundColor: menuItemDark,
+        },
+    },
+    light_menu_item_background_color: {
+        backgroundColor: menuItemLight,
+        '&:hover': {
+            backgroundColor: menuItemLight,
         },
     },
     dark_main_background_colorD: {
@@ -233,8 +248,11 @@ export const useStylesGlobal = makeStyles()({
         height: '2.9rem',
       },
     },
-    plus_icon_color: {
-      color: plusIcon,
+    dark_plus_icon_color: {
+      color: plusIconDark,
+    },
+    light_plus_icon_color: {
+      color: plusIconLight,
     },
     customPlusIconBoxRow: {
         display: "flex",

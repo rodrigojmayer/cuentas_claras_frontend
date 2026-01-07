@@ -39,7 +39,7 @@ export default function Home() {
   const [ openMenu, setOpenMenu] = useState(false);
   const handleOpenMenu = () => setOpenMenu(true);
   const handleCloseMenu = () => setOpenMenu(false);
-      const { theme } = useTheme();
+  const { theme } = useTheme();
   // const handleOpenOptions = (newData:  {option: string, open: boolean}) => {
   //         setOpenOptions({...openOptions, [newData.option]: newData.open});
   // }
@@ -322,7 +322,10 @@ const filteredData = React.useMemo(() => {
               {setShowAlertsFirst(!showAlertsFirst)
               e.stopPropagation()
             }}
-            className={`${classes.menu_item} ${classes.menu_item_background_color}`} 
+            className={`
+              ${classes.menu_item} 
+              ${classes[`${theme}_menu_item_background_color` as keyof typeof classes]}
+            `} 
           >
             <Typography 
               // variant="body2" 
@@ -340,7 +343,10 @@ const filteredData = React.useMemo(() => {
               {setShowFinishedDebts(!showFinishedDebts)
               e.stopPropagation()
             }}
-            className={`${classes.menu_item} ${classes.menu_item_background_color}`} 
+            className={`
+              ${classes.menu_item} 
+              ${classes[`${theme}_menu_item_background_color` as keyof typeof classes]}
+            `} 
           >
             <Typography 
               // variant="body2" 
@@ -358,7 +364,10 @@ const filteredData = React.useMemo(() => {
       <Box className={` ${classes.customPlusIconBoxRow}`}>
         <IconButton
           onClick={ openTableOptions }
-          className={`${classes.plusIcon} ${classes.plus_icon_color}`}
+          className={`
+            ${classes.plusIcon} 
+            ${classes[`${theme}_plus_icon_color` as keyof typeof classes]}
+          `}
           sx={{ margin: "0 auto" }}
         >
           <FilterListIcon />

@@ -46,6 +46,7 @@ interface PlusButtonProps {
 export function PlusButton({ sizeIco, sizeIcoExt, sizeIcoInt, colorIco, clicked }:  PlusButtonProps ) {
 
   const { classes } = useStylesGlobal();
+  const { theme } = useTheme();
 //   const { user } = useContext<any>(UserContext)
   let heightIcoExt, widthIcoExt, heightIcoInt, widthIcoInt = sizeIco
   const handleClick = () => {
@@ -67,7 +68,7 @@ export function PlusButton({ sizeIco, sizeIcoExt, sizeIcoInt, colorIco, clicked 
   
   return(
     <IconButton
-      className={`${classes.plusIcon} ${classes.plus_icon_color}`}
+      className={`${classes[`${theme}_plus_icon_color` as keyof typeof classes]}`}
       id="plusButton"
       sx={{
         // width: widthIcoExt, 
@@ -85,6 +86,7 @@ export function PlusButton({ sizeIco, sizeIcoExt, sizeIcoInt, colorIco, clicked 
 
 export function FilterButton( {sizeIco, sizeIcoExt, sizeIcoInt, colorIco, clicked }:  PlusButtonProps) {
   const { classes } = useStylesGlobal();
+  const { theme } = useTheme();
   let heightIcoExt, widthIcoExt, heightIcoInt, widthIcoInt = sizeIco
   const handleClick = () => {
     if (clicked)
@@ -104,7 +106,10 @@ export function FilterButton( {sizeIco, sizeIcoExt, sizeIcoInt, colorIco, clicke
   }
 return(
     <IconButton
-      className={`${classes.plusIcon} ${classes.plus_icon_color}`}
+      className={`
+        ${classes.plusIcon} 
+        ${classes[`${theme}_plus_icon_color` as keyof typeof classes]}
+      `}
       // id="plusButton"
       sx={{
         // width: widthIcoExt, 
