@@ -24,8 +24,8 @@ export function MenuButton({ onDataChanged }: ChildProps) {
         <IconButton 
             onClick={handleClick}
             className={`
-              ${classes.menuIcon} 
-              ${classes[`${theme}_menu_icon_color` as keyof typeof classes]}
+              // ${classes[`${theme}_menu_icon_color` as keyof typeof classes]}
+              ${classes[`${theme}_menuIcon` as keyof typeof classes]} 
             `}
             id="hamburgerMenuButton"
         >
@@ -176,10 +176,10 @@ export function AcceptButton({ clicked }: ButtonProps) {
       <Button 
       type={clicked? "button" : "submit"}
         className={`
-          ${classes.btnCommonStyle} 
           ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} 
-          ${classes.btn_accept} 
           ${classes[`${theme}_btn_accept_color` as keyof typeof classes]}
+          ${classes.btnCommonStyle} 
+          ${classes.btn_accept} 
         `}
         onClick={handleClick}
       >

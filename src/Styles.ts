@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { makeStyles } from 'tss-react/mui';
 // import { createTheme } from '@mui/material/styles';
 
 // const mainColorDD = 'rgb(18, 35, 46, 1)';
-const transparent = 'rgb(255, 255, 255, 0)';
+// const transparent = 'rgb(255, 255, 255, 0)';
 
 // const neutralMain = 'rgb(255, 255, 255, 1)';
 const neutralMainDark = 'rgb(255, 255, 255, 1)';
@@ -106,7 +107,9 @@ const plusIconLight = 'rgb(177, 68, 18, 1)';
 
 export const useStylesGlobal = makeStyles()({
     
-    menuIcon: {
+    dark_menuIcon: {
+        backgroundColor: first_colorDark,
+        color: neutralMainDark,
       '& .MuiSvgIcon-root': {
         width: '64px',
         height: '44px',
@@ -116,14 +119,26 @@ export const useStylesGlobal = makeStyles()({
     //   marginRight: "0",
       borderRadius: "18px 18px 0px 0px",
     },
-    dark_menu_icon_color: {
-        color: neutralMainDark,
-        backgroundColor: first_colorDark,
-    },
-    light_menu_icon_color: {
-        color: neutralMainLight,
+    light_menuIcon: {
         backgroundColor: first_colorLight,
+        color: neutralMainLight,
+      '& .MuiSvgIcon-root': {
+        width: '64px',
+        height: '44px',
+      },
+      display: 'flex',
+      margin: "auto",
+    //   marginRight: "0",
+      borderRadius: "18px 18px 0px 0px",
     },
+    // dark_menu_icon_color: {
+    //     backgroundColor: first_colorDark,
+    //     color: neutralMainDark,
+    // },
+    // light_menu_icon_color: {
+    //     color: neutralMainLight,
+    //     backgroundColor: first_colorLight,
+    // },
     menu_appbar: {
         position: "fixed",
         left: 0,
@@ -135,8 +150,12 @@ export const useStylesGlobal = makeStyles()({
         zIndex: 40,
     },
     no_background_colorDD: {
-        backgroundColor: transparent,
-        boxShadow: "none",
+        // backgroundColor: transparent,
+        // boxShadow: "none",
+        backgroundColor: 'transparent !important', // Forzamos la transparencia
+        boxShadow: "none !important",             // Eliminamos cualquier sombra residual
+        backgroundImage: "none",
+
     },
     dark_main_colorDD: {
         color: tableHeaderColorDark,
@@ -223,6 +242,9 @@ export const useStylesGlobal = makeStyles()({
     },
     dark_table_rows_color : {
         color: tableHeaderColorDark,
+    },
+    light_table_rows_color : {
+        color: tableHeaderColorLight,
     },
     light_table_row_even: {
         backgroundColor: third_soft_color1Light,
@@ -375,8 +397,8 @@ export const useStylesGlobal = makeStyles()({
         color: text_colorLight,
     },
     btn_cancel: {
-        width: "70px",
-        textTransform: 'none',
+        width: "70px !important",
+        textTransform: 'none !important' as any,
         fontWeight: "bold",
     },
     dark_btn_cancel_color: {
@@ -397,7 +419,7 @@ export const useStylesGlobal = makeStyles()({
         fontWeight: "bold",
     },
     dark_btn_accept_color: {
-        backgroundColor: green_hoverDark,
+        backgroundColor: `${green_hoverDark} !important`  ,
         '&:hover': {
             backgroundColor: green2Dark,
         }

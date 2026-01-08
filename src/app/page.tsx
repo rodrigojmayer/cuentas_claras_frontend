@@ -389,7 +389,10 @@ const filteredData = React.useMemo(() => {
           >
               {/* --- MODAL CONTENT --- */}
               <div
-                  className={`${classes[`${theme}_background_color3` as keyof typeof classes]} p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white`}
+                  className={`
+                    ${classes[`${theme}_background_color3` as keyof typeof classes]} 
+                    p6 rounded-2xl shadow-lg w-[90%] max-w-md text-white
+                  `}
                   onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
               >
                   <ManageCargarPrestamo
@@ -408,7 +411,11 @@ const filteredData = React.useMemo(() => {
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
-                    className={`${classes[`${theme}_background_color3` as keyof typeof classes]} ${classes.modalPago} p6 shadow-lg w-[90%] max-w-md text-white`}
+                    className={`
+                      ${classes[`${theme}_background_color3` as keyof typeof classes]} 
+                      ${classes.modalPago} 
+                      p6 shadow-lg w-[90%] max-w-md text-white
+                    `}
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ManagePago
@@ -430,7 +437,11 @@ const filteredData = React.useMemo(() => {
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
-                    className={`${classes[`${theme}_background_color3` as keyof typeof classes]} ${classes.modalBorder} p6 shadow-lg w-[85%] max-w-md text-white`}
+                    className={`
+                      ${classes[`${theme}_background_color3` as keyof typeof classes]} 
+                      ${classes.modalBorder} 
+                      p6 shadow-lg w-[85%] max-w-md text-white
+                    `}
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                     <ModalHistorial
@@ -448,7 +459,11 @@ const filteredData = React.useMemo(() => {
             >
                 {/* --- MODAL CONTENT --- */}
                 <div
-                    className={`${classes[`${theme}_background_color3` as keyof typeof classes]} ${classes.modalBorder} p6 shadow-lg w-[85%] max-w-md text-white`}
+                    className={`
+                      ${classes[`${theme}_background_color3` as keyof typeof classes]} 
+                      ${classes.modalBorder} 
+                      p6 shadow-lg w-[85%] max-w-md text-white
+                    `}
                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                 >
                   <ModalCambiarFecha

@@ -92,7 +92,7 @@ export default function TableProducts(
 
   return (
     <div>
-      <Paper style={{backgroundColor: "rgb(0, 0, 0, 0)", height: `calc(100dvh - ${(breakpointLG?"105px":"120px")})`, width: (breakpointLG?"98vw":"94vw"), margin: "12px auto 0 auto" ,borderRadius: "10px"}}>
+      <Paper style={{backgroundColor: "rgb(0, 0, 0, .20)", height: `calc(100dvh - ${(breakpointLG?"105px":"120px")})`, width: (breakpointLG?"98vw":"94vw"), margin: "12px auto 0 auto" ,borderRadius: "10px"}}>
         <TableVirtuoso 
           // data={data}
           data={sortedData}
@@ -196,7 +196,11 @@ function rowContent(
           key={column.id}
           align='center'
         //   onClick={() => alert(`click en header table: ${column.label}`)}
-          className={`${ _index%2 ? classes[`${theme}_table_row_odd` as keyof typeof classes] : classes[`${theme}_table_row_even` as keyof typeof classes]}`}
+          className={`${ _index%2 ? 
+            classes[`${theme}_table_row_odd` as keyof typeof classes] 
+          : 
+            classes[`${theme}_table_row_even` as keyof typeof classes]}
+          `}
           style={{ 
              border:0,
           }}
@@ -211,7 +215,7 @@ function rowContent(
               : 
                 "" } 
               ${classes.table_rows}  
-              ${classes.table_rows_color}`}
+              ${classes[`${theme}_table_rows_color` as keyof typeof classes]}`}
           > 
             <Tooltip 
                 title={row?.[column.dataKey]} 
