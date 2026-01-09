@@ -12,6 +12,7 @@ import useUsers from "@/hooks/useUsers";
 import { useSession } from "next-auth/react";
 import useDebtsByDebtor from "@/hooks/useDebtsByDebtor";
 import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
+import { useTheme } from "next-themes";
 
 
 interface ManageCargarPrestamoProps {
@@ -28,6 +29,7 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
     const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor, mutateDebtsByDebtor } = useDebtsByDebtor();
  
     const { classes } = useStylesGlobal()
+    const { theme } = useTheme();
     const [idDebtor, setIdDebtor] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState<string>("");
@@ -115,7 +117,7 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                             {...params}
                             label="Email"
                             variant="outlined"        
-                            className={classes.inputMainData}
+                            className={`${classes[`${theme}_inputMainData` as keyof typeof classes]} ${classes.inputMainData}`}
                             // className="border rounded-lg bg-white"
                         />
                     )}
@@ -131,7 +133,7 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                         }
                     }}
                     size="small"
-                    className={classes.inputMainData}
+                    className={`${classes[`${theme}_inputMainData` as keyof typeof classes]}`}
                 /> */}
                 <Box className={classes.customBoxRow}>
 
@@ -148,14 +150,14 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                             }
                         }}
                         size="small"
-                        className={classes.inputMainData}
+                        className={`${classes[`${theme}_inputMainData` as keyof typeof classes]} ${classes.inputMainData}`}
                     />
                     <TextField
                         value={currency}
                         select
                         onChange={(event:any) => setCurrency(event.target.value)}
                         size="small"
-                        className={`${classes.inputMainData}  max-w-25`} 
+                        className={`${classes[`${theme}_inputMainData` as keyof typeof classes]} ${classes.inputMainData}  max-w-25`} 
                     > 
                         {currencyOptions.map((c) => (
                             <MenuItem 
@@ -173,7 +175,7 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                     value={detail}
                     onChange={(event:any) => setDetail(event.target.value)}
                     size="small"
-                    className={classes.inputMainData}
+                    className={`${classes[`${theme}_inputMainData` as keyof typeof classes]} ${classes.inputMainData}`}
                 />
                 <DatePickerComponent dateProp={dateDue} setDateProp={setDateDue} labelProp={"Fecha vencimiento"}/>             
                      

@@ -9,6 +9,8 @@ import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
+import { useStylesGlobal } from '@/Styles';
+import { useTheme } from "next-themes";
 
 
 interface DatePickerComponentProps {
@@ -20,6 +22,8 @@ interface DatePickerComponentProps {
 
 export default function DatePickerComponent({ dateProp, setDateProp, labelProp, widthProp }: DatePickerComponentProps) {
     
+    const { classes } = useStylesGlobal()
+    const { theme } = useTheme();
     const breakpointLG = useMediaQuery('(min-width:1024px)')
     // const DatePickerComponent = breakpointLG ? DatePicker : MobileDatePicker;
     const DatePickerComponent = DatePicker ;
@@ -37,7 +41,7 @@ export default function DatePickerComponent({ dateProp, setDateProp, labelProp, 
             {/* <DemoContainer components={['DatePicker']} > */}
             <DatePicker
                 // <DatePickerComponent
-                    className="border rounded-lg p-2 bg-white"
+                    className={`${classes[`${theme}_inputMainData` as keyof typeof classes]} border rounded-lg p-2 bg-white`}
                     label={labelProp}
                     format="DD/MM/YYYY"
                     defaultValue = { dateProp? dayjs(dateProp) : null}

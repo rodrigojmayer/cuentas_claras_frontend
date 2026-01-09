@@ -457,9 +457,49 @@ export const useStylesGlobal = makeStyles()({
         display: "none",
     },
     inputMainData: {
-        backgroundColor: "white",
+        // backgroundColor: third_soft_color2Dark,
         borderRadius:7,
         width: "100%",
+        // "& .MuiInputBase-input": {
+        //     color: "black !important", 
+        //     WebkitTextFillColor: "black !important", // Necesario para algunos navegadores
+        // },
+        // Esto asegura que el label (si no ha subido) sea visible
+        // "& .MuiInputLabel-root": {
+        //     color: "rgba(0, 0, 0, 0.6) !important",
+        // },
+// "& .MuiOutlinedInput-input": {
+//       color: "#000 !important",
+//       WebkitTextFillColor: "#000 !important",
+//     },
+//         "& .MuiInputBase-input": {
+//       color: "#000 !important" ,
+//       WebkitTextFillColor: "#000",
+//     },
+
+//     // ✅ LABEL
+//     "& .MuiInputLabel-root": {
+//       color: "rgba(0, 0, 0, 0.6)",
+//     },
+
+//     // ✅ OUTLINE
+//     "& .MuiOutlinedInput-notchedOutline": {
+//       borderColor: "rgba(0,0,0,0.3)",
+//     },
+
+//     "&:hover .MuiOutlinedInput-notchedOutline": {
+//       borderColor: "rgba(0,0,0,0.6)",
+//     },
+
+//     // "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+//     //   borderColor: theme.palette.primary.main,
+//     // },
+    },
+    dark_inputMainData: {
+        backgroundColor: third_soft_color2Dark,
+    },
+    light_inputMainData: {
+        backgroundColor: neutralMainDark,
     },
     inputPago: {
         width: "20%",
