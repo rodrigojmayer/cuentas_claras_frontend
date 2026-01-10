@@ -14,7 +14,7 @@ const first_color3Dark = '#2A2E31';
 const first_color3Light = '#c6c8cbff';
 
 const first_color4Dark = '#0b3555ff';
-const first_color4Light = '#F0F';
+const first_color4Light = '#695dc9ff';
 
 const second_colorDark = '#4938CA';
 const second_colorLight = '#0FF';
@@ -26,10 +26,10 @@ const text_colorDark = '#EEFBFB';
 const text_colorLight = '#F95';
 
 const third_soft_color1Dark ='#757b86ff';
-const third_soft_color1Light ='#993';
+const third_soft_color1Light ='#dddfe1ff';
 
 const third_soft_color2Dark =' #353B42';
-const third_soft_color2Light =' #090';
+const third_soft_color2Light =' #9a9b9cff';
 
 const green_hoverDark = 'rgba(39, 182, 125, 0.35)';
 const green_hoverLight = 'rgba(1, 55, 99, 0.35)';
@@ -41,7 +41,7 @@ const red_hoverDark = 'rgba(245, 97, 93, 0.35)';
 const red_hoverLight = 'rgba(24, 7, 193, 0.35)';
 
 const tableAlertOnBackgroundDark = 'rgb(290, 10, 50, .6)';
-const tableAlertOnBackgroundLight = 'rgb(222, 110, 0, .6)';
+const tableAlertOnBackgroundLight = 'rgba(226, 123, 123, 1)';
 
 const menuItemDark = '#DCF2F1';
 const menuItemLight = '#FF8';
