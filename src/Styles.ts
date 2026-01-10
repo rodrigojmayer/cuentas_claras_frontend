@@ -14,7 +14,7 @@ const first_color3Dark = '#2A2E31';
 const first_color3Light = '#c6c8cbff';
 
 const first_color4Dark = '#0b3555ff';
-const first_color4Light = '#695dc9ff';
+const first_color4Light = '#857bceff';
 
 const second_colorDark = '#4938CA';
 const second_colorLight = '#0FF';
@@ -23,7 +23,7 @@ const second_alpha_colorDark = 'rgba(73, 56, 202, 0.75)';
 const second_alpha_colorLight = 'rgba(0, 333, 333, 0.75)';
 
 const text_colorDark = '#EEFBFB';
-const text_colorLight = '#F95';
+const text_colorLight = 'rgba(0, 0, 0, 1)';
 
 const third_soft_color1Dark ='#757b86ff';
 const third_soft_color1Light ='#dddfe1ff';
@@ -32,13 +32,13 @@ const third_soft_color2Dark =' #353B42';
 const third_soft_color2Light =' #9a9b9cff';
 
 const green_hoverDark = 'rgba(39, 182, 125, 0.35)';
-const green_hoverLight = 'rgba(1, 55, 99, 0.35)';
+const green_hoverLight = 'rgba(40, 173, 4, 1)';
 
 const green2Dark = '#319F43';
 const green2Light = '#991';
 
 const red_hoverDark = 'rgba(245, 97, 93, 0.35)';
-const red_hoverLight = 'rgba(24, 7, 193, 0.35)';
+const red_hoverLight = 'rgba(178, 5, 5, 0.35)';
 
 const tableAlertOnBackgroundDark = 'rgb(290, 10, 50, .6)';
 const tableAlertOnBackgroundLight = 'rgba(226, 123, 123, 1)';
@@ -372,7 +372,7 @@ export const useStylesGlobal = makeStyles()({
         }
     },
     light_btn_accept_color: {
-        backgroundColor: green_hoverLight,
+        backgroundColor: `${green_hoverLight} !important`,
         '&:hover': {
             backgroundColor: green2Light,
         }
