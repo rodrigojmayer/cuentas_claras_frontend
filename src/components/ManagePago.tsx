@@ -83,8 +83,17 @@ export default function ManagePago({
     }
 
     return (
-        <div className="flex flex-col p-2 max-w-md">
-            <h3 className="text-3xl text-center font-bold text-gray-800 dark:text-gray-100 mb-4">
+        <div className={`
+                ${classes[`${theme}_text` as keyof typeof classes]}
+                flex flex-col p-2 max-w-md
+            `}
+        >
+            <h3 className={`
+                text-3xl 
+                text-center 
+                font-bold  
+                mb-4
+            `}>
                 {/* {newPayment?.name || newPayment?.email} */}
                 {newPayment?.name || ((newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email)}
             </h3>

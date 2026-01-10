@@ -52,6 +52,10 @@ const warningDarkLight = 'rgb(1, 272, 127, 1)';
 const plusIconDark = 'rgb(77, 168, 218, 1)';
 const plusIconLight = 'rgb(177, 68, 18, 1)';
 
+const textDark = '#dddfe1ff';
+const textLight = '#353B42';
+
+
 export const useStylesGlobal = makeStyles()({
     
     dark_menuIcon: {
@@ -402,6 +406,12 @@ export const useStylesGlobal = makeStyles()({
     },
     hide: {
         display: "none",
+    },
+    dark_text: {
+        color: textDark,
+    },
+    light_text: {
+        color: textLight,
     },
     inputMainData: {
         // backgroundColor: third_soft_color2Dark,
