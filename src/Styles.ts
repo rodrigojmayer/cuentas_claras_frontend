@@ -1,107 +1,53 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { makeStyles } from 'tss-react/mui';
-// import { createTheme } from '@mui/material/styles';
-
-// const mainColorDD = 'rgb(18, 35, 46, 1)';
-// const transparent = 'rgb(255, 255, 255, 0)';
-
-// const neutralMain = 'rgb(255, 255, 255, 1)';
 const neutralMainDark = 'rgb(255, 255, 255, 1)';
 const neutralMainLight = 'rgb(0, 0, 0, 1)';
 
 const tableHeaderColorDark = 'rgb(255, 255, 255, 1)';
 const tableHeaderColorLight = 'rgb(0, 0, 0, 1)';
 
-// const first_color = '#414548';
 const first_colorDark = '#414548';
 const first_colorLight = '#FF0';
 
-
-// const first_color2 = '#212528';
-
-// const first_color3 = '#2A2E31';
 const first_color3Dark = '#2A2E31';
 const first_color3Light = '#0F0';
 
-// const first_color4 = '#0b3555ff';
 const first_color4Dark = '#0b3555ff';
 const first_color4Light = '#F0F';
 
-// const second_color = '#4938CA';
 const second_colorDark = '#4938CA';
 const second_colorLight = '#0FF';
 
-// const second_alpha_color = 'rgba(73, 56, 202, 0.75)';
 const second_alpha_colorDark = 'rgba(73, 56, 202, 0.75)';
 const second_alpha_colorLight = 'rgba(0, 333, 333, 0.75)';
 
-// const text_color = '#EEFBFB';
 const text_colorDark = '#EEFBFB';
 const text_colorLight = '#F95';
 
-// const third_soft_color1 ='#757b86ff';
 const third_soft_color1Dark ='#757b86ff';
 const third_soft_color1Light ='#993';
 
-// const third_soft_color2 =' #353B42';
 const third_soft_color2Dark =' #353B42';
 const third_soft_color2Light =' #090';
 
-// const white_color = '#FFFFFF';
-// const green = '#27B67D';
-
-// const green_hover = 'rgba(39, 182, 125, 0.35)';
 const green_hoverDark = 'rgba(39, 182, 125, 0.35)';
 const green_hoverLight = 'rgba(1, 55, 99, 0.35)';
 
-// const green2 = '#319F43';
 const green2Dark = '#319F43';
 const green2Light = '#991';
-  
-// const black_alpha_color = 'rgba(0, 0, 0, 0.7)';
-// const red = '#F5615D';
 
-// const red_hover = 'rgba(245, 97, 93, 0.35)';
 const red_hoverDark = 'rgba(245, 97, 93, 0.35)';
 const red_hoverLight = 'rgba(24, 7, 193, 0.35)';
 
-// const red2 = '#E33629';
-// const blue = '#587DBD';
-// const yellow = '#F8BD00';
-
-// const linkColor = '#c1e8fb';  // Is used without a user so it should be only one
-// const mainColor = 'rgb(45, 72, 91, 1)';
-// const mainColorLighter = 'rgb(115, 142, 161, 1)';
-// const mainColor3 = 'rgb(38,55, 66, 1)'; // is used just in the menu options with large screens
-// const mainColorD = 'rgb(25, 54, 72)';
-
-// const tableAlertOnBackground = 'rgb(290, 10, 50, .6)';
 const tableAlertOnBackgroundDark = 'rgb(290, 10, 50, .6)';
 const tableAlertOnBackgroundLight = 'rgb(222, 110, 0, .6)';
 
-// const tableAlertOnColor = 'rgb(255, 255, 255, 1)';
-// const tableRowColor = '#222';
-// const rowEvenBackground = 'rgb(69, 144, 186)';
-// const rowOddBackground = 'rgb(162, 199, 220)';
-
-// const menuItem = '#DCF2F1';
 const menuItemDark = '#DCF2F1';
 const menuItemLight = '#FF8';
 
-// const succesMain = 'rgb(32, 205, 60, 1)';
-// const succesContrastText = 'rgb(32, 205, 60, .2)';
-// const succesDark = 'rgb(2, 145, 10, 1)';
-// const warningMain = 'rgb(255, 47, 47, 1)';
-// const warningContrastText = 'rgb(255, 47, 47, .2)';
-
-// const warningDark = 'rgb(155, 27, 27, 1)';
 const warningDarkDark = 'rgb(155, 27, 27, 1)';
 const warningDarkLight = 'rgb(1, 272, 127, 1)';
 
-// const neutralContrastText = 'rgb(255, 255, 255, .2)';
-// const neutralDark = 'rgb(155, 155, 155, 1)';
-
-// const plusIcon = 'rgb(77, 168, 218, 1)';
 const plusIconDark = 'rgb(77, 168, 218, 1)';
 const plusIconLight = 'rgb(177, 68, 18, 1)';
 
