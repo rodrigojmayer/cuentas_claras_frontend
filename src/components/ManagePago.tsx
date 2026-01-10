@@ -118,7 +118,11 @@ export default function ManagePago({
                             }
                         }}
                         size="small"
-                        className={`${classes.inputMainData} ${classes.inputPago}`}
+                        className={`
+                            ${classes.inputMainData} 
+                            ${classes.inputPago}
+                            ${classes[`${theme}_inputMainData` as keyof typeof classes]} 
+                        `}
                     />
                     <Button
                         // type={clicked? "button" : "submit"}

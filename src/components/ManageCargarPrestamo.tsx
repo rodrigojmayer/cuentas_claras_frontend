@@ -117,7 +117,10 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
                             {...params}
                             label="Email"
                             variant="outlined"        
-                            className={`${classes[`${theme}_inputMainData` as keyof typeof classes]} ${classes.inputMainData}`}
+                            className={`
+                                ${classes[`${theme}_inputMainData` as keyof typeof classes]} 
+                                ${classes.inputMainData}
+                            `}
                             // className="border rounded-lg bg-white"
                         />
                     )}

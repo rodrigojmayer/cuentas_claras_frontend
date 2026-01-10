@@ -502,7 +502,7 @@ export const useStylesGlobal = makeStyles()({
         backgroundColor: neutralMainDark,
     },
     inputPago: {
-        width: "20%",
+        width: "20% !important",
     },
     inputClassName: {
         borderRadius: 7,
