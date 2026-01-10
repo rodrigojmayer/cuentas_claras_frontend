@@ -12,6 +12,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import useDebtsByDebtor from "@/hooks/useDebtsByDebtor";
 import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
+import { useTheme } from "next-themes";
 
 interface ManagePerfilProps {
     setUpdateData: (visible: UpdateDataProps) => void;
@@ -34,6 +35,7 @@ export default function ManagePerfil({
     const { data: session, update: updateSession } = useSession()
 // console.log("session: ", session)
     const { classes } = useStylesGlobal()
+    const { theme } = useTheme();
     const { debtsByCreditor, isErrorDebtsByCreditor, isLoadingDebtsByCreditor, mutateDebtsByCreditor } = useDebtsByCreditor();
     const { debtsByDebtor, isErrorDebtsByDebtor, isLoadingDebtsByDebtor, mutateDebtsByDebtor } = useDebtsByDebtor();
     const [name, setName] = useState<string>(session?.user.name ? session.user.name : "");
@@ -60,7 +62,7 @@ export default function ManagePerfil({
                 name: name,
                 }
                 // console.log("session?.user: ", session?.user);
-                console.log("editUser: ", editUser);
+                // console.log("editUser: ", editUser);
                 await patchUser(editUser);
                 await updateSession({
                     user: {
@@ -105,7 +107,11 @@ export default function ManagePerfil({
                             setName(val);
                         }}
                         size="small"
-                        className={`${classes.inputMainData} ${classes.valuePerfil}`}
+                        className={`
+                            ${classes[`${theme}_inputMainData` as keyof typeof classes]} 
+                            ${classes.inputMainData} 
+                            ${classes.valuePerfil}
+                        `}
                     />
                 </Box>
                 <Box className={classes.row}>
@@ -122,7 +128,11 @@ export default function ManagePerfil({
                             }
                         }}
                         size="small"
-                        className={`${classes.inputMainData} ${classes.valuePerfil}`}
+                        className={`
+                            ${classes[`${theme}_inputMainData` as keyof typeof classes]} 
+                            ${classes.inputMainData} 
+                            ${classes.valuePerfil}
+                        `}
                     />
                     {/* <Button
                         variant="text"
@@ -147,7 +157,11 @@ export default function ManagePerfil({
                             setEmail(val);
                         }}
                         size="small"
-                        className={`${classes.inputMainData} ${classes.valuePerfil}`}
+                        className={`
+                            ${classes[`${theme}_inputMainData` as keyof typeof classes]} 
+                            ${classes.inputMainData} 
+                            ${classes.valuePerfil}
+                        `}
                     />
                     {/* <Button
                         variant="text"

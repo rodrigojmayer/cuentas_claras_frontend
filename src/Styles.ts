@@ -547,7 +547,7 @@ export const useStylesGlobal = makeStyles()({
         minWidth: "170px",      /* Alinea inicio de los valores */
     },
     valuePerfil: {
-        minWidth: "120px",      /* Alinea inicio de los valores */
-        maxWidth: "170px",      /* Alinea inicio de los valores */
+        minWidth: "120px !important",      /* Alinea inicio de los valores */
+        maxWidth: "170px !important",      /* Alinea inicio de los valores */
     }
 })
