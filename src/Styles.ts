@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { makeStyles } from 'tss-react/mui';
+
 const neutralMainDark = 'rgb(255, 255, 255, 1)';
 const neutralMainLight = 'rgb(0, 0, 0, 1)';
 
@@ -7,10 +8,10 @@ const tableHeaderColorDark = 'rgb(255, 255, 255, 1)';
 const tableHeaderColorLight = 'rgb(0, 0, 0, 1)';
 
 const first_colorDark = '#414548';
-const first_colorLight = '#FF0';
+const first_colorLight = '#c6c8cbff';
 
 const first_color3Dark = '#2A2E31';
-const first_color3Light = '#0F0';
+const first_color3Light = '#c6c8cbff';
 
 const first_color4Dark = '#0b3555ff';
 const first_color4Light = '#F0F';
