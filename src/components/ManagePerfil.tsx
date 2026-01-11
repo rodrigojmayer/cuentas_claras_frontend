@@ -4,7 +4,7 @@
 import { patchUser, postPayment } from "@/lib/api";
 import { useStylesGlobal } from "@/Styles";
 import { NewPayment, NewUser, UpdateDataProps, User } from "@/types";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AcceptButton, CancelButton } from "./Buttons";
 import { useSession } from "next-auth/react";
@@ -89,14 +89,21 @@ export default function ManagePerfil({
     }
 
     return (
-        <div className="flex flex-col p-2 max-w-md">
-            <h3 className="text-3xl text-center font-bold text-gray-800 dark:text-gray-100 mb-4">
+        <div className={`
+                ${classes[`${theme}_text` as keyof typeof classes]}
+                flex flex-col p-2 max-w-md
+            `}
+        >
+            <h3 className="text-3xl text-center font-bold mb-4">
                 Perfil
             </h3>
             <form onSubmit={handleSubmit} >
                  <Box className={`${classes.container}`}>
                     <Box className={classes.row}>
-                    <a className={classes.labelPerfil}>
+                    <a className={`
+                ${classes[`${theme}_text` as keyof typeof classes]}
+                ${classes.labelPerfil}
+            `}>
                         Nombre
                     </a>
                     <TextField
@@ -114,8 +121,11 @@ export default function ManagePerfil({
                         `}
                     />
                 </Box>
-                <Box className={classes.row}>
-                    <a className={classes.labelPerfil}>
+                <Box className={classes.row} >
+                   <a className={`
+                ${classes[`${theme}_text` as keyof typeof classes]}
+                ${classes.labelPerfil}
+            `}>
                         Teléfono
                     </a>
                     <TextField
@@ -145,8 +155,10 @@ export default function ManagePerfil({
                     </Button> */}
                 </Box>
                     <Box className={classes.row}>
-                                        <a className={classes.labelPerfil}>
-
+                        <a className={`
+                ${classes[`${theme}_text` as keyof typeof classes]}
+                ${classes.labelPerfil}
+            `}>
                         Email
                     </a>
                     <TextField

@@ -342,10 +342,10 @@ export const useStylesGlobal = makeStyles()({
         }
     },
     dark_btnCommonStyle_color: {
-        color: text_colorDark,
+        color: textDark,
     },
     light_btnCommonStyle_color: {
-        color: text_colorLight,
+        color: textLight,
     },
     btn_cancel: {
         width: "70px !important",
@@ -473,10 +473,10 @@ export const useStylesGlobal = makeStyles()({
         borderRadius: "0px 0px 10px 10px",
     },
     dark_deployModalButton_color: {
-        color: text_colorDark,
+        color: textDark,
     },
     light_deployModalButton_color: {
-        color: text_colorLight,
+        color: textLight,
     },
 
     container: {
@@ -499,6 +499,14 @@ export const useStylesGlobal = makeStyles()({
     labelPerfil: {
         width: "80px",          /* MISMO ancho → columnas alineadas */
         textAlign: "right",     /* Alinea etiquetas a la derecha */
+  textDecoration: "none",
+
+  "&:visited": {
+    color: "inherit",
+  },
+  "&:hover": {
+    color: "inherit",
+  },
     },
     value: {
         minWidth: "170px",      /* Alinea inicio de los valores */
