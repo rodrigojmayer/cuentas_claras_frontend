@@ -11,6 +11,7 @@ import { patchDebtDateDue } from "@/lib/api";
 import useDebtsByDebtor from "@/hooks/useDebtsByDebtor";
 import useDebtsByCreditor from "@/hooks/useDebtsByCreditor";
 import { dateFormat } from "@/utils/dateFormat";
+import { useTheme } from "next-themes";
 
 interface ModalCambiarFechaProps {
     // setUpdateData: (visible: UpdateDataProps) => void;
@@ -28,6 +29,7 @@ export default function ModalCambiarFecha({
 }: ModalCambiarFechaProps ) {
 
     const { classes } = useStylesGlobal()
+    const { theme } = useTheme();
     const { mutateDebtsByCreditor } = useDebtsByCreditor();
     const { mutateDebtsByDebtor } = useDebtsByDebtor();
     const [newDate, setNewDate] = useState<Date | null>(null);
@@ -65,8 +67,12 @@ export default function ModalCambiarFecha({
     }
 
     return (
-        <div className="max-h-[80vh] overflow-y-auto flex flex-col p-2 max-w-md mt-1">
-            <h3 className="text-3xl text-center font-bold text-gray-800 dark:text-gray-100 mb-4">
+        <div className={`
+                ${classes[`${theme}_text` as keyof typeof classes]}
+                max-h-[80vh] overflow-y-auto flex flex-col p-2 max-w-md mt-1
+            `}
+        >
+            <h3 className="text-3xl text-center font-bold mb-4">
                Cambiar vencimiento
             </h3>
             <Box className={classes.customBoxRow}>
