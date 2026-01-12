@@ -133,7 +133,8 @@ export default function MenuOptions({
                     ${classes[`${theme}_menu_options_color` as keyof typeof classes]} 
                     ${(
                         breakpointLG ? 
-                        `${classes.menu_options_LG} ${classes[`${theme}_background_color3` as keyof typeof classes]}` : 
+                        `${classes.menu_options_LG} ${classes[`${theme}_background_color3` as keyof typeof classes]}` 
+                        : 
                         `${classes.menu_options_SM} ${classes[`${theme}_main_background_colorDD` as keyof typeof classes]}`
                     )}
                 `}

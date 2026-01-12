@@ -507,7 +507,7 @@ const filteredData = React.useMemo(() => {
           ${classes.no_background_colorDD} 
           ${classes[`${theme}_main_colorDD` as keyof typeof classes]}
         `}
-        sx={{ top: (breakpointLG?0:"auto"), bottom: 0 }}
+        sx={{ top: ("auto"), bottom: 0 }}
       >
           <Grid container spacing={3}>
             <Grid size="grow">

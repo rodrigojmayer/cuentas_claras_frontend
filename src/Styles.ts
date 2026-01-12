@@ -93,10 +93,12 @@ export const useStylesGlobal = makeStyles()({
     menu_appbar: {
         position: "fixed",
         left: 0,
-        bottom: 0,
+    // right: 0, // Importante: debe ir de lado a lado
+    // bottom: 0,
         height: '44px',
         display: "flex",
         justifyContent: "center", 
+        // alignContent: "center",
         boxShadow: 'none',
         zIndex: 40,
     },
@@ -299,11 +301,14 @@ export const useStylesGlobal = makeStyles()({
         },
     },
     menu_options_LG : {
-        top: 64,
+        bottom: 0,
+        left: 0,
         right: 0,
-        width: "15%",
-        height: "35%",
-        borderRadius: "0 0 10px 10px",
+        margin: "auto",
+        // justifyContent: "center",
+        width: "340px",
+        height: "200px",
+        borderRadius: "10px 10px 0 0",
     },
     menu_options_SM : {
         bottom: 0,
