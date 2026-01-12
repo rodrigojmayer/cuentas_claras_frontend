@@ -3,6 +3,7 @@
 import { useStylesGlobal } from "@/Styles";
 import { NewPayment, Payment } from "@/types";
 import { Box } from "@mui/material";
+import { useTheme } from "next-themes";
 
 interface ModalHistorialProps {
     debtSelected?: NewPayment | null;
@@ -14,9 +15,14 @@ export default function ModalHistorial({
 }: ModalHistorialProps ) {
 
     const { classes } = useStylesGlobal()
+    const { theme } = useTheme();
     return (
-        <div className="max-h-[80vh] overflow-y-auto flex flex-col p-2 max-w-md mt-1 mb-4">
-            <h3 className="text-3xl text-center font-bold text-gray-800 dark:text-gray-100 mb-4">
+        <div className={`
+                ${classes[`${theme}_text` as keyof typeof classes]}
+                max-h-[80vh] overflow-y-auto flex flex-col p-2 max-w-md mt-1 mb-4
+                `}
+                >
+            <h3 className="text-3xl text-center font-bold mb-4">
                Historial
             </h3>
             <Box className={`${classes.customBoxRow} font-bold`}>
