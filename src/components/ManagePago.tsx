@@ -153,74 +153,79 @@ export default function ManagePago({
             </form>
             {/* <Box className={`${showDetails ? classes.customBoxColumn : classes.hide } grid grid-cols-5 grid-rows-5 gap-4` }> */}
             <Box className={`${showDetails ? classes.container : classes.hide }`}>
-                <Box className={classes.row}>
-                    <a className={classes.label}>
-                        Teléfono: 
-                    </a>
-                    <a className={classes.value}>
-                        {newPayment?.phone}
-                    </a>
-                </Box>
-                <Box className={classes.row }>
-                    <a className={classes.label}>
-                        Correo:
-                    </a>
-                    <a className={classes.value}>  
-                        {(newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email}
-                    </a>
-                </Box>
-                <Box className={classes.row}>
-                    <a className={classes.label}>
-                        Fecha: 
-                    </a>
-                    <a className={classes.value}>
-                        {newPayment?.date_debt}
-                        <b  className={"m-2"}>
-                            <Button
-                                // type={clicked? "button" : "submit"}
-                                variant="text"
-                                className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
-                                // color="inherit"
-                                onClick={() => {
-                                    // const a = parseInt(newPayment?.pending, 10)
-                                    setVisibleModalHistorial(true)
-                                }}
-                                > 
-                                Historial
-                            </Button>
-                        </b>
-                    </a>
-                </Box>
-                <Box className={classes.row}>
-                    <a className={classes.label}>
-                        Préstamo: 
-                    </a>
-                    <a className={classes.value}>
-                        {newPayment?.initial_amount} {newPayment?.currency}
-                    </a>
-                </Box>
-                <Box className={classes.row}>
-                    <a className={classes.label}>
-                        Vencimiento: 
-                    </a>    
-                    <a className={classes.value}>
-                        {newPayment?.date_due}
-                        <b  className={"m-2"}>
-                            <Button
-                                // type={clicked? "button" : "submit"}
-                                variant="text"
-                                className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
-                                // color="inherit"
-                                onClick={() => {
-                                    // const a = parseInt(newPayment?.pending, 10)
-                                    setVisibleModalCambiarFecha(true)
-                                }}
-                                > 
-                                Cambiar
-                            </Button>
-                        </b>
-                    </a>
-                </Box>
+                <div className={`
+                        ${classes[`${theme}_text` as keyof typeof classes]}
+                    `}
+                >
+                    <Box className={classes.row}>
+                        <a className={classes.label}>
+                            Teléfono: 
+                        </a>
+                        <a className={classes.value}>
+                            {newPayment?.phone}
+                        </a>
+                    </Box>
+                    <Box className={classes.row }>
+                        <a className={classes.label}>
+                            Correo:
+                        </a>
+                        <a className={classes.value}>  
+                            {(newPayment?.email ?? "").length > 15 ? (newPayment?.email ?? "").slice(0, 15)+"..." : newPayment?.email}
+                        </a>
+                    </Box>
+                    <Box className={classes.row}>
+                        <a className={classes.label}>
+                            Fecha: 
+                        </a>
+                        <a className={classes.value}>
+                            {newPayment?.date_debt}
+                            <b  className={"m-2"}>
+                                <Button
+                                    // type={clicked? "button" : "submit"}
+                                    variant="text"
+                                    className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
+                                    // color="inherit"
+                                    onClick={() => {
+                                        // const a = parseInt(newPayment?.pending, 10)
+                                        setVisibleModalHistorial(true)
+                                    }}
+                                    > 
+                                    Historial
+                                </Button>
+                            </b>
+                        </a>
+                    </Box>
+                    <Box className={classes.row}>
+                        <a className={classes.label}>
+                            Préstamo: 
+                        </a>
+                        <a className={classes.value}>
+                            {newPayment?.initial_amount} {newPayment?.currency}
+                        </a>
+                    </Box>
+                    <Box className={classes.row}>
+                        <a className={classes.label}>
+                            Vencimiento: 
+                        </a>    
+                        <a className={classes.value}>
+                            {newPayment?.date_due}
+                            <b  className={"m-2"}>
+                                <Button
+                                    // type={clicked? "button" : "submit"}
+                                    variant="text"
+                                    className={`${classes.btnCommonStyle} ${classes[`${theme}_btnCommonStyle_color` as keyof typeof classes]} ${classes.btn_info} ${classes[`${theme}_btn_info_color` as keyof typeof classes]}`}
+                                    // color="inherit"
+                                    onClick={() => {
+                                        // const a = parseInt(newPayment?.pending, 10)
+                                        setVisibleModalCambiarFecha(true)
+                                    }}
+                                    > 
+                                    Cambiar
+                                </Button>
+                            </b>
+                        </a>
+                    </Box>
+                </div>
             </Box>
             <Button 
                 className={`${classes[`${theme}_background_color3` as keyof typeof classes]} ${classes.deployModalButton} ${classes[`${theme}_deployModalButton_color` as keyof typeof classes]}`}

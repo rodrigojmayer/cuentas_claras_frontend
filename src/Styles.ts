@@ -483,8 +483,8 @@ export const useStylesGlobal = makeStyles()({
         display: "flex",
         flexDirection: "column",
         gap: 10,
-        color: "white",
-        fontSize: "18px",
+        // color: "white",
+        // fontSize: "18px",
     },
     row: {
         display: "flex",
