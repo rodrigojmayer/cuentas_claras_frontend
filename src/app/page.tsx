@@ -34,7 +34,9 @@ import { useTheme } from "next-themes";
 
 export default function Home() {
 
-  const breakpointLG = useMediaQuery('(min-width:1024px)');
+  // const breakpointLG = useMediaQuery('(min-width:1024px)');
+  
+  const breakpointMD = useMediaQuery('(min-width: 724px)'); 
   const { classes } = useStylesGlobal()
   const [ openMenu, setOpenMenu] = useState(false);
   const handleOpenMenu = () => setOpenMenu(true);
@@ -299,6 +301,8 @@ const filteredData = React.useMemo(() => {
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
+          // className={`${breakpointMD ? classes.filter_menu_md : ""}`}
+          // className={classes.filter_menu_md }
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',
@@ -314,6 +318,8 @@ const filteredData = React.useMemo(() => {
 
           MenuListProps={{
               sx: { padding: 0,  
+          //       // width: `${breakpointMD ?"x" : ""}`
+          //   // width: `${breakpointMD ?"1222px" : ""}`
               },
           }}
         >
@@ -324,11 +330,11 @@ const filteredData = React.useMemo(() => {
             }}
             className={`
               ${classes.menu_item} 
+              ${breakpointMD ? classes.filter_item_md : ""} 
               ${classes[`${theme}_menu_item_background_color` as keyof typeof classes]}
             `} 
           >
             <Typography 
-              // variant="body2" 
             > 
               Alertas primero
               </Typography>
@@ -345,6 +351,7 @@ const filteredData = React.useMemo(() => {
             }}
             className={`
               ${classes.menu_item} 
+              ${breakpointMD ? classes.filter_item_md : ""}                
               ${classes[`${theme}_menu_item_background_color` as keyof typeof classes]}
             `} 
           >

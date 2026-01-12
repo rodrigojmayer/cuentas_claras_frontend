@@ -155,6 +155,19 @@ export const useStylesGlobal = makeStyles()({
         // alignContent: "center" ,
         justifyContent: "space-between"
     },
+    // filter_menu_md: {
+    //     '& .MuiPaper-root': { // El contenedor físico del menú
+    //     width: "180px",
+    // },
+
+    // },
+    filter_item_md: {
+        // width: "180px",
+        // height: "222px",
+        // fontSize: "bold",
+        // size: "600px",
+        padding: "17px",
+    },
     dark_menu_item_background_color: {
         backgroundColor: menuItemDark,
         '&:hover': {
