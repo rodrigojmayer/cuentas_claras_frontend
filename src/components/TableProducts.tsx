@@ -92,7 +92,12 @@ export default function TableProducts(
 
   return (
     <div>
-      <Paper style={{backgroundColor: "rgb(0, 0, 0, .20)", height: `calc(100dvh - ${(breakpointLG?"105px":"120px")})`, width: (breakpointLG?"98vw":"94vw"), margin: "12px auto 0 auto" ,borderRadius: "10px"}}>
+      {/* <Paper style={{backgroundColor: "rgb(0, 0, 0, .20)", height: `calc(100dvh - ${(breakpointLG?"105px":"120px")})`, width: (breakpointLG?"98vw":"94vw"), margin: "12px auto 0 auto" ,borderRadius: "10px"}}> */}
+      <Paper className={`
+          ${classes.table}
+          ${breakpointMD ? classes.tableMD : classes.tableSM}
+        `}
+      >
         <TableVirtuoso 
           // data={data}
           data={sortedData}

@@ -202,6 +202,20 @@ export const useStylesGlobal = makeStyles()({
       // display: "flex",
       // justifyContent: "center",
     },
+    table: {
+        backgroundColor: "rgb(0, 0, 0, .20)", 
+        margin: "12px auto 0 auto" ,
+        borderRadius: "10px",
+    },
+    tableMD: {        
+        height: "calc(100dvh - 105px)", 
+        width: "98vw", 
+        maxWidth: "1000px", 
+    },
+    tableSM: {
+        height: `calc(100dvh - 120px)`, 
+        width: "94vw",
+    },
     table_rows : {
         padding: "8px 0",
         border: 0,
