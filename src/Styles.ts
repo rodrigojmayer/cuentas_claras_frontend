@@ -514,5 +514,34 @@ export const useStylesGlobal = makeStyles()({
     valuePerfil: {
         minWidth: "120px !important",      /* Alinea inicio de los valores */
         maxWidth: "170px !important",      /* Alinea inicio de los valores */
-    }
+    },
+    mode_selector: {
+        display: "flex",
+        alignItems: "center",   /* Alinea todo a la misma altura */
+        // gap: 20,             /* Espacio entre columnas */
+        justifyContent: "center",
+        borderRadius: 29,
+        padding: 3
+    },
+    dark_mode_selector: {
+        border: `solid ${first_colorLight} 1px`,
+    },
+    light_mode_selector: {
+        border: `solid ${first_colorDark} 1px`,
+    },
+    mode_selected: {
+        display: "flex",
+        alignItems: "center",   /* Alinea todo a la misma altura */
+        gap: 7,             /* Espacio entre columnas */
+        justifyContent: "center",        
+        borderRadius: 20,
+        width: "150px",
+        padding: "5px"
+    },
+    dark_mode_selected: {        
+        backgroundColor: second_alpha_colorLight,
+    },
+    light_mode_selected: {       
+        backgroundColor: second_alpha_colorLight,
+    },
 })

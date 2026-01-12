@@ -9,6 +9,9 @@ import { useStylesGlobal } from '../Styles';
 import { CloseMenuButton } from './Buttons';
 import { signOut } from "next-auth/react"
 import { useTheme } from "next-themes";
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import CheckIcon from '@mui/icons-material/Check';
 
 interface ChildProps {
     open:  boolean
@@ -83,8 +86,30 @@ export default function MenuOptions({
             key="preferences"
             variant="text"
             onClick={toggleTheme}
+            disableRipple
         >
-                Modo {`${theme === "dark" ? "oscuro" : "claro"}`}
+                {/* Modo {`${theme === "dark" ? "oscuro" : "claro"}`} */}
+                
+                    <Box className={`
+                            ${classes.mode_selector}
+                            ${classes[`${theme}_mode_selector` as keyof typeof classes]}
+                        `}
+                    >
+                        <Box className={`
+                                ${classes.mode_selected}
+                                ${theme === "light" ? classes[`${theme}_mode_selected` as keyof typeof classes]: ""}
+                            `}
+                        >
+                            {theme === "light" ? <CheckIcon/>:<LightModeIcon/>}claro
+                        </Box>
+                        <Box className={`
+                                ${classes.mode_selected}
+                                ${theme === "dark" ? classes[`${theme}_mode_selected` as keyof typeof classes]: ""}
+                            `}
+                        >
+                            {theme === "dark" ? <CheckIcon/>:<DarkModeIcon/>}oscuro
+                        </Box>
+                    </Box>
         </Button>,
         <Button value="logout" key="logout" variant="text" onClick={closeSession}>Cerrar sesión</Button>,
         <CloseMenuButton key="close" clicked={() => handleClose(true)} />
