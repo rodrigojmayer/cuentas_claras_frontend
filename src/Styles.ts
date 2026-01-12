@@ -17,10 +17,10 @@ const first_color4Dark = '#0b3555ff';
 const first_color4Light = '#857bceff';
 
 const second_colorDark = '#4938CA';
-const second_colorLight = '#0FF';
+const second_colorLight = 'rgba(254, 14, 14, 1)F';
 
 const second_alpha_colorDark = 'rgba(73, 56, 202, 0.75)';
-const second_alpha_colorLight = 'rgba(0, 333, 333, 0.75)';
+const second_alpha_colorLight = 'rgba(114, 165, 254, 0.75)';
 
 const text_colorDark = '#EEFBFB';
 const text_colorLight = 'rgba(0, 0, 0, 1)';
@@ -47,10 +47,10 @@ const menuItemDark = '#DCF2F1';
 const menuItemLight = '#FF8';
 
 const warningDarkDark = 'rgb(155, 27, 27, 1)';
-const warningDarkLight = 'rgb(1, 272, 127, 1)';
+const warningDarkLight = 'rgba(226, 123, 123, 1)';
 
 const plusIconDark = 'rgb(77, 168, 218, 1)';
-const plusIconLight = 'rgb(177, 68, 18, 1)';
+const plusIconLight = '#353B42';
 
 const textDark = '#dddfe1ff';
 const textLight = '#353B42';
