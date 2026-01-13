@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useStylesGlobal } from "@/Styles";
+import { useStylesGlobal } from "../Styles";
 import { NewPayment, UpdateDebt } from "@/types";
 import { Box } from "@mui/material";
 import { AcceptButton, CancelButton } from "./Buttons";

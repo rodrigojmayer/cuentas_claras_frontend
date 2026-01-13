@@ -1,6 +1,6 @@
 "use client";
 
-import { useStylesGlobal } from "@/Styles";
+import { useStylesGlobal } from "../Styles";
 import { NewPayment, Payment } from "@/types";
 import { Box } from "@mui/material";
 import { useTheme } from "next-themes";

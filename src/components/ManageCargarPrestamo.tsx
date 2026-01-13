@@ -2,7 +2,7 @@
 "use client";
 
 import { createByDebtorEmail, findUserByEmail, postDebt, postUser } from "@/lib/api";
-import { useStylesGlobal } from "@/Styles";
+import { useStylesGlobal } from "../Styles";
 import { Contacts, Data, DataTable, Debt, NewDebt, NewUser, UpdateDataProps } from "@/types";
 import { Autocomplete, Box, MenuItem, TextField } from "@mui/material";
 import { useState } from "react";

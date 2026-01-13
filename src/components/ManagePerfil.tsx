@@ -2,7 +2,7 @@
 "use client";
 
 import { patchUser, postPayment } from "@/lib/api";
-import { useStylesGlobal } from "@/Styles";
+import { useStylesGlobal } from "../Styles";
 import { NewPayment, NewUser, UpdateDataProps, User } from "@/types";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";

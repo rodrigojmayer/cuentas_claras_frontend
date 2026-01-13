@@ -9,7 +9,7 @@ import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
-import { useStylesGlobal } from '@/Styles';
+import { useStylesGlobal } from '../Styles';
 import { useTheme } from "next-themes";
 
 

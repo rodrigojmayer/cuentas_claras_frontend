@@ -1,6 +1,6 @@
 "use client";
 
-import { useStylesGlobal } from "@/Styles";
+import { useStylesGlobal } from "../../Styles";
 import { signIn } from "next-auth/react";
 import { useTheme } from "next-themes";
 
