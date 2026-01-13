@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, IconButton } from "@mui/material";
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import { useStylesGlobal } from '@/Styles'
+import { useStylesGlobal } from '@/Styles';
 import ControlPointTwoToneIcon from '@mui/icons-material/ControlPointTwoTone';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import FilterListIcon from '@mui/icons-material/FilterList'
