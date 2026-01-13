@@ -267,11 +267,9 @@ export const useStylesGlobal = makeStyles()({
     },
     customPlusIconBoxRow: {
         display: "flex",
-        // justifyContent:  "flex-end",
-        // justifyContent:  "center",
-        // alignItems: "center",
-        // gap: 40,
         height: "50px",
+        maxWidth: "1100px",
+        margin: "0 auto",
         marginTop: "10px",
     },
     customBoxColumn: { 
