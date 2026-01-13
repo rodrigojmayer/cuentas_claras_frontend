@@ -47,7 +47,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <SessionProvider>
       <NextThemeProvider
         attribute="class"
-        defaultTheme="system"
+        defaultTheme="dark"
         enableSystem
       >
         <CacheProvider value={emotionCache}>
