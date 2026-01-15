@@ -38,6 +38,10 @@ const handler = NextAuth({
   session: {
     strategy: "jwt",
   },
+  
+  pages: {
+    signIn: "/login", // Redirige aquí cuando no están logueados
+  },
 
   callbacks: {
     /**
