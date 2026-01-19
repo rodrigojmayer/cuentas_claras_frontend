@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { getDebtsByCreditor, getDebtsByDebtor } from "../lib/api";
 import type { Alert, Debt, Payment, User } from "../types";
 
@@ -44,6 +45,7 @@ export default function DataList({
     setAlertDelete
     }: DataListProps) {
 
+    const { data: session } = useSession();
     const [userSelected, setUserSelected] = useState<User | null>(null);
     const [debtsByCreditor, setDebtsByCreditor] = useState<Debt[]>([]);
     const [debtsByDebtor, setDebtsByDebtor] = useState<Debt[]>([]);
@@ -60,7 +62,7 @@ export default function DataList({
             getDebtsByCreditor(userSelected._id).then(setDebtsByCreditor);
             getDebtsByDebtor(userSelected._id).then(setDebtsByDebtor);
         }
-    }, [userSelected]);
+    }, [userSelected, session]);
     
     useEffect(() => {
         if(userSelected){

@@ -2,6 +2,23 @@ import { NewUser, NewDebt, NewPayment, NewAlert, User, Alert, Debt, Payment, Upd
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/api";
 
+export const authHeaders = (): Record<string, string> => {
+  if (typeof window === "undefined") {
+    return {};
+  }
+
+  const token = localStorage.getItem("backendToken");
+
+  if (!token) {
+    return {};
+  }
+
+  return {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  };
+};
+
 export async function getUsers() {
     const res = await fetch(`${API_URL}/users`);
     return res.json();
@@ -12,10 +29,14 @@ export async function getUser(id_user: string) {
     return res.json();
 }
 
+//public
 export async function findUserByEmail(email: string) {
-    const res = await fetch(`${API_URL}/users/find-by-email`, {
+    const res = await fetch(`${API_URL}/public/users/find-by-email`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+            // Enviamos la API KEY porque aquí aún no hay un JWT de sesión
+            // "x-api-key": process.env.SYSTEM_SECRET_KEY!,
+         },
         body: JSON.stringify({ email }),
     });
     return res;
@@ -50,8 +71,10 @@ export async function getAlerts() {
 }
 
 export async function getDebtsByCreditor(_id: string ) {
-    const res = await fetch(`${API_URL}/debts/creditor/${_id}`)
-    
+  const res = await fetch(`${API_URL}/private/debts/creditor/${_id}`, {
+        headers: authHeaders() 
+
+    });
     if(!res.ok) {
         // Try to read the message if the server sent one
         const errorText = await res.text();
@@ -63,8 +86,11 @@ export async function getDebtsByCreditor(_id: string ) {
     return res.json();
 }
 
-export async function getDebtsByDebtor(_id: string) {
-    const res = await fetch(`${API_URL}/debts/debtor/${_id}`);
+export async function getDebtsByDebtor(_id: string ) {
+  
+    const res = await fetch(`${API_URL}/private/debts/debtor/${_id}`, {
+        headers: authHeaders() 
+    });
 
     if(!res.ok) {
         const errorText = await res.text();
@@ -78,10 +104,11 @@ export async function getDebtsByDebtor(_id: string) {
 export async function postUser({email, phone, name}: NewUser) {
     try {
 
-        const res = await fetch(`${API_URL}/users`, {
+        const res = await fetch(`${API_URL}/system/users`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                "x-api-key": process.env.SYSTEM_SECRET_KEY!,
             },
             body: JSON.stringify({
                 email,
