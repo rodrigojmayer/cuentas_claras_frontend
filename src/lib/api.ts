@@ -21,7 +21,9 @@ export const authHeaders = (): Record<string, string> => {
 };
 
 export async function getUsers() {
-    const res = await fetch(`${API_URL}/users`);
+        const res = await fetch(`${API_URL}/private/users`, {
+        headers: authHeaders(),
+    });
     return res.json();
 }
 
@@ -278,9 +280,9 @@ export async function patchDebt({_id, id_user_creditor, id_user_debtor, date_deb
 export async function patchDebtDateDue({ _id, amount, date_due }: UpdateDebt) {
     // console.log("dolar_google: ", dolar_google);
     try {
-        const res = await fetch(`${API_URL}/debts/${_id}`, {
+        const res = await fetch(`${API_URL}/private/debts/${_id}`, {
             method: "PATCH",
-            headers: { "Content-Type": "application/json" },
+            headers: authHeaders(),
             body: JSON.stringify({
                 amount,
                 date_due,
@@ -429,9 +431,9 @@ export async function deleteAlert(_id: string): Promise<void> {
 
 export async function createByDebtorEmail({id_user_creditor, id_user_debtor, email_debtor, detail, amount, currency, date_due }: NewDebt) {
     try {
-        const res = await fetch(`${API_URL}/debts/create-by-debtor-email`, {
+        const res = await fetch(`${API_URL}/private/debts/create-by-debtor-email`, {
             method: "POST",
-            headers: { "Content-Type": "application/json"},
+            headers: authHeaders(),
             body: JSON.stringify ({
                 id_user_creditor,
                 id_user_debtor,
