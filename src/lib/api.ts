@@ -1,4 +1,5 @@
 import { NewUser, NewDebt, NewPayment, NewAlert, User, Alert, Debt, Payment, UpdateDebt } from "@/types";
+import { CardHeader } from "@mui/material";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:7000/api";
 
@@ -213,9 +214,9 @@ export async function postAlert({id_debt, date_alert}: NewAlert) {
 
 export async function patchUser({_id, email, phone, name, enabled, deleted}: User) {
     try {
-        const res = await fetch(`${API_URL}/users/${_id}`, {
+        const res = await fetch(`${API_URL}/private/users/${_id}`, {
             method: 'PATCH',
-            headers: { "Content-Type": "application/json"},
+            headers: authHeaders(),
             body: JSON.stringify({
                 email,
                 phone,

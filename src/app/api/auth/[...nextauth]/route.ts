@@ -7,6 +7,7 @@ declare module "next-auth" {
       _id?: string;
       email?: string | null;
       name?: string | null;
+      phone?: string | null;
     };
     backendToken?: string;
   }
@@ -16,6 +17,7 @@ declare module "next-auth" {
     _id?: string;
     email: string | null;
     name: string | null;
+    phone?: string | null;
   }
 }
 
@@ -26,6 +28,7 @@ declare module "next-auth/jwt" {
       _id?: string;
       email?: string | null;
       name?: string | null;
+      phone?: string | null;
     };
     backendToken?: string;
   }
@@ -52,7 +55,7 @@ const handler = NextAuth({
      * 🔐 GOOGLE autentica identidad
      * 🔐 BACKEND genera JWT propio
      */
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account, trigger, session }) {
       if (account?.provider === "google" && user?.email) {
         const res = await fetch(`${process.env.BACKEND_URL}/auth/google`, {
           method: "POST",
@@ -74,6 +77,16 @@ const handler = NextAuth({
          */
         token.user = data.user;
         token.backendToken = data.token;
+        
+        return token;
+        
+      }
+      
+      if (trigger === "update" && session?.user) {
+        token.user = {
+          ...token.user,
+          ...session.user,
+        };
       }
 
       return token;
@@ -88,6 +101,7 @@ const handler = NextAuth({
         _id?: string;
         email?: string | null;
         name?: string | null;
+        phone?: string | null;
       };
       session.backendToken = token.backendToken;
       return session;

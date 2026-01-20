@@ -61,7 +61,7 @@ export default function ManagePerfil({
                 phone: phone,
                 name: name,
                 }
-                // console.log("session?.user: ", session?.user);
+                console.log("session?.user: ", session?.user);
                 // console.log("editUser: ", editUser);
                 await patchUser(editUser);
                 await updateSession({

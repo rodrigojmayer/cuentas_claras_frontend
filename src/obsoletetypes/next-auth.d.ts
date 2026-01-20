@@ -8,6 +8,7 @@ declare module "next-auth" {
             name: string
             email: string
             image?: string
+            phone?: string
             role?: string
             token?: string
             [key: string]: any
@@ -18,6 +19,7 @@ declare module "next-auth" {
         id: string
         name: string
         email: string
+        phone?: string
         role?: string
         token?: string
         [key: string]: any
@@ -30,6 +32,7 @@ declare module "next-auth/jwt" {
             id: string
             name: string
             email: string
+            phone?: string
             role?: string
             token?: string
             [key: string]: any
