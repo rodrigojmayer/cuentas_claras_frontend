@@ -165,11 +165,9 @@ export async function postDebt({id_user_creditor, id_user_debtor, detail, initia
 
 export async function postPayment({id_debt, amount, pending, dolar_google}: NewPayment) {
     try {
-        const res = await fetch(`${API_URL}/payments`, {
+        const res = await fetch(`${API_URL}/private/payments`, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: authHeaders(),
             body: JSON.stringify({
                 id_debt,
                 amount,
