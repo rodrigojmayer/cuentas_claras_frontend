@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { createByDebtorEmail, findUserByEmail, postDebt, postUser } from "@/lib/api";
+import { createByDebtorEmail } from "@/lib/api";
 import { useStylesGlobal } from "../Styles";
 import { Contacts, Data, DataTable, Debt, NewDebt, NewUser, UpdateDataProps } from "@/types";
 import { Autocomplete, Box, MenuItem, TextField } from "@mui/material";
@@ -54,10 +54,13 @@ export default function ManageCargarPrestamo({ setUpdateData, debtEdit, setVisib
         else if(Number(amount) <= 0) {
             setMessage(`Introduce the amount`);
             alert(`Introduce the amount`);
+        } else if (!session?.user._id) {
+            setMessage(`User session not found`);
+            alert(`User session not found`);
         } else {
             try {
                 const newDebt: NewDebt = {
-                    id_user_creditor: session?.user._id,
+                    id_user_creditor: session.user._id,
                     id_user_debtor: idDebtor,
                     email_debtor: email,
                     detail,
