@@ -27,23 +27,23 @@ export async function getUsers() {
     return res.json();
 }
 
-export async function getUser(id_user: string) {
-    const res = await fetch(`${API_URL}/users/${id_user}`);
-    return res.json();
-}
+// export async function getUser(id_user: string) {
+//     const res = await fetch(`${API_URL}/users/${id_user}`);
+//     return res.json();
+// }
 
-//public
-export async function findUserByEmail(email: string) {
-    const res = await fetch(`${API_URL}/public/users/find-by-email`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json",
-            // Enviamos la API KEY porque aquí aún no hay un JWT de sesión
-            // "x-api-key": process.env.SYSTEM_SECRET_KEY!,
-         },
-        body: JSON.stringify({ email }),
-    });
-    return res;
-}
+// //public
+// export async function findUserByEmail(email: string) {
+//     const res = await fetch(`${API_URL}/public/users/find-by-email`, {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json",
+//             // Enviamos la API KEY porque aquí aún no hay un JWT de sesión
+//             // "x-api-key": process.env.SYSTEM_SECRET_KEY!,
+//          },
+//         body: JSON.stringify({ email }),
+//     });
+//     return res;
+// }
 
 export async function getDebts() {
     const res = await fetch(`${API_URL}/debts`);
@@ -55,7 +55,9 @@ export async function getPayments() {
     return res.json();
 }
 export async function getPaymentsByDebt(id_debt: string ) {
-    const res = await fetch(`${API_URL}/payments/debt/${id_debt}`);
+    const res = await fetch(`${API_URL}/private/payments/debt/${id_debt}`,{
+        headers: authHeaders()
+    });
     
     if(!res.ok) {
         // Try to read the message if the server sent one
